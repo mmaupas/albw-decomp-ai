@@ -608,3 +608,18 @@ params 1-2 live at the first computation; r1=2 implies param1 dead by
 the third value — contradictory lifetime order under any single-pass
 model. Likely needs a two-block structure (the zero/0xff stores in a
 different basic block than the 2-store). PARKED.
+
+## 001CD1D4 (44B) — parked after ~8 probes (2026-10-27)
+
+Shape: `push {r4,lr}; mov r4,r0; bl sub(self+0x400, 0) [r1=0 hoisted
+pre-push in TARGET, armcc rematerializes it post-push in every try];
+mov r1,#1; strb r1,[r4,#0x425]; ldr r1,[pool=0x42C]; mov r0,#0;
+strb r0,[r4,#0x426]; mov r0,#2; strh r0,[r1,r4] (register-offset store
+— 0x42C exceeds strh's 255 imm); pop`.
+
+Two constructs identified: (a) register-offset strh from the 0x42C
+offset exceeding strh's 255 — pooled constant + [r1,r4] form; (b) r1
+reuse chain 0→1→0x42C suggests the zero is a live arg reused as scratch.
+3/13 after struct-layout fixes (b1 at 0x425, b2 at 0x426, v at 0x42c:
+pad[0x425], b1, b2, pad2[5], v). Open: what keeps r1=0 live from
+pre-call through the strh base (dead-guard + live-arg combos at -O2/-O3).

@@ -114,12 +114,12 @@ def next_candidate(budget, region, scan_cap=60, as_json=False):
             continue
         if lo is not None and not lo <= addr < hi:
             continue
-        scanned += 1
-        if scanned > scan_cap:
-            break
         if key in state["attempted"]:
             skipped.append((key, size, "attempted:" + state["attempted"][key].get("status", "?")))
             continue
+        scanned += 1
+        if scanned > scan_cap:
+            break
         # learn the outcome of a previous `next` suggestion from refine's state
         rstate = refine_state(addr)
         if rstate:

@@ -661,3 +661,16 @@ complete this one's pool. They should be attacked together.
 - Interim value: 00115570 at 6/7, 00115B14 at 7/10 with the same
   construct family — one insight (what keeps 3 distinct zero registers
   alive) closes 5 functions.
+
+## The trailing -1 pool word is SHARED by the static-init family (2026-10-27)
+
+005A8AA0 (different TU, different globals) shows the IDENTICAL 11/12
+pattern as 0059F7B8 with the same fam_sti source shape — the trailing
+`.word 0xFFFFFFFF` appears in both. Only 2 unmatched static-inits carry
+it (of ~440 in the family; the rest registered cleanly). No code in the
+binary loads either word (full-text pc-relative scan: zero loaders).
+Conclusion: an area-pool/data artifact at those two specific addresses
+(sibling constant or init-table sentinel), not reproducible from the
+function's own C source. Both stay at 11/12 (95.7%) — body fully
+correct, one dead data word short. PARKED unless a de-compilation of
+the neighboring data areas explains them.

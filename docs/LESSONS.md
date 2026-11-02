@@ -703,3 +703,18 @@ C++ multiple/virtual-inheritance ctor: 4 vptr stores (bases at +0,
 then a helper call (004EE540), then a this-adjustment return (r0 =
 adjusted this — deleting-dtor family). Needs reconstructed base-class
 layouts. PARKED until the base-class headers are recovered.
+
+## 00499094 (28B) — the no-CSE reload pattern (2026-11-02)
+
+Target: `ldr r2,&vtab; ldr r3,[r2]; str r3,[r0,#0x14]; ldr r3,[r2];
+str r3,[r0,#0x18]; ldr r2,[r2]; str r2,[r0,#0x1c]; ldr r2,[pc]=6A8B40;
+ldr r2,[r2]; str r2,[r0,#0x20]` — the vtable VALUE is reloaded before
+every store (no CSE), base pointer r2 loaded once, r1 skipped.
+- The reloads = the stores may alias the source: requires self and the
+  vtable symbol to be the SAME pointer type (u32*) — verified (n6/n7).
+- armcc STILL CSE'd when the base was a local copy of the array address;
+  the no-CSE form needs the base to be a GLOBAL POINTER VARIABLE
+  dereferenced per use (`extern u32* g; self[5] = *g;` — n7: reloads
+  appear but with an extra indirection level).
+- r1 skipped = param1's home occupied at allocation time; a dead u32
+  param got reused (n8), so param1 must be live-opaque. PARKED at 23%.

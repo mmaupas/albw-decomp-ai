@@ -674,3 +674,21 @@ Conclusion: an area-pool/data artifact at those two specific addresses
 function's own C source. Both stay at 11/12 (95.7%) — body fully
 correct, one dead data word short. PARKED unless a de-compilation of
 the neighboring data areas explains them.
+
+## 0040E4BC (32B) — 7/8, bitfield-extract shape (2026-10-27)
+
+Target: `add r1,r1,#1; mul r1,r1; asr r2,r1,#31; add r1,r1,r2,lsr#30;
+lsl r1,#14; lsr r1,#16; strh r1,[r0,#0x14]`.
+- add+asr+lsr30 = SIGNED div-by-4 (round-toward-zero) — x must be signed.
+- lsl 14 + lsr 16 = extract bits [2,18) of the quotient = a 16-bit
+  bitfield at bit offset 2 (armcc emits lsl/lsr pairs for bitfield
+  extracts).
+- My `(u16)((q << 14) >> 16)` merged the /4 into the shift (lsl 12) —
+  algebraically equal, different code. The ORIGINAL kept them separate:
+  the /4 result was materialized as a value (used twice? or a bitfield
+  READ from a stored word). 7/8 with every formulation tried; the
+  non-merging form needs the /4 result to be a bitfield READ of a
+  stored value (no load appears in target — so likely a compiler
+  bitfield-extract of the division result at bit offset 2, i.e. the
+  original read `x` through a `struct { int pad:2; int v:16; }`
+  view. PARKED at 7/8.

@@ -66556,6 +66556,13 @@
 "path": "src/work7/gpt27/func_0048C1F8.cpp",
 "status": "honest"
 },
+"0048C22C": {
+"cc": "4.1/b1049",
+"flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
+"hack_reasons": [],
+"path": "src/work8/auto/func_0048C22C.cpp",
+"status": "honest"
+},
 "0048C320": {
 "cc": "4.1/b1049",
 "flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",

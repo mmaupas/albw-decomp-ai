@@ -728,3 +728,25 @@ target reads the flag via r0 (param, pre-r4) and writes via r4; the tail
 call happens AFTER `pop {r4,lr}` with `mov r0,r2` — armcc in my compiles
 either wrote back differently or moved the return value early. The C is
 semantically right; the schedule isn't. PARKED.
+
+## 002FF488 (56B) — memclr4 ctor, hoist nuance (2026-11-02)
+
+`push {r4,lr}; mov r1,#0x6c; bl __aeabi_memclr4; mvn r2,#0;
+str r2,[r4,#0x30..0x38,0x3c]; mov r0,#0; str r0,[r4,#0x6c];
+strb r0,[r4,#0x29]; mov r0,r4` — ctor: memclr 0x6c bytes, -1 fields at
+0x30-0x3c, zero at 0x6c/0x29, return self. The memfunc extern pattern
+works (bl resolves). Target hoists `mvn r2,#0` ABOVE the push (first
+instruction); my compiles schedule it after (and push r5/r6 extra when
+the -1 is a live local). 6/14. The hoist-above-prologue nuance isn't
+controlled by any construct tried. PARKED.
+
+## 002FF488 (56B) — memclr4 ctor, hoist nuance (2026-11-02)
+
+`push {r4,lr}; mov r1,#0x6c; bl __aeabi_memclr4; mvn r2,#0;
+str r2,[r4,#0x30..0x38,0x3c]; mov r0,#0; str r0,[r4,#0x6c];
+strb r0,[r4,#0x29]; mov r0,r4` — ctor: memclr 0x6c bytes, -1 fields at
+0x30-0x3c, zero at 0x6c/0x29, return self. The memfunc extern pattern
+works (bl resolves). Target hoists `mvn r2,#0` ABOVE the push (first
+instruction); my compiles schedule it after (and push r5/r6 extra when
+the -1 is a live local). 6/14. The hoist-above-prologue nuance isn't
+controlled by any construct tried. PARKED.

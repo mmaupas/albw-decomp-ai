@@ -642,3 +642,22 @@ correct; only dead pool bytes differ.
 Sibling context: 0x59F7E8 (next function, also a static-init, also
 unmatched) is likely the sibling that used the -1 — solving IT may
 complete this one's pool. They should be attacked together.
+
+## stm-batch family: 6/7 on 00115570 — one mystery left (2026-10-27)
+
+`extern u32* f(void* self, u32 a, u32 b, u32 c) { u32* p = (u32*)self;
+*p++ = a; *p++ = b; *p++ = c; ×3; return p - 1; }` at -O3 -Otime gives
+**6/7** on 00115570: exact `stm r0!,{r1,r2,r3} ×2; stm r0,{r1,r2,r3}; bx`
+— missing ONLY the three leading `mov r1/r2/r3,#0`.
+- `return p - 1` is what makes the LAST stm non-writeback (r0 = last
+  slot, no post-inc).
+- The three movs = the params assigned 0 withOUT const-propagation.
+  armcc const-props `a = 0` and kills the batching (b13). An opaque
+  helper write (`clear(&a,3)`) spills everything to the stack (s2).
+- Best hypothesis: the source passed 0s AND the body re-assigned them
+  via a path armcc treats as opaque (or the movs come from an inlined
+  ctor `T3()` whose temporary lived in r1-r3). Unresolved after ~20
+  probes across the family.
+- Interim value: 00115570 at 6/7, 00115B14 at 7/10 with the same
+  construct family — one insight (what keeps 3 distinct zero registers
+  alive) closes 5 functions.

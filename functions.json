@@ -624,6 +624,13 @@
 "path": "src/work7/gpt23/func_00104518.cpp",
 "status": "honest"
 },
+"00104788": {
+"cc": "4.1/b1049",
+"flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
+"hack_reasons": [],
+"path": "src/work8/auto/func_00104788.cpp",
+"status": "honest"
+},
 "0010478C": {
 "cc": "4.1/b1049",
 "flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",

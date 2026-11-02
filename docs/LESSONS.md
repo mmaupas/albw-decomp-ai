@@ -692,3 +692,14 @@ lsl r1,#14; lsr r1,#16; strh r1,[r0,#0x14]`.
   bitfield-extract of the division result at bit offset 2, i.e. the
   original read `x` through a `struct { int pad:2; int v:16; }`
   view. PARKED at 7/8.
+
+## vtable-chain ctor family: 0033A9E0 / 0035DFD0 / 001CCEB8 (2026-10-27)
+
+Identical twins: `ldr r1,[pc]=vtable; push {r4,lr}; str r1,[r0],#0x320;
+add r2,r1,#0x58; str r2,[r0],#0xec; add r3,r2,#0x64; str r3,[r0],#0x90;
+bl func_004EE540; sub r0,r0,#0x400; pop {r4,lr}; sub r0,r0,#0x9c`.
+C++ multiple/virtual-inheritance ctor: 4 vptr stores (bases at +0,
++0x320, +0x40C, +0x49C) with writeback pointer advances by base strides,
+then a helper call (004EE540), then a this-adjustment return (r0 =
+adjusted this — deleting-dtor family). Needs reconstructed base-class
+layouts. PARKED until the base-class headers are recovered.

@@ -718,3 +718,13 @@ every store (no CSE), base pointer r2 loaded once, r1 skipped.
   appear but with an extra indirection level).
 - r1 skipped = param1's home occupied at allocation time; a dead u32
   param got reused (n8), so param1 must be live-opaque. PARKED at 23%.
+
+## 002BDD6C (56B) — 9/14, flag-RMW + conditional tail (2026-11-02)
+
+`self->0x59c |= 0x2000; r = f2(self); if (!r) return 0;
+ return f3(self, (short)self->0x2e, r);` — best form uses a `u32* flags`
+pointer for the RMW (writeback ldr/str) + locals for v/r: 9/14. The
+target reads the flag via r0 (param, pre-r4) and writes via r4; the tail
+call happens AFTER `pop {r4,lr}` with `mov r0,r2` — armcc in my compiles
+either wrote back differently or moved the return value early. The C is
+semantically right; the schedule isn't. PARKED.

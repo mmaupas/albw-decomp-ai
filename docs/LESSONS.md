@@ -761,3 +761,19 @@ folded into the 0x480 store — but the scattered p[i] stores anchor p at
 base so armcc computes p += 0x121/0x122 separately (str [0x484] or
 [0x488], no WB, no stm). The original likely used a second running
 pointer for the tail region. PARKED at 69%.
+
+## 0059F8A4 (28B) — armcc arg-evaluation-order puzzle (2026-11-02)
+
+`ldr r0,&arr; ldr r1,&ctor; mov r3,#0x14; mov r2,#8; push {r4,lr};
+blx __aeabi_vec_ctor_nocookie; mov r1,#0; add r3,r0,#0xa0; mov r2,r1;
+stm r3,{r1,r2}; str r1,[r0,#0xa8]` — vec-ctor-nocookie for a bss array
+(8 B x 0x14) + 3 zero stores at +0xa0/a4/a8.
+- The body AFTER the call matches with the KB pattern, but armcc loads
+  the two pc-relative CONSTANT args SWAPPED (ctor→r0, arr→r1) in every
+  decl form tried (extern "C", C++ mangled, ptr-global, struct member,
+  local copy). The matched KB sibling (002335B8) had arg1 = p->items (a
+  MEMORY load) and got (arr, ctor) — armcc's evaluation order differs
+  for pc-relative constants vs memory loads. The target wants arr
+  (constant) loaded FIRST. PARKED at 8/14 — needs the construct that
+  makes armcc evaluate a constant arg first (or the real bss symbol
+  type).

@@ -161,9 +161,9 @@ def skeleton(addr, cls, ins):
     if cls == "thunk":
         # b target with arg-preserving regs
         bs = [o for m, o in ins if m == "b" and o.startswith("#")]
-        if not bs:
+        tgt = bs[-1].split()[1] if bs and len(bs[-1].split()) > 1 else None
+        if not tgt:
             return None
-        tgt = bs[-1].split()[1]
         tgt = re.sub(r"[^0-9a-fA-Fx]", "", tgt)
         return ("// tail thunk\nextern void func_%s(u32, u32, u32, u32);\n\n"
                 "void func_%08X(u32 a, u32 b, u32 c, u32 d) {\n"

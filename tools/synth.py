@@ -71,8 +71,8 @@ def classify(ins):
     # single-call wrapper: push {r4,lr}; mov r4,r0; bl; ... pop {r4,pc}
     if len(calls) == 1 and ms and ms[0] == "push" and ms[-1] == "pop":
         return "wrapper"
-    # single tail call: b target
-    if len(calls) == 0 and len(ms) >= 2 and ms[-2] == "b":
+    # single tail call: b target (conditional-branch forms stripped below)
+    if len(calls) == 0 and len(ms) >= 2 and ms[-2].startswith("b"):
         return "thunk"
     # pure store/init/setter bodies
     if calls == [] and set(ms) - {"mov", "add", "str", "strb", "strh", "strd", "stm", "ldr", "ldm", "cmp", "rsb", "mul", "orr", "and", "lsl", "lsr", "asr", "b", "bx", "bxeq", "bxne", "sub", "eor"} == set():
@@ -160,7 +160,7 @@ def skeleton(addr, cls, ins):
                 "}\n" % (target, addr, target))
     if cls == "thunk":
         # b target with arg-preserving regs
-        tgt = [o for m, o in ins if m == "b"][0].split()[1]
+        tgt = [o for m, o in ins if m.startswith("b")][-1].split()[1]
         tgt = re.sub(r"[^0-9a-fA-Fx]", "", tgt)
         return ("// tail thunk\nextern void func_%s(u32, u32, u32, u32);\n\n"
                 "void func_%08X(u32 a, u32 b, u32 c, u32 d) {\n"

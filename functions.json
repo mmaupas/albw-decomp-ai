@@ -112091,6 +112091,13 @@
 "path": "src/work7/gpt22/func_006530A4.cpp",
 "status": "honest"
 },
+"006530C8": {
+"cc": "4.1/b1049",
+"flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
+"hack_reasons": [],
+"path": "src/work8/auto/func_006530C8.cpp",
+"status": "honest"
+},
 "006530CC": {
 "cc": "4.1/b1049",
 "flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",

@@ -750,3 +750,14 @@ works (bl resolves). Target hoists `mvn r2,#0` ABOVE the push (first
 instruction); my compiles schedule it after (and push r5/r6 extra when
 the -1 is a live local). 6/14. The hoist-above-prologue nuance isn't
 controlled by any construct tried. PARKED.
+
+## 003F6FBC (56B) — 69%: scattered stores + tail WB/stm (2026-11-02)
+
+`mov r2,#0; str r2,[r0,#0x460/470/478/4e0/464/468/46c/47c];
+str r2,[r0,#0x480]!; add r0,r0,#8; mov r3,r2; stm r0,{r2,r3}`.
+With `(self, x, y=0-from-caller)`: all 9 scattered stores match (r2 = y's
+home). The tail (WB str + add + stm) needs p to be a RUNNING pointer
+folded into the 0x480 store — but the scattered p[i] stores anchor p at
+base so armcc computes p += 0x121/0x122 separately (str [0x484] or
+[0x488], no WB, no stm). The original likely used a second running
+pointer for the tail region. PARKED at 69%.

@@ -623,3 +623,22 @@ reuse chain 0→1→0x42C suggests the zero is a live arg reused as scratch.
 3/13 after struct-layout fixes (b1 at 0x425, b2 at 0x426, v at 0x42c:
 pad[0x425], b1, b2, pad2[5], v). Open: what keeps r1=0 live from
 pre-call through the strh base (dead-guard + live-arg combos at -O2/-O3).
+
+## 0059F7B8 (48B static-init) — 11/12, one unused pool word short (2026-10-27)
+
+fam_sti KB source (Id64/Pair globals, `data = Id64().v` ctor-init)
+reproduces 11/12 words exactly — the whole function body AND both data
+pointers. Missing: the trailing `.word 0xFFFFFFFF` pool word, which NO
+code in the binary loads (scanned all pc-relative loads: zero loaders).
+It is the tail of the original TU's shared area pool — some sibling's
+constant (a pooled -1) that armcc placed after this function's pool.
+Same open problem class as 004E015C's trailing 0: area-pool tails of
+the original TU leak into the last function's byte range. Not
+reproducible from the function's own source; needs either the sibling
+that used the constant (then the pool layout matches) or acceptance of
+the 1-word delta. NOT a hack candidate — the function body is fully
+correct; only dead pool bytes differ.
+
+Sibling context: 0x59F7E8 (next function, also a static-init, also
+unmatched) is likely the sibling that used the -1 — solving IT may
+complete this one's pool. They should be attacked together.

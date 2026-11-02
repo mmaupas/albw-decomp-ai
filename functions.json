@@ -52517,6 +52517,13 @@
 "path": "src/work8/audit_reloc/fix/src/003C2148.cpp",
 "status": "honest"
 },
+"003C2154": {
+"cc": "4.1/b1049",
+"flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
+"hack_reasons": [],
+"path": "src/work8/auto/func_003C2154.cpp",
+"status": "honest"
+},
 "003C2160": {
 "cc": "4.1/b1049",
 "flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",

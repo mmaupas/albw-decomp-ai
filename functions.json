@@ -34,6 +34,13 @@
 "path": "src/work7/ds1/func_00100C38.cpp",
 "status": "honest"
 },
+"00100C90": {
+"cc": "4.1/b1049",
+"flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
+"hack_reasons": [],
+"path": "src/work8/auto/func_00100C90.cpp",
+"status": "honest"
+},
 "00100C94": {
 "cc": "4.1/b1049",
 "flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",

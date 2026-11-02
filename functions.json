@@ -48,6 +48,13 @@
 "path": "src/work8/bench/scored/func_00100C94.c",
 "status": "honest"
 },
+"00100D84": {
+"cc": "4.1/b1049",
+"flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
+"hack_reasons": [],
+"path": "src/work8/auto/func_00100D84.cpp",
+"status": "honest"
+},
 "00100D88": {
 "cc": "4.1/b1049",
 "flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",

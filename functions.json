@@ -118398,6 +118398,13 @@
 "path": "src/work7/gpt22/func_0068B020.cpp",
 "status": "honest"
 },
+"0068B070": {
+"cc": "4.1/b1049",
+"flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
+"hack_reasons": [],
+"path": "src/work8/auto/func_0068B070.cpp",
+"status": "honest"
+},
 "0068B134": {
 "cc": "4.1/b1049",
 "flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",

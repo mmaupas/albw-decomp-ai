@@ -1064,3 +1064,13 @@ needs the clears as separate dependent statements (v &= ~2; v &=
 read/write expressions (tried: cast-vs-member, pointer-copy-vs-
 global, volatile — all CSE'd anyway). The reload/recompute = the
 005F8EF4 no-CSE family. PARKED.
+
+## 00499094 (52B volatile triple-read) — start-register wall (2026-11-03)
+
+Target: `ldr r2,=g1; ldr r3,[r2]; str r3,[r0,#0x14]; ldr r3,[r2];
+str r3,[r0,#0x18]; ldr r2,[r2]; str r2,[r0,#0x1c]; ldr r2,=g2; ldr
+r2,[r2]; str r2,[r0,#0x20]` — the volatile no-CSE-reload pattern
+CONFIRMED (the construct = p[5..7]=g1 (3 volatile reads!), p[8]=g2).
+Only delta: the register assignment shifted by one (target: the
+first pool load → r2; mine → r1). The dead-second-param trick
+doesn't shift it. Same start-register wall as 003CD95C. PARKED.

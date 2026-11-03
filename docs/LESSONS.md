@@ -1119,3 +1119,15 @@ sits 0x18 before). The byte's struct size/padding doesn't fix it
 (the 0x18-padded form = 12/14 with the address merge lost to a
 separate pool load). The .bss packing = the compiler's layout
 choice, not source-controlled. PARKED.
+
+## 005D0C28 (52B four field copies) — materialize-vs-fold wall (2026-11-03)
+
+Target: `ldr r0,=g; add r1,r0,#0x10; ldr r3,[r0]; add r2,r1,#0x40;
+str r3,[r1,#0x18]; ldr r3,[r0,#8]; str r3,[r1,#0x30]; ldr r1,[r0,#4];
+str r1,[r2,#0x10]; ldr r0,[r0,#0xc]; str r0,[r2,#0x18]` — g->x28 =
+g->x0; g->x40 = g->x8; g->x60 = g->x4; g->x68 = g->xc, with the
+sub-object bases (g+0x10, g+0x50) MATERIALIZED in r1/r2. My compile
+folds them into r0+offsets (the offsets fit — the fold is free).
+The exact inverse of the 002C3098 wall (there the target folded and
+mine materialized). The compiler's materialize-vs-fold choice is
+not source-controlled in either direction. PARKED.

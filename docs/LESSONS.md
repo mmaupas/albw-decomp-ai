@@ -787,3 +787,16 @@ stm r3,{r1,r2}; str r1,[r0,#0xa8]` — vec-ctor-nocookie for a bss array
   (constant) loaded FIRST. PARKED at 8/14 — needs the construct that
   makes armcc evaluate a constant arg first (or the real bss symbol
   type).
+
+## 001511F0 (36B flag+tail-call) — schedule-order wall (2026-11-03)
+
+Target: `mov r2,r0; ldr r0,[r0] (m0); mov r3,#1; add r1,r0,#0x14;
+ldr r0,[r2,#0x1c] (m1c); add r2,r2,#0x10; strb r3,[r0,#0xa0];
+add r0,r0,#0x94; b func_00115C8C` — self->m1c->flagA0=1; tail call
+(m1c+0x94, m0+0x14, self+0x10). ~7 probes: inline args, local caches,
+comma-operator-in-arg2/arg3, self-copy local, by-value Vec3 arg3,
+-Ospace. armcc always loads m1c FIRST (flag store scheduled before
+the m0 load); target loads m0 first and m1c once, after. No source
+dependency forces the order (flag base is self-relative, not
+m0-derived). Self-copy mov r2,r0 appears only with a self local.
+PARKED — schedule-order wall.

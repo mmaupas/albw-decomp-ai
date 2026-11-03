@@ -1164,3 +1164,15 @@ movs r2,r0 (move+test FUSED); beq; ldrsh r1,[r4,#0x2e]; pop
 order = the same eager/lazy scheduler family. Shape confirmed:
 self->x59c |= 0x2000; res = 002BDDA4(self); if (res)
 00229F58(res, (s16)self->x2e). PARKED.
+
+## 004A523C (84B guard chain + flag set) — if-conversion wall (2026-11-03)
+
+Twin of 0031C064 (the Ghidra-converted source). The target's guard
+chain = IF-CONVERTED (ldrne r2,[r2]; cmpne r2,#0; beq — the loads/
+compares CONDITIONAL on the previous check, no branches for the
+intermediate null-tests); the twin's and my compiles = branchy
+(beq per check). The if-conversion fires in the target's compile
+for the same null-check chain but not in mine — the same
+conditionalization choice as 001150B8's vldmiane. Structure:
+t=self->x1c; b=*t; o=b->x10; fl=o->b44; if ((fl&1?1:0)==arg) return;
+o->b44=(fl&0xfe)|arg; if (arg) t->b70|=2. PARKED.

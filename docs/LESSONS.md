@@ -1083,3 +1083,15 @@ ldr r1,[r1,#4]; ble; b 003F7FA0(t, t->x4)` — the conditions: !t,
 x24 != t->xc, t->x4 > 0 (signed). Same shape confirmed; the
 register assignment (t→r1, self kept in r0) = the keep-r0 anomaly
 (003CD95C family). PARKED.
+
+## 00115234 (16B: 12+4 float copy) — dead-writeback DCE wall (2026-11-03)
+
+Target: `vldmia r1!,{s0-s11}; vldmia r2,{s12-s15}; vstmia r0,
+{s0-s15}` — 12 floats from src1 (WRITEBACK r1!), 4 from src2, one
+batched store. Best: the 00115224-style pointer-walk source with
+src2 = 3/4 — only the r1 writeback missing. The writeback = the
+dead p += 12 KEPT by the target's compiler but DCE'd by mine (the
+advanced pointer is dead — the second load comes from arg2). The
+twin 00115224's writeback was LIVE (its second load used r1's
+advanced value). For the writeback to survive as dead code: no
+honest construct. PARKED.

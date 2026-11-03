@@ -1237,3 +1237,11 @@ FORWARDER (a different shape). PARKED.
 
 The x6c=0 store between x68 and x64 doesn't change the scheduling —
 the vldr s0 spill for f3c persists. PARKED (003F11B8 family).
+
+## 003F6F84 (56B guarded vtable tail call) — if-conversion wall (2026-11-03)
+
+Target: `mov r2,r1 (the arg); ldr r1,[r0,#4]; cmp; ldrne r3,[r0,#8];
+cmpne r3,#0; beq; ldrb r0,[r0,#0xc]; cmp; bne; ldr r0,[r2]; ldr
+r3,[r0,#0xc]; mov r0,r2; bx r3` — if (x4 && x8 && !xc)
+arg->v0() (the tail). The guard chain = if-converted (ldrne/cmpne)
+— the 004A523C wall. PARKED.

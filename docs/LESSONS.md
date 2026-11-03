@@ -1232,3 +1232,8 @@ local dead), the call removed, push {r4,lr} only. The frame layout
 (the copy + the temp at +0x10) = the compiler's for the by-value
 stack arg — not reproduced. The twin 005FF2A8 = a pure stack-arg
 FORWARDER (a different shape). PARKED.
+
+## 003F1A80 (56B = 003F11B8 + x6c store) — same VFP-spill wall (2026-11-03)
+
+The x6c=0 store between x68 and x64 doesn't change the scheduling —
+the vldr s0 spill for f3c persists. PARKED (003F11B8 family).

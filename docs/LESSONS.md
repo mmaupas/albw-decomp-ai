@@ -1106,3 +1106,16 @@ UNREFERENCED pool word 0xffffffff — the area-pool-tail class
 word is the compiler's leftover literal. PARKED (area-pool class).
 The twin 005931E8's source (probe_sti_b.cpp) = the same construct
 with the Big's v at +8.
+
+## 005AB1D0 (52B static init: Big + Pair + byte-T) — .bss packing wall (2026-11-03)
+
+Twin of 005A5B48 (the fam_sti pattern). Best: `T_00715448
+{char pad[16]; s64 v;} data = {{0}, Id64().v}; Pair data_00715450;
+T_00715438 {u8 m0;} data_00715438;` = 12/13 (92.3%) — the only
+delta: the byte's address arithmetic (target: pair_addr - 0x18;
+mine: pair_addr - 4 — the compiler's .bss first-fit packing placed
+my 1-byte byte-T in the gap before the Pair; the target's byte-T
+sits 0x18 before). The byte's struct size/padding doesn't fix it
+(the 0x18-padded form = 12/14 with the address merge lost to a
+separate pool load). The .bss packing = the compiler's layout
+choice, not source-controlled. PARKED.

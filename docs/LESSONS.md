@@ -1187,3 +1187,13 @@ the TAIL — the standard C++ dtor chain!). My compile: push
 the register assignment shifted. The two-disposer structure (the
 member's + the base's tail) reproduced; the frame size/register
 assignment not. PARKED.
+
+## 00502F8C (108B disposer dtor, sub at 0x2f8) — same frame wall (2026-11-03)
+
+Same structure as 002E284C (twin of 0025ECE0/0029D990). Tried: -g
+(the twin's flags), the distinct-callee alias symbol, the 0x18-padded
+byte-T. The push {r4-r8,lr} vs the target's {r4-r6,lr} persists.
+The twin's compiled form used func_0048D1B0 (a different callee)
+with the nested adjustment; 002E284C/00502F8C's targets = the base
+dtor as the TAIL (b 004A1520). The frame difference = the compiler's
+choice for the same-callee-twice structure. PARKED.

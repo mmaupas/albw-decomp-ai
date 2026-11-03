@@ -831,3 +831,23 @@ offsets fit the encodings — armcc rematerializes for free. The
 target's ip retention is unexplained (maybe a member function of
 a different class or an opaque derivation). Same fold-wall family
 as 0040E390's r0-reservation. PARKED.
+
+## 00115B3C (44B identity-matrix init) — initializer-streaming wall (2026-11-03)
+
+Target: `mov r1,#0x3f800000; mov r2,#0; mov r3,#0; stm r0!,{r1,r2,r3};
+stm r0!,{r2,r3}` x3 + `str r1,[r0]` — identity matrix (16 words,
+w0/w5/w10/w15 = 1.0f bit pattern) streamed through core regs with
+the runs (r1,r2,r3),(r2,r3) repeating. Probes: float initializer
+(rodata copy), float direct (VFP vstr), u32 direct (r1=0! zero
+hoisted first, stm {r1,r2} pairs), value locals, chained assigns,
+running pointer, u64 pairing. armcc always hoists the zero constant
+to r1 and batches only pairs; the target's 1.0f-in-r1 + 3-wide stm
+streams = the compiler's initializer streaming with 1.0f computed
+first — no source construct found. Related: the VFP elementwise
+family (00115C54/C70/D54/DAC) — target allocates products to FRESH
+regs (s6-s8) in x,y,z order; every construct gives in-place reuse
+(s0,s2,s1 scrambled) or scalar vldr/vstr. 00115DAC (vmla family,
+k in VFP arg s0): target batches BOTH loads (v→s1-s3, w→s4-s6) and
+accumulates in-place into w; constructs give v batched high + w
+scalar scrambled. PARKED — VFP allocator + initializer streaming
+wall.

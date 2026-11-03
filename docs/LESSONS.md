@@ -1219,3 +1219,16 @@ checked-init convention: the initializer's result's sign = the
 error flag; the diagnostic captures the CALLER'S pc (mov r1,pc!).
 The pc-as-value = the compiler-generated diagnostic glue (the
 00106320 lr-override family). Not expressible in plain C. PARKED.
+
+## 003D3658 (56B stack-arg + call + result) — stack-arg frame wall (2026-11-03)
+
+Target: `push {r4-r6,lr}; sub sp,#0x18; add lr,sp,#0x28 (the
+CALLER'S stack args!); ldm lr,{r0,r5,r6,ip}; stm sp,{...} (the
+16-byte by-value stack arg copied to my frame!); add r0,sp,#0x10;
+bl 003D3588(&frame[0x10]); add lr,sp,#0x10; mov r0,r4; ldm lr,
+{r1,r2}; stm r4,{r1,r2}` — the 5th-arg (16-byte struct) copy + the
+call + the 8-byte result store. My compile: the copy DCE'd (the
+local dead), the call removed, push {r4,lr} only. The frame layout
+(the copy + the temp at +0x10) = the compiler's for the by-value
+stack arg — not reproduced. The twin 005FF2A8 = a pure stack-arg
+FORWARDER (a different shape). PARKED.

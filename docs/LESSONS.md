@@ -1141,3 +1141,15 @@ OVERRIDDEN to func_0010998C. The lr override = the compiler's
 internal tail-glue (the callee "returns" to a third function). Not
 expressible in plain C — the same class as the inline-constant-
 after-BL (0011466C family). PARKED.
+
+## 0028F270 (56B table-lookup guarded tail call) — push/ip wall (2026-11-03)
+
+Target: `push {r4,r5}; ldrsh ip,[r0,#0x42]; ldr r4,=table; ldrb
+ip,[r4,ip,lsl#4]; cmp ip,#0xb; bne skip; ldr r0,[r0,#0x48]; cmp;
+beq skip; pop {r4,r5}; b 003776F8(r0=self->x48)` — the lookup:
+table[idx*16] == 0xb (the stride 16, SIGNED s16 idx). My construct
+(plain C, same shape) = 1/14: no push, the idx in r1, the table's
+address in r2 (used once). The target: the table's address KEPT in
+r4 (a callee-saved reg, pushed for the alignment with r5), the idx
+in ip. The r4's lifetime + the ip allocation = the compiler's
+codegen for the table lookup — not source-controlled. PARKED.

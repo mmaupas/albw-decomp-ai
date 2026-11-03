@@ -82887,6 +82887,13 @@
 "path": "src/work7/ds7/gen_54c_54CD88.cpp",
 "status": "honest"
 },
+"0054CDD4": {
+"cc": "4.1/b1049",
+"flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
+"hack_reasons": [],
+"path": "src/work8/auto/func_0054CDD4.cpp",
+"status": "honest"
+},
 "0054CE38": {
 "cc": "4.1/b1049",
 "flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",

@@ -1131,3 +1131,13 @@ folds them into r0+offsets (the offsets fit — the fold is free).
 The exact inverse of the 002C3098 wall (there the target folded and
 mine materialized). The compiler's materialize-vs-fold choice is
 not source-controlled in either direction. PARKED.
+
+## 00106320 (56B vtable tail call with lr override) — not expressible (2026-11-03)
+
+Target: `mov r2,#0; mov r1,r0; ldr r0,=g; ldr r0,[r0]; ldr r3,[r0];
+ldr r3,[r3,#0xc]; ldr lr,=func_0010998C (a CODE POINTER in the
+pool!); bx r3` — a virtual tail call with the LINK REGISTER
+OVERRIDDEN to func_0010998C. The lr override = the compiler's
+internal tail-glue (the callee "returns" to a third function). Not
+expressible in plain C — the same class as the inline-constant-
+after-BL (0011466C family). PARKED.

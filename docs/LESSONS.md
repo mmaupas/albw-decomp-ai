@@ -818,3 +818,16 @@ batch-vs-scalar + fresh-vs-inplace choice is source-insensitive
 here. PARKED — needs a new lever (maybe the original used a
 Vec3 class with specific member layout or an inline method the
 scheduler treats atomically).
+
+## 002C3098 (28B rec-fill) — sub-object-pointer fold wall (2026-11-03)
+
+Target: `add ip,r1,#0x24; mov r1,#0; strb r1,[ip,#4]; ldr
+r0,[r0,#0x1c]; str r0,[ip]; strd r2,r3,[ip,#8]; bx` — the
+sub-object base (dst+0x24) is materialized in ip and all 4 stores
+go through it. Every construct (p local, inlined helper taking
+Rec*, sub-struct Pair, local Rec + struct assign, -Ospace) gets
+the base FOLDED into each store (str [r1,#0x24] etc.) because the
+offsets fit the encodings — armcc rematerializes for free. The
+target's ip retention is unexplained (maybe a member function of
+a different class or an opaque derivation). Same fold-wall family
+as 0040E390's r0-reservation. PARKED.

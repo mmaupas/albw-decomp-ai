@@ -1,5 +1,6 @@
-// 0x524898: union word/float views, +0.5f adjust (the twin's form).
-#include "range.h"
+// 0x524898: union word/float views, +0.5f adjust (twin 0052BC58).
+typedef unsigned int u32; typedef float f32;
+struct Vec3 { f32 x, y, z; };
 union V { Vec3 xyz; u32 words[3]; };
 struct S { char pad[0x3d0]; V pos; };
 extern "C" void target(S* p, V* out) {

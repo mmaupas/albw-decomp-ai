@@ -77497,6 +77497,13 @@
 "path": "src/work4/agent5/b6/func_001E6948.cpp",
 "status": "honest"
 },
+"00524898": {
+"cc": "4.1/b1049",
+"flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
+"hack_reasons": [],
+"path": "src/work8/auto/func_00524898.cpp",
+"status": "honest"
+},
 "005248D0": {
 "cc": "4.1/b1049",
 "flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",

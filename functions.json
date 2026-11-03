@@ -78029,6 +78029,13 @@
 "path": "src/work7/gpt28/func_0052B294.cpp",
 "status": "honest"
 },
+"0052B2BC": {
+"cc": "4.1/b1049",
+"flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
+"hack_reasons": [],
+"path": "src/work8/auto/func_0052B2BC.cpp",
+"status": "honest"
+},
 "0052B2F4": {
 "cc": "4.1/b1049",
 "flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",

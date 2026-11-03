@@ -1011,3 +1011,17 @@ killed), flags→r1; target idx→r1 (self KEPT dead in r0), flags→r3.
 The keep-r0 anomaly (inverted kill-r0, 00368C3C family). Dead
 second param doesn't change it. The test form: (flags>>i)&1 (shift
 down) + bic with (1<<i) as ip<<i — reproduced. PARKED.
+
+## 003D5684 (52B init + call + flag + -1 pair) — -1 CSE/stm-merge wall (2026-11-03)
+
+Target: `mvn r2,#0 (pre-push!); push {r4,lr}; stm r0,{r1,r2}
+(x0=arg, x4=-1); add r0,#0xc; bl 003D4CD4(self+0xc, arg); sub
+r0,#0xc; mov r3,#1; strb r3,[r0,#0x30]; mvn r1,#0 (RECOMPUTED —
+no CSE across the call!); add r3,r0,#0x38; mov r2,r1 (COPY);
+stm r3,{r1,r2} (x38/x3c = -1,-1 via stm with two regs)`.
+Mine: push {r4,r5,r6} (the -1 KEPT in r5 across the call — CSE'd!),
+scalar str r5 twice (no stm — one reg). Deltas: (1) the -1 CSE
+across the call (mine CSEs + pushes r5; the target recomputes and
+avoids the push); (2) the stm merge needs the value in TWO regs
+(the copy) — mine has one. The inlined-helper and -Ospace forms
+don't flip either. Same family as 005A8148/0059F7B8. PARKED.

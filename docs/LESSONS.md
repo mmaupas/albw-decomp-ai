@@ -877,3 +877,27 @@ strd needs two regs). Remaining delta: my compiles hoist the zero
 stores ABOVE the strd (scheduler); target keeps strd first. No
 source dependency blocks the hoist (all addresses/values constant).
 PARKED.
+
+## 0041BD4C (44B u16 fill 0xffff) — addendum (2026-11-03)
+
+do-while + s16 array + -1 gets mvn r0,#0 (no pool!) — 6/12 best.
+The remaining deltas (countdown pointer-walk vs count-up index loop)
+persist across: u16 index (uxth), != bound, u32 v variable, ~0,
+inlined put16 helper, global index, volatile base, short array.
+armcc's loop reversal + strength reduction is unstoppable for this
+shape; the target's count-up index form suggests the original
+source had something structurally different (possibly the loop
+variable used after the loop, or a different inlining context).
+PARKED.
+
+## 001CD1D4 (48B call + flags + far u16 store) — scheduler-eager wall (2026-11-03)
+
+Target: push; r4=self; bl 0037D414; mov r1,#1; strb r1,[r4,#0x425];
+ldr r1,=0x42c; mov r0,#0; strb r0,[r4,#0x426]; mov r0,#2; strh
+r0,[r1,r4] — the 0x42c offset (strh immediate max 255) forces the
+pool load, scheduled LAZILY (between the stores). My compiles hoist
+ALL constants first (r3=0x42c, r2=1, r0=0, r1=2, then stores).
+Structure right (5/12): u8 at 0x425, u8 at 0x426, u16 at 0x42c.
+The lazy-vs-eager constant scheduling didn't respond to -Ospace or
+statement reordering. Same scheduler-eager family as 001511F0.
+PARKED.

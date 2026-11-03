@@ -67766,6 +67766,13 @@
 "path": "src/work7/gpt20/func_00495E50.cpp",
 "status": "honest"
 },
+"00495E84": {
+"cc": "4.1/b1049",
+"flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
+"hack_reasons": [],
+"path": "src/work8/auto/func_00495E84.cpp",
+"status": "honest"
+},
 "00495EA0": {
 "cc": "4.1/b1049",
 "flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",

@@ -913,3 +913,16 @@ load into r1 is a second argument, not the call's arg0. With that,
 keeps p+0x16 in r0 across the store; mine keeps p and uses [r0,
 #0x16] twice). Reference, pointer-advance, local-p, direct forms
 all refuse the writeback. PARKED — one scheduler delta short.
+
+## 0059F7B8 (48B two-global reset) — same strd/zero-hoist wall (2026-11-03)
+
+Target: `ldr r2,=g1(0x716618); mvn r0,#0; mov r1,r0; strd r0,r1,[r2];
+ldr r0,=g2(0x716620); mov r1,#0; mov r2,r1; stm r0,{r1,r2}` — u64
+g1 = -1 (strd), then u32 pair g2 = 0,0 (stm), with the g2 address
+RELOADED (separate pool entry — two globals, not one struct; the
+compiler reloads between accesses to different externs). Probes:
+single struct (no reload, no strd), separate globals (reload yes,
+but u64 → stm not strd, registers scrambled), cast-view u64 store,
+u64 value local, padded layout (strd appeared but zeros hoisted
+above it — the 005A8148 wall), inlined helper. Same strd/zero-hoist
+wall family. PARKED.

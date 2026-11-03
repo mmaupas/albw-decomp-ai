@@ -901,3 +901,15 @@ Structure right (5/12): u8 at 0x425, u8 at 0x426, u16 at 0x42c.
 The lazy-vs-eager constant scheduling didn't respond to -Ospace or
 statement reordering. Same scheduler-eager family as 001511F0.
 PARKED.
+
+## 00487F04 (48B call + u16 bit set/clear) — writeback-miss wall (2026-11-03)
+
+Target: push; ldr r1,[r0,#0x14]; mov r4,r0; bl func_004B96A0(r0=self,
+r1=p14 — TWO-ARG call!); ldr r0,[r4,#0x14]; ldrh r1,[r0,#0x16]!
+(writeback); orr #1; strh [r0]; ldr r0,[r4,#0x14]; bic #2; strh
+[r0,#0x16]. KEY FINDING: func_004B96A0 takes (self, p14) — the p14
+load into r1 is a second argument, not the call's arg0. With that,
+10/12 (83.3%): only delta = the writeback on the first ldrh (target
+keeps p+0x16 in r0 across the store; mine keeps p and uses [r0,
+#0x16] twice). Reference, pointer-advance, local-p, direct forms
+all refuse the writeback. PARKED — one scheduler delta short.

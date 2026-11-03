@@ -974,3 +974,16 @@ offset moved to 0x5c — Primary vtable = 2+20+1(D0) = 23 = 0x5c).
 Vtable accounting: entries = 2 + virtuals + 1 (D0) for polymorphic
 classes. For tertiary at 0x64: Secondary = 3 entries (no D0) —
 no construct found. PARKED.
+
+## 00368C3C (52B per-element flag set loop) — ldrd/kill-r0 wall (2026-11-03)
+
+Target: `ldr r2,[r0,#0xa4] (count); ldr r0,[r0,#0xa8] (elems,
+OVERWRITING self); mov r3,#0; L: add ip,r3,r3,lsl#3; add ip,ip,
+r3,lsl#5 (=i*41); add r3,#1; add ip,r0,ip,lsl#3 (=elems+i*328);
+cmp r3,r2; strb r1,[ip,#0x145]; bne L` — 1x loop, index
+addressing with the mul decomposed (41*8), self KILLED by the
+elems load. Probes: -O3 (2x-unrolled with odd-peel epilogue),
+-O2 (ldrd pair load — self kept, the 00111EF0 wall), -Ospace
+(push+writeback). The 1x + no-reduction + kill-r0 form not
+reproduced. Element = 0x148 bytes, flag byte at +0x145. PARKED —
+same ldrd/kill-r0 family as 00111EF0.

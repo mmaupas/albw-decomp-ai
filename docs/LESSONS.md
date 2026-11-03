@@ -1208,3 +1208,14 @@ ROLLED loop with the speculative-hoist guards + the double-cmp. My
 compiles: -O3/-Otime FULLY UNROLLS the 3-iteration loop; -O2/-Ospace
 = other forms; the runtime-bound+inner-guard = 16 words (different).
 The rolled+guarded form not reproduced. PARKED.
+
+## 003D23D8 (56B checked-init + pc diagnostic) — pc-capture, not expressible (2026-11-03)
+
+Target: `push {r4,r5,lr}; sub sp,#0x1c; mov r4,r0; mov r2,#0xa0000;
+mov r1,#0x1c; mov r0,sp; bl func_00108630(buf,0x1c,0xa0000); mov
+r1,pc (THE RETURN ADDRESS AS A VALUE!); lsrs r2,r0,#31; blne
+func_0010AC24(res,pc); ldm sp,{r0-r3,r5,ip}; stm r4,{...}` — the
+checked-init convention: the initializer's result's sign = the
+error flag; the diagnostic captures the CALLER'S pc (mov r1,pc!).
+The pc-as-value = the compiler-generated diagnostic glue (the
+00106320 lr-override family). Not expressible in plain C. PARKED.

@@ -1153,3 +1153,14 @@ address in r2 (used once). The target: the table's address KEPT in
 r4 (a callee-saved reg, pushed for the alignment with r5), the idx
 in ip. The r4's lifetime + the ip allocation = the compiler's
 codegen for the table lookup — not source-controlled. PARKED.
+
+## 002BDD6C (56B flag + call + conditional tail call) — movs-fusion wall (2026-11-03)
+
+Target: `push; ldr r0,[r0,#0x59c] (the flag load BEFORE the self
+save!); orr #0x2000; str r0,[r4,#0x59c]; mov r0,r4; bl 002BDDA4;
+movs r2,r0 (move+test FUSED); beq; ldrsh r1,[r4,#0x2e]; pop
+{r4,lr}; mov r0,r2; b 00229F58`. Mine: mov r4,r0 first, mov+cmp
+(unfused), no r2-restore. The movs fusion + the flag-load-first
+order = the same eager/lazy scheduler family. Shape confirmed:
+self->x59c |= 0x2000; res = 002BDDA4(self); if (res)
+00229F58(res, (s16)self->x2e). PARKED.

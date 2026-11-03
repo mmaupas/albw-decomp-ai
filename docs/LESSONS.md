@@ -800,3 +800,21 @@ the m0 load); target loads m0 first and m1c once, after. No source
 dependency forces the order (flag base is self-relative, not
 m0-derived). Self-copy mov r2,r0 appears only with a self local.
 PARKED — schedule-order wall.
+
+## VFP elementwise-op family (00115C54/C70/D54/DAC/C8C) — fresh-reg wall (2026-11-03)
+
+Target shape (add/sub/mul/div): `vldmia r1,{s0-s2}; vldmia
+r2,{s3-s5}; vop s6,s0,s3; vop s7,s1,s4; vop s8,s2,s5; vstmia
+r0,{s6-s8}` — products into FRESH regs s6-s8, x,y,z order. All
+constructs tried (locals-first, pointer-walk, array, struct-copy,
+free operator*, by-value args, reversed operand order, -Ospace)
+give in-place reuse (s0,s2,s1, scrambled) or scalar vldr/vstr.
+armcc reuses a dead input's reg for the result; the target's
+compiler allocated fresh. 00115DAC (vmla: dst[i]=v[i]*k+w[i], k
+in VFP arg s0) — target batches BOTH loads and accumulates
+in-place into w's regs s4-s6; every construct gives v batched
+into s4-s6 and w degraded to scalar vldr. The VFP allocator's
+batch-vs-scalar + fresh-vs-inplace choice is source-insensitive
+here. PARKED — needs a new lever (maybe the original used a
+Vec3 class with specific member layout or an inline method the
+scheduler treats atomically).

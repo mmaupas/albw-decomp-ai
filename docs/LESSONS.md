@@ -1197,3 +1197,14 @@ The twin's compiled form used func_0048D1B0 (a different callee)
 with the nested adjustment; 002E284C/00502F8C's targets = the base
 dtor as the TAIL (b 004A1520). The frame difference = the compiler's
 choice for the same-callee-twice structure. PARKED.
+
+## 003C33F0 (56B 3-row copy loop) — roll+guard wall (2026-11-03)
+
+Target: `mov r1,#0; L: cmp r1,#3; addlo r3,r1,r1,lsl#3; addlo ip,
+ip,r1,lsl#3; addlo r2,r0,r3,lsl#2; addlo r3,r0,ip,lsl#2 (the SAME
+address computed twice!); movhs r3,r0; movhs r2,r0 (the hs-guards!);
+ldr r3,[r3,#8]; add r1,#1; cmp r1,#3; str r3,[r2,#4]; blt L` — the
+ROLLED loop with the speculative-hoist guards + the double-cmp. My
+compiles: -O3/-Otime FULLY UNROLLS the 3-iteration loop; -O2/-Ospace
+= other forms; the runtime-bound+inner-guard = 16 words (different).
+The rolled+guarded form not reproduced. PARKED.

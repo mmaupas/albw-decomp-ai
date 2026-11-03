@@ -1025,3 +1025,16 @@ across the call (mine CSEs + pushes r5; the target recomputes and
 avoids the push); (2) the stm merge needs the value in TWO regs
 (the copy) — mine has one. The inlined-helper and -Ospace forms
 don't flip either. Same family as 005A8148/0059F7B8. PARKED.
+
+## 003F11B8 (52B buffer-alloc: 3-word copy + advance + tail call) — VFP-spill/interleave wall (2026-11-03)
+
+Target: `ldr r1,=g; add r0,self+0x38; ldm r0,{r2,r3,ip}; ldr
+r0,[r1]; str r2,[r0,#0x68]; str r3,[r0,#0x64]; mov r2,#0; str
+ip,[r0,#0x60]; add r3,r0,#0x80; str r2,[r0,#0x7c]; str r3,[r1];
+b 003F6A20` — p=*g; p->x68/x64/x60 = self->f38/f3c/f40 (ldm batch,
+scalar DESCENDING stores); p->x7c=0; *g = p+0x80; tail call(p).
+Probes: direct fields (scalar + vldr spill), 12-byte struct copy
+(ldrd+vldr), all-locals (vldmia+vstr — the VFP bank used for u32
+copies!), u32-pointer walks. The compiler's VFP-spill (moving u32s
+through s-registers) + the load/store interleave block the ldm+core
+form. Same eager-scheduler family. PARKED.

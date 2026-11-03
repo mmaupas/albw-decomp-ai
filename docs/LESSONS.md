@@ -987,3 +987,15 @@ elems load. Probes: -O3 (2x-unrolled with odd-peel epilogue),
 (push+writeback). The 1x + no-reduction + kill-r0 form not
 reproduced. Element = 0x148 bytes, flag byte at +0x145. PARKED —
 same ldrd/kill-r0 family as 00111EF0.
+
+## 003752C4 (52B fields + conditional tail call) — eager-hoist wall (2026-11-03)
+
+Target: `mov r3,#1; str r1,[r0,#0x494]; mov r2,#0; strb r3,
+[r0,#0x4a1]; strb r2,[r0,#0x4a2]; ldr r3,[r0,#0x450]; mov r2,#1;
+cmp r3,#0; strbne r2,[r3,#0x61]; cmp r1,#0; bne ret; b 00375314`
+— strict source order: x494=arg; b4a1=1; b4a2=0; if(x450)
+x450->b61=1; if(arg==0) tail-call 00375314. My compile (same
+source!) hoists the x450 load + all constants ABOVE the stores
+(0/13 but 64% similarity — same instruction set, reordered).
+The eager-hoist scheduler anomaly (001CD1D4 family) — the target's
+compiler kept strict source order. PARKED.

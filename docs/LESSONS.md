@@ -1095,3 +1095,14 @@ advanced pointer is dead — the second load comes from arg2). The
 twin 00115224's writeback was LIVE (its second load used r1's
 advanced value). For the writeback to survive as dead code: no
 honest construct. PARKED.
+
+## 0059F7B8/005A8AA0 — SOLVED to 11/12: static-init temporary form (2026-11-03)
+
+The construct: `V data_00716618 = { Id64().v }; Pair data_00716620;`
+(the Id64 TEMPORARY's ctor = mvn r0,#0; mov r1,r0; the copy = strd
+[r2]!) — 11/12 (95.7%). The ONLY delta: the target's trailing
+UNREFERENCED pool word 0xffffffff — the area-pool-tail class
+(004E015C's open problem). The honest source is FOUND; the pool
+word is the compiler's leftover literal. PARKED (area-pool class).
+The twin 005931E8's source (probe_sti_b.cpp) = the same construct
+with the Big's v at +8.

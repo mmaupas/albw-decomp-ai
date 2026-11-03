@@ -999,3 +999,15 @@ source!) hoists the x450 load + all constants ABOVE the stores
 (0/13 but 64% similarity — same instruction set, reordered).
 The eager-hoist scheduler anomaly (001CD1D4 family) — the target's
 compiler kept strict source order. PARKED.
+
+## 003CD95C (52B conditional bit-clear) — keep-r0 anomaly (2026-11-03)
+
+Target: `ldr r1,[r0] (idx→r1, self KEPT dead in r0); cmp r1,#0x10;
+ldr r2,=flags; ldrh r3,[r2]; lsr ip,r3,r1; tst ip,#1; beq; mov
+ip,#1; bic r1,r3,ip,lsl r1; strh r1,[r2]` — the shift-DOWN test
+((flags>>i)&1) + the bic clear. Instruction set reproduced (5/13)
+but the register assignment shifted by one: mine idx→r0 (self
+killed), flags→r1; target idx→r1 (self KEPT dead in r0), flags→r3.
+The keep-r0 anomaly (inverted kill-r0, 00368C3C family). Dead
+second param doesn't change it. The test form: (flags>>i)&1 (shift
+down) + bic with (1<<i) as ip<<i — reproduced. PARKED.

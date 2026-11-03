@@ -1074,3 +1074,12 @@ CONFIRMED (the construct = p[5..7]=g1 (3 volatile reads!), p[8]=g2).
 Only delta: the register assignment shifted by one (target: the
 first pool load → r2; mine → r1). The dead-second-param trick
 doesn't shift it. Same start-register wall as 003CD95C. PARKED.
+
+## 004A3700 (52B guarded tail call) — keep-r0 anomaly family (2026-11-03)
+
+Target: `ldr r1,[r0,#0x20] (t); cmp; beq; ldr r0,[r0,#0x24] (x24,
+self overwritten); ldr r2,[r1,#0xc]; cmp; bne; mov r0,r1 (t);
+ldr r1,[r1,#4]; ble; b 003F7FA0(t, t->x4)` — the conditions: !t,
+x24 != t->xc, t->x4 > 0 (signed). Same shape confirmed; the
+register assignment (t→r1, self kept in r0) = the keep-r0 anomaly
+(003CD95C family). PARKED.

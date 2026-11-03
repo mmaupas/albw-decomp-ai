@@ -851,3 +851,18 @@ k in VFP arg s0): target batches BOTH loads (v→s1-s3, w→s4-s6) and
 accumulates in-place into w; constructs give v batched high + w
 scalar scrambled. PARKED — VFP allocator + initializer streaming
 wall.
+
+## 0041BD4C (44B u16 fill 0xffff) — loop-reversal wall (2026-11-03)
+
+Target: `ldr r2,=bss; mov r0,#0; mvn r1,#0; L: add r3,r2,r0,lsl#1;
+add r0,r0,#2; strh r1,[r3]; strh r1,[r3,#2]; cmp r0,#0x10; blt L`
+— count-up index loop (i step 2), pair strh, SIGNED blt, value
+0xffffffff in the register (mvn, no pool). Best: do-while + u32 i +
+`(int)i < 0x10` compare = 9/11 (90.9%) — only delta: armcc schedules
+the cmp BETWEEN the two strh. Probes: u32 step-2 for-loop (reversed
+to countdown pointer-walk), u16 index (uxth), -1/0xffff/~0/u32 v
+(all truncate to 0xffff pool — only s16 array + -1 keeps mvn),
+inlined put16 helper, global index, volatile base. The mvn-vs-pool
+choice: s16 array + -1 keeps mvn; u16 array truncates to 0xffff
+pool. The count-up vs countdown: armcc reverses unless blocked;
+volatile changes the counter shape but not to the target's. PARKED.

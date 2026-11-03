@@ -926,3 +926,21 @@ but u64 → stm not strd, registers scrambled), cast-view u64 store,
 u64 value local, padded layout (strd appeared but zeros hoisted
 above it — the 005A8148 wall), inlined helper. Same strd/zero-hoist
 wall family. PARKED.
+
+## 001512B4 (52B Vec3 add + child store + flag) — dead-arg-reg reuse wall (2026-11-03)
+
+Target: `push {r4,lr}; ldr r4,[r0,#0x1c]; sub sp,#0x10; add
+r2,r0,#4; mov r0,sp; bl 00115C54(out=sp, a=v /*r1 passthrough*/,
+b=self+4); ldm sp,{r0,r1,r3}; add r2,r4,#0x88; stm r2,{r0,r1,r3};
+mov r0,#1; strb r0,[r4,#0xa0]` — c=m1c loaded FIRST (r4), self
+discarded; ONE m1c use (no reload — the source uses a C* local!).
+Shape twin of matched 001512E8 (same structure, different call-arg
+registers: there r1/r2 = computed addresses; here r1 = the v
+passthrough param). Best: direct setAdd + c local = 9/13 — delta:
+the ldm list {r0,r1,r3} (target, skipping r2 = the stm base) vs
+{r1,r2,r3} (mine) and the stm base r2 (target, reusing the dead
+arg reg) vs ip (mine). The dead-arg-reg reuse (compiler treats arg
+registers as free after the call) didn't fire in my compile with a
+PASSTHROUGH param (r1 = v) — the twin's COMPUTED address args
+(add-based) may enable it. Swapped setAdd args (commutative) =
+worse (3/14). PARKED.

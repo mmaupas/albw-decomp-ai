@@ -944,3 +944,16 @@ registers as free after the call) didn't fire in my compile with a
 PASSTHROUGH param (r1 = v) — the twin's COMPUTED address args
 (add-based) may enable it. Swapped setAdd args (commutative) =
 worse (3/14). PARKED.
+
+## 00182E1C (52B state-dependent tail call) — load-order + ternary wall (2026-11-03)
+
+Target: `ldr r1,=G; ldr r1,[r1]; ldrb r2,[r1,#0x70]; ldr r1,[r0]
+(obj); cmp r2,#4; mvn r2,#0 (dead — ternary else-base artifact);
+ldr r3,[r1,#0xac]; beq; mov r1,#0; bx r3; mov r1,#4` — if/else with
+DUPLICATED tail calls via a function pointer (o->fAC(o, state==4 ?
+4 : 0)). Best: if/else duplicated-tail-call form = 5/13. Deltas:
+(1) the scheduler hoists my obj load above the holder-deref chain
+(target keeps the chain first); (2) the mvn r2,#0 dead value (the
+compiler's ternary else-base artifact, not reproduced). Ternary
+form gives conditional mov (movne) + single bx — wrong shape.
+PARKED.

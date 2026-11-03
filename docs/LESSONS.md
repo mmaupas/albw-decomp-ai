@@ -957,3 +957,20 @@ DUPLICATED tail calls via a function pointer (o->fAC(o, state==4 ?
 compiler's ternary else-base artifact, not reproduced). Ternary
 form gives conditional mov (movne) + single bx — wrong shape.
 PARKED.
+
+## 001CCEB8 (52B D1 dtor, 3-vtable) — vt-register swap + tertiary-offset (2026-11-03)
+
+Twin of 00143074 (1.00 DNA). Structure identical: Primary(19
+virtuals, pad 0x31c) + Secondary + Tertiary + Member_004EE540;
+vt 006E021C; str writeback 0x320; secondary patch +0x58/+0xec;
+tertiary +0x64/+0x90; member dtor 004EE540; sub 0x400+0x9c; tail
+001510A4. Deltas: (1) the vt load register: target r1, mine r2
+(the first two values' registers swapped — same anomaly as
+005F689C); (2) the tertiary's offset: target +0x64 (25 slots),
+mine +0x68 (26) — the Secondary's vtable = 3 entries (target) vs
+4 (mine, D0 included). Probes: Secondary dtor-only (4 entries),
+protected/private dtor (no effect), Primary +p18 (secondary
+offset moved to 0x5c — Primary vtable = 2+20+1(D0) = 23 = 0x5c).
+Vtable accounting: entries = 2 + virtuals + 1 (D0) for polymorphic
+classes. For tertiary at 0x64: Secondary = 3 entries (no D0) —
+no construct found. PARKED.

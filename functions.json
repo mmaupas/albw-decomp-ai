@@ -74532,6 +74532,13 @@
 "path": "src/work7/ds6/func_00504574.cpp",
 "status": "honest"
 },
+"00504C5C": {
+"cc": "4.1/b1049",
+"flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
+"hack_reasons": [],
+"path": "src/work8/auto/func_00504C5C.cpp",
+"status": "honest"
+},
 "00504CC0": {
 "cc": "4.1/b1049",
 "flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",

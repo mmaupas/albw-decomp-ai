@@ -16547,6 +16547,13 @@
 "path": "src/work5/templater/gen/func_0017E260.cpp",
 "status": "honest"
 },
+"0017E274": {
+"cc": "4.1/b1049",
+"flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
+"hack_reasons": [],
+"path": "src/work8/auto/func_0017E274.c",
+"status": "honest"
+},
 "0017E7A4": {
 "cc": "4.1/b1049",
 "flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",

@@ -1038,3 +1038,14 @@ Probes: direct fields (scalar + vldr spill), 12-byte struct copy
 copies!), u32-pointer walks. The compiler's VFP-spill (moving u32s
 through s-registers) + the load/store interleave block the ldm+core
 form. Same eager-scheduler family. PARKED.
+
+## 00408B94 (52B struct init: ro ptr + zeros + strd{0,-1} + bytes) — merge-anomaly wall (2026-11-03)
+
+Target: `ldr r1,=ro; mov r2,#0; stm r0,{r1,r2} (x0=ro, x4=0 pair!);
+add r1,r0,#0x110; str r2,[r0,#8]; str r2,[r0,#0x110]; mvn r3,#0;
+strd r2,r3,[r1,#4] (x114=0, x118=-1 pair!); mov r1,#0x2f; strb
+r1,[r0,#0xc]; strb r2,[r0,#0xd]` — the stm/strd merges of adjacent
+different-value stores. My compile: same structure but the merges
+don't fire where the target's do (the first stm {ro,0}; the strd
+{0,-1}) and fire where it doesn't. The store-merge pass's register
+assignment anomaly (the 005A8148/0059F7B8 family). PARKED.

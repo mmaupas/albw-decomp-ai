@@ -609,6 +609,16 @@ the third value — contradictory lifetime order under any single-pass
 model. Likely needs a two-block structure (the zero/0xff stores in a
 different basic block than the 2-store). PARKED.
 
+2026-11-03 session, +6 probes: reversed source store order (b,a,e,d,c)
+DOES flip the allocation to r3-first (r3=2, r1=0, r2=0xff) — proof the
+reverse allocation exists — but the store schedule then follows program
+order (b,a,e,d,c), not the target's address order (c,d,e,a,b). Explicit
+value locals (ff,zero,two computed first) keep forward alloc (r1=0xff,
+r2=0, r3=2). Volatile-sink liveness adds push/pop (wrong shape); dead
+guards get DCE'd without shifting alloc. The target's (r3=0xff, ip=0,
+r1=2) with address-order stores needs first-computed→r3 AND address-order
+stores — no single-pass construct found. PARKED again.
+
 ## 001CD1D4 (44B) — parked after ~8 probes (2026-10-27)
 
 Shape: `push {r4,lr}; mov r4,r0; bl sub(self+0x400, 0) [r1=0 hoisted

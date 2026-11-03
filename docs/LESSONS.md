@@ -1049,3 +1049,18 @@ different-value stores. My compile: same structure but the merges
 don't fire where the target's do (the first stm {ro,0}; the strd
 {0,-1}) and fire where it doesn't. The store-merge pass's register
 assignment anomaly (the 005A8148/0059F7B8 family). PARKED.
+
+## 0045F2C4 (52B bit-clear + tail call) — no-CSE-addr + two-bics wall (2026-11-03)
+
+Target: `ldr r2,=g; ldr r1,[r2]; add r1,#0x300; add r1,#0x3e;
+ldrh r1,[r1]; bic r3,r1,#2; ldr r1,[r2] (POINTER RE-READ!); bic
+r2,r3,#0x10; add r1,#0x300; add r1,#0x3e (address RECOMPUTED);
+strh r2,[r1]; b 004412DC` — read the u16 at g+0x33e, clear bits
+1 and 4 via TWO separate bics, write via a RE-READ pointer +
+RECOMPUTED address. My compiles: CSE everything (one ldr, one
+add, and the two bits MERGED into bic #0x12). The two-bic form
+needs the clears as separate dependent statements (v &= ~2; v &=
+~0x10 — tried); the no-CSE needs the compiler to not unify the
+read/write expressions (tried: cast-vs-member, pointer-copy-vs-
+global, volatile — all CSE'd anyway). The reload/recompute = the
+005F8EF4 no-CSE family. PARKED.

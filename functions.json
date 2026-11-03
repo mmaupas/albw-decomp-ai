@@ -57657,6 +57657,13 @@
 "path": "src/work8/auto/func_0040E390.cpp",
 "status": "honest"
 },
+"0040E4BC": {
+"cc": "4.1/b1049",
+"flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
+"hack_reasons": [],
+"path": "src/work8/auto/func_0040E4BC.cpp",
+"status": "honest"
+},
 "0040E554": {
 "cc": "4.1/b1049",
 "flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",

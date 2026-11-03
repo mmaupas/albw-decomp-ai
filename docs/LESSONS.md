@@ -866,3 +866,14 @@ inlined put16 helper, global index, volatile base. The mvn-vs-pool
 choice: s16 array + -1 keeps mvn; u16 array truncates to 0xffff
 pool. The count-up vs countdown: armcc reverses unless blocked;
 volatile changes the counter shape but not to the target's. PARKED.
+
+## 005A8148 (44B struct reset) — zero-hoist vs strd wall (2026-11-03)
+
+Target: `ldr r2,=g; mvn r0,#0; mov r1,r0; mov r3,#0; strd
+r0,r1,[r2,#8]; add r0,r2,#0x10; str r3,[r0]; str r3,[r0,#4]; str
+r3,[r2]` — g->bc(u64)=-1 strd first, then de=0, a=0. Found: bc is
+a u64 field ((u64)-1 → mvn+copy+strd — the copy exists because
+strd needs two regs). Remaining delta: my compiles hoist the zero
+stores ABOVE the strd (scheduler); target keeps strd first. No
+source dependency blocks the hoist (all addresses/values constant).
+PARKED.

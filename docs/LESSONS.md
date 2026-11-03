@@ -1176,3 +1176,14 @@ for the same null-check chain but not in mine — the same
 conditionalization choice as 001150B8's vldmiane. Structure:
 t=self->x1c; b=*t; o=b->x10; fl=o->b44; if ((fl&1?1:0)==arg) return;
 o->b44=(fl&0xfe)|arg; if (arg) t->b70|=2. PARKED.
+
+## 002E284C (108B disposer dtor) — frame-size wall (2026-11-03)
+
+Twin of 0025ECE0 (the 0029D990 form). Target: the vtables, the
+byte check, the list erase, the byte=0, bl func_004A1520(sub);
+pop {r4-r6,lr}; sub r0,#0x3c; b func_004A1520 (the base's dtor as
+the TAIL — the standard C++ dtor chain!). My compile: push
+{r4-r8,lr} (6 regs — the frame chain!) vs the target's {r4-r6,lr};
+the register assignment shifted. The two-disposer structure (the
+member's + the base's tail) reproduced; the frame size/register
+assignment not. PARKED.

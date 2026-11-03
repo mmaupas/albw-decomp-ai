@@ -2178,6 +2178,13 @@
 "path": "src/work7/gpt15/variants/0010EEE8/v0.cpp",
 "status": "honest"
 },
+"0010F1DC": {
+"cc": "4.1/b1049",
+"flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
+"hack_reasons": [],
+"path": "src/work8/auto/func_0010F1DC.cpp",
+"status": "honest"
+},
 "0010F88C": {
 "cc": "4.1/b1049",
 "flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",

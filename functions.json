@@ -36764,13 +36764,9 @@
 "002ABDE8": {
 "cc": "4.1/b1049",
 "flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
-"hack_reasons": [
-"__schedule_barrier",
-"asm",
-"dummy_local"
-],
-"path": "src/work8/sol2/session4/002ABDE8.c",
-"status": "hack"
+"hack_reasons": [],
+"path": "src/work8/auto/func_002ABDE8.c",
+"status": "honest"
 },
 "002AC268": {
 "cc": "4.1/b1049",
@@ -52477,12 +52473,9 @@
 "003BDDE8": {
 "cc": "4.1/b1049",
 "flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
-"hack_reasons": [
-"__schedule_barrier",
-"volatile_dummy"
-],
-"path": "src/work8/game_re2/families/src/rm/003BDDE8_from_003C080C.cpp",
-"status": "hack"
+"hack_reasons": [],
+"path": "src/work8/auto/func_003BDDE8.cpp",
+"status": "honest"
 },
 "003BDE4C": {
 "cc": "4.1/b1049",
@@ -52881,12 +52874,9 @@
 "003C1384": {
 "cc": "4.1/b1049",
 "flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
-"hack_reasons": [
-"__schedule_barrier",
-"volatile_dummy"
-],
-"path": "src/work8/game_re2/families/src/rm/003C1384_from_003C080C.cpp",
-"status": "hack"
+"hack_reasons": [],
+"path": "src/work8/auto/func_003C1384.cpp",
+"status": "honest"
 },
 "003C13E8": {
 "cc": "4.1/b1049",
@@ -58182,12 +58172,9 @@
 "0040E1BC": {
 "cc": "4.1/b1049",
 "flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
-"hack_reasons": [
-"__schedule_barrier",
-"identical_arms"
-],
-"path": "src/work8/perm_local/imported/func_0040E1BC.cpp",
-"status": "hack"
+"hack_reasons": [],
+"path": "src/work8/auto/func_0040E1BC.cpp",
+"status": "honest"
 },
 "0040E390": {
 "cc": "4.1/b1049",

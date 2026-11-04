@@ -43329,14 +43329,9 @@
 "003248BC": {
 "cc": "4.1/b1049",
 "flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
-"hack_reasons": [
-"__schedule_barrier",
-"perm_t",
-"identical_arms",
-"weak"
-],
-"path": "src/work8/permuter_match/003248BC.cpp",
-"status": "hack"
+"hack_reasons": [],
+"path": "src/work8/auto/func_003248BC.cpp",
+"status": "honest"
 },
 "003248F0": {
 "cc": "4.1/b1049",

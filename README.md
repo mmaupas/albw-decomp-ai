@@ -9,22 +9,24 @@ not included either.
 
 ## Status
 
-| | Functions | Share of 25,986 |
-|---|---:|---:|
-| Matched, source included | 16,660 | 64.1% |
-| of which honest (no hack, see below) | 15,871 | 61.1% |
-| of which matched only with a hack | 789 | 3.0% |
-| Matched earlier, source not included | 131 | 0.5% |
-| Not matched yet | 9,195 | 35.4% |
+| | Functions | Share of 25,986 | Bytes | Share of 6,455,296 B code |
+|---|---:|---:|---:|---:|
+| Matched, source included | 16,825 | 64.7% | 2,050,232 | 31.8% |
+| of which honest (no hack, see below) | 16,036 | 61.7% | 1,924,552 | 29.8% |
+| of which matched only with a hack | 789 | 3.0% | 125,680 | 1.9% |
+| Matched earlier, source not included | 114 | 0.4% | — | — |
+| Not matched yet | 9,144 | 35.2% | 4,405,064 | 68.2% |
 
-Still to do for a fully honest decomp: **10,115** functions (38.9%) = 9,195 never matched + 789 hack matches that
-need an honest source + 131 without a published source.
+Still to do for a fully honest decomp: **10,047** functions (38.7%) = 9,144 never matched + 789 hack matches that
+need an honest source + 114 without a published source.
 
-The 131 functions without source break down as follows:
-- **114:** sources lost over time.
-- **14:** prebuilt middleware/SDK library code, built with other compiler builds. This is not game code and is
-  deliberately excluded.
-- **3:** interior addresses that duplicate their enclosing function.
+Byte shares are computed from consecutive start addresses in `funcs.json` over the code section `0x100000`–`0x728000`.
+Matched functions average only ~122 bytes while unmatched ones average ~482 bytes, so the 64.7% function count covers
+under a third of the machine code; the remaining 68.2% of bytes sit in the large "hard tail" functions.
+
+The 114 functions without source are sources lost over time. Separately, **14** prebuilt middleware/SDK library
+functions (built with other compiler builds — not game code, deliberately excluded) and **3** interior addresses
+that duplicate their enclosing function are not counted above.
 
 **Correction to the first publication.** 419 entries of the first publication (2026-10-15) were removed after a
 relocation audit. `tools/fn.py` masks relocated words (call targets, global addresses), so it printed `RESULT: MATCH`
@@ -132,7 +134,7 @@ decides.
 
 ### ملخص بالعربي
 - **وش هذا المشروع:** تفكيك مطابق للعبة Zelda: A Link Between Worlds على 3DS. كل ملف هنا لما يترجَم بمترجم armcc 4.1 يعطي نفس بايتات الدالة في اللعبة بالضبط.
-- **وين وصلنا:** 64.1% من دوال اللعبة مطابقة (16,660 دالة). النظيف منها بدون حيل 15,871 دالة، يعني 61.1% من كل الدوال.
-- **وش باقي:** 9,195 دالة ما طابقت أبداً (35.4%). والمجموع الباقي عشان يصير التفكيك كله نظيف 10,115 دالة (38.9%).
+- **وين وصلنا:** 64.7% من دوال اللعبة مطابقة (16,825 دالة)، أي ما يعادل 31.8% من بايتات الكود. النظيف منها بدون حيل 16,036 دالة، يعني 61.7% من كل الدوال.
+- **وش باقي:** 9,144 دالة ما طابقت أبداً (35.2%)، وتمثل 68.2% من بايتات الكود لأن الدوال غير المطابقة أكبر (متوسط 482 بايت مقابل 122). والمجموع الباقي عشان يصير التفكيك كله نظيف 10,047 دالة (38.7%).
 - **وش ما يشمل:** ما فيه أي ملفات من اللعبة (ملف الكود أو ملفات البيانات) ولا المترجم. كل واحد يجيب نسخته بنفسه.
 - **ليش منشور:** الشغل منشور عشان أي أحد يبي يكمّل.

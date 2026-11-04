@@ -71580,12 +71580,9 @@
 "004D0804": {
 "cc": "4.1/b1049",
 "flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
-"hack_reasons": [
-"__schedule_barrier",
-"asm"
-],
-"path": "src/work8/sol2/session6/004D0804.c",
-"status": "hack"
+"hack_reasons": [],
+"path": "src/work8/auto/func_004D0804.c",
+"status": "honest"
 },
 "004D08B8": {
 "cc": "4.1/b1049",

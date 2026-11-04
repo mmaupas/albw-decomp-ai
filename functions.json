@@ -58779,12 +58779,9 @@
 "004139B0": {
 "cc": "4.1/b1049",
 "flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
-"hack_reasons": [
-"__schedule_barrier",
-"asm"
-],
-"path": "src/work8/sol2/session4/004139B0.cpp",
-"status": "hack"
+"hack_reasons": [],
+"path": "src/work8/auto/func_004139B0.cpp",
+"status": "honest"
 },
 "00413ECC": {
 "cc": "4.1/b1049",

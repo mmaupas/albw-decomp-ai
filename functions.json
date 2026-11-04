@@ -29554,12 +29554,9 @@
 "0024F0D4": {
 "cc": "4.1/b1049",
 "flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
-"hack_reasons": [
-"__schedule_barrier",
-"identical_arms"
-],
-"path": "src/work8/perm_local/imported/func_0024F0D4.c",
-"status": "hack"
+"hack_reasons": [],
+"path": "src/work8/auto/func_0024F0D4.c",
+"status": "honest"
 },
 "0024F10C": {
 "status": "no_source"

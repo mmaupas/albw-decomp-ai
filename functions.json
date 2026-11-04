@@ -48623,14 +48623,9 @@
 "0038862C": {
 "cc": "4.1/b1049",
 "flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
-"hack_reasons": [
-"__schedule_barrier",
-"perm_t",
-"dummy_local",
-"identical_arms"
-],
-"path": "src/work8/permuter_match/0038862C.c",
-"status": "hack"
+"hack_reasons": [],
+"path": "src/work8/auto/func_0038862C.c",
+"status": "honest"
 },
 "00388BF0": {
 "status": "no_source"

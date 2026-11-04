@@ -12,8 +12,8 @@ not included either.
 | | Functions | Share of 25,986 | Bytes | Share of 6,455,296 B code |
 |---|---:|---:|---:|---:|
 | Matched, source included | 16,933 | 65.2% | 2,052,212 | 31.8% |
-| of which honest (no hack, see below) | 16,144 | 62.1% | 1,926,516 | 29.8% |
-| of which matched only with a hack | 789 | 3.0% | 125,680 | 1.9% |
+| of which honest (no hack, see below) | 16,155 | 62.2% | 1,926,516 | 29.8% |
+| of which matched only with a hack | 778 | 3.0% | 125,680 | 1.9% |
 | Matched earlier, source not included | 114 | 0.4% | — | — |
 | Not matched yet | 8,944 | 34.4% | 4,403,084 | 68.2% |
 

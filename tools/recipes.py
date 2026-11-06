@@ -17,6 +17,8 @@ import json
 import os
 import sys
 
+from common import file_lock, read_json, write_json
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CORPUS = os.path.join(ROOT, "shared", "recipes.json")
 
@@ -24,15 +26,19 @@ CORPUS = os.path.join(ROOT, "shared", "recipes.json")
 def load():
     if not os.path.exists(CORPUS):
         return []
-    return json.load(open(CORPUS))
+    return read_json(CORPUS)
 
 
 def save(recipes):
-    out = json.dumps(recipes, indent=2, sort_keys=True)
-    open(CORPUS, "w").write("\n".join(l.lstrip() for l in out.splitlines()))
+    write_json(CORPUS, recipes, canonical=True)
 
 
 def add(args):
+    with file_lock(os.path.join(ROOT, "logs", "recipes.lock")):
+        _add(args)
+
+
+def _add(args):
     if any(r["id"] == args.id for r in load()):
         sys.exit("recipe id already exists: %s" % args.id)
     r = {"id": args.id}
@@ -60,8 +66,11 @@ def query(args):
     hits = []
     for r in load():
         text = (r.get("shape", "") + " " + r.get("source", "")).lower()
-        if any(t in text for t in sig) or any(t in text for t in sig):
+        if any(t in text for t in sig):
             hits.append(r)
+    if args.json:
+        print(json.dumps(hits))
+        return
     for r in hits:
         print("[%s] %s" % (r["kind"], r["id"]))
         print("  shape:   %s" % r.get("shape", ""))
@@ -74,8 +83,6 @@ def query(args):
             print("  refs:    %s" % ", ".join(r["refs"]))
     if not hits:
         print("no recipes match; sources of prior knowledge: docs/LESSONS.md")
-    if args.json:
-        print(json.dumps(hits))
 
 
 def do_list(args):

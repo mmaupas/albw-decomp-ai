@@ -15,11 +15,13 @@ import os
 import re
 import sys
 
+from common import load_binary, read_json
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TA = 0x100000
 
-code = open(os.path.join(ROOT, "code.bin"), "rb").read()
-starts = json.load(open(os.path.join(ROOT, "funcs.json")))["starts"]
+code = load_binary(os.path.join(ROOT, "code.bin"))
+starts = read_json(os.path.join(ROOT, "funcs.json"))["starts"]
 
 
 def rng(a):

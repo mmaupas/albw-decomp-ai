@@ -15,6 +15,7 @@ Matched functions come with their source path, so a query on an unmatched
 target surfaces "twin" skeletons to start from.
 """
 import bisect
+import contextlib
 import difflib
 import json
 import os
@@ -22,6 +23,8 @@ import random
 import re
 import struct
 import sys
+
+from common import file_lock, read_json
 
 import fn  # tools/fn.py: STARTS, func_range, rd32, name_of, listing, in_text
 
@@ -148,20 +151,45 @@ def dna_of(start, end):
     }
 
 
+def _index_records(repair=False):
+    """Ignore an interrupted last record; never silently skip interior corruption."""
+    records = []
+    mode = "r+b" if repair else "rb"
+    with open(DNA_FILE, mode) as stream:
+        good_end = 0
+        for line in stream:
+            try:
+                record = json.loads(line)
+                if not isinstance(record, dict) or "addr" not in record:
+                    raise ValueError("missing address")
+            except (ValueError, UnicodeDecodeError):
+                if stream.read().strip():
+                    raise ValueError("corrupt DNA index before final record; rebuild it")
+                if repair:
+                    stream.truncate(good_end)
+                break
+            records.append(record)
+            good_end += len(line)
+        else:
+            if repair and good_end and not line.endswith(b"\n"):
+                stream.seek(0, os.SEEK_END)
+                stream.write(b"\n")
+    return records
+
+
 def build_index():
+    with file_lock(DNA_FILE + ".lock"):
+        return _build_index()
+
+
+def _build_index():
     """Build logs/dna.jsonl incrementally; safe to restart after a crash.
 
     Records are appended one function at a time and already-present addresses
     are skipped on restart, so an interrupted build resumes where it stopped.
     """
     os.makedirs(os.path.dirname(DNA_FILE), exist_ok=True)
-    done = set()
-    if os.path.exists(DNA_FILE):
-        for line in open(DNA_FILE):
-            try:
-                done.add(json.loads(line)["addr"])
-            except ValueError:  # truncated last line from a crash
-                break
+    done = {record["addr"] for record in _index_records(repair=True)} if os.path.exists(DNA_FILE) else set()
     starts = fn.STARTS
     n_new = 0
     with open(DNA_FILE, "a") as fh:
@@ -182,18 +210,11 @@ def build_index():
 
 
 def load_index():
-    recs = []
-    for line in open(DNA_FILE):
-        try:
-            recs.append(json.loads(line))
-        except ValueError:  # truncated last line from a crash
-            break
-    return recs
+    return _index_records()
 
 
 def load_status():
-    d = json.load(open(os.path.join(ROOT, "functions.json")))
-    return d
+    return read_json(os.path.join(ROOT, "functions.json"))
 
 
 def rank_twins(mine, idx):
@@ -218,7 +239,8 @@ def rank_twins(mine, idx):
 def query(addr, as_json=False):
     addr = int(addr, 16)
     if not os.path.exists(DNA_FILE):
-        build_index()
+        with contextlib.redirect_stdout(sys.stderr):
+            build_index()
     idx = load_index()
     mine = next(r for r in idx if int(r["addr"], 16) == addr)
     status = load_status()
@@ -257,7 +279,8 @@ def acceptance(n=20, seed=42, as_json=False):
               (a usable starting skeleton for an unmatched target).
     """
     if not os.path.exists(DNA_FILE):
-        build_index()
+        with contextlib.redirect_stdout(sys.stderr):
+            build_index()
     idx = load_index()
     status = load_status()
     honest = [(k, v) for k, v in status.items() if v["status"] == "honest" and v.get("path")]

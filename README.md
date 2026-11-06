@@ -1,7 +1,7 @@
 # The Legend of Zelda: A Link Between Worlds (3DS, USA): matching decompilation (work in progress)
 
 This repository holds C/C++ source for individual functions of *A Link Between Worlds*. Each source compiles with
-the original compiler to **exactly the same bytes** as the function in the game. It is an unfinished project, shared
+the original compiler with the goal of producing **exactly the same bytes** as the function in the game. It is an unfinished project, shared
 so that anyone who wants to can continue it.
 
 **No game binary, data files or assets are included.** You need your own copy of the game's code binary. The compiler is
@@ -9,32 +9,32 @@ not included either.
 
 ## Status
 
-| | Functions | Share of 25,986 | Bytes | Share of 6,455,296 B code |
+<!-- generated:status -->
+| | Functions | Share of 25,986 | .text bytes | Share of 5,841,180 B |
 |---|---:|---:|---:|---:|
-| Matched, source included | 16,933 | 65.2% | 2,052,212 | 31.8% |
-| of which honest (no hack, see below) | 16,158 | 62.2% | 1,926,516 | 29.8% |
-| of which matched only with a hack | 775 | 3.0% | 125,680 | 1.9% |
-| Matched earlier, source not included | 114 | 0.4% | — | — |
-| Not matched yet | 8,944 | 34.4% | 4,403,084 | 68.2% |
+| Matched, source included | 16,933 | 65.2% | 1,440,096 | 24.7% |
+| of which honest (no hack) | 16,150 | 62.1% | 1,314,960 | 22.5% |
+| of which hack | 783 | 3.0% | 125,136 | 2.1% |
+| Earlier match, source not included | 114 | 0.4% | 15,396 | 0.3% |
+| Not matched yet | 8,925 | 34.3% | 4,380,940 | 75.0% |
+| Excluded library | 14 | 0.1% | 4,748 | 0.1% |
 
-Still to do for a fully honest decomp: **9,852** functions (37.9%) = 8,949 never matched + 789 hack matches that
-need an honest source + 114 without a published source.
+Remaining for an honest decompilation (excluding libraries): **9,822** functions.
 
-Byte shares are computed from consecutive start addresses in `funcs.json` over the code section `0x100000`–`0x728000`.
-Matched functions average only ~122 bytes while unmatched ones average ~482 bytes, so the 64.7% function count covers
-under a third of the machine code; the remaining 68.2% of bytes sit in the large "hard tail" functions.
+Sizes use consecutive starts in `funcs.json` within `.text` (`0x100000`–`0x69211C`), not the whole binary.
+3 interior-address entries are not counted as separate functions.
 
-The 114 functions without source are sources lost over time. Separately, **14** prebuilt middleware/SDK library
-functions (built with other compiler builds — not game code, deliberately excluded) and **3** interior addresses
-that duplicate their enclosing function are not counted above.
+Hack reasons (a function can have several): weak 527, __schedule_barrier 156, asm 94, identical_arms 22, perm_t 15, dummy_local 12, volatile_dummy 3.
+<!-- /generated:status -->
 
 **Correction to the first publication.** 419 entries of the first publication (2026-10-15) were removed after a
-relocation audit. `tools/fn.py` masks relocated words (call targets, global addresses), so it printed `RESULT: MATCH`
-for sources that call the wrong function, use the wrong global, or were accepted against the wrong padding. Those
-entries are no longer listed as matched unless a source also passes the relocation identity check; 18 of them came
-back that way in this update.
+relocation audit. The old checker masked relocated words and could print `RESULT: MATCH` for the wrong call or global.
+The checker now validates supported relocation identities and rejects unknown symbols, unsupported relocations,
+and unproved linker rewrites. Existing entries have **not** all been reverified with this stricter checker;
+the table reflects recorded metadata, not a new verification campaign.
 
-(Counts are recomputed from `functions.json` with `python tools/audit.py stats`.)
+Counts are generated offline from `functions.json` and `funcs.json`:
+`python3 tools/audit.py readme --write`. CI rejects stale generated summaries.
 
 **What "honest" means here.** The source compiles to the exact bytes **without** any of these tricks:
 - `__attribute__((weak))` / `__weak` used only to stop a tail call;
@@ -46,8 +46,8 @@ back that way in this update.
 - if/else blocks whose two arms are identical;
 - permuter-only `perm_t` types.
 
-`functions.json` marks every function `honest` or `hack` and lists the hack reasons. Hack counts: weak 527,
-`__schedule_barrier` 165, asm 94, identical arms 24, perm_t 15, dummy locals 13, volatile dummies 6.
+`functions.json` records `honest`/`hack` for sources and lists hack reasons. The automatic scan catches obvious
+textual constructs, not every semantic trick; passing it is not proof of honesty.
 
 ## Layout
 
@@ -64,27 +64,41 @@ back that way in this update.
 
 ## Requirements
 
-1. **Python 3** with `capstone` (`pip install capstone`).
+1. **Python 3.10+**. Install analysis dependencies with `python3 -m pip install -r requirements.txt`.
+   Offline tests, audit, and worklist `status`/`report` require only the standard library.
 2. **The game code binary.** Save it as `code.bin` in the repository root. It is the decompressed `.code` section of
    the USA release, dumped from your own copy, 6,455,296 bytes, SHA-1 `e6ab7d66ee62e879248b0660aaf38d22202e604b`.
 3. **ARM Compiler (armcc) 4.1, build 1049.** Place it at `tools/armcc/4.1/b1049/bin/armcc.exe`. Every published
-   function uses this build. You need your own licensed copy.
+   function uses this build unless its index entry specifies otherwise. You need your own licensed copy.
+   On Linux/macOS, the Windows executable also requires Wine (available as `wine` on `PATH`).
 
 Default flags:
 ```
 --cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections
 ```
-867 functions also need `--apcs=/fpic`, and a few use `--fpu` variants. `functions.json` has the exact `cc` and `flags`
+Some functions also need `--apcs=/fpic`, and a few use `--fpu` variants. `functions.json` has the exact `cc` and `flags`
 of each function.
 
 ## Usage
 
 ```
-python tools/fn.py show  0x001747E8                     # annotated disassembly of the original function
-python tools/fn.py check <path from functions.json> 0x<ADDR> --cc <cc> --flags "<flags>"
+python3 tools/fn.py show  0x001747E8                     # annotated disassembly of the original function
+python3 tools/fn.py check <path from functions.json> 0x<ADDR> --cc <cc> --flags "<flags>"
 ```
 `check` compiles the file, finds the function, compares it with the game bytes, and prints `RESULT: MATCH` or an
 aligned diff. Some C++ members need `--sym <mangled-name substring>`.
+All compiler jobs are serialized with a repository lock; sweep/permuter accept only `--jobs 1`.
+Use the exact `cc` and `flags` in the index. Binary size and SHA-1 are checked before analysis.
+Unknown relocation identities are a non-match, even if instruction placeholders are equal.
+
+Offline validation (no game dump, compiler, Wine, or Capstone required):
+```
+python3 -m unittest discover -s tests -v
+python3 tools/audit.py
+python3 tools/audit.py readme
+```
+Refiner checkpoints retain immutable checked variants and a wave cursor. Winner copies keep their `.c`/`.cpp`/`.cc`
+extension. Legacy checkpoints predate strict relocation checking and require an explicit `--fresh` restart.
 
 ## How it was made
 
@@ -94,14 +108,14 @@ Most of the sources were written by **automated tools**:
 - source permuters;
 - "twin" harvesting, which reuses a matched source for byte-identical or same-shape functions.
 
-**Every source here was verified byte-exact with `tools/fn.py check`.** Some communities do not accept
+**Sources were historically accepted by `tools/fn.py check`; that is not a claim of revalidation under the hardened checker.** Some communities do not accept
 machine-written decompilation, so please keep this in mind if you merge anything.
 
 See `docs/LESSONS.md` for what worked, what did not, and the measured numbers.
 
 ## Where to go next
 
-The remaining 9,195 unmatched functions are the hard tail. Our tests show the main blocker is **the shape of small inline
+The unmatched functions in the generated table are the hard tail. Our tests show the main blocker is **the shape of small inline
 helpers and classes from the game's own headers**:
 - inlined constructors;
 - setters with parameters;
@@ -117,8 +131,7 @@ of these helpers would unlock many functions at once. This is how other large de
   `tools/` (worklist, refine, synth, dna, sweep, permuter, triage, twins, dehack, recipes, audit and others), the
   shared headers `shared/include/albw_types.h` and `albw_common.h`, `shared/recipes.json`, `AGENTS.md` and the agent
   skills, new matches (twin harvesting, de-hacked sources, functions that had lost their source), and many entries in
-  `docs/LESSONS.md`. Their matches were re-checked with the same gate as ours (byte match, hack scan, relocation
-  identity) before being listed here.
+  `docs/LESSONS.md`. The index records historical acceptance; current verification limitations are described above.
 
 ## Legal
 
@@ -133,8 +146,11 @@ decides.
 ---
 
 ### ملخص بالعربي
-- **وش هذا المشروع:** تفكيك مطابق للعبة Zelda: A Link Between Worlds على 3DS. كل ملف هنا لما يترجَم بمترجم armcc 4.1 يعطي نفس بايتات الدالة في اللعبة بالضبط.
-- **وين وصلنا:** 64.7% من دوال اللعبة مطابقة (16,933 دالة)، أي ما يعادل 31.8% من بايتات الكود. النظيف منها بدون حيل 16,117 دالة، يعني 62.0% من كل الدوال.
-- **وش باقي:** 8,949 دالة ما طابقت أبداً (34.4%)، وتمثل 68.2% من بايتات الكود لأن الدوال غير المطابقة أكبر (متوسط 482 بايت مقابل 122). والمجموع الباقي عشان يصير التفكيك كله نظيف 9,852 دالة (37.9%).
+- **وش هذا المشروع:** مشروع تفكيك مطابق للعبة Zelda: A Link Between Worlds على 3DS، بهدف إنتاج نفس بايتات الدوال باستخدام مترجم armcc 4.1.
+<!-- generated:arabic-status -->
+- **وين وصلنا:** 16,933 دالة لها مصدر (65.2%)، منها 16,150 نظيفة (62.1%) و783 بحيل.
+- **وش باقي:** 8,925 دالة غير مطابقة؛ الباقي لتفكيك نظيف، باستثناء المكتبات، 9,822 دالة.
+<!-- /generated:arabic-status -->
+- الأرقام من الفهرس؛ لم تُعَد مراجعة كل المصادر بالمُدقّق الجديد الأكثر صرامة.
 - **وش ما يشمل:** ما فيه أي ملفات من اللعبة (ملف الكود أو ملفات البيانات) ولا المترجم. كل واحد يجيب نسخته بنفسه.
 - **ليش منشور:** الشغل منشور عشان أي أحد يبي يكمّل.

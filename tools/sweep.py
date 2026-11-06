@@ -1,6 +1,6 @@
 """Variant sweep with diff-classification feedback (permuter.py + classifier).
 
-  python tools/sweep.py <addr> <spec.py> [--jobs 5] [--top 8]
+  python tools/sweep.py <addr> <spec.py> [--jobs 1] [--top 8]
                         [--stop-on-match] [--sample 240] [--max 2000]
 
 spec.py (all slots use @@NAME@@ — braces clash with C):
@@ -24,16 +24,19 @@ locals / flags, keep the construct.
 import importlib.util
 import itertools
 import json
+import math
 import os
 import random
 import re
-import shutil
 import sys
 import tempfile
 import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from permuter import RESULT_RE, check_one  # noqa: E402
+from common import read_json
+from fn import DEFAULT_CC
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEFAULT_FLAGS = "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections"
@@ -131,7 +134,6 @@ def body_permutations(body, sample):
     """Orderings of BODY without ever materializing n! (12! = 479M tuples OOMed
     Termux once). Full enumeration only when n! <= sample; else a seeded
     random sample with dedup."""
-    import math
     if math.factorial(len(body)) <= sample:
         return list(itertools.permutations(body))
     seen, out = set(), []
@@ -148,7 +150,7 @@ def body_permutations(body, sample):
     return out
 
 
-def load_spec(path):
+def load_spec(path, default_flags=DEFAULT_FLAGS):
     spec = importlib.util.spec_from_file_location("sweep_spec", path)
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)
@@ -158,7 +160,7 @@ def load_spec(path):
     body = getattr(mod, "BODY", None)
     if body:
         grid["BODY"] = ["\n".join(p) for p in body_permutations(body, SAMPLE)]
-    flags = getattr(mod, "FLAGS", None) or [DEFAULT_FLAGS]
+    flags = getattr(mod, "FLAGS", None) or [default_flags]
     return template, groups, grid, flags, getattr(mod, "SYM", None)
 
 
@@ -181,14 +183,18 @@ def main():
     global SAMPLE
     addr = int(sys.argv[1], 16)
     spec_path = sys.argv[2]
-    jobs = int(sys.argv[sys.argv.index("--jobs") + 1]) if "--jobs" in sys.argv else 5
+    jobs = int(sys.argv[sys.argv.index("--jobs") + 1]) if "--jobs" in sys.argv else 1
+    if jobs != 1:
+        sys.exit("Only --jobs 1 is supported: parallel compiler jobs can exhaust memory")
     top = int(sys.argv[sys.argv.index("--top") + 1]) if "--top" in sys.argv else 8
     SAMPLE = int(sys.argv[sys.argv.index("--sample") + 1]) if "--sample" in sys.argv else 240
     stop = "--stop-on-match" in sys.argv
 
     maxv = int(sys.argv[sys.argv.index("--max") + 1]) if "--max" in sys.argv else 2000
 
-    template, groups, grid, flags, sym = load_spec(spec_path)
+    entry = read_json(os.path.join(ROOT, "functions.json")).get("%08X" % addr, {})
+    cc = entry.get("cc", DEFAULT_CC)
+    template, groups, grid, flags, sym = load_spec(spec_path, entry.get("flags", DEFAULT_FLAGS))
     est = len(groups) * len(flags)
     for k in grid:
         est *= len(grid[k])
@@ -198,16 +204,14 @@ def main():
     print("%d variants (%d groups x %s x %d flag-sets)" % (
         len(variants), len(groups), "x".join(str(len(grid[k])) for k in sorted(grid)) or "1", len(flags)))
 
-    workdir = os.path.join(tempfile.gettempdir(), "sweep_%08X" % addr)
-    shutil.rmtree(workdir, ignore_errors=True)
-    os.makedirs(workdir)
+    workdir = tempfile.mkdtemp(prefix="sweep_%08X_" % addr)
 
     def run(v):
         idx, text, fl, subs = v
         src = os.path.join(workdir, "v%05d.cpp" % idx)
         with open(src, "w") as fh:
             fh.write(text)
-        r = check_one(workdir, src, addr, fl, sym)
+        r = check_one(workdir, src, addr, fl, sym, cc=cc)
         r.update(idx=idx, flags=fl, src=src, subs=subs)
         if r["err"]:
             r.update(n_op=999, n_reg=0, perm=False, regmap=[])
@@ -215,7 +219,6 @@ def main():
             r.update(classify(r["out"], r["words"], r["total"]))
         return r
 
-    from concurrent.futures import ThreadPoolExecutor, as_completed
     results, t0 = [], time.time()
     with ThreadPoolExecutor(max_workers=jobs) as ex:
         futs = [ex.submit(run, v) for v in variants]

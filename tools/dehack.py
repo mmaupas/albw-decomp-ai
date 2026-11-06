@@ -15,10 +15,11 @@ import json
 import os
 import re
 import shutil
-import signal
-import subprocess
 import sys
 from pathlib import Path
+
+from common import file_lock, write_json
+from permuter import check_one
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -34,9 +35,7 @@ BARRIER_RE = re.compile(r"__schedule_barrier\s*\(\s*\)\s*;?")
 
 def save_functions(functions):
     """Write functions.json in the repo's exact canonical format."""
-    redumped = json.dumps(functions, indent=2, sort_keys=True)
-    (ROOT / "functions.json").write_text(
-        "\n".join(line.lstrip() for line in redumped.split("\n")))
+    write_json(ROOT / "functions.json", functions, canonical=True)
 
 
 def log(record):
@@ -51,18 +50,9 @@ def run_check(src, addr, cc, flags, timeout=300):
     The wine/box64 layer occasionally hangs; a fresh interpreter per check
     lets us kill the whole process group on timeout.
     """
-    cmd = [sys.executable, str(ROOT / "tools" / "fn.py"), "check",
-           src, hex(addr), "--cc", cc, "--flags", flags]
-    proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL,
-                             text=True, cwd=ROOT, start_new_session=True)
-    try:
-        out, _ = proc.communicate(timeout=timeout)
-    except subprocess.TimeoutExpired:
-        os.killpg(proc.pid, signal.SIGKILL)
-        proc.wait()
-        return False, "TIMEOUT"
-    out = (out or "").strip()
-    return "RESULT: MATCH" in out, (out.splitlines() or [""])[-1]
+    result = check_one(str(ROOT), src, addr, flags, None, timeout=timeout, cc=cc)
+    detail = result["err"] or (result["out"].strip().splitlines() or [""])[-1]
+    return result["match"], detail
 
 
 def check_all(entries, fpic):
@@ -89,6 +79,11 @@ def check_all(entries, fpic):
 
 
 def main():
+    with file_lock(ROOT / "logs" / "worklist.lock"):
+        _main()
+
+
+def _main():
     limit = None
     if "--limit" in sys.argv:
         limit = int(sys.argv[sys.argv.index("--limit") + 1])

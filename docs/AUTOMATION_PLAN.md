@@ -10,7 +10,8 @@ knowledge moves out of the agent's head and into tools + recipe data.
 1. **One command = one decision.** Every tool prints a verdict and, when
    applicable, the suggested next command. The agent never improvises
    flag sets, construct classes, or mutation choices.
-2. **Structured output.** Every tool supports `--json` with stable fields.
+2. **Structured output.** Commands advertising `--json` emit one JSON value
+   on stdout, with progress on stderr. Not all legacy commands implement it.
    The agent's job is to read a handful of fields, not disassembly.
 3. **Budgets are built in, not chosen.** Probe budgets, job counts (`--jobs 1`
    on this device — see OOM note in LESSONS.md), and timeouts are defaults.
@@ -106,8 +107,11 @@ diff-class-driven mutation, no hand-written specs:
   - `PERM`-class best → full BODY permutation sweep;
   - `OP`-class best → swap construct class (store form, guard form, helper
     style) per recipes;
-- every new best is written to `logs/refine/<addr>/best.c` + `state.json`
-  (resumable), each iteration appends to `history.jsonl`.
+- each checked variant gets an immutable path; `state.json` atomically records
+  the winner, complete wave and cursor. `best.c`/`best.cpp`/`best.cc` is a derived
+  copy repaired from that path on resume. Every candidate appends to `history.jsonl`;
+- budgets are cumulative checks; a budget-limited wave resumes at its next variant.
+  Legacy checkpoints require `--fresh` because their verifier was less strict.
 
 **Acceptance:** reproduce ≥5 known honest matches from skeleton-only
 restart (drop the original source, regenerate, refine to MATCH).
@@ -126,8 +130,10 @@ NEXT      python tools/refine.py 0x0049F6DC --budget 60
 - pulls from triage list, skips negative-recipe shapes, runs dna → synth,
   hands the agent the next command;
 - `queue.py register <addr> <src> <flags>` — re-runs fn.py check, refuses
-  unless `RESULT: MATCH`, updates functions.json in canonical format, runs
-  the path audit;
+  unless `RESULT: MATCH`, refuses existing source/index entries and detectable
+  tricks, then atomically updates functions.json under a publication lock.
+  Run `python3 tools/audit.py` before committing; this is an offline invariant
+  check, not a fresh compiler verification of existing sources;
 - `queue.py report` — near-miss table (addr, best %, diff class, one-line
   hypothesis) for human/large-LLM review;
 - state in `logs/autodecomp/state.json`; crash-safe (`--jobs 1`,

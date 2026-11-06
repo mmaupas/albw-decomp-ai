@@ -7,29 +7,35 @@
 """
 import bisect, difflib, json, os, re, struct, subprocess, sys, time
 
-from capstone import Cs, CS_ARCH_ARM, CS_MODE_ARM
+try:
+    from capstone import Cs, CS_ARCH_ARM, CS_MODE_ARM
+except ImportError:
+    Cs = None
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+from common import ROOT, TEXT_SIZE, TEXT_START, file_lock, load_binary, read_json, write_json
+from relocations import word_matches
+
 _code_path = os.path.join(ROOT, "code.bin")
-if not os.path.isfile(_code_path):
-    sys.stderr.write(
-        "fn.py: code.bin not found at %s\n"
-        "Supply the USA dump (6,455,296 bytes, SHA-1 e6ab7d66ee62e879248b0660aaf38d22202e604b)\n"
-        "in the repository root; see README.md 'Requirements'.\n" % _code_path)
-    raise SystemExit(2)
-CODE = open(_code_path, "rb").read()
-TA, TS = 0x100000, 5841180
+CODE = None
+TA, TS = TEXT_START, TEXT_SIZE
 RA, RS = 0x693000, 439800
 DA, DS = 0x6FF000, 166384
 TEXT_END = TA + TS
 DEFAULT_CC = "4.1/b1049"  # b894 inserts NOPs between back-to-back branches; b791..b1454 (except b894) match
 DEFAULT_FLAGS = "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections"
 
-md = Cs(CS_ARCH_ARM, CS_MODE_ARM)
+md = Cs(CS_ARCH_ARM, CS_MODE_ARM) if Cs else None
+
+
+def load_code():
+    global CODE
+    if CODE is None:
+        CODE = load_binary(_code_path)
+    return CODE
 
 
 def rd32(a):
-    return struct.unpack_from("<I", CODE, a - TA)[0]
+    return struct.unpack_from("<I", load_code(), a - TA)[0]
 
 
 def in_text(a):
@@ -48,6 +54,7 @@ _cache = os.path.join(ROOT, "funcs.json")
 
 
 def build_table():
+    load_code()
     words = struct.unpack_from(f"<{TS // 4}I", CODE, 0)
     bl, ptr, pro = set(), set(), set()
     for i, w in enumerate(words):
@@ -148,12 +155,12 @@ def build_table():
     if os.path.exists(nf):
         drop = {int(l.split()[0], 16) for l in open(nf) if l.strip() and not l.startswith("#")}
         starts = sorted(set(starts) - drop)
-    json.dump({"starts": starts, "bl": sorted(bl), "ptr": sorted(ptr)}, open(_cache, "w"))
+    write_json(_cache, {"starts": starts, "bl": sorted(bl), "ptr": sorted(ptr)})
 
 
 if not os.path.exists(_cache):
-    build_table()
-_t = json.load(open(_cache))
+    raise RuntimeError("funcs.json is missing; importing tooling never rebuilds it implicitly")
+_t = read_json(_cache)
 STARTS = _t["starts"]
 BL_T = set(_t["bl"])
 PTR_T = set(_t["ptr"])
@@ -167,6 +174,7 @@ def func_range(addr):
 
 
 def cstring(a):
+    load_code()
     off = a - TA
     end = CODE.find(b"\0", off, off + 200)
     if end <= off:
@@ -188,12 +196,13 @@ def known_symbols():
     """Names/signatures agents have registered with `kb.py sym` (latest entry per address wins)."""
     out = {}
     if os.path.exists(SYMS_FILE):
-        for line in open(SYMS_FILE, encoding="utf-8"):
-            try:
-                d = json.loads(line)
-                out[int(d["addr"], 16)] = d
-            except (ValueError, KeyError):
-                pass
+        with open(SYMS_FILE, encoding="utf-8") as stream:
+            for line in stream:
+                try:
+                    d = json.loads(line)
+                    out[int(d["addr"], 16)] = d
+                except (ValueError, KeyError):
+                    pass
     return out
 
 
@@ -218,7 +227,9 @@ def name_of(a):
 
 def dis1(a):
     """Decode the single ARM word at a (None if it is not a valid instruction)."""
-    l = list(md.disasm(CODE[a - TA:a - TA + 4], a, 1))
+    if md is None:
+        raise RuntimeError("Disassembly requires capstone; install requirements.txt")
+    l = list(md.disasm(load_code()[a - TA:a - TA + 4], a, 1))
     return l[0] if l else None
 
 
@@ -312,6 +323,7 @@ def cmd_show(addr):
 
 
 def cmd_xref(addr):
+    load_code()
     hits = []
     words = struct.unpack_from(f"<{TS // 4}I", CODE, 0)
     for i, w in enumerate(words):
@@ -334,39 +346,77 @@ def cmd_xref(addr):
 
 # ---------------- ELF object parsing ----------------
 def parse_elf(path):
-    d = open(path, "rb").read()
+    with open(path, "rb") as stream:
+        d = stream.read()
+    if len(d) < 52 or d[:7] != b"\x7fELF\x01\x01\x01" or struct.unpack_from("<HH", d, 16) != (1, 40):
+        raise ValueError("expected a little-endian ARM ELF32 relocatable object")
     shoff, = struct.unpack_from("<I", d, 0x20)
     shentsize, shnum, shstrndx = struct.unpack_from("<HHH", d, 0x2E)
+    if shentsize != 40 or shnum == 0 or shstrndx >= shnum or shoff < 52 or shoff + shnum * shentsize > len(d):
+        raise ValueError("invalid ELF section-header table")
     secs = []
     for i in range(shnum):
         nm, ty, fl, ad, off, sz, link, info, al, es = struct.unpack_from("<10I", d, shoff + i * shentsize)
+        if ty != 8 and off + sz > len(d):  # SHT_NOBITS has no file payload
+            raise ValueError("ELF section extends beyond object")
         secs.append(dict(name=nm, type=ty, off=off, size=sz, link=link, info=info, es=es))
     shs = secs[shstrndx]
+    if shs["type"] != 3:
+        raise ValueError("invalid ELF section-name string table")
 
     def sname(o, tab):
-        e = d.index(b"\0", tab["off"] + o)
+        if o >= tab["size"]:
+            raise ValueError("ELF string offset outside table")
+        e = d.find(b"\0", tab["off"] + o, tab["off"] + tab["size"])
+        if e == -1:
+            raise ValueError("unterminated ELF string")
         return d[tab["off"] + o:e].decode("latin1")
 
     for s in secs:
         s["name"] = sname(s["name"], shs)
     syms = []
-    for s in secs:
+    tables = {}
+    for index, s in enumerate(secs):
         if s["type"] == 2:  # SYMTAB
+            if s["es"] != 16 or s["size"] % 16 or s["link"] >= shnum or secs[s["link"]]["type"] != 3:
+                raise ValueError("invalid ELF symbol-table layout")
+            table = tables[index] = []
             strt = secs[s["link"]]
             for j in range(s["size"] // 16):
                 nm, val, sz, info, oth, shn = struct.unpack_from("<IIIBBH", d, s["off"] + j * 16)
-                syms.append(dict(name=sname(nm, strt), value=val, size=sz, type=info & 0xF, shndx=shn))
+                table.append(dict(name=sname(nm, strt), value=val, size=sz,
+                                  type=info & 0xF, binding=info >> 4, shndx=shn))
+            syms.extend(table)
     rels = {}
     for s in secs:
-        if s["type"] == 9:  # REL
+        if s["type"] == 4:  # RELA is not emitted by our compiler; never ignore it.
+            raise ValueError("unsupported ELF RELA relocations")
+        if s["type"] == 9:  # REL, sh_link identifies the symbol table
+            if s["es"] != 8 or s["size"] % 8 or not 0 < s["info"] < shnum or s["link"] not in tables:
+                raise ValueError("invalid ELF relocation-table layout")
             lst = rels.setdefault(s["info"], [])
+            table = tables[s["link"]]
             for j in range(s["size"] // 8):
                 off, info = struct.unpack_from("<II", d, s["off"] + j * 8)
-                lst.append((off, info & 0xFF, syms[info >> 8]["name"] if (info >> 8) < len(syms) else "?"))
+                if off % 4 or off + 4 > secs[s["info"]]["size"] or any(r[0] == off for r in lst):
+                    raise ValueError("unaligned, overlapping or out-of-range ELF relocation")
+                if info >> 8 >= len(table):
+                    raise ValueError("ELF relocation symbol outside table")
+                lst.append((off, info & 0xFF, table[info >> 8]))
     return d, secs, syms, rels
 
 
 def cmd_check(src, addr, sym=None, cc=DEFAULT_CC, flags=DEFAULT_FLAGS, prebuilt=False):
+    if addr not in STARTS:
+        raise ValueError("check requires an exact function start: %08X" % addr)
+    if md is None:
+        raise RuntimeError("Disassembly requires capstone; install requirements.txt")
+    with file_lock(os.path.join(ROOT, "logs", "compiler.lock")):
+        return _cmd_check(src, addr, sym, cc, flags, prebuilt)
+
+
+def _cmd_check(src, addr, sym, cc, flags, prebuilt):
+    load_code()
     s, e = func_range(addr)
     obj = os.path.splitext(src)[0] + ".o"
     if prebuilt:  # the caller already compiled src to obj (e.g. many files in one armcc call)
@@ -420,33 +470,16 @@ def cmd_check(src, addr, sym=None, cc=DEFAULT_CC, flags=DEFAULT_FLAGS, prebuilt=
                     and "$$" not in x["name"]] + [sec["size"]])
         mine = d[sec["off"] + f["value"]: sec["off"] + fend]
         relmap = {o - f["value"]: (t, n) for o, t, n in rels.get(f["shndx"], []) if f["value"] <= o < fend}
+        if len(target) % 4 or len(mine) % 4:
+            raise ValueError("comparison requires complete ARM words")
+        section_bases = {f["shndx"]: s - f["value"]}
         n_t, n_m = len(target) // 4, len(mine) // 4
         same = 0
         rows = []
         for i in range(max(n_t, n_m)):
             tw = struct.unpack_from("<I", target, i * 4)[0] if i < n_t else None
             mw = struct.unpack_from("<I", mine, i * 4)[0] if i < n_m else None
-            ok = tw == mw
-            if not ok and tw is not None and mw is not None:
-                rel = relmap.get(i * 4)
-                if rel and rel[0] in (1, 28, 29) and (tw & 0xFF000000) == (mw & 0xFF000000):
-                    ok = True  # call / jump target fixed up by the linker
-                elif rel and rel[0] in (1, 28) and (tw >> 25) == 0x7D:
-                    ok = True  # BL turned into BLX by the linker (callee is Thumb)
-                elif rel and rel[0] == 2:
-                    ok = True  # absolute address in literal pool
-                elif rel and rel[0] in (1, 28) and (tw & 0x0E000000) != 0x0A000000:
-                    ok = True  # call to a tiny function inlined by the linker (e.g. "mov r0, r0")
-                elif rel and rel[0] == 29 and tw == 0xE1A00000:
-                    ok = True  # tail call to the very next function, turned into a NOP by the linker
-                elif (rel and rel[0] == 29 and (mw & 0x0F000000) == 0x0B000000 and (tw >> 28) == (mw >> 28)
-                      and (tw & 0x0E000000) != 0x0A000000):
-                    ok = True  # conditional call (blne) to a one-instruction function, inlined by the linker
-                elif (tw & 0x0E000000) == 0x0A000000 and (tw & 0xFF000000) == (mw & 0xFF000000):
-                    imm = tw & 0xFFFFFF
-                    imm = imm - 0x1000000 if imm & 0x800000 else imm
-                    if not (s <= s + i * 4 + 8 + (imm << 2) < e):
-                        ok = True  # branch out of the function, resolved at link time
+            ok = word_matches(mw, tw, relmap.get(i * 4), s + i * 4, section_bases)
             same += ok
             rows.append((i, tw, mw, ok, relmap.get(i * 4)))
         return same, n_t, n_m, rows, mine, relmap
@@ -511,7 +544,7 @@ def cmd_check(src, addr, sym=None, cc=DEFAULT_CC, flags=DEFAULT_FLAGS, prebuilt=
         print(f"  {'off':>5}  {'original':38} {'yours':38}")
         for i, tw, mw, ok, rel in rows:
             mark = "  " if ok else "!!"
-            r = f" [{rel[1]}]" if rel else ""
+            r = f" [{rel[1]['name']}; relocation identity not proved]" if rel and not ok else ""
             print(f"{mark}{i * 4:5x}  {dis(tw, s + i * 4):38} {dis(mw, s + i * 4):38}{r}")
     elif not exact:
         print("sizes differ: aligned diff (only changed blocks, 2 lines of context)")

@@ -10,10 +10,14 @@ Classification signatures come from docs/LESSONS.md open-problem work:
   pad_tail - ends in alignment padding with no terminator (cross-function fall-through)
   candidate- everything else: worth a source attempt, sorted smallest-first
 """
-import bisect, json, os, struct, sys
+import os
+import struct
+import sys
+
+from common import atomic_write, file_lock, load_binary, read_json
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CODE = open(os.path.join(ROOT, "code.bin"), "rb").read()
+CLASSES = ("svc", "mrc_mcr", "veneer", "atomic", "pad_tail", "candidate")
 TA, TS = 0x100000, 5841180
 
 
@@ -44,11 +48,12 @@ def main():
         lo, hi = int(a, 16), int(b, 16)
     outdir = sys.argv[sys.argv.index("--out") + 1] if "--out" in sys.argv else os.path.join(ROOT, "logs", "triage")
 
-    starts = json.load(open(os.path.join(ROOT, "funcs.json")))["starts"]
-    indexed = set(json.load(open(os.path.join(ROOT, "functions.json"))))
+    code = load_binary(os.path.join(ROOT, "code.bin"))
+    starts = read_json(os.path.join(ROOT, "funcs.json"))["starts"]
+    indexed = set(read_json(os.path.join(ROOT, "functions.json")))
     os.makedirs(outdir, exist_ok=True)
 
-    buckets = {}
+    buckets = {name: [] for name in CLASSES}
     for i, s in enumerate(starts):
         e = starts[i + 1] if i + 1 < len(starts) else TA + TS
         if s in (0x10BFFC,):  # 0x10BFFC exists only as 0x10BFD4's fall-through pad
@@ -58,15 +63,16 @@ def main():
         if f"{s:08X}" in indexed:
             continue
         n = (e - s) // 4
-        words = struct.unpack_from("<%dI" % n, CODE, s - TA)
+        words = struct.unpack_from("<%dI" % n, code, s - TA)
         buckets.setdefault(classify(list(words)), []).append((s, e - s))
 
-    for cls, lst in sorted(buckets.items()):
-        path = os.path.join(outdir, "unindexed_%s.txt" % cls)
-        with open(path, "w") as fh:
-            for s, sz in sorted(lst, key=lambda x: x[1]):
-                fh.write("%08X %d\n" % (s, sz))
-        print("%-9s %5d  (smallest %d B)  -> %s" % (cls, len(lst), lst and min(x[1] for x in lst), path))
+    with file_lock(os.path.join(outdir, "write.lock")):
+        for cls, lst in sorted(buckets.items()):
+            path = os.path.join(outdir, "unindexed_%s.txt" % cls)
+            atomic_write(path, "".join("%08X %d\n" % (s, size)
+                                     for s, size in sorted(lst, key=lambda x: x[1])))
+            smallest = min((size for _, size in lst), default=0)
+            print("%-9s %5d  (smallest %d B)  -> %s" % (cls, len(lst), smallest, path))
     total = sum(len(v) for v in buckets.values())
     print("%-9s %5d" % ("TOTAL", total))
 

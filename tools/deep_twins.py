@@ -16,7 +16,7 @@ Usage:
 import json
 import os
 import re
-import subprocess
+from permuter import check_one
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -189,18 +189,9 @@ def verify(dest, cand, anchor_entry):
     for flags in (base_flags, base_flags.replace("--apcs=/interwork", "--apcs=/fpic")):
         if not flags:
             continue
-        cmd = [sys.executable, os.path.join(ROOT, "tools", "fn.py"), "check",
-               dest, hex(cand), "--cc", anchor_entry.get("cc", "4.1/b1049"),
-               "--flags", flags]
-        proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL,
-                                text=True, cwd=ROOT, start_new_session=True)
-        try:
-            out, _ = proc.communicate(timeout=300)
-        except subprocess.TimeoutExpired:
-            os.killpg(proc.pid, 9)
-            proc.wait()
-            out = ""
-        if "RESULT: MATCH" in (out or ""):
+        result = check_one(ROOT, dest, cand, flags, None,
+                           cc=anchor_entry.get("cc", "4.1/b1049"))
+        if result["match"]:
             return True
     return False
 

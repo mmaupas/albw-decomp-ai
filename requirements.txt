@@ -1,0 +1,2 @@
+# Only binary analysis/disassembly needs this; offline checks use the standard library.
+capstone>=5.0.1,<6

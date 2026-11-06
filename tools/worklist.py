@@ -28,9 +28,13 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import fn
+import dna
+import contextlib
 import synth
 from permuter import check_one
 from sweep import DEFAULT_FLAGS
+from audit import trick_reasons
+from common import file_lock, read_json, write_json
 
 ROOT = fn.ROOT
 STATE_DIR = os.path.join(ROOT, "logs", "autodecomp")
@@ -38,22 +42,22 @@ STATE_FILE = os.path.join(STATE_DIR, "state.json")
 CAND_FILE = os.path.join(ROOT, "logs", "triage", "unindexed_candidate.txt")
 AUTO_DIR = os.path.join(ROOT, "src", "work8", "auto")
 DEFAULT_CC = "4.1/b1049"
-INCLUDE_LINE = re.compile(r'(\s*#include\s+")([^"]+)(")')
+INCLUDE_LINE = re.compile(r'(^[ \t]*#include\s+")([^"]+)(")', re.MULTILINE)
 
 
 def load_state():
     if os.path.exists(STATE_FILE):
-        return json.load(open(STATE_FILE))
+        return read_json(STATE_FILE)
     return {"attempted": {}, "registered": []}
 
 
 def save_state(state):
     os.makedirs(STATE_DIR, exist_ok=True)
-    json.dump(state, open(STATE_FILE, "w"), indent=1)
+    write_json(STATE_FILE, state)
 
 
 def load_status():
-    return json.load(open(os.path.join(ROOT, "functions.json")))
+    return read_json(os.path.join(ROOT, "functions.json"))
 
 
 def run_checked(argv, timeout):
@@ -63,9 +67,13 @@ def run_checked(argv, timeout):
     try:
         out, _ = p.communicate(timeout=timeout)
     except subprocess.TimeoutExpired:
-        os.killpg(os.getpgid(p.pid), signal.SIGKILL)
+        if os.name == "nt":
+            p.kill()
+        else:
+            os.killpg(p.pid, signal.SIGKILL)
+        p.communicate()
         return None
-    return out
+    return out if p.returncode == 0 else None
 
 
 def candidates():
@@ -83,14 +91,14 @@ def candidates():
 
 def refine_state(addr):
     p = os.path.join(ROOT, "logs", "refine", "%08X" % addr, "state.json")
-    return json.load(open(p)) if os.path.exists(p) else None
+    return read_json(p) if os.path.exists(p) else None
 
 
 def ops_twin_map():
     """ops-sequence -> registered source paths, for twin eligibility."""
-    import dna
     if not os.path.exists(dna.DNA_FILE):
-        dna.build_index()
+        with contextlib.redirect_stdout(sys.stderr):
+            dna.build_index()
     status = load_status()
     m = {}
     for r in dna.load_index():
@@ -114,6 +122,11 @@ def next_candidate(budget, region, scan_cap=60, as_json=False):
             continue
         if lo is not None and not lo <= addr < hi:
             continue
+        rstate = refine_state(addr)
+        if rstate and (rstate.get("best") or {}).get("match"):
+            chosen = dict(addr=key, size=size, outcome="MATCH-unregistered",
+                          origin=rstate["origin"], checks=rstate["used"])
+            break
         if key in state["attempted"]:
             skipped.append((key, size, "attempted:" + state["attempted"][key].get("status", "?")))
             continue
@@ -123,10 +136,6 @@ def next_candidate(budget, region, scan_cap=60, as_json=False):
         # learn the outcome of a previous `next` suggestion from refine's state
         rstate = refine_state(addr)
         if rstate:
-            if rstate["best"].get("match"):
-                chosen = dict(addr=key, size=size, outcome="MATCH-unregistered",
-                              origin=rstate["origin"], checks=rstate["used"])
-                break
             state["attempted"][key] = {
                 "status": rstate.get("status", "?"), "checks": rstate["used"],
                 "origin": rstate["origin"], "size": size}
@@ -151,7 +160,6 @@ def next_candidate(budget, region, scan_cap=60, as_json=False):
         # exact same mnemonic sequence (refine's auto start uses it)
         if twins is None:
             twins = ops_twin_map()
-        import dna
         ops = " ".join(dna.ops_seq(s, e))
         if twins.get(ops):
             chosen = dict(addr=key, size=size, outcome="new", cls="twin:" + twins[ops][0])
@@ -161,6 +169,7 @@ def next_candidate(budget, region, scan_cap=60, as_json=False):
     save_state(state)
     if as_json:
         print(json.dumps({"chosen": chosen, "skipped": skipped[:12]}))
+        return
     if chosen is None:
         print("QUEUE EMPTY within scan cap %d (%d skipped this pass)" % (scan_cap, len(skipped)))
         print("NEXT  python tools/worklist.py report  # manual review backlog")
@@ -186,68 +195,89 @@ def rebase_includes(text, dest_dir):
     out = []
     for line in text.splitlines():
         m = INCLUDE_LINE.match(line)
-        if m and m.group(2).startswith(ROOT):
-            line = m.group(1) + os.path.relpath(m.group(2), dest_dir) + m.group(3)
+        if m and os.path.isabs(m.group(2)):
+            included = os.path.realpath(m.group(2))
+            if os.path.commonpath([os.path.realpath(ROOT), included]) == os.path.realpath(ROOT):
+                line = m.group(1) + os.path.relpath(included, dest_dir) + m.group(3) + line[m.end():]
         out.append(line)
     return "\n".join(out) + "\n"
 
 
 def register(addr, src=None, flags=None, as_json=False):
-    """Verify the source at its FINAL path, then update functions.json.
+    """Publish a new, verified honest source; never replace an existing entry."""
+    with file_lock(os.path.join(ROOT, "logs", "worklist.lock")):
+        return _register(addr, src, flags, as_json)
 
-    Refuses unless fn.py check prints RESULT: MATCH for the registered file.
-    Defaults come from refine's state (best.c, winning flags).
-    """
+
+def _register(addr, src, flags, as_json):
     key = "%08X" % addr
-    sd = os.path.join(ROOT, "logs", "refine", key)
-    rstate = refine_state(addr)
-    if src is None:
-        src = os.path.join(sd, "best.c")
-    if flags is None:
-        flags = rstate["best"]["flags"] if rstate else DEFAULT_FLAGS
-    if not os.path.exists(src):
-        sys.exit("no source to register: %s (run refine.py first or pass --src)" % src)
-
-    os.makedirs(AUTO_DIR, exist_ok=True)
-    ext = os.path.splitext(src)[1] or ".c"
-    dest = os.path.join(AUTO_DIR, "func_%s%s" % (key, ext))
-    text = rebase_includes(open(src).read(), AUTO_DIR)
-    open(dest, "w").write(text)
-
-    # path audit: registered sources include nothing absolute
-    bad = [m.group(2) for m in INCLUDE_LINE.finditer(text) if m.group(2).startswith("/")]
-    if bad:
-        os.unlink(dest)
-        sys.exit("PATH AUDIT FAILED: absolute include survived rewrite: %s" % bad[0])
-
-    r = check_one(AUTO_DIR, dest, addr, flags, None)
-    if os.path.exists(dest + ".o"):
-        os.unlink(dest + ".o")
-    if not r["match"]:
-        print("REFUSED: fn.py check says %s %d/%d words" % (
-            r["err"] or "NO MATCH", r["words"], r["total"]))
-        print("  source kept (unregistered) at %s" % dest)
-        return
-    rel = os.path.relpath(dest, ROOT)
-    print("RESULT: MATCH %d/%d words  ->  %s" % (r["words"], r["total"], rel))
-
+    if addr not in fn.STARTS:
+        raise ValueError("registration requires an exact function start: " + key)
     status = load_status()
-    status[key] = {"cc": DEFAULT_CC, "flags": flags, "hack_reasons": [],
-                   "path": rel, "status": "honest"}
-    # canonical format: indent=1 with every line lstripped (flat left margin,
-    # as the rest of the repo's json files)
-    out = json.dumps(status, indent=1, sort_keys=True)
-    with open(os.path.join(ROOT, "functions.json"), "w") as fh:
-        fh.write("\n".join(l.lstrip() for l in out.splitlines()))
-    state = load_state()
-    state["registered"].append(key)
-    state["attempted"].pop(key, None)
-    save_state(state)
+    if key in status:
+        raise ValueError("refusing to replace existing index entry: " + key)
+    rstate = refine_state(addr)
+    best = (rstate or {}).get("best") or {}
+    if src is None:
+        src = best.get("path")
+    if not src or not os.path.isfile(src):
+        raise ValueError("no checked source to register; pass --src or run refine.py")
+    if flags is None:
+        flags = best.get("flags", DEFAULT_FLAGS)
+    cc = (rstate or {}).get("cc", DEFAULT_CC)
+    ext = os.path.splitext(src)[1]
+    if ext not in (".c", ".cpp", ".cc"):
+        raise ValueError("unsupported source extension: " + ext)
+    dest = os.path.join(AUTO_DIR, "func_%s%s" % (key, ext))
+    with open(src, encoding="utf-8") as stream:
+        text = rebase_includes(stream.read(), AUTO_DIR)
+    tricks = trick_reasons(text)
+    if tricks:
+        raise ValueError("honest registration refused: " + ", ".join(tricks))
+    bad = [m.group(2) for m in INCLUDE_LINE.finditer(text) if os.path.isabs(m.group(2))]
+    if bad:
+        raise ValueError("PATH AUDIT FAILED: absolute include: " + bad[0])
+    os.makedirs(AUTO_DIR, exist_ok=True)
+    if os.path.realpath(AUTO_DIR) != os.path.abspath(AUTO_DIR):
+        raise ValueError("registration directory must not traverse a symlink")
+    # Exclusive creation also protects an unindexed source left by an earlier crash.
+    with open(dest, "x", encoding="utf-8") as stream:
+        stream.write(text)
+    published = False
+    try:
+        result = check_one(AUTO_DIR, dest, addr, flags, None, cc=cc)
+        if not result["match"] or result["err"]:
+            raise ValueError("registration refused: " + (result["err"] or "NO MATCH"))
+        rel = os.path.relpath(dest, ROOT)
+        status[key] = {"cc": cc, "flags": flags, "hack_reasons": [],
+                       "path": rel, "status": "honest"}
+        write_json(os.path.join(ROOT, "functions.json"), status, canonical=True)
+        published = True
+        state = load_state()
+        if key not in state["registered"]:
+            state["registered"].append(key)
+        state["attempted"].pop(key, None)
+        save_state(state)
+    finally:
+        obj = os.path.splitext(dest)[0] + ".o"
+        if os.path.exists(obj):
+            os.unlink(obj)
+        if not published:
+            # Replacement may have committed just before an interruption. Never
+            # remove a source unless the on-disk index proves it is unreferenced.
+            try:
+                published = load_status().get(key, {}).get("path") == os.path.relpath(dest, ROOT)
+            except (OSError, ValueError):
+                published = True  # preserve evidence if publication cannot be determined
+            if not published:
+                os.unlink(dest)
+    output = {"addr": key, "path": rel, "status": "honest", "cc": cc, "flags": flags}
     if as_json:
-        print(json.dumps({"addr": key, "path": rel, "status": "honest", "flags": flags}))
-    print("functions.json: %s -> honest" % key)
-    print("NEXT  git add %s functions.json && git commit -m \"Match %s (auto refine)\"" % (
-        rel, key))
+        print(json.dumps(output))
+    else:
+        print("RESULT: MATCH %d/%d words -> %s" % (result["words"], result["total"], rel))
+        print("NEXT  python3 tools/audit.py  # review changes before staging or committing")
+    return output
 
 
 # --------------------------------------------------------------------- report
@@ -265,7 +295,11 @@ def report(as_json=False):
             rows.append(dict(addr=key, kind=info.get("status", "?"), frac=0.0,
                              hypothesis="no refine state (negative / no-start / error)"))
             continue
-        b = rstate["best"]
+        b = rstate.get("best")
+        if not b:
+            rows.append(dict(addr=key, kind=rstate.get("status", "DEFER"), frac=0.0,
+                             hypothesis=rstate.get("reason", "no starting source")))
+            continue
         if b.get("match"):
             rows.append(dict(addr=key, kind="MATCH-unregistered", frac=1.0,
                              hypothesis="run: python tools/worklist.py register 0x%s" % key))
@@ -300,7 +334,7 @@ def status_summary(as_json=False):
     state = load_state()
     n_cand = sum(1 for _ in open(CAND_FILE)) if os.path.exists(CAND_FILE) else -1
     waiting = sum(1 for k in state["attempted"]
-                  if (refine_state(int(k, 16)) or {}).get("best", {}).get("match"))
+                  if ((refine_state(int(k, 16)) or {}).get("best") or {}).get("match"))
     s = {"candidates": n_cand, "attempted": len(state["attempted"]),
          "registered": len(state["registered"]), "match_waiting": waiting}
     if as_json:
@@ -321,7 +355,8 @@ def main():
     ap.add_argument("--json", action="store_true")
     a = ap.parse_args()
     if a.cmd == "next":
-        next_candidate(a.budget, a.region, as_json=a.json)
+        with file_lock(os.path.join(ROOT, "logs", "worklist.lock")):
+            next_candidate(a.budget, a.region, as_json=a.json)
     elif a.cmd == "register":
         if not a.addr:
             sys.exit("register needs an address")

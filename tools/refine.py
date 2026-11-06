@@ -25,11 +25,17 @@ import os
 import re
 import sys
 import time
+import contextlib
+import tempfile
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import fn
+import dna
+import synth
 from permuter import check_one
 from sweep import body_permutations, classify
+from common import atomic_write, file_lock, read_json, write_json
+from relocations import VERIFIER_VERSION
 
 ROOT = fn.ROOT
 DEFAULT_FLAGS = "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections"
@@ -67,14 +73,13 @@ def fix_includes(text, path):
     for line in text.splitlines():
         m = re.match(r'(\s*#include\s+")([^"]+)(")', line)
         if m and not m.group(2).startswith("/"):
-            line = m.group(1) + os.path.join(d, m.group(2)) + m.group(3)
+            line = m.group(1) + os.path.join(d, m.group(2)) + m.group(3) + line[m.end():]
         out.append(line)
     return "\n".join(out) + "\n"
 
 
 def synth_start(addr):
     """Skeleton from synth.py, or (None, reason) to defer."""
-    import synth
     s, e, ins = synth.view(addr)
     neg = synth.check_negative(ins)
     if neg:
@@ -95,10 +100,10 @@ def twin_start(addr):
 
     Returns dict(text, flags, name, origin) or None when there is no twin.
     """
-    import dna
     if not os.path.exists(dna.DNA_FILE):
-        print("building dna index first (~10 min)...")
-        dna.build_index()
+        print("building dna index first (~10 min)...", file=sys.stderr)
+        with contextlib.redirect_stdout(sys.stderr):
+            dna.build_index()
     idx = dna.load_index()
     status = dna.load_status()
     mine = next((r for r in idx if int(r["addr"], 16) == addr), None)
@@ -118,7 +123,8 @@ def twin_start(addr):
         text = open(full, errors="replace").read()
         return dict(text=fix_includes(text, full),
                     flags=entry.get("flags") or DEFAULT_FLAGS,
-                    name="func_%s" % r["addr"], origin="twin:%s" % path)
+                    name="func_%s" % r["addr"], origin="twin:%s" % path,
+                    cc=entry.get("cc", fn.DEFAULT_CC))
     return None
 
 
@@ -221,7 +227,6 @@ def gen_values(text, addr, budget):
     All-primary first, then single-slot alternates, then two-slot combos.
     Deduped against the input text.
     """
-    import dna
     s, e = fn.func_range(addr)
     stores = dna.store_map(s, e)
     imms = immediates(s, e)
@@ -261,7 +266,7 @@ def gen_values(text, addr, budget):
         for vi in cands[i][:3]:
             for vj in cands[j][:3]:
                 add({i: vi, j: vj})
-    return variants[:budget]
+    return variants if budget is None else variants[:budget]
 
 
 def gen_order(text, budget, name=None):
@@ -291,6 +296,13 @@ def better(a, b):
 
 def run(addr, budget=60, start="auto", src=None, fresh=False,
         as_json=False, quiet=False):
+    if budget < 1:
+        raise ValueError("budget must be positive")
+    with file_lock(os.path.join(state_dir(addr), "run.lock")):
+        return _run(addr, budget, start, src, fresh, as_json, quiet or as_json)
+
+
+def _run(addr, budget, start, src, fresh, as_json, quiet):
     sd = state_dir(addr)
     os.makedirs(os.path.join(sd, "waves"), exist_ok=True)
     hist_path = os.path.join(sd, "history.jsonl")
@@ -299,44 +311,56 @@ def run(addr, budget=60, start="auto", src=None, fresh=False,
     # ---- resume or resolve a fresh start
     state = None
     if not fresh and os.path.exists(state_path):
-        state = json.load(open(state_path))
-        if not os.path.exists(os.path.join(sd, "best.c")):  # crash between writes
-            open(os.path.join(sd, "best.c"), "w").write(open(state["best"]["path"]).read())
+        state = read_json(state_path)
+        if state.get("verifier") != VERIFIER_VERSION:
+            raise ValueError("legacy checkpoint needs --fresh: relocation verification changed")
+        if state.get("best"):
+            with open(state["best"]["path"], encoding="utf-8") as stream:
+                atomic_write(os.path.join(sd, "best" + os.path.splitext(state["best"]["path"])[1]), stream.read())
+        if state.get("status") == "DEFER" and state.get("best") is None:
+            return _finish(addr, state, "DEFER", as_json, quiet)
         if not quiet:
-            b = state["best"]
-            print("resumed: %d checks used, best OP=%d REG=%d %s" % (
-                state["used"], b["n_op"], b["n_reg"], "PERM" if b["perm"] else ""))
+            print("resumed: %d checks used" % state["used"])
     if state is None:
         origin = ext = flags = name = text = None
+        entry = read_json(os.path.join(ROOT, "functions.json")).get("%08X" % addr, {})
+        cc = entry.get("cc", fn.DEFAULT_CC)
         if src:
-            text = open(src, errors="replace").read()
+            with open(src, errors="replace") as stream:
+                text = fix_includes(stream.read(), src)
             origin, ext, flags, name = "src:%s" % src, os.path.splitext(src)[1] or ".cpp", \
-                DEFAULT_FLAGS, None
+                entry.get("flags", DEFAULT_FLAGS), None
         else:
             t = twin_start(addr) if start in ("auto", "twin") else None
             if t:
                 text, flags, name, origin = t["text"], t["flags"], t["name"], t["origin"]
+                flags = entry.get("flags", DEFAULT_FLAGS)
                 ext = os.path.splitext(origin.split(":")[-1])[1] or ".cpp"
             elif start == "twin":
                 sys.exit("no usable registered twin for 0x%08X" % addr)
         if origin is None:
             text, otag = synth_start(addr)
             if text is None:
-                _report(addr, "DEFER", otag, as_json)
-                return {"addr": addr, "status": "DEFER", "reason": otag}
-            origin, ext, flags, name = otag, ".c", DEFAULT_FLAGS, "func_%08X" % addr
-        open(os.path.join(sd, "start" + ext), "w").write(text)
+                state = {"addr": "%08X" % addr, "status": "DEFER", "reason": otag,
+                         "used": 0, "best": None, "origin": otag, "verifier": VERIFIER_VERSION}
+                _save(state_path, state)
+                return _finish(addr, state, "DEFER", as_json, quiet)
+            origin, ext, flags, name = otag, ".c", entry.get("flags", DEFAULT_FLAGS), "func_%08X" % addr
+        atomic_write(os.path.join(sd, "start" + ext), text)
         state = {"addr": "%08X" % addr, "used": 0, "iter": 0, "tried": [],
                  "origin": origin, "ext": ext, "name": name,
-                 "flags_base": flags, "best": None}
+                 "flags_base": flags, "cc": cc, "best": None,
+                 "pending": None, "fallback": "pending" if origin.startswith("twin:") else "done",
+                 "verifier": VERIFIER_VERSION}
 
     def check(text, flags, wave):
         state["used"] += 1
-        path = os.path.join(sd, "waves", "v%04d%s" % (state["used"], state["ext"]))
-        open(path, "w").write(text)
-        r = check_one(sd, path, addr, flags, None)
-        if r["err"] in ("TIMEOUT", "NO OUTPUT"):
-            r = check_one(sd, path, addr, flags, None)  # wine warm-up flake; retry once
+        fd, path = tempfile.mkstemp(prefix="v%04d_" % state["used"], suffix=state["ext"],
+                                    dir=os.path.join(sd, "waves"))
+        with os.fdopen(fd, "w", encoding="utf-8") as stream:
+            stream.write(text)
+        _save(state_path, state)  # count a possibly interrupted compiler invocation
+        r = check_one(sd, path, addr, flags, None, cc=state["cc"])
         if r["err"]:
             rec = dict(match=False, n_op=999, n_reg=0, perm=False, words=0,
                        total=0, sim=0.0, err=r["err"][:80])
@@ -353,31 +377,48 @@ def run(addr, budget=60, start="auto", src=None, fresh=False,
 
     def keep_best(rec, text):
         state["best"] = rec
-        open(os.path.join(sd, "best.c"), "w").write(text)
-        _save(state_path, state)
+        _save(state_path, state)  # immutable rec.path is the authoritative winner
+        atomic_write(os.path.join(sd, "best" + state["ext"]), text)
 
     # ---- baseline
     if state["best"] is None:
-        start_text = open(os.path.join(sd, "start" + state["ext"])).read()
+        if state["used"] >= budget:
+            return _finish(addr, state, "BUDGET", as_json, quiet)
+        with open(os.path.join(sd, "start" + state["ext"]), encoding="utf-8") as stream:
+            start_text = stream.read()
         rec = check(start_text, state["flags_base"], "baseline")
         keep_best(rec, start_text)
         if not quiet:
             _print_rec("baseline", rec)
-        # twin picked as start but clearly the wrong construct: the synth
-        # skeleton (store-map driven) is the fallback; keep the twin's flags
-        if (rec["n_op"] > 2 and not rec["match"] and state["origin"].startswith("twin")
-                and not rec["err"]):
-            text, otag = synth_start(addr)
-            if text:
-                state["origin"], state["name"] = otag, "func_%08X" % addr
-                if re.search(r"\bu(8|16|32)\b", text) and "typedef" not in text:
+
+    # Fallback is a resumable phase, not a side effect of running the baseline.
+    if state.get("fallback") == "pending":
+        best = state["best"]
+        poor_twin = best["n_op"] > 2 and not best["err"] and not best["match"]
+        if not poor_twin:
+            state["fallback"] = "done"
+            _save(state_path, state)
+        elif state["used"] >= budget:
+            return _finish(addr, state, "BUDGET", as_json, quiet)
+        else:
+            text = state.get("fallback_text")
+            if text is None:
+                text, tag = synth_start(addr)
+                if text and re.search(r"\bu(8|16|32)\b", text) and "typedef" not in text:
                     text = PREAMBLE + text
-                state["ext"] = ".c"
-                open(os.path.join(sd, "start.c"), "w").write(text)
+            if text:
+                state.update(origin="synth:fallback", ext=".c", name="func_%08X" % addr,
+                             fallback_text=text)
+                _save(state_path, state)
                 rec = check(text, state["flags_base"], "baseline-synth")
+                state["fallback"] = "done"
+                state.pop("fallback_text", None)
                 keep_best(rec, text)
                 if not quiet:
                     _print_rec("baseline-synth", rec)
+            else:
+                state["fallback"] = "done"
+                _save(state_path, state)
     if state["best"]["match"]:
         state["status"] = "MATCH"
         _save(state_path, state)
@@ -385,54 +426,58 @@ def run(addr, budget=60, start="auto", src=None, fresh=False,
 
     tried = set(state["tried"])
 
-    # ---- waves until MATCH / budget / exhaustion
+    # Persist the complete bounded wave and cursor, not a budget-truncated prefix.
     while state["used"] < budget and not state["best"]["match"]:
-        best = state["best"]
-        left = budget - state["used"]
-        text = open(os.path.join(sd, "best.c")).read()
-        wave, checks = None, []
-        if best["n_op"] > 0:
-            if "values" not in tried and state["origin"].startswith("synth"):
-                wave = "values"
-                checks = [(v, best["flags"]) for v in gen_values(text, addr, left)]
+        pending = state.get("pending")
+        if pending is None:
+            best = state["best"]
+            with open(best["path"], encoding="utf-8") as stream:
+                text = stream.read()
+            wave, checks = None, []
+            if best["n_op"] > 0:
+                if "values" not in tried and state["origin"].startswith("synth"):
+                    wave = "values"
+                    checks = [(v, best["flags"]) for v in gen_values(text, addr, None)]
+                elif "flags" not in tried:
+                    wave = "flags"
+                    checks = [(text, f) for f in flag_variants(state["flags_base"])
+                              if f != best["flags"]]
+                elif "order" not in tried and best["n_op"] <= 2:
+                    wave = "order"
+                    checks = [(v, best["flags"]) for v in gen_order(text, 240, state["name"])]
+            elif "order" not in tried:
+                wave = "order"
+                checks = [(v, best["flags"]) for v in gen_order(text, 240, state["name"])]
             elif "flags" not in tried:
                 wave = "flags"
                 checks = [(text, f) for f in flag_variants(state["flags_base"])
                           if f != best["flags"]]
-            elif "order" not in tried and best["n_op"] <= 2:
-                # reordering cannot fix missing-instruction constructs
-                wave = "order"
-                checks = [(v, best["flags"]) for v in gen_order(text, left, state["name"])]
-        else:
-            if "order" not in tried:
-                wave = "order"
-                checks = [(v, best["flags"]) for v in gen_order(text, left, state["name"])]
-            elif "flags" not in tried:
-                wave = "flags"
-                checks = [(text, f) for f in flag_variants(state["flags_base"])
-                          if f != best["flags"]]
-        if wave is None:
-            break
-        tried.add(wave)
-        checks = checks[:left]
-        if not checks:
-            continue  # this wave had nothing to try; fall through to the next
-        if not quiet:
-            print("[%d] wave %s: %d variants  (from OP=%d REG=%d %s)" % (
-                state["iter"] + 1, wave, len(checks), best["n_op"], best["n_reg"],
-                "PERM" if best["perm"] else ""))
-        for k, (text_v, fl) in enumerate(checks):
-            rec = check(text_v, fl, wave)
+            if wave is None:
+                break
+            pending = {"wave": wave, "checks": checks, "cursor": 0, "improved": False}
+            state["pending"] = pending
+            _save(state_path, state)
+        wave, checks = pending["wave"], pending["checks"]
+        while pending["cursor"] < len(checks) and state["used"] < budget:
+            text_v, flags = checks[pending["cursor"]]
+            rec = check(text_v, flags, wave)
             if not quiet:
-                _print_rec("  %2d/%d" % (k + 1, len(checks)), rec)
+                _print_rec(wave, rec)
+            pending["cursor"] += 1
             if better(rec, state["best"]):
+                pending["improved"] = True
                 keep_best(rec, text_v)
-                tried.discard("order")  # new best body may reorder differently
-                if rec["match"]:
-                    break
-        state["iter"] += 1
-        state["tried"] = sorted(tried)
-        _save(state_path, state)
+            _save(state_path, state)
+            if rec["match"]:
+                break
+        if pending["cursor"] == len(checks):
+            tried.add(wave)
+            if pending["improved"]:
+                tried.discard("order")  # a new winning body can reorder differently
+            state["pending"] = None
+            state["iter"] += 1
+            state["tried"] = sorted(tried)
+            _save(state_path, state)
 
     state["tried"] = sorted(tried)
     status = "MATCH" if state["best"]["match"] else \
@@ -450,11 +495,20 @@ def _print_rec(tag, rec):
 
 
 def _save(state_path, state):
-    json.dump(state, open(state_path, "w"), indent=1)
+    write_json(state_path, state)
 
 
 def _finish(addr, state, status, as_json, quiet):
-    b = state["best"]
+    b = state.get("best")
+    if b is None:
+        result = {"addr": "%08X" % addr, "status": status, "used": state["used"],
+                  "best": None, "reason": state.get("reason", "no starting source")}
+        if as_json:
+            print(json.dumps(result))
+        elif not quiet:
+            print("STATUS %s: %s" % (status, result["reason"]))
+            print("NEXT  manual review")
+        return result
     if as_json:
         print(json.dumps({"addr": "%08X" % addr, "status": status,
                           "used": state["used"], "origin": state["origin"],
@@ -468,9 +522,9 @@ def _finish(addr, state, status, as_json, quiet):
             b["words"], b["total"], b["sim"]))
     if not quiet:
         if status == "MATCH":
-            print("NEXT  python tools/fn.py check logs/refine/%08X/best.c 0x%08X "
-                  "--cc 4.1/b1049 --flags \"%s\"  # verify, then register" % (
-                      addr, addr, b["flags"]))
+            print("NEXT  python3 tools/fn.py check %s 0x%08X "
+                  "--cc %s --flags \"%s\"  # verify, then register" % (
+                      b["path"], addr, state["cc"], b["flags"]))
         else:
             print("NEXT  manual review (near-miss in logs/refine/%08X/history.jsonl)" % addr)
     return {"addr": addr, "status": status, "used": state["used"], "best": b,
@@ -485,8 +539,7 @@ def acceptance(n=10, budget=40):
     Picks honest-matched store-class functions, drops their source, regenerates
     the synth skeleton and refines to MATCH. Needs n reproduced.
     """
-    import synth
-    status = json.load(open(os.path.join(ROOT, "functions.json")))
+    status = read_json(os.path.join(ROOT, "functions.json"))
     cands = []
     for key, entry in status.items():
         if entry["status"] != "honest" or not entry.get("path"):
@@ -505,7 +558,6 @@ def acceptance(n=10, budget=40):
         if not set(m for m, _ in ins) <= {"mov", "add", "str", "strb", "strh",
                                           "strd", "stm", "ldr", "ldm", "bx"}:
             continue
-        import dna
         if not dna.store_map(s, e):  # skip trivial bx-lr empties: the gate must
             continue                  # exercise the values/order wave machinery
         cands.append((e - s, addr, key))

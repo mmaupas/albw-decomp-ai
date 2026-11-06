@@ -359,7 +359,7 @@ def parse_elf(path):
         nm, ty, fl, ad, off, sz, link, info, al, es = struct.unpack_from("<10I", d, shoff + i * shentsize)
         if ty != 8 and off + sz > len(d):  # SHT_NOBITS has no file payload
             raise ValueError("ELF section extends beyond object")
-        secs.append(dict(name=nm, type=ty, off=off, size=sz, link=link, info=info, es=es))
+        secs.append(dict(name=nm, type=ty, flags=fl, off=off, size=sz, link=link, info=info, es=es))
     shs = secs[shstrndx]
     if shs["type"] != 3:
         raise ValueError("invalid ELF section-name string table")
@@ -404,6 +404,44 @@ def parse_elf(path):
                     raise ValueError("ELF relocation symbol outside table")
                 lst.append((off, info & 0xFF, table[info >> 8]))
     return d, secs, syms, rels
+
+
+def data_section_bases(secs, syms):
+    """Place the object's data sections from explicit address-label symbols.
+
+    A symbol named data_XXXXXXXX / bss_XXXXXXXX / ro_XXXXXXXX is an agent-
+    asserted linked address (the naming convention the checker already trusts
+    for identity via relocations.resolve_symbol). Deriving the section base
+    from such a symbol is the same class of proof: base = asserted - value.
+    Fail-closed: only sections containing at least one named label get a base;
+    conflicting labels (two symbols asserting different bases) abort the check.
+    """
+    from relocations import ADDRESS_LABEL
+    bases = {}
+    for x in syms:
+        m = ADDRESS_LABEL.fullmatch(x["name"])
+        if not m or x["shndx"] in (0, 0xFFF1):
+            continue
+        prefix = m.group(0).split("_")[0]
+        sec = secs[x["shndx"]]
+        # a data/bss label must live in a data-ish section; ro_ in read-only data
+        writable = bool(sec["flags"] & 1)  # SHF_WRITE
+        if prefix == "ro" and writable:
+            _check_abort("ro_ label %s in writable section %s" % (x["name"], sec["name"]))
+        if prefix in ("data", "bss") and not writable:
+            _check_abort("%s label %s in read-only section %s" % (prefix, x["name"], sec["name"]))
+        base = int(m.group(1), 16) - x["value"]
+        old = bases.get(x["shndx"])
+        if old is not None and old != base:
+            _check_abort("conflicting section bases for %s: %08X vs %08X (%s vs %s)"
+                         % (sec["name"], old & 0xFFFFFFFF, base & 0xFFFFFFFF,
+                            [y["name"] for y in syms if y["shndx"] == x["shndx"]][0], x["name"]))
+        bases[x["shndx"]] = base
+    return bases
+
+
+def _check_abort(msg):
+    raise ValueError("section-base derivation: " + msg)
 
 
 def cmd_check(src, addr, sym=None, cc=DEFAULT_CC, flags=DEFAULT_FLAGS, prebuilt=False):
@@ -472,7 +510,8 @@ def _cmd_check(src, addr, sym, cc, flags, prebuilt):
         relmap = {o - f["value"]: (t, n) for o, t, n in rels.get(f["shndx"], []) if f["value"] <= o < fend}
         if len(target) % 4 or len(mine) % 4:
             raise ValueError("comparison requires complete ARM words")
-        section_bases = {f["shndx"]: s - f["value"]}
+        section_bases = data_section_bases(secs, syms)
+        section_bases[f["shndx"]] = s - f["value"]
         n_t, n_m = len(target) // 4, len(mine) // 4
         same = 0
         rows = []

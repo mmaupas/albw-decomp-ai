@@ -1295,3 +1295,22 @@ id-first store order needs an init-order mechanism armcc 4.1 doesn't give
 from C++ declarations. Also blocked by the same .data ABS32 checker gap as
 005CE944 even where instructions match. Abandoned after ~10 shapes; do not
 re-try the plain forms.
+
+## Checker extension: data-section bases from address-label symbols (2026-11-06)
+The `.data` ABS32 identity gap (005CFE08/005CE944 entry above) is closed:
+`fn.py data_section_bases()` now derives a data section's linked base from
+explicit `data_XXXXXXXX`/`bss_XXXXXXXX`/`ro_XXXXXXXX` symbols defined in the
+TU (base = asserted address - symbol value), fail-closed: conflicting bases
+abort the check, `data_`/`bss_` labels in read-only sections (and `ro_` in
+writable ones) abort. Function's own section still placed as before.
+Effects: 005CE944 registered honest (15/15); twin 005CFE08 and 003E21EC now
+re-verify MATCH under the hardened checker. 00100B90 still fails on
+init_array_begin/end pool words — those symbols are NOT address-labels;
+needs the aliases mechanism (explicit, reviewed) if ever pursued.
+Caveat for fam_sti work: the names must match armcc's ACTUAL layout — armcc
+places ctored globals in .bss when every byte they write is zero (T objects
+with only zeroed members land in .bss, not .data), and layout order is not
+simply declaration order. Derive names from the compiled .o's symbol table
+(parse_elf), not from the target's addresses alone. 005AB1D0/005CBE9C remain
+blocked on the init-order wall (id strd FIRST, flags strb LAST, Pair stm
+between) — do not re-try plain declaration shapes.

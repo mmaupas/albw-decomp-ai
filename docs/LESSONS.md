@@ -1245,3 +1245,53 @@ cmpne r3,#0; beq; ldrb r0,[r0,#0xc]; cmp; bne; ldr r0,[r2]; ldr
 r3,[r0,#0xc]; mov r0,r2; bx r3` — if (x4 && x8 && !xc)
 arg->v0() (the tail). The guard chain = if-converted (ldrne/cmpne)
 — the 004A523C wall. PARKED.
+
+## 00519B4C (64B guard + step + tail call) — boolean-materialization wall (2026-11-06)
+Target guards with `cmp r1,#0; ldrbeq r1,[r0,#0xe]; cmpeq r1,#0; movne r1,#0;
+moveq r1,#1; teq r1,#1; beq` — the guard condition is MATERIALIZED as 0/1 and
+then tested with `teq r1,#1`, instead of branching off `cmpeq` directly.
+Near-identical siblings 0043DD2C and 00519544 (both honest, same guard + same
+two callees, different member offset) branch DIRECTLY off `cmpeq` from the
+plain `if (p->mD != 0 || p->mE != 0)` source. Swept 12+ hand variants
+(helper returning bool/int, ternary chain, `idle == 1` test, `|` of compares,
+`== 1` on parenthesized condition): armcc b1049 folds every one to the direct
+branch (all 7/16, sim 89.7, OP delta = exactly the 3 materialization words).
+Hypothesis remaining: the bool crossed a TU boundary or was a real (non-inlined)
+call result in the original; or a construct class outside the probed space.
+Do not re-sweep the plain forms. (auto loop deferred it; manual attack closed)
+
+## 005CE944 (60B static init) — .data ABS32 identity gap in the hardened checker (2026-11-06)
+Twin of honest 005CFE08 (family fam_sti: Id64(-1) strd @T+8, Pair zero stm,
+store value @T+0 via sub r0,#0x10). Byte-identical emission achieved with the
+twin's exact declaration shape; only the stored value differs (address of
+data_00725970 instead of constant 0x10000000). Under the hardened checker
+(edb3912) BOTH the twin and this source now fail on the .data-section ABS32
+pool words: the checker places only the function's own section
+(`section_bases = {f["shndx"]: ...}` in fn.py cmd_check), so a literal whose
+relocation targets a different section (.data) can never resolve —
+"[.data; relocation identity not proved]". The twin was verified under the OLD
+checker, which accepted any ABS32 pool word unconditionally. So: (a) the
+fam_sti static-initializer shape is byte-reproducible; (b) registering these
+needs either a checker extension (place .data/.bss section bases from the
+object's section table + the game's data map) or a documented exception.
+Do not re-derive the source shape — it is done (src/work8/auto/func_005CE944.cpp).
+
+## 00519B4C addendum — sibling 005CBE9C (OP=6, 53%) likely same boolean wall
+Same guard family (state bytes 0xd/0xe of the sub-object, same two callees).
+If its target also materializes the guard (movne/moveq/teq), it is closed by
+the same checker/construct gap as 00519B4C; check the teq signature first.
+
+## 005CBE9C (60B static init) — init-order/layout wall (2026-11-06)
+fam_sti variant: T@0x708970 (u8 flags @+0/+1, id @+0x18), Pair@0x708990.
+Target emission: ldr r2=&T; strd -1,[r2,#0x18]; ldr r0=&pair; stm 0;
+sub r0,#0x20; strb 0; add r0,#1; strb 0. The store order (id, pair, flags)
+with flags written via pair-0x20 pointer CSE cannot be produced by any
+declaration shape tried (single enclosing struct; separate globals with
+cross-object ctors; pointer-walk flag writes; base-class ordering) — armcc
+either reorders stores by declaration order, splits the literals, or emits
+negative-offset strb. The sub+add strb-walk form implies the original source
+advanced a u8* pointer forward from &pair-0x20, but coupling that with the
+id-first store order needs an init-order mechanism armcc 4.1 doesn't give
+from C++ declarations. Also blocked by the same .data ABS32 checker gap as
+005CE944 even where instructions match. Abandoned after ~10 shapes; do not
+re-try the plain forms.

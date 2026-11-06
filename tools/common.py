@@ -84,8 +84,17 @@ def file_lock(path):
                 stream.seek(0)
                 msvcrt.locking(stream.fileno(), msvcrt.LK_UNLCK, 1)
         else:
-            fcntl.flock(stream.fileno(), fcntl.LOCK_EX)
+            try:
+                fcntl.flock(stream.fileno(), fcntl.LOCK_EX)
+            except OSError as exc:
+                if exc.errno not in (errno.ENOLCK, errno.EINVAL, errno.EOPNOTSUPP, errno.ENOSYS):
+                    raise
+                # Filesystem without flock support (e.g. sdcard/FUSE):
+                # proceed unlocked rather than fail; single-process use only.
             try:
                 yield
             finally:
-                fcntl.flock(stream.fileno(), fcntl.LOCK_UN)
+                try:
+                    fcntl.flock(stream.fileno(), fcntl.LOCK_UN)
+                except OSError:
+                    pass

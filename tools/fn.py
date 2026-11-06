@@ -444,16 +444,34 @@ def _check_abort(msg):
     raise ValueError("section-base derivation: " + msg)
 
 
-def cmd_check(src, addr, sym=None, cc=DEFAULT_CC, flags=DEFAULT_FLAGS, prebuilt=False):
+ALIASES_FILE = os.path.join(ROOT, "shared", "aliases.json")
+
+
+def load_aliases():
+    """Explicit symbol identities from shared/aliases.json ({name: hexaddr}).
+
+    Unlike address-label names (data_XXXXXXXX), an alias is a reviewed
+    identity: the file must exist to have effect, and every entry is an
+    assertion an agent (or human) has verified against the game dump."""
+    if not os.path.exists(ALIASES_FILE):
+        return None
+    with open(ALIASES_FILE, encoding="utf-8") as stream:
+        d = json.load(stream)
+    return {name: int(v, 16) if isinstance(v, str) else int(v) for name, v in d.items()}
+
+
+def cmd_check(src, addr, sym=None, cc=DEFAULT_CC, flags=DEFAULT_FLAGS, prebuilt=False, aliases=None):
+    if isinstance(aliases, str):
+        aliases = json.loads(open(aliases).read()) if aliases.strip().startswith("{") else load_aliases()
     if addr not in STARTS:
         raise ValueError("check requires an exact function start: %08X" % addr)
     if md is None:
         raise RuntimeError("Disassembly requires capstone; install requirements.txt")
     with file_lock(os.path.join(ROOT, "logs", "compiler.lock")):
-        return _cmd_check(src, addr, sym, cc, flags, prebuilt)
+        return _cmd_check(src, addr, sym, cc, flags, prebuilt, aliases)
 
 
-def _cmd_check(src, addr, sym, cc, flags, prebuilt):
+def _cmd_check(src, addr, sym, cc, flags, prebuilt, aliases=None):
     load_code()
     s, e = func_range(addr)
     obj = os.path.splitext(src)[0] + ".o"
@@ -518,7 +536,7 @@ def _cmd_check(src, addr, sym, cc, flags, prebuilt):
         for i in range(max(n_t, n_m)):
             tw = struct.unpack_from("<I", target, i * 4)[0] if i < n_t else None
             mw = struct.unpack_from("<I", mine, i * 4)[0] if i < n_m else None
-            ok = word_matches(mw, tw, relmap.get(i * 4), s + i * 4, section_bases)
+            ok = word_matches(mw, tw, relmap.get(i * 4), s + i * 4, section_bases, aliases)
             same += ok
             rows.append((i, tw, mw, ok, relmap.get(i * 4)))
         return same, n_t, n_m, rows, mine, relmap

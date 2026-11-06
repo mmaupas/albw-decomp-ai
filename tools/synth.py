@@ -86,6 +86,11 @@ def classify(ins):
 
 # ---------------------------------------------------------------- generators
 
+def _off_expr(off):
+    # a store offset can be negative (e.g. base r4 = r0 - 0xb4); C has no 0x-b4
+    return "(char*)self + 0x%x" % off if off >= 0 else "(char*)self - 0x%x" % -off
+
+
 def skeleton_from_stores(addr, ins):
     """Best-effort setter/ctor lines from str-patterns against self chain."""
     body = []
@@ -109,7 +114,7 @@ def skeleton_from_stores(addr, ins):
             for k in (0, 1):
                 v = mm.group(1 + k)
                 val = "self" if v == "r0" else ("p" + v[1] if v in ("r1", "r2", "r3") else "p1")
-                body.append("    *(u32*)((char*)self + 0x%x) = %s;" % (off + 4 * k, val))
+                body.append("    *(u32*)(%s) = %s;" % (_off_expr(off + 4 * k), val))
             continue
         mm = re.fullmatch(r"(r\d+|ip), \[(r\d+|sp|ip)(?:, #?(-?(?:0x[0-9a-f]+|\d+)))?\](!?)", o)
         if m.startswith("str") and m != "stm" and mm and mm.group(2) not in ("sp", "ip"):
@@ -126,7 +131,11 @@ def skeleton_from_stores(addr, ins):
                 val = "p" + v[1]
             else:
                 val = "p1"  # placeholder; the refiner's VALUES wave substitutes
-            body.append("    *(%s)((char*)self + 0x%x) = %s;" % (cast, off, val))
+            # narrow stores need an integer value: a pointer stored through u8*/u16*
+            # is a compile error (armcc #513); truncate the guess to the width.
+            if cast != "u32*" and not val.isdigit():
+                val = "(u32)%s" % val
+            body.append("    *(%s)(%s) = %s;" % (cast, _off_expr(off), val))
             continue
         mm = re.fullmatch(r"(r\d+|sp|ip)(!)?, \{(.+)\}", o)
         if m == "stm" and mm and mm.group(1) not in ("sp", "ip"):
@@ -142,7 +151,7 @@ def skeleton_from_stores(addr, ins):
                     val = "p" + r
                 else:
                     val = "p1"  # placeholder; the refiner's VALUES wave substitutes
-                body.append("    *(u32*)((char*)self + 0x%x) = %s;" % (off, val))
+                body.append("    *(u32*)(%s) = %s;" % (_off_expr(off), val))
             if mm.group(2):  # writeback: the base advances for later stores
                 bases[int(mm.group(1)[1:])] = b + 4 * len(regs)
     return body

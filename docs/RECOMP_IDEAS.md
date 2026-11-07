@@ -44,12 +44,32 @@ executed addresses, then decompile hot paths first.
   005CBE9C (frac 0.53, 1.4M hits) correctly jumps from rank 4 to rank 1.
 - `python tools/coverage_rank.py explain <addr>` shows one row's inputs.
 
-Producing a real log (not possible in this Termux environment — no 3DS
-emulator can execute here): fork Azahar/Citra and increment a counter keyed
-on PC in the ARM11 core, dump JSONL on exit; or log PCs in Zakuro's
-interpreter loop; or use a Luma3DS-style hook on real hardware.
+Producing a real log — **DONE in this Termux environment** (2026-11-07):
+Zakuro (github.com/fearkov/zakuro) is pure Rust and its `zakuro-core`
+crate builds fine on aarch64-android with the system rust 1.99.1. The GUI
+frontend doesn't (winit pulls android-activity, which needs the NDK), but
+a 60-line `covtool` binary linking `zakuro-core` runs the interpreter
+headless and counts every PC exactly:
 
-## 3. Behavioral oracle (per-function replacement in a running game) — DOCUMENTED, BLOCKED HERE
+    python tools/coverage_run.py --rom <decrypted USA .3ds> --frames 600
+    python tools/coverage_rank.py rank --top 20
+
+Measured on the USA ALBW dump (sha1-verified against the project's
+code.bin): 600 frames (~10 s of game time, title screen) = 242,950 distinct
+PCs / ~530 M instructions, 5,368 functions covered. Top of the re-ranked
+backlog: 00115234 (frac 0.50, 5,300 hits, twin of matched 00115224) is now
+#1 — a much better target than the cold 85% walls. 0010FC34 is the
+hottest function in the game (7.6 M hits) but only 8% matched.
+The ROM itself was already decrypted (ExeFS plaintext — verified byte-
+identical to code.bin), so Zakuro loads it directly. covtool itself is
+scratch (~/zakuro-work/covtool), not committed; the wrapper
+`tools/coverage_run.py` is.
+
+Alternative sources if Zakuro ever stops fitting: fork Azahar/Citra and
+increment a counter keyed on PC in the ARM11 core, or use a Luma3DS-style
+hook on real hardware.
+
+## 3. Behavioral oracle (per-function replacement in a running game) — NOW FEASIBLE VIA ZAKURO
 
 The report's highest-value idea for a matching decomp: swap one decompiled
 function into an otherwise-original running game (weak-alias / linker
@@ -59,13 +79,18 @@ behavior. This would let us distinguish "bytes differ but semantics equal"
 from a real mismatch — potentially reclassifying near-misses stuck at
 83–85% on armcc scheduling walls (005AB1D0, 0059F7B8, 005A8AA0, 005CBE9C).
 
-**Blocker:** this environment (Termux/Android, no GPU, no 3DS emulator
-available) cannot run the game, so no behavioral comparison is possible
-here. When a host with Azahar/Zakuro is available, the concrete plan is:
-load the USA dump, apply a single-function patch built from a registered
-decomp source, and diff a deterministic playthrough (scripted inputs)
-against the unpatched run. Until then, `fn.py check` remains the only
-oracle, and the scheduling walls stand as documented in LESSONS.md.
+**Update 2026-11-07: the blocker is gone.** Zakuro runs in this Termux
+environment (see section 2), and 3dsrecomp has first-class support for
+exactly this: `3dsrecomp build <rom> --overrides dir/` compiles hand-written
+C (`RECOMP_OVERRIDE(0x005AB1D0) { ... }`) that runs *instead of* the
+generated code at that address, with `RECOMP_ORIGINAL(0x005AB1D0)` to call
+the original, and `3dsrecomp verify` checks every recompiled function
+against Zakuro's interpreter from the same state, comparing registers,
+flags and memory. Concrete plan: take a near-miss source, express it as a
+`RECOMP_OVERRIDE` against the running game, and diff a deterministic
+replay (ZAKURO_RECORD / ZAKURO_REPLAY env vars exist for scripted inputs)
+against the unpatched run. Not yet wired into the worklist — the natural
+next step after coverage-driven re-ranking.
 
 ## 4. Legal posture — already enforced
 

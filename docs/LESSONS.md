@@ -1314,3 +1314,32 @@ simply declaration order. Derive names from the compiled .o's symbol table
 (parse_elf), not from the target's addresses alone. 005AB1D0/005CBE9C remain
 blocked on the init-order wall (id strd FIRST, flags strb LAST, Pair stm
 between) — do not re-try plain declaration shapes.
+
+## Behavioral oracle (3dsrecomp verify + Zakuro) works in Termux — 2026-11-07
+
+- `tools/behavioral_oracle.py` (commit 1fbb8dd) drives 3dsrecomp's `verify` mode:
+  each function runs twice from identical seeded state (Zakuro interpreter =
+  ground truth vs our RECOMP_OVERRIDE) and regs/flags/VFP/memory are diffed.
+  `VERIFY_ONLY=<addr>` focuses one function. Full 3dsrecomp build (304 MiB C)
+  won't finish on this device — use the hand-built minilib .so instead
+  (`recomp_abi=5`, `recomp_generation=0` — NOT 5, null origins segfaults;
+  override symbol `override_0x<ADDR>`; Module = real 5-field layout).
+- Validated: 0010F1F8, 005CBE9C, and 005AB1D0 overrides all report
+  `1 returned, 0 mismatched` over 125 runs. A no-op override correctly
+  mismatches — the diff is real.
+- PAY-OFF: 005AB1D0 is an 85% byte near-miss that is semantically EQUIVALENT
+  per the oracle. The oracle is therefore a second acceptance lever alongside
+  `fn.py check`: a function can be proven correct by execution even when
+  bytes differ (register allocation / scheduling walls).
+- Override must replicate ALL effects: registers (incl. final r1/r2), flags
+  from the LAST flag-setter, and every memory write.
+
+## fam_sti 3-word pool wall — 2026-11-07
+
+- 0059F7B8 / 005A8AA0 (48B static-init): fam_sti shape reaches 11/12 (91.7%)
+  but the target carries a THIRD pool word `0xffffffff` that matched twins
+  (005934D4, 005931E8, 005A5B48 — 2 pool words) do not have. The extra word
+  is a pooled -1 constant referenced somewhere in the function's own TU;
+  forcing it via `static const s64 NEG1=-1; &NEG1` did NOT add the word.
+  New wall class: extra-pool-word static inits. Behavioral oracle proves
+  005AB1D0's sibling semantics; byte match still open.

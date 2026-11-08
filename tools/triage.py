@@ -1,6 +1,9 @@
 """Triage unindexed functions: classify asm/CRT/linker artifacts vs armcc-producible candidates.
 
   python tools/triage.py [--region 0x100000-0x200000] [--out logs/triage]
+  python tools/triage.py --hints          # auto-inject forwarder/veneer hints
+                                        # into shared/extra_starts.txt
+  python tools/triage.py --hints --dry-run
 
 Classification signatures come from docs/LESSONS.md open-problem work:
   svc      - kernel SVC wrappers (armcc's __svc is call-shaped, never frameless)
@@ -41,7 +44,93 @@ def classify(words):
     return "candidate"
 
 
+def _is_end(w):
+    return (w == 0xE12FFF1E or (w & 0xFFFF8000) == 0xE8BD8000 or w == 0xE49DF004
+            or (w & 0xFF000000) == 0xEA000000 or (w & 0xFFFFFFF0) == 0xE12FFF10)
+
+
+def _looks_like_fn(words, i):
+    for k in range(4):
+        if i + k >= len(words):
+            break
+        x = words[i + k]
+        if (x & 0xFFFF0000) in (0xE92D0000, 0xE24D0000) or x in (0xE49DF004, 0xE12FFF1E):
+            return True
+    return False
+
+
+def find_forwarder_hints():
+    """Detect unreferenced function starts reached only via linker artifacts:
+
+    - NOPped tail calls: word at F-4 is 0xE1A00000 (mov r0,r0 = NOP) and the
+      word at F-8 is a terminator — the linker replaced `b F` with a NOP,
+      so F has no BL/pointer reference but is a real function start.
+    - Veneers: `ldr pc,[pc,#imm]` (E51FFxxx) whose pool word targets F —
+      a linker veneer, not a source function; the TARGET may still be an
+      unreferenced real start.
+    Returns (nopped_targets, veneer_targets) as sorted address lists.
+    """
+    code = load_binary(os.path.join(ROOT, "code.bin"))
+    words = struct.unpack("<%dI" % (len(code) // 4), code)
+    funcs = read_json(os.path.join(ROOT, "funcs.json"))
+    starts = funcs["starts"]
+    bl = set(funcs["bl"])
+    ptr = set(funcs["ptr"])
+    extra_path = os.path.join(ROOT, "shared", "extra_starts.txt")
+    extra = set()
+    if os.path.exists(extra_path):
+        extra = {int(l.split()[0], 16) for l in open(extra_path)
+                 if l.strip() and not l.startswith("#")}
+
+    nopped, veneers = [], []
+    for i, x in enumerate(words):
+        if (x & 0xFFFFF000) == 0xE51FF000:  # ldr pc,[pc,#imm] veneer
+            la = TA + i * 4 + 8 + (x & 0xFFF)
+            if TA <= la <= TA + len(code) - 4:
+                t = struct.unpack_from("<I", code, la - TA)[0]
+                if TA <= t < TA + len(code):
+                    veneers.append(t)
+    veneer_set = set(veneers)
+    for s in starts:
+        if s in bl or s in ptr or s in extra:
+            continue
+        i = (s - TA) // 4
+        if i >= 2 and words[i - 1] == 0xE1A00000 and _is_end(words[i - 2]) \
+                and _looks_like_fn(words, i) and words[i] >> 24 != 0xEF:
+            nopped.append(s)  # skip svc stubs (neg-svc-stub class)
+        elif s in veneer_set and _looks_like_fn(words, i) and words[i] >> 24 != 0xEF:
+            nopped.append(s)  # veneer target with no direct ref
+    return sorted(set(nopped)), sorted(veneer_set)
+
+
+def inject_hints(dry_run=False):
+    """Append auto-detected forwarder/veneer targets to extra_starts.txt."""
+    nopped, veneers = find_forwarder_hints()
+    path = os.path.join(ROOT, "shared", "extra_starts.txt")
+    existing = set()
+    lines = []
+    if os.path.exists(path):
+        lines = [l for l in open(path) if l.strip()]
+        existing = {int(l.split()[0], 16) for l in lines if not l.startswith("#")}
+    new = [s for s in nopped if s not in existing]
+    if not new:
+        print("no new forwarder hints (all %d already in extra_starts.txt)" % len(nopped))
+        return 0
+    note = "auto: triage.py --hints (NOPped tail-call/veneer target, unreferenced start)"
+    add = "".join("%08X %s\n" % (s, note) for s in new)
+    print("%s %d new hint(s):" % ("would add" if dry_run else "added", len(new)))
+    for s in new:
+        print("  %08X" % s)
+    if not dry_run:
+        with file_lock(path + ".lock"):
+            with open(path, "a") as f:
+                f.write(add)
+    return len(new)
+
+
 def main():
+    if "--hints" in sys.argv:
+        sys.exit(0 if inject_hints(dry_run="--dry-run" in sys.argv) >= 0 else 1)
     lo = hi = None
     if "--region" in sys.argv:
         a, b = sys.argv[sys.argv.index("--region") + 1].split("-")

@@ -630,7 +630,10 @@ if __name__ == "__main__":
     if not a:
         print(__doc__)
         sys.exit(0)
-    if a[0] == "show":
+    if a[0] == "rebuild-table":
+        build_table()
+        print("rebuilt funcs.json")
+    elif a[0] == "show":
         cmd_show(int(a[1], 16))
     elif a[0] == "xref":
         cmd_xref(int(a[1], 16))

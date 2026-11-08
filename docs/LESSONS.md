@@ -1382,3 +1382,21 @@ Oracle triage rule (m02138): leaf near-misses are already proven
 semantically equivalent (0 mismatched), so only call-heavy functions
 need true byte matches — negative recipes now steer the loop away from
 unwinnable leaf shapes before spending budget.
+
+## Automated forwarder/veneer hints — 2026-11-08
+
+`python tools/triage.py --hints [--dry-run]` auto-detects unreferenced
+function starts reached only via linker artifacts and appends them to
+`shared/extra_starts.txt` (replacing the hand-annotated KB #68/#111
+pattern):
+- **NOPped tail calls**: word at F-4 == 0xE1A00000 (mov r0,r0 NOP) and
+  word at F-8 is a terminator, F has a real prologue, F not in
+  BL/ptr/extra_starts, and F's first word is not an svc (svc stubs are
+  the neg-svc-stub class).
+- **Veneer targets**: `ldr pc,[pc,#imm]` (E51FFxxx) pool words pointing
+  at unreferenced function-looking starts.
+First run injected 14 new hints (00110388, 0017222C, 002AB3E0,
+002E0510, 0037CC2C, 003D3258, 003E3C2C, 0040F3F8, 0049D1EC, 0049D8E4,
+0050D548, 005106DC, 00602148, 006875B0); re-running is idempotent
+("no new forwarder hints"). `fn.py rebuild-table` (new subcommand)
+regenerates funcs.json from code.bin + extra_starts.txt.

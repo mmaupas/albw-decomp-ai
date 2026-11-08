@@ -49,6 +49,7 @@ def view(addr):
             ins.append((m, i.op_str))
             continue
         ins.append((m, i.op_str))
+    POOL_ADDR[0] = addr  # so check_negative can count raw pool words past body
     return s, e, ins
 
 
@@ -237,6 +238,69 @@ def check_negative(ins):
                     return True
         return False
 
+    def if_converted_guard_chain():
+        # neg-if-converted-guard-chain: a null-check chain emitted as
+        # conditional loads/compares (ldrne/cmpne/ldrbne) instead of
+        # per-check branches (004A523C, 003F6F84). armcc b1049 from our
+        # C forms always picks the branchy form; the if-converted target
+        # shape is a hard skip.
+        return any(m in ("ldrne", "cmpne", "ldrbne", "ldmne", "strne")
+                   for m, _ in ins)
+
+    def bool_materialized_guard():
+        # neg-bool-materialized-guard: guard condition materialized to
+        # 0/1 (movne rX,#0; moveq rX,#1) then tested with teq rX,#1
+        # (00519B4C, 005CBE9C). Every plain C form folds to a direct
+        # branch off cmpeq under armcc b1049.
+        has_mat = any(m == "mov" and re.fullmatch(r"(ne|eq)", "") for m, _ in ins)
+        movne0 = any(m == "movne" and re.fullmatch(r"r\d+, #0", o) for m, o in ins)
+        moveq1 = any(m == "moveq" and re.fullmatch(r"r\d+, #1", o) for m, o in ins)
+        teq1 = any(m == "teq" and re.fullmatch(r"r\d+, #1", o) for m, o in ins)
+        return movne0 and moveq1 and teq1
+
+    def fam_sti_third_pool_word():
+        # neg-fam-sti-third-pool-word: fam_sti static-init shape (strd of
+        # -1 pair + stm zero pair + value store) whose literal pool holds
+        # a THIRD word beyond the matched twins' two pool words
+        # (0059F7B8/005A8AA0 carry 0xffffffff; twins 005934D4/005931E8/
+        # 005A5B48 have two). The extra pooled word is a TU-sibling
+        # constant armcc placed in this function's pool; no C construct
+        # we tried materializes it. Pool words past the body decode as
+        # garbage mnemonics (e.g. rsbseq) in the view, so count raw words.
+        addr = POOL_ADDR[0]
+        if addr is None or "strd" not in ms:
+            return False
+        s, e = fn.func_range(addr)
+        # body = instructions up to and including the final bx lr / pop pc;
+        # pool = remaining words of the function range
+        body_end = None
+        for a in range(s, e, 4):
+            i = fn.dis1(a)
+            if i is None:
+                break
+            m = i.mnemonic.split(".")[0]
+            if m == "bx" and "lr" in i.op_str:
+                body_end = a + 4
+                break
+            if m == "pop" and "pc" in i.op_str:
+                body_end = a + 4
+                break
+        if body_end is None:
+            return False
+        pool_words = (e - body_end) // 4
+        return pool_words >= 3
+
+    def stack_arg_frame_copy():
+        # neg-stack-arg-frame-copy: sub sp,#N frame plus caller stack
+        # args reloaded via add lr,sp,#k; ldm lr,{...} and a by-value
+        # stack arg copied into the local frame with stm sp,{...}
+        # (003D3658, 002E284C, 00502F8C). The local copy is DCE'd by
+        # armcc from every C form we tried.
+        has_sub_sp = any(m == "sub" and o.startswith("sp,") for m, o in ins)
+        has_ldm_lr = any(m.startswith("ldm") and o.startswith("lr,") for m, o in ins)
+        has_stm_sp = any(m.startswith("stm") and o.startswith("sp,") for m, o in ins)
+        return has_sub_sp and has_ldm_lr and has_stm_sp
+
     NEG = {
         "neg-svc-stub":      lambda: "svc" in text,
         "neg-mrc-mcr":       lambda: any(m in ("mrc", "mcr") for m, _ in ins),
@@ -248,11 +312,20 @@ def check_negative(ins):
             and any(m.startswith("v") for m in ms[2:])),
         "neg-armlib-push-r0lr": push_r0_lr,
         "neg-lr-bulk-data": lr_bulk_data,
+        "neg-if-converted-guard-chain": if_converted_guard_chain,
+        "neg-bool-materialized-guard": bool_materialized_guard,
+        "neg-stack-arg-frame-copy": stack_arg_frame_copy,
+        "neg-fam-sti-third-pool-word": fam_sti_third_pool_word,
     }
     for rid, test in NEG.items():
         if test():
             return rid
     return None
+
+
+# module-level scratch so check_negative can see the address of the function
+# whose instruction list it was given (pool words live past the body end)
+POOL_ADDR = [None]
 
 
 def main():

@@ -155,5 +155,53 @@
 "001164F4"
 ],
 "shape": "lr used as bulk-fill data: mov lr,rX then lr in a stm register list (armlib __aeabi_memclr4 style); a compiler never clobbers lr mid-body"
+},
+{
+"id": "neg-if-converted-guard-chain",
+"kind": "negative",
+"refs": [
+"LESSONS.md#if-conversion",
+"004A523C",
+"003F6F84",
+"001150B8"
+],
+"shape": "guard chain emitted as ldrne/cmpne conditional ops (if-converted null-check chain, e.g. ldrne r2,[r2]; cmpne r2,#0; beq) instead of per-check beq branches"
+},
+{
+"id": "neg-bool-materialized-guard",
+"kind": "negative",
+"refs": [
+"LESSONS.md#boolean-materialization",
+"00519B4C",
+"005CBE9C",
+"0043DD2C",
+"00519544"
+],
+"shape": "guard condition materialized to 0/1 then tested with teq r1,#1 (movne r1,#0; moveq r1,#1; teq r1,#1; beq) instead of branching directly off cmpeq"
+},
+{
+"id": "neg-fam-sti-third-pool-word",
+"kind": "negative",
+"refs": [
+"LESSONS.md#fam_sti",
+"0059F7B8",
+"005A8AA0",
+"005934D4",
+"005931E8",
+"005A5B48"
+],
+"shape": "fam_sti static-init (Id64 strd -1, Pair zero stm, value store) carrying a THIRD literal-pool word 0xffffffff beyond the twin's two pool words"
+},
+{
+"id": "neg-stack-arg-frame-copy",
+"kind": "negative",
+"refs": [
+"LESSONS.md#stack-arg",
+"003D3658",
+"002E284C",
+"00502F8C",
+"005FF2A8"
+],
+"shape": "push {r4-r6,lr}; sub sp,#N; caller stack args reloaded via add lr,sp,#k; ldm lr,{...}; 16-byte by-value stack arg copied into local frame via stm sp,{...}"
 }
 ]

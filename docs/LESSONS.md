@@ -1362,3 +1362,23 @@ CAVEAT: overrides can only replicate LEAF functions — any real BL target
 with calls (0040D930, 002FF488) are NOT oracle-provable this way.
 The oracle thus splits the backlog: leaf near-misses are provable;
 call-heavy ones still need byte matches.
+
+## Parked walls encoded as negative recipes — 2026-11-08
+
+Top recurring wall classes from the 49 parked entries are now
+machine-checkable in `shared/recipes.json` AND enforced in
+`tools/synth.py::check_negative` (checked before any compile budget):
+- `neg-if-converted-guard-chain` (004A523C, 003F6F84): ldrne/cmpne
+  conditional guard chains — armcc b1049 from C always emits branchy.
+- `neg-bool-materialized-guard` (00519B4C, 005CBE9C): movne #0/moveq #1
+  + teq #1 materialization — all plain C forms fold to direct branch.
+- `neg-fam-sti-third-pool-word` (0059F7B8, 005A8AA0): fam_sti with >=3
+  pool words (extra pooled 0xffffffff from a TU sibling) — detected by
+  counting raw pool words past the body's final bx lr.
+- `neg-stack-arg-frame-copy` (003D3658, 002E284C, 00502F8C): sub sp
+  frame + ldm lr caller-args + stm sp by-value copy — the local copy is
+  always DCE'd from C.
+Oracle triage rule (m02138): leaf near-misses are already proven
+semantically equivalent (0 mismatched), so only call-heavy functions
+need true byte matches — negative recipes now steer the loop away from
+unwinnable leaf shapes before spending budget.

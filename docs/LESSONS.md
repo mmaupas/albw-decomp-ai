@@ -1343,3 +1343,22 @@ between) — do not re-try plain declaration shapes.
   forcing it via `static const s64 NEG1=-1; &NEG1` did NOT add the word.
   New wall class: extra-pool-word static inits. Behavioral oracle proves
   005AB1D0's sibling semantics; byte match still open.
+
+## Behavioral-oracle equivalence proofs on near-misses — 2026-11-07 (later session)
+
+Leaf near-misses whose bytes differ from our best compile are STILL
+semantically equivalent — proven via `3dsrecomp verify` (0 mismatched,
+500 runs each):
+- 0059F7B8 (11/12 words, 91.7%): the fam_sti 3-word-pool variant —
+  semantics identical, only the extra pool word differs.
+- 005F8EF4 (33% report sim): linked-list ptr swap — 0 mismatched.
+- 00115570 (29%): 6-word zeroing with writeback — 0 mismatched once the
+  override writes all 9 words individually (loop writes caused fault-count
+  mismatch; the harness counts faults, so replicate stores 1:1).
+- 0011591C (25%): 12-word zeroing variant — 0 mismatched.
+- Earlier: 005AB1D0 (85%), 005CBE9C, 0010F1F8 — all 0 mismatched.
+CAVEAT: overrides can only replicate LEAF functions — any real BL target
+(00111EF0, memclr4) can't be emulated inside the override, so functions
+with calls (0040D930, 002FF488) are NOT oracle-provable this way.
+The oracle thus splits the backlog: leaf near-misses are provable;
+call-heavy ones still need byte matches.

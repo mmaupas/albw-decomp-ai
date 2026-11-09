@@ -158,4 +158,47 @@ inline u32 randRange(void* r, u32 n) {
 }
 }
 
+
+// ---------------------------------------------------------------------------
+// StateMgr family (mined 46x): state-machine manager with PMF enter/exec/exit
+// arrays and an optional timeline. The execute() body is what reproduced bytes.
+// ---------------------------------------------------------------------------
+namespace albw {
+struct SmOwner_; typedef void (SmOwner_::*SmFunc)();
+struct SmTimeline { char pad[4]; };
+extern "C" void func_00352210(void* timeline, bool b, float frame);
+struct StateMgr {
+    u32 mCounter; s8 mCur; s8 mNext; u8 mNum; u8 pad7[9];
+    SmTimeline* mTimeline; SmOwner_* mOwner; SmFunc* mEnter; SmFunc* mExec; SmFunc* mExit;
+    void execute() {
+        StateMgr* s = this;
+        (s->mOwner->*s->mExec[s->mCur])();
+        u32 c = mCounter + 1; mCounter = c;
+        if (mTimeline) func_00352210(mTimeline, true, (float)c);
+    }
+    void ChangeState(s8 state);
+};
+}  // namespace albw
+
+
+// ---------------------------------------------------------------------------
+// Callback-delegate shapes (mined 131x / 78x / 24x / 22x):
+//   struct D { virtual bool invoke(void*); O* owner; bool (O::*fn)(void*); }
+//   bool D::invoke(void* a) { if (owner && fn) return (owner->*fn)(a); return false; }
+// The void/void* 2-arg variant is the same shape with (void*, void*).
+// ---------------------------------------------------------------------------
+namespace albw {
+struct DelegateOwner {};
+typedef bool (DelegateOwner::*DelegateFn)(void*);
+struct Delegate {
+    virtual bool invoke(void* a);
+    DelegateOwner* owner;
+    DelegateFn fn;
+};
+inline bool Delegate::invoke(void* a) {
+    if (owner && fn) return (owner->*fn)(a);
+    return false;
+}
+}  // namespace albw
+
 #endif  // ALBW_SHAPES_H

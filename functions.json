@@ -98141,6 +98141,13 @@
 "path": "src/work7/ds7/hid/_bulk_005931e8.cpp",
 "status": "honest"
 },
+"005D0E74": {
+"cc": "4.1/b1049",
+"flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
+"hack_reasons": [],
+"path": "src/work8/auto/func_005D0E74.cpp",
+"status": "honest"
+},
 "005D0EB0": {
 "cc": "4.1/b1049",
 "flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
@@ -100050,6 +100057,13 @@
 "flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
 "hack_reasons": [],
 "path": "src/work8/fam_sti/func_005F32A8.cpp",
+"status": "honest"
+},
+"005F3414": {
+"cc": "4.1/b1049",
+"flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
+"hack_reasons": [],
+"path": "src/work8/auto/func_005F3414.cpp",
 "status": "honest"
 },
 "005F3450": {

@@ -1400,3 +1400,32 @@ First run injected 14 new hints (00110388, 0017222C, 002AB3E0,
 0050D548, 005106DC, 00602148, 006875B0); re-running is idempotent
 ("no new forwarder hints"). `fn.py rebuild-table` (new subcommand)
 regenerates funcs.json from code.bin + extra_starts.txt.
+
+
+## Rebuild gate (tools/rebuild_check.py) — 2026-11-10
+
+End-to-end N64Recomp-style check: recompile every honest function, resolve its
+ELF relocations with the same identity rules as fn.py check, place the bytes at
+the original address, and compare the assembled 6,455,296-byte image against
+code.bin (target SHA-1 e6ab7d66ee62e879248b0660aaf38d22202e604b).
+
+- armlink is NOT shipped in tools/armcc (compiler only), so the gate uses a
+  Python assembler fallback: cross-function relocation drift is only covered
+  when armlink is supplied later; per-function drift IS covered now.
+- CI: .github/workflows/rebuild-gate.yml (secrets CODE_BIN_B64/ARMCC_ZIP_B64;
+  skips with a warning when unprovisioned). Smoke test locally: --limit N.
+- Relocation rules encoded: ABS32 via resolve_symbol (address labels/aliases);
+  branch relocs recomputed from resolved address, with mangled-name extraction
+  VERIFIED against the original target word (mangled names can lie); any
+  unresolvable reloc (init_array_*, __switch7859, dbg, __aeabi_*) takes the
+  target's own word (linker bookkeeping); NOPped tail b -> E1A00000 fixup;
+  multi-function objects: pick the symbol whose head word matches the target.
+- First full run: 16121/16154 placed, 516 mismatched words in 216 functions.
+  Cross-check vs fn.py: 206 of those 216 also NO MATCH under fn.py (i.e. they
+  are pre-hardening entries, mostly src/work7/ds7 + gpt15, that were registered
+  before commit edb3912 and cannot be re-verified); only 8 still MATCH under
+  fn.py and differ here (imm-value drift the checker's relocation identity
+  accepts but raw bytes don't — e.g. E2100002 vs E2100010). 98.7% of honest
+  entries are byte-clean under the gate.
+- Use --report <path.json> for per-function stats; --allow-partial
+  --max-mismatches N sets the CI pass threshold.

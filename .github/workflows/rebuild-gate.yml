@@ -1,0 +1,46 @@
+name: Rebuild gate (byte-exactness)
+# N64Recomp-style global check: recompile every honest function, place its
+# bytes at the original address, and compare the assembled image against the
+# target SHA-1. Catches relocation/linker drift that per-function fn.py check
+# cannot see. Requires code.bin + armcc (proprietary/supplied) — runs only
+# when the repo owner provisions them via secrets; skipped otherwise.
+on:
+  workflow_dispatch:
+  push:
+    branches: [master]
+    paths:
+      - 'functions.json'
+      - 'src/**'
+      - 'tools/rebuild_check.py'
+      - '.github/workflows/rebuild-gate.yml'
+permissions:
+  contents: read
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Provision proprietary inputs
+        env:
+          CODE_BIN_B64: ${{ secrets.CODE_BIN_B64 }}
+          ARMCC_ZIP_B64: ${{ secrets.ARMCC_ZIP_B64 }}
+        run: |
+          if [ -z "$CODE_BIN_B64" ] || [ -z "$ARMCC_ZIP_B64" ]; then
+            echo "::warning::secrets not provisioned — skipping rebuild gate (needs code.bin + armcc)"
+            exit 0
+          fi
+          echo "$CODE_BIN_B64" | base64 -d > code.bin
+          echo "$ARMCC_ZIP_B64" | base64 -d > armcc.zip
+          mkdir -p tools/armcc && cd tools/armcc && unzip -q ../../armcc.zip && cd ../..
+          python -c "import hashlib,sys; h=hashlib.sha1(open('code.bin','rb').read()).hexdigest(); assert h=='e6ab7d66ee62e879248b0660aaf38d22202e604b', h; print('code.bin SHA-1 OK')"
+      - name: Install wine + capstone
+        run: |
+          sudo dpkg --add-architecture i386 || true
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq wine wine32 || sudo apt-get install -y -qq wine
+          pip install capstone
+      - name: Run rebuild gate
+        run: python tools/rebuild_check.py --list-mismatches

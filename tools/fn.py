@@ -228,7 +228,7 @@ def name_of(a):
 def dis1(a):
     """Decode the single ARM word at a (None if it is not a valid instruction)."""
     if md is None:
-        raise RuntimeError("Disassembly requires capstone; install requirements.txt")
+        raise RuntimeError("Disassembly requires capstone; install it with `uv sync` or `pip install capstone`")
     l = list(md.disasm(load_code()[a - TA:a - TA + 4], a, 1))
     return l[0] if l else None
 
@@ -466,7 +466,7 @@ def cmd_check(src, addr, sym=None, cc=DEFAULT_CC, flags=DEFAULT_FLAGS, prebuilt=
     if addr not in STARTS:
         raise ValueError("check requires an exact function start: %08X" % addr)
     if md is None:
-        raise RuntimeError("Disassembly requires capstone; install requirements.txt")
+        raise RuntimeError("Disassembly requires capstone; install it with `uv sync` or `pip install capstone`")
     with file_lock(os.path.join(ROOT, "logs", "compiler.lock")):
         return _cmd_check(src, addr, sym, cc, flags, prebuilt, aliases)
 

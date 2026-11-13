@@ -64,7 +64,8 @@ textual constructs, not every semantic trick; passing it is not proof of honesty
 
 ## Requirements
 
-1. **Python 3.10+**. Install analysis dependencies with `python3 -m pip install -r requirements.txt`.
+1. **Python 3.10+**. Install analysis dependencies with `uv sync` (creates `.venv`; then run tools as
+   `.venv/bin/python tools/…` or via `uv run python tools/…`), or with `python3 -m pip install capstone`.
    Offline tests, audit, and worklist `status`/`report` require only the standard library.
 2. **The game code binary.** Save it as `code.bin` in the repository root. It is the decompressed `.code` section of
    the USA release, dumped from your own copy, 6,455,296 bytes, SHA-1 `e6ab7d66ee62e879248b0660aaf38d22202e604b`.

@@ -7,6 +7,8 @@ tools/armcc/
 check_log.jsonl
 __pycache__/
 *.pyc
+# uv-managed virtual environment
+.venv/
 # local secrets, never committed
 .env*
 # generated automation state (regenerable: dna.py index / ghidra_dump.py / synth.py / triage.py)

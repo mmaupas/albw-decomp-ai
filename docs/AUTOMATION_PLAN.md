@@ -30,6 +30,7 @@ knowledge moves out of the agent's head and into tools + recipe data.
 | `tools/dna.py` | done — index built (25,986), acceptance 20/20 + 7/7, `--json` everywhere |
 | `tools/recipes.py` + `shared/recipes.json` | done — 13 entries (7 positive, 6 negative) |
 | `tools/synth.py` | done — store-init class, DEFER otherwise; class coverage grows with use |
+| `tools/shapemine.py` | done — n-gram motif clusters over all 25,986 starts; `next` prints the top unreported header-shape candidate |
 | `tools/refine.py` (phase 4) | done — closed-loop refiner, acceptance 5/5 reproduced from skeleton-only restart |
 | `tools/worklist.py` (phase 5) | done — next/register/report/status; first auto-registered match 003E60D4 |
 | `AGENTS.md` + skills | done — AGENTS.md is facts+invariants; the loop is `.agents/skills/decomp-loop`, expert work `.agents/skills/decomp-manual` |
@@ -93,6 +94,19 @@ like dead-arg liveness). Synthesized classes, smallest-first:
    (byteswap, min/max, masks), refined by sweep.
 
 Output includes the ready-to-run `sweep.py` spec, so phase 4 is one command.
+
+### Phase 3b — Shape miner (tools/shapemine.py)
+
+Systematic replacement for the hand-mined `shared/include/albw_shapes.h`
+entries. `index` disassembles every start and hashes all 4/5-grams of the
+normalized token stream (cond stripped, regs→r, imms→#, pool→POOL,
+calls→CALL). `rank` clusters n-grams by posting list and scores
+file_frequency(matched) × unindexed_overlap; `--focus stores` (the `next`
+default) keeps only store-dense call-free motifs — the inlined ctor/setter
+shapes that become header structs. `next` prints the best unreported
+candidate with a `NEXT:` line; `candidate <id>` emits a paste-ready draft in
+`logs/shapemine/candidates/<id>.h` with example sources and the unindexed
+functions the shape would unlock. State is resumable under `logs/shapemine/`.
 
 ### Phase 4 — Closed-loop refiner (tools/refine.py)
 

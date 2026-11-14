@@ -11566,6 +11566,8 @@
 "status": "honest"
 },
 "0012AB58": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=19 REG=0 (logs/refine/0012AB58/)",
 "status": "no_source"
 },
 "0012B42C": {
@@ -11576,6 +11578,8 @@
 "status": "honest"
 },
 "0012B444": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=33 REG=0 (logs/refine/0012B444/)",
 "status": "no_source"
 },
 "0012B4E4": {
@@ -12199,6 +12203,8 @@
 "status": "honest"
 },
 "001372B4": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=21 REG=0 (logs/refine/001372B4/)",
 "status": "no_source"
 },
 "00137354": {
@@ -12764,6 +12770,8 @@
 "status": "honest"
 },
 "0013F4F4": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=29 REG=0 (logs/refine/0013F4F4/)",
 "status": "no_source"
 },
 "0013F614": {
@@ -13791,6 +13799,8 @@
 "status": "honest"
 },
 "00150C80": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=18 REG=3 (logs/refine/00150C80/)",
 "status": "no_source"
 },
 "00150DEC": {
@@ -13976,6 +13986,8 @@
 "status": "honest"
 },
 "00152CD4": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=27 REG=0 (logs/refine/00152CD4/)",
 "status": "no_source"
 },
 "00152F88": {
@@ -14240,6 +14252,8 @@
 "status": "honest"
 },
 "0015749C": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=27 REG=4 (logs/refine/0015749C/)",
 "status": "no_source"
 },
 "00157534": {
@@ -14292,6 +14306,8 @@
 "status": "honest"
 },
 "001578B8": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=27 REG=1 (logs/refine/001578B8/)",
 "status": "no_source"
 },
 "0015793C": {
@@ -16028,6 +16044,8 @@
 "status": "honest"
 },
 "00173ED4": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=28 REG=0 (logs/refine/00173ED4/)",
 "status": "no_source"
 },
 "00173F4C": {
@@ -16292,6 +16310,8 @@
 "status": "honest"
 },
 "00177878": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=28 REG=3 (logs/refine/00177878/)",
 "status": "no_source"
 },
 "00177924": {
@@ -17192,6 +17212,8 @@
 "status": "honest"
 },
 "001873A8": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=26 REG=0 (logs/refine/001873A8/)",
 "status": "no_source"
 },
 "0018745C": {
@@ -18975,6 +18997,8 @@
 "status": "honest"
 },
 "001A75E4": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=24 REG=0 (logs/refine/001A75E4/)",
 "status": "no_source"
 },
 "001A7764": {
@@ -19169,6 +19193,8 @@
 "status": "honest"
 },
 "001AA9C4": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=43 REG=1 (logs/refine/001AA9C4/)",
 "status": "no_source"
 },
 "001AAC10": {
@@ -19447,6 +19473,8 @@
 "status": "honest"
 },
 "001B044C": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=89 REG=1 (logs/refine/001B044C/)",
 "status": "no_source"
 },
 "001B06C4": {
@@ -19485,6 +19513,8 @@
 "status": "honest"
 },
 "001B0D2C": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=50 REG=0 (logs/refine/001B0D2C/)",
 "status": "no_source"
 },
 "001B0ED4": {
@@ -19672,6 +19702,8 @@
 "status": "honest"
 },
 "001B4E2C": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=59 REG=0 (logs/refine/001B4E2C/)",
 "status": "no_source"
 },
 "001B4EF4": {
@@ -19738,6 +19770,8 @@
 "status": "honest"
 },
 "001B5A20": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=46 REG=0 (logs/refine/001B5A20/)",
 "status": "no_source"
 },
 "001B6804": {
@@ -20489,6 +20523,8 @@
 "status": "honest"
 },
 "001C221C": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=12 REG=0 (logs/refine/001C221C/)",
 "status": "no_source"
 },
 "001C227C": {
@@ -20756,6 +20792,8 @@
 "status": "honest"
 },
 "001C71BC": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=27 REG=0 (logs/refine/001C71BC/)",
 "status": "no_source"
 },
 "001C7300": {
@@ -23091,6 +23129,8 @@
 "status": "honest"
 },
 "001E2E80": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=38 REG=0 (logs/refine/001E2E80/)",
 "status": "no_source"
 },
 "001E2F24": {
@@ -27177,6 +27217,8 @@
 "status": "honest"
 },
 "002204B8": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=39 REG=2 (logs/refine/002204B8/)",
 "status": "no_source"
 },
 "002205B0": {
@@ -27280,6 +27322,8 @@
 "status": "honest"
 },
 "00221378": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=17 REG=0 (logs/refine/00221378/)",
 "status": "no_source"
 },
 "002213D0": {
@@ -28605,6 +28649,8 @@
 "status": "honest"
 },
 "0023D438": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=41 REG=1 (logs/refine/0023D438/)",
 "status": "no_source"
 },
 "0023D688": {
@@ -29410,6 +29456,8 @@
 "status": "honest"
 },
 "0024B040": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=63 REG=0 (logs/refine/0024B040/)",
 "status": "no_source"
 },
 "0024B114": {
@@ -29518,9 +29566,13 @@
 "status": "honest"
 },
 "0024DEB4": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=39 REG=1 (logs/refine/0024DEB4/)",
 "status": "no_source"
 },
 "0024DF98": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=31 REG=0 (logs/refine/0024DF98/)",
 "status": "no_source"
 },
 "0024E038": {
@@ -29566,6 +29618,8 @@
 "status": "honest"
 },
 "0024F10C": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=30 REG=1 (logs/refine/0024F10C/)",
 "status": "no_source"
 },
 "0024F180": {
@@ -29648,6 +29702,8 @@
 "status": "hack"
 },
 "0025053C": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=16 REG=0 (logs/refine/0025053C/)",
 "status": "no_source"
 },
 "002506A4": {
@@ -30584,6 +30640,8 @@
 "status": "honest"
 },
 "00258830": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=24 REG=0 (logs/refine/00258830/)",
 "status": "no_source"
 },
 "00258B2C": {
@@ -31405,6 +31463,8 @@
 "status": "honest"
 },
 "00260848": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=27 REG=0 (logs/refine/00260848/)",
 "status": "no_source"
 },
 "00260DFC": {
@@ -31691,6 +31751,8 @@
 "status": "honest"
 },
 "00262EBC": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=22 REG=3 (logs/refine/00262EBC/)",
 "status": "no_source"
 },
 "00263124": {
@@ -31722,6 +31784,8 @@
 "status": "honest"
 },
 "00263548": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=36 REG=3 (logs/refine/00263548/)",
 "status": "no_source"
 },
 "002635FC": {
@@ -31732,6 +31796,8 @@
 "status": "honest"
 },
 "00263920": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=48 REG=0 (logs/refine/00263920/)",
 "status": "no_source"
 },
 "002639E0": {
@@ -32238,6 +32304,8 @@
 "status": "honest"
 },
 "0026CE6C": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=29 REG=0 (logs/refine/0026CE6C/)",
 "status": "no_source"
 },
 "0026CEE4": {
@@ -32446,6 +32514,8 @@
 "status": "honest"
 },
 "0026FC20": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=27 REG=8 (logs/refine/0026FC20/)",
 "status": "no_source"
 },
 "0026FCC0": {
@@ -37535,6 +37605,8 @@
 "status": "honest"
 },
 "002BCC2C": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=16 REG=0 (logs/refine/002BCC2C/)",
 "status": "no_source"
 },
 "002BCC84": {
@@ -37825,6 +37897,8 @@
 "status": "honest"
 },
 "002BF418": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=29 REG=0 (logs/refine/002BF418/)",
 "status": "no_source"
 },
 "002BF4BC": {
@@ -39158,6 +39232,8 @@
 "status": "honest"
 },
 "002CEF40": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=35 REG=0 (logs/refine/002CEF40/)",
 "status": "no_source"
 },
 "002CEFC8": {
@@ -39720,6 +39796,8 @@
 "status": "honest"
 },
 "002D710C": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=18 REG=1 (logs/refine/002D710C/)",
 "status": "no_source"
 },
 "002DA4B8": {
@@ -39970,6 +40048,8 @@
 "status": "honest"
 },
 "002DFB9C": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=13 REG=0 (logs/refine/002DFB9C/)",
 "status": "no_source"
 },
 "002DFC2C": {
@@ -40591,6 +40671,8 @@
 "status": "honest"
 },
 "002E5F04": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=22 REG=3 (logs/refine/002E5F04/)",
 "status": "no_source"
 },
 "002E60E8": {
@@ -40685,6 +40767,8 @@
 "status": "honest"
 },
 "002E8AA4": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=23 REG=0 (logs/refine/002E8AA4/)",
 "status": "no_source"
 },
 "002E92E0": {
@@ -40732,6 +40816,8 @@
 "status": "honest"
 },
 "002ECA9C": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=26 REG=0 (logs/refine/002ECA9C/)",
 "status": "no_source"
 },
 "002ECAFC": {
@@ -41122,6 +41208,8 @@
 "status": "honest"
 },
 "002FB4EC": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=22 REG=1 (logs/refine/002FB4EC/)",
 "status": "no_source"
 },
 "002FB968": {
@@ -41495,6 +41583,8 @@
 "status": "hack"
 },
 "002FE918": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=38 REG=0 (logs/refine/002FE918/)",
 "status": "no_source"
 },
 "002FE9A8": {
@@ -41631,6 +41721,8 @@
 "status": "honest"
 },
 "00302194": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=17 REG=0 (logs/refine/00302194/)",
 "status": "no_source"
 },
 "00302310": {
@@ -41704,6 +41796,8 @@
 "status": "honest"
 },
 "0030426C": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=14 REG=0 (logs/refine/0030426C/)",
 "status": "no_source"
 },
 "00304350": {
@@ -41912,6 +42006,8 @@
 "status": "honest"
 },
 "003096D8": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=58 REG=1 (logs/refine/003096D8/)",
 "status": "no_source"
 },
 "003097BC": {
@@ -42552,6 +42648,8 @@
 "status": "honest"
 },
 "0031939C": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=11 REG=0 (logs/refine/0031939C/)",
 "status": "no_source"
 },
 "003193FC": {
@@ -43670,6 +43768,8 @@
 "status": "honest"
 },
 "00329940": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=21 REG=0 (logs/refine/00329940/)",
 "status": "no_source"
 },
 "00329994": {
@@ -43694,6 +43794,8 @@
 "status": "honest"
 },
 "0032A498": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=32 REG=0 (logs/refine/0032A498/)",
 "status": "no_source"
 },
 "0032A52C": {
@@ -44208,6 +44310,8 @@
 "status": "honest"
 },
 "00334024": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=30 REG=1 (logs/refine/00334024/)",
 "status": "no_source"
 },
 "003340AC": {
@@ -44325,6 +44429,8 @@
 "status": "honest"
 },
 "003352C4": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=30 REG=1 (logs/refine/003352C4/)",
 "status": "no_source"
 },
 "00335340": {
@@ -44659,6 +44765,8 @@
 "status": "honest"
 },
 "0033BA80": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=33 REG=0 (logs/refine/0033BA80/)",
 "status": "no_source"
 },
 "0033BB30": {
@@ -44991,6 +45099,8 @@
 "status": "honest"
 },
 "00347F28": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=35 REG=5 (logs/refine/00347F28/)",
 "status": "no_source"
 },
 "0034914C": {
@@ -45437,6 +45547,8 @@
 "status": "honest"
 },
 "00357F08": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=22 REG=0 (logs/refine/00357F08/)",
 "status": "no_source"
 },
 "003581B0": {
@@ -46686,6 +46798,8 @@
 "status": "honest"
 },
 "0036A20C": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=56 REG=0 (logs/refine/0036A20C/)",
 "status": "no_source"
 },
 "0036A2B4": {
@@ -46719,6 +46833,8 @@
 "status": "honest"
 },
 "0036AEEC": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=50 REG=1 (logs/refine/0036AEEC/)",
 "status": "no_source"
 },
 "0036AF9C": {
@@ -46736,6 +46852,8 @@
 "status": "honest"
 },
 "0036B06C": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=73 REG=0 (logs/refine/0036B06C/)",
 "status": "no_source"
 },
 "0036B668": {
@@ -47049,6 +47167,8 @@
 "status": "honest"
 },
 "0036E93C": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=27 REG=1 (logs/refine/0036E93C/)",
 "status": "no_source"
 },
 "0036E9B8": {
@@ -47947,6 +48067,8 @@
 "status": "hack"
 },
 "0037B2B8": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=22 REG=0 (logs/refine/0037B2B8/)",
 "status": "no_source"
 },
 "0037B814": {
@@ -48134,6 +48256,8 @@
 "status": "honest"
 },
 "0037FA3C": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=54 REG=0 (logs/refine/0037FA3C/)",
 "status": "no_source"
 },
 "00380544": {
@@ -48144,6 +48268,8 @@
 "status": "honest"
 },
 "003805A4": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=16 REG=0 (logs/refine/003805A4/)",
 "status": "no_source"
 },
 "00380600": {
@@ -48448,6 +48574,8 @@
 "status": "honest"
 },
 "00385A50": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=12 REG=3 (logs/refine/00385A50/)",
 "status": "no_source"
 },
 "00385A90": {
@@ -48646,6 +48774,8 @@
 "status": "hack"
 },
 "00388BF0": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=26 REG=0 (logs/refine/00388BF0/)",
 "status": "no_source"
 },
 "00388CA4": {
@@ -48901,6 +49031,8 @@
 "status": "honest"
 },
 "0038B424": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=35 REG=1 (logs/refine/0038B424/)",
 "status": "no_source"
 },
 "0038B648": {
@@ -49207,6 +49339,8 @@
 "status": "honest"
 },
 "00392B7C": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=30 REG=0 (logs/refine/00392B7C/)",
 "status": "no_source"
 },
 "00392C04": {
@@ -49224,6 +49358,8 @@
 "status": "honest"
 },
 "00393164": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=30 REG=0 (logs/refine/00393164/)",
 "status": "no_source"
 },
 "003931EC": {
@@ -49290,6 +49426,8 @@
 "status": "honest"
 },
 "00394B90": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=6 REG=0 (logs/refine/00394B90/)",
 "status": "no_source"
 },
 "00394E3C": {
@@ -50319,6 +50457,8 @@
 "status": "hack"
 },
 "003A3AC0": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=11 REG=0 (logs/refine/003A3AC0/)",
 "status": "no_source"
 },
 "003A3B7C": {
@@ -51763,6 +51903,8 @@
 "status": "honest"
 },
 "003B59C8": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=19 REG=1 (logs/refine/003B59C8/)",
 "status": "no_source"
 },
 "003B5F78": {
@@ -57059,6 +57201,8 @@
 "status": "honest"
 },
 "003FC2F8": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=21 REG=0 (logs/refine/003FC2F8/)",
 "status": "no_source"
 },
 "003FD0C0": {
@@ -59810,6 +59954,8 @@
 "status": "honest"
 },
 "0041DB10": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=31 REG=1 (logs/refine/0041DB10/)",
 "status": "no_source"
 },
 "0041DB94": {
@@ -61398,6 +61544,8 @@
 "status": "honest"
 },
 "00438D98": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=25 REG=1 (logs/refine/00438D98/)",
 "status": "no_source"
 },
 "00438E0C": {
@@ -61764,6 +61912,8 @@
 "status": "honest"
 },
 "0043D488": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=28 REG=0 (logs/refine/0043D488/)",
 "status": "no_source"
 },
 "0043D4F4": {
@@ -61776,6 +61926,8 @@
 "status": "hack"
 },
 "0043D560": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=23 REG=0 (logs/refine/0043D560/)",
 "status": "no_source"
 },
 "0043D620": {
@@ -61809,6 +61961,8 @@
 "status": "hack"
 },
 "0043D6D4": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=21 REG=4 (logs/refine/0043D6D4/)",
 "status": "no_source"
 },
 "0043D73C": {
@@ -61849,6 +62003,8 @@
 "status": "honest"
 },
 "0043D944": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=12 REG=0 (logs/refine/0043D944/)",
 "status": "no_source"
 },
 "0043D9B4": {
@@ -61889,6 +62045,8 @@
 "status": "honest"
 },
 "0043DAF0": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=20 REG=5 (logs/refine/0043DAF0/)",
 "status": "no_source"
 },
 "0043DB5C": {
@@ -62171,6 +62329,8 @@
 "status": "honest"
 },
 "00440E6C": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=28 REG=0 (logs/refine/00440E6C/)",
 "status": "no_source"
 },
 "00440EE0": {
@@ -62540,6 +62700,8 @@
 "status": "honest"
 },
 "00444C14": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=20 REG=0 (logs/refine/00444C14/)",
 "status": "no_source"
 },
 "00444C68": {
@@ -62694,6 +62856,8 @@
 "status": "honest"
 },
 "00448DA8": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=16 REG=0 (logs/refine/00448DA8/)",
 "status": "no_source"
 },
 "00448ECC": {
@@ -62814,6 +62978,8 @@
 "status": "honest"
 },
 "0044D334": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=28 REG=0 (logs/refine/0044D334/)",
 "status": "no_source"
 },
 "0044D878": {
@@ -63008,6 +63174,8 @@
 "status": "honest"
 },
 "00450E3C": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=32 REG=1 (logs/refine/00450E3C/)",
 "status": "no_source"
 },
 "00451050": {
@@ -63165,6 +63333,8 @@
 "status": "honest"
 },
 "0045295C": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=13 REG=0 (logs/refine/0045295C/)",
 "status": "no_source"
 },
 "00452CA0": {
@@ -63608,6 +63778,8 @@
 "status": "honest"
 },
 "0045A7A4": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=16 REG=0 (logs/refine/0045A7A4/)",
 "status": "no_source"
 },
 "0045A898": {
@@ -63821,6 +63993,8 @@
 "status": "honest"
 },
 "0045E5CC": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=7 REG=0 (logs/refine/0045E5CC/)",
 "status": "no_source"
 },
 "0045E5F0": {
@@ -64688,6 +64862,8 @@
 "status": "honest"
 },
 "004700C0": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=82 REG=1 (logs/refine/004700C0/)",
 "status": "no_source"
 },
 "0047031C": {
@@ -65447,6 +65623,8 @@
 "status": "honest"
 },
 "00477FD4": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=16 REG=0 (logs/refine/00477FD4/)",
 "status": "no_source"
 },
 "0047802C": {
@@ -65764,6 +65942,8 @@
 "status": "honest"
 },
 "0047BDD0": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=47 REG=0 (logs/refine/0047BDD0/)",
 "status": "no_source"
 },
 "0047BF18": {
@@ -66065,6 +66245,8 @@
 "status": "honest"
 },
 "00480A60": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=33 REG=0 (logs/refine/00480A60/)",
 "status": "no_source"
 },
 "00480B14": {
@@ -66082,6 +66264,8 @@
 "status": "honest"
 },
 "00480B94": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=25 REG=0 (logs/refine/00480B94/)",
 "status": "no_source"
 },
 "00480C00": {
@@ -66302,6 +66486,8 @@
 "status": "honest"
 },
 "00484738": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=30 REG=1 (logs/refine/00484738/)",
 "status": "no_source"
 },
 "00484F7C": {
@@ -66617,6 +66803,8 @@
 "status": "honest"
 },
 "00489174": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=49 REG=0 (logs/refine/00489174/)",
 "status": "no_source"
 },
 "00489230": {
@@ -66935,6 +67123,8 @@
 "status": "honest"
 },
 "0048AEB8": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=14 REG=3 (logs/refine/0048AEB8/)",
 "status": "no_source"
 },
 "0048AF0C": {
@@ -67792,6 +67982,8 @@
 "status": "honest"
 },
 "00490440": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=16 REG=0 (logs/refine/00490440/)",
 "status": "no_source"
 },
 "0049048C": {
@@ -68088,6 +68280,8 @@
 "status": "honest"
 },
 "00494374": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=33 REG=1 (logs/refine/00494374/)",
 "status": "no_source"
 },
 "004944E8": {
@@ -68157,6 +68351,8 @@
 "status": "honest"
 },
 "00494EC0": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=17 REG=0 (logs/refine/00494EC0/)",
 "status": "no_source"
 },
 "00494F50": {
@@ -68363,6 +68559,8 @@
 "status": "honest"
 },
 "00495FE8": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=26 REG=0 (logs/refine/00495FE8/)",
 "status": "no_source"
 },
 "00496040": {
@@ -71282,6 +71480,8 @@
 "status": "honest"
 },
 "004CA000": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=46 REG=6 (logs/refine/004CA000/)",
 "status": "no_source"
 },
 "004CA0DC": {
@@ -71406,6 +71606,8 @@
 "status": "honest"
 },
 "004CC2D0": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=30 REG=2 (logs/refine/004CC2D0/)",
 "status": "no_source"
 },
 "004CCFA8": {
@@ -72265,6 +72467,8 @@
 "status": "honest"
 },
 "004E21AC": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=31 REG=2 (logs/refine/004E21AC/)",
 "status": "no_source"
 },
 "004E2224": {
@@ -72478,6 +72682,8 @@
 "status": "honest"
 },
 "004E6F78": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=32 REG=0 (logs/refine/004E6F78/)",
 "status": "no_source"
 },
 "004E71B0": {
@@ -74175,6 +74381,8 @@
 "status": "honest"
 },
 "004FB19C": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=23 REG=0 (logs/refine/004FB19C/)",
 "status": "no_source"
 },
 "004FB1F8": {
@@ -74570,6 +74778,8 @@
 "status": "honest"
 },
 "004FEBF0": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=26 REG=0 (logs/refine/004FEBF0/)",
 "status": "no_source"
 },
 "004FEC4C": {
@@ -75221,6 +75431,8 @@
 "status": "honest"
 },
 "00509F30": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=28 REG=0 (logs/refine/00509F30/)",
 "status": "no_source"
 },
 "00509FA0": {
@@ -75513,6 +75725,8 @@
 "status": "honest"
 },
 "0050FC60": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=31 REG=1 (logs/refine/0050FC60/)",
 "status": "no_source"
 },
 "0050FD14": {
@@ -76325,6 +76539,8 @@
 "status": "honest"
 },
 "0051B06C": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=8 REG=0 (logs/refine/0051B06C/)",
 "status": "no_source"
 },
 "0051B0B4": {
@@ -76426,6 +76642,8 @@
 "status": "honest"
 },
 "0051B524": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=38 REG=8 (logs/refine/0051B524/)",
 "status": "no_source"
 },
 "0051B5C4": {
@@ -77360,6 +77578,8 @@
 "status": "honest"
 },
 "00520770": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=11 REG=2 (logs/refine/00520770/)",
 "status": "no_source"
 },
 "00520814": {
@@ -82871,6 +83091,8 @@
 "status": "honest"
 },
 "005486C4": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=20 REG=0 (logs/refine/005486C4/)",
 "status": "no_source"
 },
 "00548798": {
@@ -84033,6 +84255,8 @@
 "status": "honest"
 },
 "0054F554": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=15 REG=2 (logs/refine/0054F554/)",
 "status": "no_source"
 },
 "0054F5E8": {
@@ -87108,6 +87332,8 @@
 "status": "honest"
 },
 "00560E5C": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=5 REG=0 (logs/refine/00560E5C/)",
 "status": "no_source"
 },
 "00560E74": {
@@ -116233,6 +116459,8 @@
 "status": "honest"
 },
 "00676010": {
+"label": "source_lost",
+"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=35 REG=3 (logs/refine/00676010/)",
 "status": "no_source"
 },
 "0067628C": {

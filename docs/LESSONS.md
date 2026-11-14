@@ -1429,3 +1429,23 @@ code.bin (target SHA-1 e6ab7d66ee62e879248b0660aaf38d22202e604b).
   entries are byte-clean under the gate.
 - Use --report <path.json> for per-function stats; --allow-partial
   --max-mismatches N sets the CI pass threshold.
+
+## no_source backlog re-derivation attempt (114 lost sources)
+
+- All 114 `no_source` entries (first-publication purge) were attempted with the
+  automated twin+synth loop: `refine.py --start auto --budget 24` per address
+  (dna twin first, synth fallback), plus a `--fresh --start synth --budget 40`
+  second pass on the 8 closest. Result: 0 matches. Every one DEFERs with
+  OP=5..89 — the nearest registered twins are all "wrong construct"
+  (worklist report said the same), and synth only classifies 17 of 114
+  (15 call+stores, 1 wrapper, 1 thunk). No orphan source files for these
+  addresses exist anywhere under src/.
+- Closest: 00560E5C (24 B, OP=5), 00394B90 (OP=6), 0045E5CC (OP=7). Manual
+  probe of 00560E5C (`b=p->x; return b + b->off[i]` shape): all source forms
+  emit `ldr rX,[r0]` before the offset math; the original emits
+  `mov r2,#4; add r2,r2,r1,lsl#2` first — a pure scheduler-order wall (OP=5
+  REG=0, not a construct difference). Needs a scheduler-level recipe, not
+  more twin mining.
+- All 114 are now labelled `"label": "source_lost"` with a note recording the
+  best diff (functions.json; audit.py stays CLEAN, tests pass — extra fields
+  on non-matched entries are within schema).

@@ -12,14 +12,14 @@ not included either.
 <!-- generated:status -->
 | | Functions | Share of 25,986 | .text bytes | Share of 5,841,180 B |
 |---|---:|---:|---:|---:|
-| Matched, source included | 16,732 | 64.4% | 1,420,952 | 24.3% |
-| of which honest (no hack) | 15,949 | 61.4% | 1,295,816 | 22.2% |
+| Matched, source included | 16,733 | 64.4% | 1,421,084 | 24.3% |
+| of which honest (no hack) | 15,950 | 61.4% | 1,295,948 | 22.2% |
 | of which hack | 783 | 3.0% | 125,136 | 2.1% |
 | Earlier match, source not included | 114 | 0.4% | 15,396 | 0.3% |
-| Not matched yet | 9,126 | 35.1% | 4,400,084 | 75.3% |
+| Not matched yet | 9,125 | 35.1% | 4,399,952 | 75.3% |
 | Excluded library | 14 | 0.1% | 4,748 | 0.1% |
 
-Remaining for an honest decompilation (excluding libraries): **10,023** functions.
+Remaining for an honest decompilation (excluding libraries): **10,022** functions.
 
 Sizes use consecutive starts in `funcs.json` within `.text` (`0x100000`–`0x69211C`), not the whole binary.
 3 interior-address entries are not counted as separate functions.
@@ -151,8 +151,8 @@ decides.
 ### ملخص بالعربي
 - **وش هذا المشروع:** مشروع تفكيك مطابق للعبة Zelda: A Link Between Worlds على 3DS، بهدف إنتاج نفس بايتات الدوال باستخدام مترجم armcc 4.1.
 <!-- generated:arabic-status -->
-- **وين وصلنا:** 16,732 دالة لها مصدر (64.4%)، منها 15,949 نظيفة (61.4%) و783 بحيل.
-- **وش باقي:** 9,126 دالة غير مطابقة؛ الباقي لتفكيك نظيف، باستثناء المكتبات، 10,023 دالة.
+- **وين وصلنا:** 16,733 دالة لها مصدر (64.4%)، منها 15,950 نظيفة (61.4%) و783 بحيل.
+- **وش باقي:** 9,125 دالة غير مطابقة؛ الباقي لتفكيك نظيف، باستثناء المكتبات، 10,022 دالة.
 <!-- /generated:arabic-status -->
 - الأرقام من الفهرس؛ لم تُعَد مراجعة كل المصادر بالمُدقّق الجديد الأكثر صرامة.
 - **وش ما يشمل:** ما فيه أي ملفات من اللعبة (ملف الكود أو ملفات البيانات) ولا المترجم. كل واحد يجيب نسخته بنفسه.

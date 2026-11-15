@@ -91,18 +91,38 @@ def shape_motif_signature(shape, motifs_by_addr, min_sites=None):
     return {mid for mid, n in counts.items() if n >= min_sites}, sites
 
 
-def resolve_targets(shape, top=40):
-    """Unindexed functions exhibiting the shape, ranked by motif overlap.
+def ops_twin_targets(shape):
+    """Unindexed functions whose exact dna ops-sequence matches a registered
+    verified site of the shape — the twin-sweep half of family targeting.
+    Offline; empty when the dna index is not built."""
+    import dna
+    if not os.path.exists(dna.DNA_FILE):
+        return []
+    functions = read_json(os.path.join(ROOT, "functions.json"))
+    sites = shape_sites(shape)
+    site_paths = {functions[a]["path"] for a in sites
+                  if a in functions and functions[a].get("path")}
+    if not site_paths:
+        return []
+    idx = dna.load_index()
+    ops_hit = set()
+    for r in idx:
+        ent = functions.get(r["addr"])
+        if ent and ent.get("path") in site_paths:
+            ops_hit.add(r["ops"])
+    return [r["addr"] for r in idx
+            if r["ops"] in ops_hit
+            and not (functions.get(r["addr"]) or {}).get("path")]
 
-    Pure apart from file reads; unit-tested offline with fake state.
+
+def resolve_targets(shape, top=40, include_ops=True):
+    """Unindexed functions exhibiting the shape, ranked by motif overlap
+    (ops-twin matches score +10). Pure apart from file reads; unit-tested
+    offline with fake state (include_ops=False there).
     """
     motifs_by_addr = fn_motifs()
     sig, sites = shape_motif_signature(shape, motifs_by_addr)
-    if not sig:
-        return [], sites
-    # unindexed = starts with no registered source
     functions = read_json(os.path.join(ROOT, "functions.json"))
-    # motif -> unindexed addrs, via the aggregated shapemine cache
     agg_path = os.path.join(SHAPEMINE, "motifs.json")
     agg = read_json(agg_path) if os.path.exists(agg_path) else {}
     motifs = agg.get("motifs", {})
@@ -112,6 +132,11 @@ def resolve_targets(shape, top=40):
             if a in functions and functions[a].get("path"):
                 continue
             score[a] = score.get(a, 0) + 1
+    if include_ops:
+        for a in ops_twin_targets(shape):
+            if a in functions and functions[a].get("path"):
+                continue
+            score[a] = score.get(a, 0) + 10
     ranked = sorted(score.items(), key=lambda kv: (-kv[1], kv[0]))
     return ranked[:top], sites
 
@@ -181,6 +206,55 @@ def cmd_run(args):
     print("NEXT  python tools/worklist.py next   # continue the normal loop")
 
 
+def motif_targets(mid, top=10 ** 9):
+    """Unindexed addrs containing a shapemine motif id, ranked by df."""
+    functions = read_json(os.path.join(ROOT, "functions.json"))
+    agg_path = os.path.join(SHAPEMINE, "motifs.json")
+    agg = read_json(agg_path) if os.path.exists(agg_path) else {}
+    ent = agg.get("motifs", {}).get(mid)
+    if not ent:
+        return []
+    return [a for a in ent.get("u", [])
+            if not (functions.get(a) or {}).get("path")][:top]
+
+
+def cmd_run_motif(args):
+    import worklist
+    targets = [a for a in motif_targets(args.motif)
+               if a not in load_state()["attempted"]][:args.limit]
+    if not targets:
+        print("no unattempted targets for motif %s" % args.motif)
+        return
+    os.makedirs(STATE, exist_ok=True)
+    log = open(os.path.join(STATE, "motif_%s.jsonl" % args.motif), "a", buffering=1)
+    state = load_state()
+    registered = 0
+    for key in targets:
+        t0 = time.time()
+        subprocess.run([sys.executable, "tools/refine.py", "0x" + key,
+                        "--budget", str(args.budget), "--start", "auto", "--json"],
+                       capture_output=True, text=True, cwd=ROOT, timeout=1200)
+        sp = os.path.join(ROOT, "logs", "refine", key, "state.json")
+        rstate = read_json(sp) if os.path.exists(sp) else {}
+        best = rstate.get("best") or {}
+        status = rstate.get("status") or ("MATCH" if best.get("match") else "NO")
+        log.write(json.dumps({"addr": key, "status": status, "used": rstate.get("used"),
+                              "op": best.get("n_op")}) + "\n")
+        print("%s %s used=%s op=%s %.0fs" % (key, status, rstate.get("used"), best.get("n_op"),
+                                             time.time() - t0), flush=True)
+        state["attempted"][key] = {"motif": args.motif, "status": status}
+        if status == "MATCH":
+            try:
+                worklist.register(int(key, 16), as_json=False)
+                registered += 1
+                print("  REGISTERED %s" % key, flush=True)
+            except Exception as exc:
+                print("  register failed: %s" % str(exc)[:120], flush=True)
+        save_state(state)
+    print("motif %s: %d targets, %d registered" % (args.motif, len(targets), registered))
+    print("NEXT  python tools/shapemine.py next   # next mined shape candidate")
+
+
 def cmd_next(args):
     report = read_json(REPORT)
     state = load_state()
@@ -210,6 +284,11 @@ def main():
     p.add_argument("--limit", type=int, default=10)
     p.add_argument("--budget", type=int, default=20)
     p.set_defaults(fn=cmd_run)
+    p = sub.add_parser("run-motif")
+    p.add_argument("motif")
+    p.add_argument("--limit", type=int, default=10)
+    p.add_argument("--budget", type=int, default=20)
+    p.set_defaults(fn=cmd_run_motif)
     p = sub.add_parser("next")
     p.add_argument("--limit", type=int, default=10)
     p.add_argument("--budget", type=int, default=20)

@@ -56,12 +56,12 @@ class ResolveTargetsTests(unittest.TestCase):
         self.assertEqual(len(sites), 3)
 
     def test_targets_ranked_by_overlap_and_exclude_registered(self):
-        ranked, sites = reharvest.resolve_targets("albw::Id64", top=10)
+        ranked, sites = reharvest.resolve_targets("albw::Id64", top=10, include_ops=False)
         # 00000009 hits aa+bb (2), 0000000A hits bb only (1); 0000000B unrelated
         self.assertEqual(ranked, [("00000009", 2), ("0000000A", 1)])
 
     def test_unknown_shape_yields_nothing(self):
-        ranked, sites = reharvest.resolve_targets("albw::Nope", top=10)
+        ranked, sites = reharvest.resolve_targets("albw::Nope", top=10, include_ops=False)
         self.assertEqual(ranked, [])
         self.assertEqual(sites, [])
 

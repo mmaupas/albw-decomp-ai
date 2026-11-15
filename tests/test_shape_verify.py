@@ -28,6 +28,26 @@ class ParseShapesTests(unittest.TestCase):
         pats = shape_verify.site_regexes("albw::Id64", "Id64")
         self.assertTrue(any(p == r"\bId64\b" for p in pats))
 
+    def test_statemgr_plain_split_shares_base_name_but_negates_timeline(self):
+        self.assertIn("albw::StateMgrPlain", shape_verify.parse_shapes())
+        pats = shape_verify.site_regexes("albw::StateMgrPlain", "StateMgrPlain")
+        self.assertIn(r"\bStateMgr\b", pats)  # alias: sources keep the base name
+        neg = [p.pattern for p in shape_verify.negative_regexes("albw::StateMgrPlain")]
+        self.assertTrue(any("func_00352210" in p for p in neg))
+        self.assertEqual(shape_verify.negative_regexes("albw::StateMgr"), [])
+
+
+class TodoShapesTests(unittest.TestCase):
+    def test_single_shape_is_one_item_not_its_characters(self):
+        args = type("A", (), {"shape": "sead::SafeString"})()
+        report = {"shapes": {"a": {}, "sead::SafeString": {}}}
+        self.assertEqual(shape_verify.todo_shapes(args, report), ["sead::SafeString"])
+
+    def test_no_shape_means_all_shapes_sorted(self):
+        args = type("A", (), {"shape": None})()
+        report = {"shapes": {"b": {}, "a": {}}}
+        self.assertEqual(shape_verify.todo_shapes(args, report), ["a", "b"])
+
 
 class VerdictTests(unittest.TestCase):
     def site(self, check, status="honest", tricks=None):

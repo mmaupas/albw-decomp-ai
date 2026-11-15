@@ -25,6 +25,27 @@ class RelocationTests(unittest.TestCase):
             self.assertFalse(word_matches(0xEBFFFFFE, target,
                                          (28, symbol()), 0x101000, {}))
 
+    def test_mangled_name_embeds_address_label(self):
+        # _Z13func_004EAF08Pvi is func_004EAF08(void*,int): the mangled name
+        # embeds the address-label identifier, so the name asserts 0x4EAF08
+        sym = symbol("_Z13func_004EAF08Pvi")
+        self.assertEqual(resolve_symbol(sym, {}, None), (0x4EAF08, False))
+        self.assertEqual(resolve_symbol(symbol("_ZN6Act1D013func_001CFEF4Eif", kind=0), {}, None),
+                         (0x1CFEF4, False))
+        self.assertEqual(resolve_symbol(symbol("_Z13func_004EAF09Pvi", kind=2), {}, None),
+                         (0x4EAF08, True))  # odd func_ address: Thumb bit, address & ~1
+        # a bare mangled name without a label is still refused
+        self.assertIsNone(resolve_symbol(symbol("_ZN8StateMgr11changeStateEi"), {}, None))
+        self.assertIsNone(resolve_symbol(symbol("_ZTVN4sead10SafeStringE"), {}, None))
+        # a label-looking substring that is not a whole mangled segment is refused
+        self.assertIsNone(resolve_symbol(symbol("_Z10myfunc_00588BE4x"), {}, None))
+        # branch relocs against such symbols validate like bare labels:
+        # bl from 0x101000 to 0x102000 encodes as 0xEB0003FE
+        self.assertTrue(word_matches(0xEBFFFFFE, 0xEB0003FE,
+                                     (28, symbol("_Z13func_00102000Pvi")), 0x101000, {}))
+        self.assertFalse(word_matches(0xEBFFFFFE, 0xEB0003FF,
+                                      (28, symbol("_Z13func_00102000Pvi")), 0x101000, {}))
+
     def test_nopped_tail_call_to_fall_through(self):
         # linker rewrote a tail "b" to the next function (fall-through
         # instruction) into NOP: only that exact case passes
@@ -88,8 +109,10 @@ class RelocationTests(unittest.TestCase):
         for name in ("func_00102000", "FUN_00102000", "G_00102000", "ro_00102000",
                      "data_00102000", "bss_00102000"):
             self.assertEqual(resolve_symbol(symbol(name), {}), (0x102000, False))
-        for name in ("_Z13func_00102000v", "func_00102000_extra", "unknown00102000"):
+        for name in ("func_00102000_extra", "unknown00102000"):
             self.assertIsNone(resolve_symbol(symbol(name), {}))
+        # a mangled name embedding the label identifier asserts the address too
+        self.assertEqual(resolve_symbol(symbol("_Z13func_00102000v"), {}), (0x102000, False))
         self.assertEqual(resolve_symbol(symbol("local", 0x15, 3), {3: 0x100000}),
                          (0x100014, True))
         self.assertEqual(resolve_symbol(symbol("absolute", 0x700000, 0xFFF1, 1), {}),

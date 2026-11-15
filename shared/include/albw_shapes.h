@@ -30,9 +30,9 @@ typedef long long s64;
 
 // sead SafeStringBase — the recurring vtable string wrapper (mined 50x).
 // Placed in namespace sead to match sources that refer to sead::SafeString.
-// VERIFICATION: FAIL — 0/18 candidate sites re-verify byte-exact under the
-// current checker (see docs/LESSONS.md shape-verification block); treat as
-// unproven until tools/shape_verify.py passes it at >= 3 sites.
+// VERIFICATION: PASS — byte-exact at >= 3 distinct registered call sites
+// (9 for sead::SafeString, 15 for sead::SafeStringBase; see the
+// docs/LESSONS.md shape-verification block and shared/shape_verification.json).
 namespace sead {
 template <class T>
 struct SafeStringBase {
@@ -165,6 +165,8 @@ inline u32 randRange(void* r, u32 n) {
 // ---------------------------------------------------------------------------
 // StateMgr family (mined 46x): state-machine manager with PMF enter/exec/exit
 // arrays and an optional timeline. The execute() body is what reproduced bytes.
+// VERIFICATION: both variants PASS byte-exact at >= 3 sites each (StateMgr 5,
+// StateMgrPlain 3; docs/LESSONS.md shape-verification block).
 // ---------------------------------------------------------------------------
 namespace albw {
 struct SmOwner_; typedef void (SmOwner_::*SmFunc)();
@@ -178,6 +180,21 @@ struct StateMgr {
         (s->mOwner->*s->mExec[s->mCur])();
         u32 c = mCounter + 1; mCounter = c;
         if (mTimeline) func_00352210(mTimeline, true, (float)c);
+    }
+    void ChangeState(s8 state);
+};
+
+// Plain variant (split out of albw::StateMgr): same layout, but execute()
+// has NO func_00352210 timeline call — sites 0010BB50/0010BC94/0010CF7C and
+// the changeState-family sources use this form. Verified separately so the
+// timeline form cannot silently stand in for the plain one.
+struct StateMgrPlain {
+    u32 mCounter; s8 mCur; s8 mNext; u8 mNum; u8 pad7[9];
+    SmTimeline* mTimeline; SmOwner_* mOwner; SmFunc* mEnter; SmFunc* mExec; SmFunc* mExit;
+    void execute() {
+        StateMgrPlain* s = this;
+        (s->mOwner->*s->mExec[s->mCur])();
+        u32 c = mCounter + 1; mCounter = c;
     }
     void ChangeState(s8 state);
 };

@@ -6,14 +6,60 @@ selected function's section has a known placement. See AAELF32 relocation rules.
 import re
 
 VERIFIER_VERSION = "identity-v1"
-ADDRESS_LABEL = re.compile(r"(?:func|FUN|f|data|ro|G|bss)_([0-9a-fA-F]{8})\Z")
+ADDRESS_LABEL = re.compile(r"(?:func|FUN|f|data|ro|G|bss|str|g)_([0-9a-fA-F]{8})\Z")
+
+
+def _mangled_name_segments(name):
+    """Yield the length-prefixed identifiers of an Itanium-mangled name.
+
+    _Z13func_004EAF08P2En yields 'func_004EAF08' (and the trailing 'En'
+    type-code fragment). Bare digits in a mangled name are length prefixes,
+    so segments are recovered exactly, not by substring search: a label
+    match only counts when a whole mangled segment is an address label.
+    """
+    if not name.startswith("_Z"):
+        return
+    i, n = 2, len(name)
+    while i < n:
+        if name[i].isdigit():
+            j = i
+            while j < n and name[j].isdigit():
+                j += 1
+            length = int(name[i:j])
+            if 0 < length and j + length <= n:
+                yield name[j:j + length]
+                i = j + length
+                continue
+            i = j
+        else:
+            i += 1
+
+
+def _label_address(segment):
+    """Address asserted by an address-label identifier, else None.
+
+    The repo convention is that an identifier func_XXXXXXXX / data_XXXXXXXX /
+    ... asserts address 0xXXXXXXXX. A mangled name that embeds such an
+    identifier (e.g. _Z13func_004EAF08Pvi for func_004EAF08(void*,int))
+    carries the same assertion, so it is provable from the name alone —
+    no global name->address table is consulted.
+    """
+    match = ADDRESS_LABEL.fullmatch(segment)
+    if not match:
+        return None
+    address = int(match.group(1), 16)
+    function = segment.startswith(("func_", "FUN_", "f_"))
+    # An odd explicit function address carries its Thumb state.
+    return (address & ~1, True) if function and address & 1 else (address, False)
 
 
 def resolve_symbol(symbol, section_bases, aliases=None):
     """Resolve to (address without Thumb bit, is_thumb), or None.
 
     Aliases must be explicit, reviewed identities, not guesses from a disassembly
-    name or from the target instruction. Mangled names are deliberately refused.
+    name or from the target instruction. Plain mangled names are refused, but a
+    mangled name that embeds an address-label identifier (func_XXXXXXXX etc.)
+    is resolved from that embedded label — the name itself asserts the address.
     """
     section = symbol["shndx"]
     value = symbol["value"]
@@ -26,12 +72,13 @@ def resolve_symbol(symbol, section_bases, aliases=None):
         return None
     if aliases and symbol["name"] in aliases:
         return aliases[symbol["name"]], False
-    match = ADDRESS_LABEL.fullmatch(symbol["name"])
-    if match:
-        address = int(match.group(1), 16)
-        # An odd explicit function address carries its Thumb state.
-        function = symbol["name"].startswith(("func_", "FUN_", "f_"))
-        return (address & ~1, True) if function and address & 1 else (address, False)
+    resolved = _label_address(symbol["name"])
+    if resolved is not None:
+        return resolved
+    for segment in _mangled_name_segments(symbol["name"]):
+        resolved = _label_address(segment)
+        if resolved is not None:
+            return resolved
     return None
 
 

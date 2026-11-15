@@ -8,6 +8,14 @@
 "name": "Control2317",
 "sites": [
 {
+"addr": "00291C30",
+"check": null,
+"header": false,
+"path": "src/work8/auto/func_00291C30.cpp",
+"status": "honest",
+"tricks": []
+},
+{
 "addr": "0025D328",
 "check": null,
 "header": false,
@@ -478,14 +486,6 @@
 "path": "src/work8/sol1/003214F4.cpp",
 "status": "honest",
 "tricks": []
-},
-{
-"addr": "00325664",
-"check": null,
-"header": false,
-"path": "src/work8/sol2/session3/00325664.cpp",
-"status": "honest",
-"tricks": []
 }
 ]
 },
@@ -676,14 +676,6 @@
 "tricks": []
 },
 {
-"addr": "00599018",
-"check": "NO MATCH",
-"header": false,
-"path": "src/work8/fam_sti/func_00599018.cpp",
-"status": "honest",
-"tricks": []
-},
-{
 "addr": "005991C0",
 "check": "NO MATCH",
 "header": false,
@@ -696,30 +688,6 @@
 "check": "NO MATCH",
 "header": false,
 "path": "src/work8/fam_sti/func_005993FC.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "0059A0CC",
-"check": "NO MATCH",
-"header": false,
-"path": "src/work8/fam_sti/func_0059A0CC.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "0059A548",
-"check": "NO MATCH",
-"header": false,
-"path": "src/work8/fam_sti/func_0059A548.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "0059A5F8",
-"check": "NO MATCH",
-"header": false,
-"path": "src/work8/fam_sti/func_0059A5F8.cpp",
 "status": "honest",
 "tricks": []
 },
@@ -752,14 +720,6 @@
 "check": "NO MATCH",
 "header": false,
 "path": "src/work8/fam_sti/func_0059B2A8.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "0059B37C",
-"check": null,
-"header": false,
-"path": "src/work8/fam_sti/func_0059B37C.cpp",
 "status": "honest",
 "tricks": []
 },
@@ -836,14 +796,6 @@
 "tricks": []
 },
 {
-"addr": "0059F24C",
-"check": null,
-"header": false,
-"path": "src/work8/fam_sti/func_0059F24C.cpp",
-"status": "honest",
-"tricks": []
-},
-{
 "addr": "0059F5D4",
 "check": null,
 "header": false,
@@ -864,14 +816,6 @@
 "check": null,
 "header": false,
 "path": "src/work8/fam_sti/func_0059F878.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "0059F9E0",
-"check": null,
-"header": false,
-"path": "src/work8/fam_sti/func_0059F9E0.cpp",
 "status": "honest",
 "tricks": []
 },
@@ -912,14 +856,6 @@
 "check": null,
 "header": false,
 "path": "src/work8/fam_sti/func_005A118C.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "005A123C",
-"check": null,
-"header": false,
-"path": "src/work8/fam_sti/func_005A123C.cpp",
 "status": "honest",
 "tricks": []
 },
@@ -992,14 +928,6 @@
 "check": null,
 "header": false,
 "path": "src/work8/fam_sti/func_005A3754.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "005A3804",
-"check": null,
-"header": false,
-"path": "src/work8/fam_sti/func_005A3804.cpp",
 "status": "honest",
 "tricks": []
 },
@@ -1120,6 +1048,78 @@
 "check": null,
 "header": false,
 "path": "src/work8/fam_sti/func_005A77E4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A7BC4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A7BC4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A7C94",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A7C94.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A7FF8",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A7FF8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A89BC",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A89BC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A9070",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A9070.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A91C8",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A91C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A9294",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A9294.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005AAF30",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005AAF30.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005AB204",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005AB204.cpp",
 "status": "honest",
 "tricks": []
 }
@@ -1648,14 +1648,6 @@
 "tricks": []
 },
 {
-"addr": "00599018",
-"check": "NO MATCH",
-"header": false,
-"path": "src/work8/fam_sti/func_00599018.cpp",
-"status": "honest",
-"tricks": []
-},
-{
 "addr": "005991C0",
 "check": "NO MATCH",
 "header": false,
@@ -1668,30 +1660,6 @@
 "check": "NO MATCH",
 "header": false,
 "path": "src/work8/fam_sti/func_005993FC.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "0059A0CC",
-"check": "NO MATCH",
-"header": false,
-"path": "src/work8/fam_sti/func_0059A0CC.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "0059A548",
-"check": "NO MATCH",
-"header": false,
-"path": "src/work8/fam_sti/func_0059A548.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "0059A5F8",
-"check": "NO MATCH",
-"header": false,
-"path": "src/work8/fam_sti/func_0059A5F8.cpp",
 "status": "honest",
 "tricks": []
 },
@@ -1724,14 +1692,6 @@
 "check": "NO MATCH",
 "header": false,
 "path": "src/work8/fam_sti/func_0059B2A8.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "0059B37C",
-"check": "NO MATCH",
-"header": false,
-"path": "src/work8/fam_sti/func_0059B37C.cpp",
 "status": "honest",
 "tricks": []
 },
@@ -1808,14 +1768,6 @@
 "tricks": []
 },
 {
-"addr": "0059F24C",
-"check": null,
-"header": false,
-"path": "src/work8/fam_sti/func_0059F24C.cpp",
-"status": "honest",
-"tricks": []
-},
-{
 "addr": "0059F5D4",
 "check": null,
 "header": false,
@@ -1836,14 +1788,6 @@
 "check": null,
 "header": false,
 "path": "src/work8/fam_sti/func_0059F878.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "0059F9E0",
-"check": null,
-"header": false,
-"path": "src/work8/fam_sti/func_0059F9E0.cpp",
 "status": "honest",
 "tricks": []
 },
@@ -1884,14 +1828,6 @@
 "check": null,
 "header": false,
 "path": "src/work8/fam_sti/func_005A118C.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "005A123C",
-"check": null,
-"header": false,
-"path": "src/work8/fam_sti/func_005A123C.cpp",
 "status": "honest",
 "tricks": []
 },
@@ -1964,14 +1900,6 @@
 "check": null,
 "header": false,
 "path": "src/work8/fam_sti/func_005A3754.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "005A3804",
-"check": null,
-"header": false,
-"path": "src/work8/fam_sti/func_005A3804.cpp",
 "status": "honest",
 "tricks": []
 },
@@ -2094,6 +2022,78 @@
 "path": "src/work8/fam_sti/func_005A77E4.cpp",
 "status": "honest",
 "tricks": []
+},
+{
+"addr": "005A7BC4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A7BC4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A7C94",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A7C94.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A7FF8",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A7FF8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A89BC",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A89BC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A9070",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A9070.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A91C8",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A91C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A9294",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A9294.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005AAF30",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005AAF30.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005AB204",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005AB204.cpp",
+"status": "honest",
+"tricks": []
 }
 ]
 },
@@ -2101,6 +2101,14 @@
 "kind": "struct",
 "name": "Flag16",
 "sites": [
+{
+"addr": "00291C30",
+"check": null,
+"header": false,
+"path": "src/work8/auto/func_00291C30.cpp",
+"status": "honest",
+"tricks": []
+},
 {
 "addr": "0025D328",
 "check": "MATCH",
@@ -2583,14 +2591,6 @@
 "path": "src/work8/sol2/session3/00308110.cpp",
 "status": "honest",
 "tricks": []
-},
-{
-"addr": "003097BC",
-"check": null,
-"header": false,
-"path": "src/work8/sol2/variants/003097BC_0.cpp",
-"status": "honest",
-"tricks": []
 }
 ]
 },
@@ -2598,6 +2598,14 @@
 "kind": "struct",
 "name": "Flag32",
 "sites": [
+{
+"addr": "00291C30",
+"check": null,
+"header": false,
+"path": "src/work8/auto/func_00291C30.cpp",
+"status": "honest",
+"tricks": []
+},
 {
 "addr": "0025D328",
 "check": "MATCH",
@@ -3080,14 +3088,6 @@
 "path": "src/work7/gpt25/best/func_002D4A7C.cpp",
 "status": "honest",
 "tricks": []
-},
-{
-"addr": "002DEB3C",
-"check": null,
-"header": false,
-"path": "src/work8/sol1/002DEB3C.cpp",
-"status": "honest",
-"tricks": []
 }
 ]
 },
@@ -3116,6 +3116,22 @@
 "check": "MATCH",
 "header": false,
 "path": "src/work8/auto/func_005CE944.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005DE4A8",
+"check": null,
+"header": false,
+"path": "src/work8/auto/func_005DE4A8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005EDD90",
+"check": null,
+"header": false,
+"path": "src/work8/auto/func_005EDD90.cpp",
 "status": "honest",
 "tricks": []
 },
@@ -3184,14 +3200,6 @@
 "tricks": []
 },
 {
-"addr": "00599018",
-"check": null,
-"header": false,
-"path": "src/work8/fam_sti/func_00599018.cpp",
-"status": "honest",
-"tricks": []
-},
-{
 "addr": "005991C0",
 "check": null,
 "header": false,
@@ -3204,14 +3212,6 @@
 "check": null,
 "header": false,
 "path": "src/work8/fam_sti/func_005993FC.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "0059A0CC",
-"check": null,
-"header": false,
-"path": "src/work8/fam_sti/func_0059A0CC.cpp",
 "status": "honest",
 "tricks": []
 },
@@ -3256,22 +3256,6 @@
 "tricks": []
 },
 {
-"addr": "0059A548",
-"check": null,
-"header": false,
-"path": "src/work8/fam_sti/func_0059A548.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "0059A5F8",
-"check": null,
-"header": false,
-"path": "src/work8/fam_sti/func_0059A5F8.cpp",
-"status": "honest",
-"tricks": []
-},
-{
 "addr": "0059AC40",
 "check": null,
 "header": false,
@@ -3308,14 +3292,6 @@
 "check": null,
 "header": false,
 "path": "src/work8/fam_sti/func_0059B2A8.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "0059B37C",
-"check": null,
-"header": false,
-"path": "src/work8/fam_sti/func_0059B37C.cpp",
 "status": "honest",
 "tricks": []
 },
@@ -3392,14 +3368,6 @@
 "tricks": []
 },
 {
-"addr": "0059F24C",
-"check": null,
-"header": false,
-"path": "src/work8/fam_sti/func_0059F24C.cpp",
-"status": "honest",
-"tricks": []
-},
-{
 "addr": "0059F5D4",
 "check": null,
 "header": false,
@@ -3464,14 +3432,6 @@
 "tricks": []
 },
 {
-"addr": "0059F9E0",
-"check": null,
-"header": false,
-"path": "src/work8/fam_sti/func_0059F9E0.cpp",
-"status": "honest",
-"tricks": []
-},
-{
 "addr": "0059FA90",
 "check": null,
 "header": false,
@@ -3528,14 +3488,6 @@
 "tricks": []
 },
 {
-"addr": "005A123C",
-"check": null,
-"header": false,
-"path": "src/work8/fam_sti/func_005A123C.cpp",
-"status": "honest",
-"tricks": []
-},
-{
 "addr": "005A1448",
 "check": null,
 "header": false,
@@ -3572,6 +3524,54 @@
 "check": null,
 "header": false,
 "path": "src/work8/fam_sti/func_005A21D8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A30FC",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A30FC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A31C8",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A31C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A35D4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A35D4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A36A4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A36A4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A36D0",
+"check": null,
+"header": false,
+"path": "src/work7/ds7/hid/_bulk_00593500.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A36FC",
+"check": null,
+"header": false,
+"path": "src/work7/ds7/hid/_bulk_00593500.cpp",
 "status": "honest",
 "tricks": []
 }
@@ -3736,6 +3736,22 @@
 "check": "MATCH",
 "header": false,
 "path": "src/work8/auto/func_005CE944.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005DE4A8",
+"check": null,
+"header": false,
+"path": "src/work8/auto/func_005DE4A8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005EDD90",
+"check": null,
+"header": false,
+"path": "src/work8/auto/func_005EDD90.cpp",
 "status": "honest",
 "tricks": []
 },
@@ -4036,14 +4052,6 @@
 "tricks": []
 },
 {
-"addr": "00599018",
-"check": null,
-"header": false,
-"path": "src/work8/fam_sti/func_00599018.cpp",
-"status": "honest",
-"tricks": []
-},
-{
 "addr": "005991C0",
 "check": null,
 "header": false,
@@ -4056,14 +4064,6 @@
 "check": null,
 "header": false,
 "path": "src/work8/fam_sti/func_005993FC.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "0059A0CC",
-"check": null,
-"header": false,
-"path": "src/work8/fam_sti/func_0059A0CC.cpp",
 "status": "honest",
 "tricks": []
 },
@@ -4108,22 +4108,6 @@
 "tricks": []
 },
 {
-"addr": "0059A548",
-"check": null,
-"header": false,
-"path": "src/work8/fam_sti/func_0059A548.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "0059A5F8",
-"check": null,
-"header": false,
-"path": "src/work8/fam_sti/func_0059A5F8.cpp",
-"status": "honest",
-"tricks": []
-},
-{
 "addr": "0059AC40",
 "check": null,
 "header": false,
@@ -4164,14 +4148,6 @@
 "tricks": []
 },
 {
-"addr": "0059B37C",
-"check": null,
-"header": false,
-"path": "src/work8/fam_sti/func_0059B37C.cpp",
-"status": "honest",
-"tricks": []
-},
-{
 "addr": "0059B44C",
 "check": null,
 "header": false,
@@ -4192,6 +4168,30 @@
 "check": null,
 "header": false,
 "path": "src/work8/fam_sti/func_0059BF70.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059D488",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059D488.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059DB94",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059DB94.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059E4FC",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059E4FC.cpp",
 "status": "honest",
 "tricks": []
 }
@@ -4242,14 +4242,6 @@
 "tricks": []
 },
 {
-"addr": "00599018",
-"check": "NO MATCH",
-"header": false,
-"path": "src/work8/fam_sti/func_00599018.cpp",
-"status": "honest",
-"tricks": []
-},
-{
 "addr": "005991C0",
 "check": null,
 "header": false,
@@ -4262,30 +4254,6 @@
 "check": null,
 "header": false,
 "path": "src/work8/fam_sti/func_005993FC.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "0059A0CC",
-"check": null,
-"header": false,
-"path": "src/work8/fam_sti/func_0059A0CC.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "0059A548",
-"check": null,
-"header": false,
-"path": "src/work8/fam_sti/func_0059A548.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "0059A5F8",
-"check": null,
-"header": false,
-"path": "src/work8/fam_sti/func_0059A5F8.cpp",
 "status": "honest",
 "tricks": []
 },
@@ -4318,14 +4286,6 @@
 "check": null,
 "header": false,
 "path": "src/work8/fam_sti/func_0059B2A8.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "0059B37C",
-"check": null,
-"header": false,
-"path": "src/work8/fam_sti/func_0059B37C.cpp",
 "status": "honest",
 "tricks": []
 },
@@ -4402,14 +4362,6 @@
 "tricks": []
 },
 {
-"addr": "0059F24C",
-"check": null,
-"header": false,
-"path": "src/work8/fam_sti/func_0059F24C.cpp",
-"status": "honest",
-"tricks": []
-},
-{
 "addr": "0059F5D4",
 "check": null,
 "header": false,
@@ -4430,14 +4382,6 @@
 "check": null,
 "header": false,
 "path": "src/work8/fam_sti/func_0059F878.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "0059F9E0",
-"check": null,
-"header": false,
-"path": "src/work8/fam_sti/func_0059F9E0.cpp",
 "status": "honest",
 "tricks": []
 },
@@ -4478,14 +4422,6 @@
 "check": null,
 "header": false,
 "path": "src/work8/fam_sti/func_005A118C.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "005A123C",
-"check": null,
-"header": false,
-"path": "src/work8/fam_sti/func_005A123C.cpp",
 "status": "honest",
 "tricks": []
 },
@@ -4558,14 +4494,6 @@
 "check": null,
 "header": false,
 "path": "src/work8/fam_sti/func_005A3754.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "005A3804",
-"check": null,
-"header": false,
-"path": "src/work8/fam_sti/func_005A3804.cpp",
 "status": "honest",
 "tricks": []
 },
@@ -4678,6 +4606,78 @@
 "check": null,
 "header": false,
 "path": "src/work8/fam_sti/func_005A6BF8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A77E4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A77E4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A7BC4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A7BC4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A7C94",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A7C94.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A7FF8",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A7FF8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A89BC",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A89BC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A9070",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A9070.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A91C8",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A91C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A9294",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A9294.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005AAF30",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005AAF30.cpp",
 "status": "honest",
 "tricks": []
 }
@@ -4728,14 +4728,6 @@
 "tricks": []
 },
 {
-"addr": "00599018",
-"check": "NO MATCH",
-"header": false,
-"path": "src/work8/fam_sti/func_00599018.cpp",
-"status": "honest",
-"tricks": []
-},
-{
 "addr": "005991C0",
 "check": null,
 "header": false,
@@ -4748,30 +4740,6 @@
 "check": null,
 "header": false,
 "path": "src/work8/fam_sti/func_005993FC.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "0059A0CC",
-"check": null,
-"header": false,
-"path": "src/work8/fam_sti/func_0059A0CC.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "0059A548",
-"check": null,
-"header": false,
-"path": "src/work8/fam_sti/func_0059A548.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "0059A5F8",
-"check": null,
-"header": false,
-"path": "src/work8/fam_sti/func_0059A5F8.cpp",
 "status": "honest",
 "tricks": []
 },
@@ -4804,14 +4772,6 @@
 "check": null,
 "header": false,
 "path": "src/work8/fam_sti/func_0059B2A8.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "0059B37C",
-"check": null,
-"header": false,
-"path": "src/work8/fam_sti/func_0059B37C.cpp",
 "status": "honest",
 "tricks": []
 },
@@ -4888,14 +4848,6 @@
 "tricks": []
 },
 {
-"addr": "0059F24C",
-"check": null,
-"header": false,
-"path": "src/work8/fam_sti/func_0059F24C.cpp",
-"status": "honest",
-"tricks": []
-},
-{
 "addr": "0059F5D4",
 "check": null,
 "header": false,
@@ -4916,14 +4868,6 @@
 "check": null,
 "header": false,
 "path": "src/work8/fam_sti/func_0059F878.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "0059F9E0",
-"check": null,
-"header": false,
-"path": "src/work8/fam_sti/func_0059F9E0.cpp",
 "status": "honest",
 "tricks": []
 },
@@ -4964,14 +4908,6 @@
 "check": null,
 "header": false,
 "path": "src/work8/fam_sti/func_005A118C.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "005A123C",
-"check": null,
-"header": false,
-"path": "src/work8/fam_sti/func_005A123C.cpp",
 "status": "honest",
 "tricks": []
 },
@@ -5044,14 +4980,6 @@
 "check": null,
 "header": false,
 "path": "src/work8/fam_sti/func_005A3754.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "005A3804",
-"check": null,
-"header": false,
-"path": "src/work8/fam_sti/func_005A3804.cpp",
 "status": "honest",
 "tricks": []
 },
@@ -5164,6 +5092,78 @@
 "check": null,
 "header": false,
 "path": "src/work8/fam_sti/func_005A6BF8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A77E4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A77E4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A7BC4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A7BC4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A7C94",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A7C94.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A7FF8",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A7FF8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A89BC",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A89BC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A9070",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A9070.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A91C8",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A91C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A9294",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A9294.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005AAF30",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005AAF30.cpp",
 "status": "honest",
 "tricks": []
 }
@@ -5214,14 +5214,6 @@
 "tricks": []
 },
 {
-"addr": "00599018",
-"check": "NO MATCH",
-"header": false,
-"path": "src/work8/fam_sti/func_00599018.cpp",
-"status": "honest",
-"tricks": []
-},
-{
 "addr": "005991C0",
 "check": "NO MATCH",
 "header": false,
@@ -5234,30 +5226,6 @@
 "check": null,
 "header": false,
 "path": "src/work8/fam_sti/func_005993FC.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "0059A0CC",
-"check": null,
-"header": false,
-"path": "src/work8/fam_sti/func_0059A0CC.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "0059A548",
-"check": null,
-"header": false,
-"path": "src/work8/fam_sti/func_0059A548.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "0059A5F8",
-"check": null,
-"header": false,
-"path": "src/work8/fam_sti/func_0059A5F8.cpp",
 "status": "honest",
 "tricks": []
 },
@@ -5290,14 +5258,6 @@
 "check": null,
 "header": false,
 "path": "src/work8/fam_sti/func_0059B2A8.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "0059B37C",
-"check": null,
-"header": false,
-"path": "src/work8/fam_sti/func_0059B37C.cpp",
 "status": "honest",
 "tricks": []
 },
@@ -5374,14 +5334,6 @@
 "tricks": []
 },
 {
-"addr": "0059F24C",
-"check": null,
-"header": false,
-"path": "src/work8/fam_sti/func_0059F24C.cpp",
-"status": "honest",
-"tricks": []
-},
-{
 "addr": "0059F5D4",
 "check": null,
 "header": false,
@@ -5402,14 +5354,6 @@
 "check": null,
 "header": false,
 "path": "src/work8/fam_sti/func_0059F878.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "0059F9E0",
-"check": null,
-"header": false,
-"path": "src/work8/fam_sti/func_0059F9E0.cpp",
 "status": "honest",
 "tricks": []
 },
@@ -5450,14 +5394,6 @@
 "check": null,
 "header": false,
 "path": "src/work8/fam_sti/func_005A118C.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "005A123C",
-"check": null,
-"header": false,
-"path": "src/work8/fam_sti/func_005A123C.cpp",
 "status": "honest",
 "tricks": []
 },
@@ -5530,14 +5466,6 @@
 "check": null,
 "header": false,
 "path": "src/work8/fam_sti/func_005A3754.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "005A3804",
-"check": null,
-"header": false,
-"path": "src/work8/fam_sti/func_005A3804.cpp",
 "status": "honest",
 "tricks": []
 },
@@ -5652,6 +5580,78 @@
 "path": "src/work8/fam_sti/func_005A6BF8.cpp",
 "status": "honest",
 "tricks": []
+},
+{
+"addr": "005A77E4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A77E4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A7BC4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A7BC4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A7C94",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A7C94.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A7FF8",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A7FF8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A89BC",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A89BC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A9070",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A9070.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A91C8",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A91C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A9294",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A9294.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005AAF30",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005AAF30.cpp",
+"status": "honest",
+"tricks": []
 }
 ]
 },
@@ -5660,32 +5660,8 @@
 "name": "StateMgr",
 "sites": [
 {
-"addr": "0013646C",
-"check": "NO MATCH",
-"header": false,
-"path": "src/work8/auto/func_0013646C.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "0024C54C",
-"check": "NO MATCH",
-"header": false,
-"path": "src/work8/auto/func_0024C54C.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "0035E2E4",
-"check": "NO MATCH",
-"header": false,
-"path": "src/work8/auto/func_0035E2E4.cpp",
-"status": "honest",
-"tricks": []
-},
-{
 "addr": "0010BB50",
-"check": "NO MATCH",
+"check": null,
 "header": false,
 "path": "src/work8/opus_fam/a1/006563C8.cpp",
 "status": "honest",
@@ -5693,7 +5669,7 @@
 },
 {
 "addr": "0010BC94",
-"check": "NO MATCH",
+"check": null,
 "header": false,
 "path": "src/work8/opus_fam/a1/006563C8.cpp",
 "status": "honest",
@@ -5701,9 +5677,41 @@
 },
 {
 "addr": "0010CF7C",
-"check": "NO MATCH",
+"check": null,
 "header": false,
 "path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0013646C",
+"check": null,
+"header": false,
+"path": "src/work8/auto/func_0013646C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0024C54C",
+"check": null,
+"header": false,
+"path": "src/work8/auto/func_0024C54C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0035E2E4",
+"check": null,
+"header": false,
+"path": "src/work8/auto/func_0035E2E4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "004ECF84",
+"check": null,
+"header": false,
+"path": "src/work8/auto/func_004ECF84.cpp",
 "status": "honest",
 "tricks": []
 },
@@ -5725,7 +5733,7 @@
 },
 {
 "addr": "00143E80",
-"check": "NO MATCH",
+"check": null,
 "header": false,
 "path": "src/work8/game_re2/families/src/s16/00143E80_from_0016EC48_s16ec48.cpp",
 "status": "honest",
@@ -5733,7 +5741,7 @@
 },
 {
 "addr": "0015A29C",
-"check": "NO MATCH",
+"check": null,
 "header": false,
 "path": "src/work5/agent16/func_00213DF8_nw.cpp",
 "status": "honest",
@@ -5741,7 +5749,7 @@
 },
 {
 "addr": "0015F8C8",
-"check": "NO MATCH",
+"check": null,
 "header": false,
 "path": "src/work5/agent16/func_00213DF8_nw.cpp",
 "status": "honest",
@@ -5749,7 +5757,7 @@
 },
 {
 "addr": "0016EC48",
-"check": "NO MATCH",
+"check": null,
 "header": false,
 "path": "src/work8/game_re2/families/solve/16EC48/v7.cpp",
 "status": "honest",
@@ -5765,7 +5773,7 @@
 },
 {
 "addr": "00174EB0",
-"check": "NO MATCH",
+"check": null,
 "header": false,
 "path": "src/work8/game_re2/families/src/s16/00174EB0_from_0016EC48_s16ec48.cpp",
 "status": "honest",
@@ -5773,7 +5781,7 @@
 },
 {
 "addr": "00176760",
-"check": "NO MATCH",
+"check": null,
 "header": false,
 "path": "src/work8/game_re2/families/src/s16/00176760_from_0016EC48_s16ec48.cpp",
 "status": "honest",
@@ -5781,7 +5789,7 @@
 },
 {
 "addr": "001816E8",
-"check": "NO MATCH",
+"check": null,
 "header": false,
 "path": "src/work8/opus6/001816E8.cpp",
 "status": "honest",
@@ -6130,16 +6138,496 @@
 "path": "src/work8/game_re2/families/src/s16/0029AB48_from_0016EC48_s16ec48.cpp",
 "status": "honest",
 "tricks": []
+}
+]
+},
+"albw::StateMgrPlain": {
+"kind": "struct",
+"name": "StateMgrPlain",
+"sites": [
+{
+"addr": "0010BB50",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
 },
 {
-"addr": "0029B1EC",
+"addr": "0010BC94",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0010CF7C",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0015A29C",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work5/agent16/func_00213DF8_nw.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0015F8C8",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work5/agent16/func_00213DF8_nw.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001816E8",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work8/opus6/001816E8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001E6E60",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work4/agent5/b6/func_001E6E60_nw.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00200978",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work5/agent8/func_00200978_nw.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00200A3C",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work8/lead/matched_1020/00200A3C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00206DB8",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work5/agent11/func_00206DB8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00213DF8",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work5/agent16/func_00213DF8_nw.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002158D8",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work6/gpt11/func_002158D8_nw.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00215AC8",
+"check": "MATCH",
+"header": false,
+"path": "src/work6/gpt11/func_00215AC8_nw.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00215F70",
+"check": "MATCH",
+"header": false,
+"path": "src/work6/gpt11/func_00215F70_nw.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002254CC",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work8/opus5/002254CC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0035AE0C",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work8/opus6/0035AE0C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "003931EC",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work8/opus_fam/a6/m0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00478068",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/M3/func_00478068.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00479E74",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work/agent6/func_00479E74.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "006563C8",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0065650C",
 "check": null,
 "header": false,
-"path": "src/work8/game_re2/families/src/s16/0029B1EC_from_0016EC48_s16ec48.cpp",
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00656650",
+"check": null,
+"header": false,
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00656794",
+"check": null,
+"header": false,
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "006568D8",
+"check": null,
+"header": false,
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00656A1C",
+"check": null,
+"header": false,
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00656B60",
+"check": null,
+"header": false,
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00656CA4",
+"check": null,
+"header": false,
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00656DE8",
+"check": null,
+"header": false,
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00656F2C",
+"check": null,
+"header": false,
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00657070",
+"check": null,
+"header": false,
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "006571B4",
+"check": null,
+"header": false,
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "006572F8",
+"check": null,
+"header": false,
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0065743C",
+"check": null,
+"header": false,
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00657580",
+"check": null,
+"header": false,
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "006576C4",
+"check": null,
+"header": false,
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00657808",
+"check": null,
+"header": false,
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0065794C",
+"check": null,
+"header": false,
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00657A90",
+"check": null,
+"header": false,
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00657BD4",
+"check": null,
+"header": false,
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00657D18",
+"check": null,
+"header": false,
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00657E5C",
+"check": null,
+"header": false,
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00657FA0",
+"check": null,
+"header": false,
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "006580E4",
+"check": null,
+"header": false,
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00658228",
+"check": null,
+"header": false,
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0065836C",
+"check": null,
+"header": false,
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00658604",
+"check": null,
+"header": false,
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00658748",
+"check": null,
+"header": false,
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0065888C",
+"check": null,
+"header": false,
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "006589D0",
+"check": null,
+"header": false,
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00658B14",
+"check": null,
+"header": false,
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00658C58",
+"check": null,
+"header": false,
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00658D9C",
+"check": null,
+"header": false,
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00658EE0",
+"check": null,
+"header": false,
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00659024",
+"check": null,
+"header": false,
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00659168",
+"check": null,
+"header": false,
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00659400",
+"check": null,
+"header": false,
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00659544",
+"check": null,
+"header": false,
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00659688",
+"check": null,
+"header": false,
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "006597CC",
+"check": null,
+"header": false,
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00659910",
+"check": null,
+"header": false,
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
 "status": "honest",
 "tricks": []
 }
-]
+],
+"verdict": "PASS",
+"verified": 3
 },
 "albw::Word": {
 "kind": "struct",
@@ -6765,30 +7253,12 @@
 "status": "honest",
 "tricks": []
 }
-],
-"verdict": "PASS",
-"verified": 3
+]
 },
 "operator new": {
 "kind": "operator",
 "name": "operator new",
 "sites": [
-{
-"addr": "006063CC",
-"check": "NO MATCH",
-"header": false,
-"path": "src/work8/auto/var/v_006063CC_from_006043E4.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "0010BAB4",
-"check": "MATCH",
-"header": false,
-"path": "src/work7/gpt23/func_0010BAB4.cpp",
-"status": "honest",
-"tricks": []
-},
 {
 "addr": "0010BB50",
 "check": "NO MATCH",
@@ -6810,6 +7280,22 @@
 "check": "NO MATCH",
 "header": false,
 "path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "006063CC",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/auto/var/v_006063CC_from_006043E4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0010BAB4",
+"check": "MATCH",
+"header": false,
+"path": "src/work7/gpt23/func_0010BAB4.cpp",
 "status": "honest",
 "tricks": []
 },
@@ -6850,14 +7336,6 @@
 "check": "NO MATCH",
 "header": false,
 "path": "src/work8/game_re2/reach/pass/0015C6A8.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "0016739C",
-"check": "NO MATCH",
-"header": false,
-"path": "src/work7/gpt16/func_0016739C.cpp",
 "status": "honest",
 "tricks": []
 },
@@ -7094,58 +7572,10 @@
 "tricks": []
 },
 {
-"addr": "0060279C",
-"check": null,
-"header": false,
-"path": "src/work7/ds7/gen_vtfac_all.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "006027D8",
-"check": null,
-"header": false,
-"path": "src/work7/ds7/gen_vtfac_all.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "00602840",
-"check": null,
-"header": false,
-"path": "src/work7/ds7/gen_factory_all.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "0060286C",
-"check": null,
-"header": false,
-"path": "src/work7/ds7/gen_vtfac_all.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "006028A8",
-"check": null,
-"header": false,
-"path": "src/work7/ds7/gen_vtfac_all.cpp",
-"status": "honest",
-"tricks": []
-},
-{
 "addr": "006028E4",
 "check": null,
 "header": false,
 "path": "src/work7/gpt29/func_006028E4.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "00602960",
-"check": null,
-"header": false,
-"path": "src/work7/ds7/gen_factory_all.cpp",
 "status": "honest",
 "tricks": []
 },
@@ -7158,22 +7588,6 @@
 "tricks": []
 },
 {
-"addr": "006029C4",
-"check": null,
-"header": false,
-"path": "src/work7/ds7/gen_factory_all.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "00602A74",
-"check": null,
-"header": false,
-"path": "src/work7/ds7/gen_factory_all.cpp",
-"status": "honest",
-"tricks": []
-},
-{
 "addr": "00602AF8",
 "check": null,
 "header": false,
@@ -7182,34 +7596,10 @@
 "tricks": []
 },
 {
-"addr": "00602B20",
-"check": null,
-"header": false,
-"path": "src/work7/ds7/gen_vtfac_all.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "00602B58",
-"check": null,
-"header": false,
-"path": "src/work7/ds7/gen_vtfac_all.cpp",
-"status": "honest",
-"tricks": []
-},
-{
 "addr": "00602B90",
 "check": null,
 "header": false,
 "path": "src/work7/ds7/gen_fb_602B90.cpp",
-"status": "honest",
-"tricks": []
-},
-{
-"addr": "00602C00",
-"check": null,
-"header": false,
-"path": "src/work7/ds7/gen_factory_all.cpp",
 "status": "honest",
 "tricks": []
 },
@@ -7246,16 +7636,110 @@
 "tricks": []
 },
 {
-"addr": "00602E34",
+"addr": "00602E70",
 "check": null,
 "header": false,
-"path": "src/work7/ds7/gen_vtfac_all.cpp",
+"path": "src/work7/ds7/fam60_factory.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00602FA8",
+"check": null,
+"header": false,
+"path": "src/work8/audit_reloc/fix/src/00602FA8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00603054",
+"check": null,
+"header": false,
+"path": "src/work8/audit_reloc/fix/src/00603054.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "006030D4",
+"check": null,
+"header": false,
+"path": "src/work8/audit_reloc/fix/src/006030D4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00603280",
+"check": null,
+"header": false,
+"path": "src/work8/audit_reloc/fix/src/00603280.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00603300",
+"check": null,
+"header": false,
+"path": "src/work8/audit_reloc/fix/src/00603300.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00603354",
+"check": null,
+"header": false,
+"path": "src/work7/ds7/fam60_factory.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0060340C",
+"check": null,
+"header": false,
+"path": "src/work8/lead/matched_1020/0060340C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "006034A8",
+"check": null,
+"header": false,
+"path": "src/work8/lead/matched_1020/006034A8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00603640",
+"check": null,
+"header": false,
+"path": "src/work8/audit_reloc/fix/src/00603640.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00603694",
+"check": null,
+"header": false,
+"path": "src/work8/audit_reloc/fix/src/00603694.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00603798",
+"check": null,
+"header": false,
+"path": "src/work8/audit_reloc/fix/src/00603798.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0060389C",
+"check": null,
+"header": false,
+"path": "src/work8/audit_reloc/fix/src/0060389C.cpp",
 "status": "honest",
 "tricks": []
 }
-],
-"verdict": "PASS",
-"verified": 3
+]
 },
 "sead::SafeString": {
 "kind": "typedef",
@@ -7263,7 +7747,7 @@
 "sites": [
 {
 "addr": "002C9C04",
-"check": "NO MATCH",
+"check": "NO MATCH (reloc)",
 "header": false,
 "path": "src/work8/auto/var/v_002C9C04_from_00240F7C.cpp",
 "status": "honest",
@@ -7271,7 +7755,7 @@
 },
 {
 "addr": "00135800",
-"check": "NO MATCH",
+"check": "MATCH",
 "header": false,
 "path": "src/work8/sol1/00135800.cpp",
 "status": "honest",
@@ -7279,7 +7763,7 @@
 },
 {
 "addr": "0015381C",
-"check": "NO MATCH",
+"check": "NO MATCH (reloc)",
 "header": false,
 "path": "src/work7/ds2/f_0015381C.cpp",
 "status": "honest",
@@ -7287,7 +7771,7 @@
 },
 {
 "addr": "001563F8",
-"check": "NO MATCH",
+"check": "NO MATCH (reloc)",
 "header": false,
 "path": "src/work8/opus1/001563F8.cpp",
 "status": "honest",
@@ -7295,7 +7779,7 @@
 },
 {
 "addr": "00163870",
-"check": "NO MATCH",
+"check": "NO MATCH (reloc)",
 "header": false,
 "path": "src/work7/ds2/f_00163870.cpp",
 "status": "honest",
@@ -7303,7 +7787,7 @@
 },
 {
 "addr": "00163E88",
-"check": "NO MATCH",
+"check": "NO MATCH (reloc)",
 "header": false,
 "path": "src/work7/ds2/f_00163E88.cpp",
 "status": "honest",
@@ -7311,7 +7795,7 @@
 },
 {
 "addr": "0017381C",
-"check": "NO MATCH",
+"check": "NO MATCH (reloc)",
 "header": false,
 "path": "src/work7/ds2/v17381C_b.cpp",
 "status": "honest",
@@ -7319,7 +7803,7 @@
 },
 {
 "addr": "00173F4C",
-"check": "NO MATCH",
+"check": "NO MATCH (reloc)",
 "header": false,
 "path": "src/work7/ds2/f_00173F4C.cpp",
 "status": "honest",
@@ -7327,7 +7811,7 @@
 },
 {
 "addr": "00183738",
-"check": "NO MATCH",
+"check": "NO MATCH (reloc)",
 "header": false,
 "path": "src/work7/ds2/f_00183738.cpp",
 "status": "honest",
@@ -7335,7 +7819,7 @@
 },
 {
 "addr": "00189580",
-"check": "NO MATCH",
+"check": "NO MATCH (reloc)",
 "header": false,
 "path": "src/work8/sol2/variants/00189580_1_dh.cpp",
 "status": "honest",
@@ -7343,7 +7827,7 @@
 },
 {
 "addr": "0018D9FC",
-"check": "NO MATCH",
+"check": "NO MATCH (reloc)",
 "header": false,
 "path": "src/work7/ds2/f_0018D9FC.cpp",
 "status": "honest",
@@ -7351,7 +7835,7 @@
 },
 {
 "addr": "0018E66C",
-"check": "NO MATCH",
+"check": "NO MATCH (reloc)",
 "header": false,
 "path": "src/work7/ds2/f_0018E66C.cpp",
 "status": "honest",
@@ -7359,7 +7843,7 @@
 },
 {
 "addr": "001986E0",
-"check": "NO MATCH",
+"check": "NO MATCH (reloc)",
 "header": false,
 "path": "src/work7/ds2/f_001986E0.cpp",
 "status": "honest",
@@ -7367,7 +7851,7 @@
 },
 {
 "addr": "0019B7D4",
-"check": "NO MATCH",
+"check": "NO MATCH (reloc)",
 "header": false,
 "path": "src/work7/ds2/f_0019B7D4.cpp",
 "status": "honest",
@@ -7375,7 +7859,7 @@
 },
 {
 "addr": "001A4354",
-"check": "NO MATCH",
+"check": "NO MATCH (reloc)",
 "header": false,
 "path": "src/work7/ds2/f_001A4354.cpp",
 "status": "honest",
@@ -7383,7 +7867,7 @@
 },
 {
 "addr": "001A8024",
-"check": "NO MATCH",
+"check": "NO MATCH (reloc)",
 "header": false,
 "path": "src/work8/opus8/001A8024.cpp",
 "status": "honest",
@@ -7391,7 +7875,7 @@
 },
 {
 "addr": "001A985C",
-"check": "NO MATCH",
+"check": "MATCH",
 "header": false,
 "path": "src/work8/sol1/001A985C.cpp",
 "status": "honest",
@@ -7399,7 +7883,7 @@
 },
 {
 "addr": "001B06C4",
-"check": "NO MATCH",
+"check": "NO MATCH (reloc)",
 "header": false,
 "path": "src/work8/sol2/variants/001B06C4_0.cpp",
 "status": "honest",
@@ -7407,7 +7891,7 @@
 },
 {
 "addr": "001B2A74",
-"check": "NO MATCH",
+"check": "NO MATCH (reloc)",
 "header": false,
 "path": "src/work8/lead/matched_1020/001B2A74.cpp",
 "status": "honest",
@@ -7415,7 +7899,7 @@
 },
 {
 "addr": "001BF634",
-"check": "NO MATCH",
+"check": "NO MATCH (reloc)",
 "header": false,
 "path": "src/work8/opus_tp2/func_001BF634.cpp",
 "status": "honest",
@@ -7423,7 +7907,7 @@
 },
 {
 "addr": "001BF70C",
-"check": "NO MATCH",
+"check": "NO MATCH (reloc)",
 "header": false,
 "path": "src/work7/ds2/v1BF70C_a.cpp",
 "status": "honest",
@@ -7431,7 +7915,7 @@
 },
 {
 "addr": "001BFC14",
-"check": "NO MATCH",
+"check": "NO MATCH (reloc)",
 "header": false,
 "path": "src/work8/fam_rtti2/func_001BFC14.cpp",
 "status": "honest",
@@ -7439,7 +7923,7 @@
 },
 {
 "addr": "001C3054",
-"check": "NO MATCH",
+"check": "NO MATCH (reloc)",
 "header": false,
 "path": "src/work7/ds2/v1C3054_a.cpp",
 "status": "honest",
@@ -7447,7 +7931,7 @@
 },
 {
 "addr": "001D0238",
-"check": "NO MATCH",
+"check": "MATCH",
 "header": false,
 "path": "src/work5/agent1/func_001D0238.cpp",
 "status": "honest",
@@ -7455,7 +7939,7 @@
 },
 {
 "addr": "001D1228",
-"check": "NO MATCH (reloc)",
+"check": "MATCH",
 "header": false,
 "path": "src/work5/agent1/func_001D1228.cpp",
 "status": "honest",
@@ -7463,7 +7947,7 @@
 },
 {
 "addr": "001D12BC",
-"check": "NO MATCH (reloc)",
+"check": "MATCH",
 "header": false,
 "path": "src/work5/agent1/func_001D12BC.cpp",
 "status": "honest",
@@ -7471,7 +7955,7 @@
 },
 {
 "addr": "001D1B20",
-"check": "NO MATCH (reloc)",
+"check": "MATCH",
 "header": false,
 "path": "src/work8/sol1/001D1B20.cpp",
 "status": "honest",
@@ -7535,7 +8019,7 @@
 },
 {
 "addr": "001DF624",
-"check": "NO MATCH (reloc)",
+"check": "MATCH",
 "header": false,
 "path": "src/work4/agent8/func_001DF624.cpp",
 "status": "honest",
@@ -7551,7 +8035,7 @@
 },
 {
 "addr": "001E02B4",
-"check": "NO MATCH (reloc)",
+"check": "MATCH",
 "header": false,
 "path": "src/work4/agent1/func_001E02B4.cpp",
 "status": "honest",
@@ -7575,7 +8059,7 @@
 },
 {
 "addr": "00202C20",
-"check": "NO MATCH (reloc)",
+"check": "MATCH",
 "header": false,
 "path": "src/work8/opus1/00202C20_nw.cpp",
 "status": "honest",
@@ -7583,7 +8067,7 @@
 },
 {
 "addr": "00212B5C",
-"check": "NO MATCH (reloc)",
+"check": null,
 "header": false,
 "path": "src/work8/sol2/00212B5C_nw.cpp",
 "status": "honest",
@@ -7591,7 +8075,7 @@
 },
 {
 "addr": "002158D8",
-"check": "NO MATCH (reloc)",
+"check": null,
 "header": false,
 "path": "src/work6/gpt11/func_002158D8_nw.cpp",
 "status": "honest",
@@ -7599,7 +8083,7 @@
 },
 {
 "addr": "00215AC8",
-"check": "NO MATCH (reloc)",
+"check": null,
 "header": false,
 "path": "src/work6/gpt11/func_00215AC8_nw.cpp",
 "status": "honest",
@@ -7607,7 +8091,7 @@
 },
 {
 "addr": "00215F70",
-"check": "NO MATCH (reloc)",
+"check": null,
 "header": false,
 "path": "src/work6/gpt11/func_00215F70_nw.cpp",
 "status": "honest",
@@ -7615,7 +8099,7 @@
 },
 {
 "addr": "00217A0C",
-"check": "NO MATCH (reloc)",
+"check": null,
 "header": false,
 "path": "src/work8/opus1/00217A0C.cpp",
 "status": "honest",
@@ -7623,7 +8107,7 @@
 },
 {
 "addr": "002188A0",
-"check": "NO MATCH (reloc)",
+"check": null,
 "header": false,
 "path": "src/work6/gpt13/func_002188A0.cpp",
 "status": "honest",
@@ -7631,7 +8115,7 @@
 },
 {
 "addr": "00219968",
-"check": "NO MATCH (reloc)",
+"check": null,
 "header": false,
 "path": "src/work8/opus2/00219968_nw.cpp",
 "status": "honest",
@@ -7639,7 +8123,7 @@
 },
 {
 "addr": "0021A4F0",
-"check": "NO MATCH (reloc)",
+"check": null,
 "header": false,
 "path": "src/work6/gpt14/func_0021A4F0.cpp",
 "status": "honest",
@@ -7647,7 +8131,7 @@
 },
 {
 "addr": "0021A59C",
-"check": "NO MATCH (reloc)",
+"check": null,
 "header": false,
 "path": "src/work8/lead/ledger_1019/dehack/0021A59C.cpp",
 "status": "honest",
@@ -7655,7 +8139,7 @@
 },
 {
 "addr": "0021ABB0",
-"check": "NO MATCH (reloc)",
+"check": null,
 "header": false,
 "path": "src/work8/lead/ledger_1019/dehack/0021ABB0.cpp",
 "status": "honest",
@@ -7663,7 +8147,7 @@
 },
 {
 "addr": "0021ACB8",
-"check": "NO MATCH (reloc)",
+"check": null,
 "header": false,
 "path": "src/work8/lead/ledger_1019/dehack/0021ACB8.cpp",
 "status": "honest",
@@ -7671,7 +8155,7 @@
 },
 {
 "addr": "0021BC40",
-"check": "NO MATCH (reloc)",
+"check": null,
 "header": false,
 "path": "src/work8/lead/ledger_1019/dehack/0021BC40.cpp",
 "status": "honest",
@@ -7679,7 +8163,7 @@
 },
 {
 "addr": "002270E4",
-"check": "NO MATCH (reloc)",
+"check": null,
 "header": false,
 "path": "src/work7/ds2/f_002270E4.cpp",
 "status": "honest",
@@ -7687,7 +8171,7 @@
 },
 {
 "addr": "0023E0E8",
-"check": "NO MATCH (reloc)",
+"check": null,
 "header": false,
 "path": "src/work8/opus7/0023E0E8.cpp",
 "status": "honest",
@@ -7695,7 +8179,7 @@
 },
 {
 "addr": "00240F7C",
-"check": "NO MATCH (reloc)",
+"check": null,
 "header": false,
 "path": "src/work7/ds2/f_00240F7C.cpp",
 "status": "honest",
@@ -7703,7 +8187,7 @@
 },
 {
 "addr": "00254E18",
-"check": "NO MATCH (reloc)",
+"check": null,
 "header": false,
 "path": "src/work7/ds2/f_00254E18.cpp",
 "status": "honest",
@@ -7711,7 +8195,7 @@
 },
 {
 "addr": "002585A0",
-"check": "NO MATCH (reloc)",
+"check": null,
 "header": false,
 "path": "src/work8/sol2/session3/002585A0.cpp",
 "status": "honest",
@@ -7719,7 +8203,7 @@
 },
 {
 "addr": "00259354",
-"check": "NO MATCH (reloc)",
+"check": null,
 "header": false,
 "path": "src/work7/gpt24/func_00259354.cpp",
 "status": "honest",
@@ -7727,7 +8211,7 @@
 },
 {
 "addr": "00259800",
-"check": "NO MATCH (reloc)",
+"check": null,
 "header": false,
 "path": "src/work7/ds2/f_00259800.cpp",
 "status": "honest",
@@ -7735,15 +8219,15 @@
 },
 {
 "addr": "00259C6C",
-"check": "NO MATCH (reloc)",
+"check": null,
 "header": false,
 "path": "src/work7/ds3/func_00259C6C.cpp",
 "status": "honest",
 "tricks": []
 }
 ],
-"verdict": "FAIL",
-"verified": 0
+"verdict": "PASS",
+"verified": 9
 },
 "sead::SafeStringBase": {
 "kind": "struct",
@@ -7751,7 +8235,7 @@
 "sites": [
 {
 "addr": "00135800",
-"check": "NO MATCH",
+"check": "MATCH",
 "header": false,
 "path": "src/work8/sol1/00135800.cpp",
 "status": "honest",
@@ -7759,7 +8243,7 @@
 },
 {
 "addr": "001A985C",
-"check": "NO MATCH",
+"check": "MATCH",
 "header": false,
 "path": "src/work8/sol1/001A985C.cpp",
 "status": "honest",
@@ -7767,7 +8251,7 @@
 },
 {
 "addr": "001D1B20",
-"check": "NO MATCH",
+"check": "MATCH",
 "header": false,
 "path": "src/work8/sol1/001D1B20.cpp",
 "status": "honest",
@@ -7775,7 +8259,7 @@
 },
 {
 "addr": "001FEFBC",
-"check": "NO MATCH",
+"check": "NO MATCH (reloc)",
 "header": false,
 "path": "src/work5/agent7/func_001FEFBC.cpp",
 "status": "honest",
@@ -7783,7 +8267,7 @@
 },
 {
 "addr": "0025B324",
-"check": "NO MATCH",
+"check": "MATCH",
 "header": false,
 "path": "src/work8/sol2/session3/0025B324.cpp",
 "status": "honest",
@@ -7791,7 +8275,7 @@
 },
 {
 "addr": "002C8DA0",
-"check": "NO MATCH",
+"check": "MATCH",
 "header": false,
 "path": "src/work8/sol1/002C8DA0.cpp",
 "status": "honest",
@@ -7799,7 +8283,7 @@
 },
 {
 "addr": "002C9104",
-"check": "NO MATCH",
+"check": "MATCH",
 "header": false,
 "path": "src/work8/sol2/session3/002C9104.cpp",
 "status": "honest",
@@ -7807,7 +8291,7 @@
 },
 {
 "addr": "002CC4BC",
-"check": "NO MATCH",
+"check": "MATCH",
 "header": false,
 "path": "src/work8/sol1/002CC4BC.cpp",
 "status": "honest",
@@ -7815,7 +8299,7 @@
 },
 {
 "addr": "002CC5CC",
-"check": "NO MATCH",
+"check": "MATCH",
 "header": false,
 "path": "src/work8/sol1/002CC5CC.cpp",
 "status": "honest",
@@ -7823,7 +8307,7 @@
 },
 {
 "addr": "0031A804",
-"check": "NO MATCH",
+"check": "MATCH",
 "header": false,
 "path": "src/work8/sol2/session3/0031A804.cpp",
 "status": "honest",
@@ -7831,7 +8315,7 @@
 },
 {
 "addr": "003214AC",
-"check": "NO MATCH",
+"check": "MATCH",
 "header": false,
 "path": "src/work8/audit_reloc/fix/src/003214AC.cpp",
 "status": "honest",
@@ -7839,7 +8323,7 @@
 },
 {
 "addr": "003214F4",
-"check": "NO MATCH",
+"check": "MATCH",
 "header": false,
 "path": "src/work8/sol1/003214F4.cpp",
 "status": "honest",
@@ -7847,7 +8331,7 @@
 },
 {
 "addr": "0035B19C",
-"check": "NO MATCH",
+"check": "NO MATCH (reloc)",
 "header": false,
 "path": "src/work8/sol1/0035B19C.cpp",
 "status": "honest",
@@ -7855,7 +8339,7 @@
 },
 {
 "addr": "0035CCFC",
-"check": "NO MATCH",
+"check": "NO MATCH (reloc)",
 "header": false,
 "path": "src/work8/H2/func_0035CCFC.cpp",
 "status": "honest",
@@ -7863,7 +8347,7 @@
 },
 {
 "addr": "00360AD0",
-"check": "NO MATCH",
+"check": "MATCH",
 "header": false,
 "path": "src/work8/sol2/session3/00360AD0_dh.cpp",
 "status": "honest",
@@ -7871,7 +8355,7 @@
 },
 {
 "addr": "0038B0D0",
-"check": "NO MATCH",
+"check": "MATCH",
 "header": false,
 "path": "src/work8/sol1/0038B0D0.cpp",
 "status": "honest",
@@ -7879,7 +8363,7 @@
 },
 {
 "addr": "003AE590",
-"check": "NO MATCH",
+"check": "MATCH",
 "header": false,
 "path": "src/work8/sol1/003AE590.cpp",
 "status": "honest",
@@ -7887,17 +8371,17 @@
 },
 {
 "addr": "004C17C0",
-"check": "NO MATCH",
+"check": "MATCH",
 "header": false,
 "path": "src/work8/sol1/004C17C0.cpp",
 "status": "honest",
 "tricks": []
 }
 ],
-"verdict": "FAIL",
-"verified": 0
+"verdict": "PASS",
+"verified": 15
 }
 },
-"updated": "2026-11-15T10:54:12+00:00",
+"updated": "2026-11-15T20:47:56+00:00",
 "verifier": "identity-v1"
 }

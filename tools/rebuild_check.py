@@ -180,9 +180,20 @@ def assemble_image(entries):
                     continue
                 addr, _thumb = r
                 w = struct.unpack_from("<I", mine, o - best["value"])[0]
-                if (w & 0x0E000000) == 0x0A000000:  # b/bl
+                place = s + o - best["value"]
+                tw = fn.rd32(place)
+                from relocations import validate_relocation
+                if validate_relocation(w, tw, t, place, r):
+                    # The oracle accepts this linked word (exact match, or the
+                    # linker-NOPped fall-through tail / BLX-thumb conversion):
+                    # emit the original word so the image stays byte-exact.
+                    struct.pack_into("<I", mine, o - best["value"], tw)
+                elif (w & 0x0E000000) == 0x0A000000:  # b/bl
+                    # Recompute so the drift stays visible in --list-mismatches
+                    # (a registered source whose branch no longer validates
+                    # must be de-registered, not masked).
                     from relocations import _branch_addend
-                    delta = addr + _branch_addend(w) - (s + o - best["value"])
+                    delta = addr + _branch_addend(w) - place
                     if -0x2000000 <= delta < 0x2000000 and delta % 4 == 0:
                         opcode = w & 0xFF000000
                         struct.pack_into("<I", mine, o - best["value"],
@@ -229,8 +240,11 @@ def assemble_image(entries):
                         imm -= 0x4000000
                     tgt = s + off + 8 + imm
                     # linker NOP: this word itself is mov r0,r0 in the
-                    # original (the linker replaced the branch with a NOP)
-                    if fn.rd32(s + off) == 0xE1A00000:
+                    # original (the linker replaced the branch with a NOP).
+                    # Fail-closed like the oracle: only a fall-through tail
+                    # (target == next word) qualifies, otherwise the drift
+                    # must stay visible.
+                    if fn.rd32(s + off) == 0xE1A00000 and tgt == s + off + 4:
                         struct.pack_into("<I", code, s - TEXT_START + off, 0xE1A00000)
             compiled += 1
     return bytes(code), compiled

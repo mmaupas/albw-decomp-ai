@@ -52,6 +52,16 @@ STRUCTURAL = {
     "albw::randRange": [r">>\s*32"],  # multiply-high PRNG: (u64)x * n >> 32
 }
 
+# A split-out variant keeps the base shape's name in sources; match those name
+# patterns too. NEGATIVE_STRUCTURAL then separates the variants: a site matches
+# the variant only when none of its negative patterns appear in the source.
+# albw::StateMgrPlain = StateMgr sources WITHOUT the func_00352210 timeline call
+# (the plain execute() form; cf. sites 0010BB50/0010BC94/0010CF7C).
+NAME_ALIASES = {"albw::StateMgrPlain": ["StateMgr"]}
+NEGATIVE_STRUCTURAL = {
+    "albw::StateMgrPlain": [r"func_00352210|mTimeline|SmTimeline"],
+}
+
 
 # ------------------------------------------------------------ shape registry
 
@@ -106,8 +116,19 @@ def parse_shapes():
 
 def site_regexes(qname, name):
     pats = [r"\b%s\b" % re.escape(name), r"\b%s\b" % re.escape(qname)]
+    for alias in NAME_ALIASES.get(qname, []):
+        pats.append(r"\b%s\b" % re.escape(alias))
     pats += STRUCTURAL.get(qname, [])
     return pats
+
+
+def negative_regexes(qname):
+    return [re.compile(p) for p in NEGATIVE_STRUCTURAL.get(qname, [])]
+
+
+def todo_shapes(args, report):
+    # a single --shape value must be one todo item, not its characters
+    return [args.shape] if getattr(args, "shape", None) else sorted(report["shapes"])
 
 
 # ------------------------------------------------------------------- scanning
@@ -141,9 +162,11 @@ def cmd_scan(args):
         pats = site_regexes(qname, name)
         comps = [re.compile(p) for p in pats]
         struct_all = [re.compile(p) for p in STRUCTURAL.get(qname, [])]
+        neg = negative_regexes(qname)
         sites = []
         for key, ent, text, has_header in sources:
-            if any(c.search(text) for c in comps) and all(c.search(text) for c in struct_all):
+            if any(c.search(text) for c in comps) and all(c.search(text) for c in struct_all) \
+                    and not any(n.search(text) for n in neg):
                 sites.append({"addr": key, "path": ent["path"], "status": ent.get("status"),
                               "check": None, "tricks": [], "header": has_header})
         # keep previous oracle results for sites that still exist
@@ -195,7 +218,15 @@ def cmd_verify(args):
     if not report.get("shapes"):
         sys.exit("no scan yet; run: python tools/shape_verify.py scan")
     functions = read_json(os.path.join(ROOT, "functions.json"))
-    todo = args.shape if args.shape else sorted(report["shapes"])
+    todo = todo_shapes(args, report)
+    if getattr(args, "recheck", False):
+        for qname in todo:
+            for s in report["shapes"][qname].get("sites", []):
+                if s.get("check") not in (None, "MATCH"):
+                    s["check"] = None
+                    s["tricks"] = []
+        write_json(REPORT, report, canonical=True)
+        print("cleared non-MATCH checks for %d shape(s)" % len(todo), flush=True)
     for qname in todo:
         ent = report["shapes"][qname]
         if not args.all and verdict_of(ent) == "PASS":
@@ -326,6 +357,9 @@ def main():
     p.add_argument("--sites", type=int, default=DEFAULT_SITES)
     p.add_argument("--shape")
     p.add_argument("--all", action="store_true", help="re-check even PASS shapes")
+    p.add_argument("--recheck", action="store_true",
+                   help="clear non-MATCH checks first (re-verify stale reloc failures "
+                        "under a new checker)")
     p.set_defaults(fn=cmd_verify)
     p = sub.add_parser("report")
     p.add_argument("--json", action="store_true")

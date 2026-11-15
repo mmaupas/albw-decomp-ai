@@ -1,2 +1,2 @@
-extern "C" void func_00100B88();
-extern "C" void func_00100B84() { func_00100B88(); }
+extern "C" void func_00100C94();
+extern "C" void func_00100C90() { func_00100C94(); }

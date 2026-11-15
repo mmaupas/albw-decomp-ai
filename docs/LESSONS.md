@@ -1458,7 +1458,7 @@ Protocol: every shape in `shared/include/albw_shapes.h` must be byte-exact
 and honest there (no forbidden tricks). One verified site is not enough — a
 shape verified once can silently be wrong in its variants; the sites below
 are the evidence. Report: `shared/shape_verification.json`
-(verifier identity-v1, updated 2026-11-15T10:54:12+00:00).
+(verifier identity-v1, updated 2026-11-15T20:47:56+00:00).
 
 | Shape | Verdict | Verified call sites |
 |---|---|---|
@@ -1476,12 +1476,34 @@ are the evidence. Report: `shared/shape_verification.json`
 | `albw::PtrList` | PASS (3/60 sites byte-exact) | `00465FE0` (src/work8/lead/matched_1020/00465FE0.cpp), `005934D4` (src/work8/fam_sti/func_005934D4.cpp), `005936A0` (src/work8/fam_sti/func_005936A0.cpp) |
 | `albw::PtrListBase` | PASS (3/60 sites byte-exact) | `00465FE0` (src/work8/lead/matched_1020/00465FE0.cpp), `005934D4` (src/work8/fam_sti/func_005934D4.cpp), `005936A0` (src/work8/fam_sti/func_005936A0.cpp) |
 | `albw::StateMgr` | PASS (5/60 sites byte-exact) | `00137E14` (src/work8/opus_tp3b/func_00137E14.cpp), `0013DFC0` (src/work8/audit_reloc/fix/src/0013DFC0.cpp), `00172B74` (src/work8/opus_tp3b/func_00172B74.cpp), `00186108` (src/work8/fam_rtti/func_00186108.cpp), `00186870` (src/work8/fam_rtti/func_00186870.cpp) |
+| `albw::StateMgrPlain` | PASS (3/60 sites byte-exact) | `00215AC8` (src/work6/gpt11/func_00215AC8_nw.cpp), `00215F70` (src/work6/gpt11/func_00215F70_nw.cpp), `00478068` (src/work8/M3/func_00478068.cpp) |
 | `albw::Word` | PASS (4/16 sites byte-exact) | `0019EBF0` (src/work8/opus_tiny/f19EBF0.cpp), `001A0A5C` (src/work8/opus_tiny/f1A0A5C.cpp), `0021A2DC` (src/work8/opus_tiny/f21A2DC.cpp), `0021C124` (src/work8/opus_tiny/f21C124.cpp) |
 | `albw::randRange` | PASS (3/60 sites byte-exact) | `00104338` (src/work7/gpt23/func_00104338.cpp), `00124194` (src/work7/ds1/func_00124194.cpp), `00125980` (src/work7/ds1/func_00125980.cpp) |
 | `operator new` | PASS (3/60 sites byte-exact) | `0010BAB4` (src/work7/gpt23/func_0010BAB4.cpp), `003947D0` (src/work8/H3/func_003947D0.cpp), `003FDD6C` (src/work8/opus_tiny/f3FDD6C.cpp) |
-| `sead::SafeString` | FAIL (0/60 sites byte-exact); 36/60 checked fail only on unproved mangled-name relocations | - |
-| `sead::SafeStringBase` | FAIL (0/18 sites byte-exact) | - |
+| `sead::SafeString` | PASS (9/60 sites byte-exact) | `00135800` (src/work8/sol1/00135800.cpp), `001A985C` (src/work8/sol1/001A985C.cpp), `001D0238` (src/work5/agent1/func_001D0238.cpp), `001D1228` (src/work5/agent1/func_001D1228.cpp), `001D12BC` (src/work5/agent1/func_001D12BC.cpp), `001D1B20` (src/work8/sol1/001D1B20.cpp), `001DF624` (src/work4/agent8/func_001DF624.cpp), `001E02B4` (src/work4/agent1/func_001E02B4.cpp), ... (9 total) |
+| `sead::SafeStringBase` | PASS (15/18 sites byte-exact) | `00135800` (src/work8/sol1/00135800.cpp), `001A985C` (src/work8/sol1/001A985C.cpp), `001D1B20` (src/work8/sol1/001D1B20.cpp), `0025B324` (src/work8/sol2/session3/0025B324.cpp), `002C8DA0` (src/work8/sol1/002C8DA0.cpp), `002C9104` (src/work8/sol2/session3/002C9104.cpp), `002CC4BC` (src/work8/sol1/002CC4BC.cpp), `002CC5CC` (src/work8/sol1/002CC5CC.cpp), ... (15 total) |
 <!-- /shape-verification -->
+
+
+## Failing shapes fixed + fail-closed gate (2026-11-15 session)
+
+- **StateMgr split**: the failing sites were the plain variant (PMF exec
+  WITHOUT the `func_00352210` timeline call). `albw::StateMgrPlain` was split
+  out in `shared/include/albw_shapes.h`; `shape_verify.py` separates the
+  variants via NAME_ALIASES + NEGATIVE_STRUCTURAL. Both PASS (5 + 3 sites).
+- **SafeString unblocked by the checker, not the shape**: mangled-name label
+  extraction in `relocations.py` (`_Z13func_004EAF08Pvi` -> 0x4EAF08, undefined
+  symbols only) plus the read-only-section vtable content proof in `fn.py`
+  took sead::SafeString 0 -> 9 MATCH sites and SafeStringBase 0 -> 15.
+- **NOPped-tail stale labels** (111 functions, 1 word each): the image word is
+  `E1A00000` (linker NOPped a fall-through tail `b`), so the source's tail-call
+  label must be the NEXT function start (`place+4`), e.g. func_0024C54C calls
+  `func_0024C5D0`, not `func_002C8348`. All 111 re-labelled and re-verified
+  MATCH via `fn.py check`. The gate's fixup now requires the fall-through
+  condition (fail-closed like the oracle) and resolved branch words emit the
+  original word only when `validate_relocation` accepts them — the gate can no
+  longer mask a branch the oracle rejects. 8 stale registrations that no
+  longer verify were de-registered. Gate: EXACT MATCH (0 words).
 
 ## Punch list cleared: image gate now EXACT MATCH (0 mismatched words)
 

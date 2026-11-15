@@ -444,6 +444,57 @@ def _check_abort(msg):
     raise ValueError("section-base derivation: " + msg)
 
 
+def ro_section_bases_from_image(secs, syms, rels, bases, d, mine, f, s):
+    """Place read-only object sections (vtables, typeinfo) by content proof.
+
+    A pool ABS32 reloc against a symbol defined in a read-only section that has
+    no label-derived base proposes base = target_word - addend - symbol_value,
+    where target_word is the dump image word at the reloc place. The proposal is
+    accepted only when the section's bytes reproduce the dump image at that
+    base: every non-reloc word byte-equal, and every reloc word in the section
+    a valid dump pointer (zero, a function start, or a pointed-to address).
+    This is a content placement proof, not a name identity — the mangled vtable
+    name itself asserts no address. Returns an extended copy of `bases`.
+    """
+    from relocations import resolve_symbol
+    starts_set = set(STARTS)
+    out = dict(bases)
+    for o, t, sym in rels.get(f["shndx"], []):
+        if t != 2 or sym["shndx"] in (0, 0xFFF1) or sym["shndx"] in out:
+            continue
+        sec = secs[sym["shndx"]]
+        if sec["flags"] & 1:  # SHF_WRITE: only read-only sections are placed by content
+            continue
+        if resolve_symbol(sym, out, None) is not None:
+            continue
+        place = s + (o - f["value"])
+        boff = place - TA
+        if boff < 0 or boff + 4 > len(CODE):
+            continue
+        target = rd32(place)
+        addend = struct.unpack_from("<I", mine, o - f["value"])[0]
+        base = (target - addend - sym["value"]) & 0xFFFFFFFF
+        ib = base - TA
+        if ib < 0 or ib + sec["size"] > len(CODE):
+            continue
+        secrels = {o2 for o2, t2, _n2 in rels.get(sym["shndx"], []) if t2 == 2}
+        if not secrels:
+            continue
+        ok = True
+        for off in range(0, sec["size"] - 3, 4):
+            img = int.from_bytes(CODE[ib + off:ib + off + 4], "little")
+            if off in secrels:
+                if not (img == 0 or img in starts_set or img in PTR_T):
+                    ok = False
+                    break
+            elif d[sec["off"] + off:sec["off"] + off + 4] != CODE[ib + off:ib + off + 4]:
+                ok = False
+                break
+        if ok:
+            out[sym["shndx"]] = base
+    return out
+
+
 ALIASES_FILE = os.path.join(ROOT, "shared", "aliases.json")
 
 
@@ -532,6 +583,7 @@ def _cmd_check(src, addr, sym, cc, flags, prebuilt, aliases=None):
             raise ValueError("comparison requires complete ARM words")
         section_bases = data_section_bases(secs, syms)
         section_bases[f["shndx"]] = s - f["value"]
+        section_bases = ro_section_bases_from_image(secs, syms, rels, section_bases, d, mine, f, s)
         n_t, n_m = len(target) // 4, len(mine) // 4
         same = 0
         rows = []

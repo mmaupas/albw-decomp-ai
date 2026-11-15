@@ -12,5 +12,5 @@ struct StateMgr {
     }
 };
 struct Owner { u8 pad[0x40c]; StateMgr mMgr; void func_0050FD14(); };
-extern "C" void func_002C8348(Owner*);
-void Owner::func_0050FD14() { mMgr.exec(); func_002C8348(this); }
+extern "C" void func_0024C5D0(Owner*);
+void Owner::func_0050FD14() { mMgr.exec(); func_0024C5D0(this); }

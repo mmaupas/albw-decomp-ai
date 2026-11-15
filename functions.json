@@ -16362,6 +16362,13 @@
 "path": "src/work7/gpt16/func_0017A6A0.cpp",
 "status": "honest"
 },
+"0017A6D8": {
+"cc": "4.1/b1049",
+"flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
+"hack_reasons": [],
+"path": "src/work8/auto/func_0017A6D8.cpp",
+"status": "honest"
+},
 "0017A760": {
 "cc": "4.1/b1049",
 "flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
@@ -16537,6 +16544,13 @@
 "flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections --apcs=/fpic",
 "hack_reasons": [],
 "path": "src/work8/audit_reloc/fix/src/0017DD98.cpp",
+"status": "honest"
+},
+"0017E194": {
+"cc": "4.1/b1049",
+"flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
+"hack_reasons": [],
+"path": "src/work8/auto/func_0017E194.cpp",
 "status": "honest"
 },
 "0017E21C": {
@@ -47353,6 +47367,13 @@
 "path": "src/work8/game_re2/float/barrier/pass/dehacked/00371D6C.cpp",
 "status": "honest"
 },
+"0037252C": {
+"cc": "4.1/b1049",
+"flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
+"hack_reasons": [],
+"path": "src/work8/auto/func_0037252C.cpp",
+"status": "honest"
+},
 "003725B4": {
 "cc": "4.1/b1049",
 "flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
@@ -49897,6 +49918,13 @@
 "flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections --apcs=/fpic",
 "hack_reasons": [],
 "path": "src/work8/audit_reloc/fix/src/0039BF54.cpp",
+"status": "honest"
+},
+"0039BF60": {
+"cc": "4.1/b1049",
+"flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
+"hack_reasons": [],
+"path": "src/work8/auto/func_0039BF60.cpp",
 "status": "honest"
 },
 "0039BFE8": {

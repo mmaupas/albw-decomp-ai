@@ -30,6 +30,9 @@ typedef long long s64;
 
 // sead SafeStringBase — the recurring vtable string wrapper (mined 50x).
 // Placed in namespace sead to match sources that refer to sead::SafeString.
+// VERIFICATION: FAIL — 0/18 candidate sites re-verify byte-exact under the
+// current checker (see docs/LESSONS.md shape-verification block); treat as
+// unproven until tools/shape_verify.py passes it at >= 3 sites.
 namespace sead {
 template <class T>
 struct SafeStringBase {

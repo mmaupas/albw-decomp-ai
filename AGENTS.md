@@ -36,6 +36,15 @@ The workflow lives in the tools, not in this file — every tool prints a
    compiler file, any SDK material, or any third-party library source
    you don't have redistribution rights for. String literals referenced
    by the function are acceptable (project convention).
+4. **Shape admission protocol.** A shape admitted to
+   `shared/include/albw_shapes.h` must pass `python tools/shape_verify.py`:
+   byte-exact (`fn.py check` -> `RESULT: MATCH`) at **>= 3 distinct registered
+   call sites**, honest at those sites (no tricks). A shape verified at one
+   site can silently be wrong in its variants — never admit on one site.
+   Verdicts and site lists are recorded in `shared/shape_verification.json`
+   and the generated block in `docs/LESSONS.md` (CI freshness-checks it via
+   `shape_verify.py lessons`). A FAIL shape must be annotated as unproven in
+   the header; re-run `scan` + `verify` after registering new sites.
 
 # Environment
 

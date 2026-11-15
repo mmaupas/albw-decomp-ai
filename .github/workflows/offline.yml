@@ -19,3 +19,5 @@ jobs:
         run: python tools/audit.py
       - name: Generated README freshness
         run: python tools/audit.py readme
+      - name: Shape-verification record freshness
+        run: python tools/shape_verify.py lessons

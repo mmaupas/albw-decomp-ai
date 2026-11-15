@@ -1,0 +1,7903 @@
+{
+"header": "shared/include/albw_shapes.h",
+"min_sites": 3,
+"protocol": "byte-exact (fn.py check RESULT: MATCH) at >= 3 distinct registered call sites, honest (no forbidden tricks); sites recorded per shape",
+"shapes": {
+"albw::Control2317": {
+"kind": "struct",
+"name": "Control2317",
+"sites": [
+{
+"addr": "0025D328",
+"check": null,
+"header": false,
+"path": "src/work8/auto/var/v_0025D328_from_0025C464.cpp",
+"status": "hack",
+"tricks": []
+},
+{
+"addr": "0025D380",
+"check": null,
+"header": false,
+"path": "src/work8/auto/var/v_0025D380_from_0025C464.cpp",
+"status": "hack",
+"tricks": []
+},
+{
+"addr": "0025D3D8",
+"check": null,
+"header": false,
+"path": "src/work8/auto/var/v_0025D3D8_from_0025C464.cpp",
+"status": "hack",
+"tricks": []
+},
+{
+"addr": "0025D430",
+"check": null,
+"header": false,
+"path": "src/work8/auto/var/v_0025D430_from_0025C464.cpp",
+"status": "hack",
+"tricks": []
+},
+{
+"addr": "001533B8",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/game_re2/families/src/dehack/001533B8_from_0026562C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001660D0",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/game_re2/float/barrier/pass/dehacked/001660D0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00230674",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/opus_tp3b/func_00230674.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0025B324",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/sol2/session3/0025B324.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0025D5C8",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/sol1/0025D5C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0026562C",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/sol1/0026562C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00267914",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/game_re2/float/hacks/pass/dehacked/00267914.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00267968",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/game_re2/float/barrier/pass/new/00267968.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002879C8",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/sol2/variants/002879C8_1.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00288224",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/game_re2/float/barrier/pass/dehacked/00288224.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002884A4",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/sol2/session5/002884A4_nw.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0028B008",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/sol1/0028B008.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002903E8",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/sol2/session6/002903E8_dh.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00291520",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/sol1/00291520.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00291950",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/sol1/00291950_dh.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0029E18C",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/sol1/0029E18C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0029F88C",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/sol2/variants/0029F88C_0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002A52D8",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/sol2/variants/002A52D8_1.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002AD6C0",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/sol1/002AD6C0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002AD8A0",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/sol2/session4/002AD8A0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002AE9F8",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/sol2/session3/002AE9F8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002B0514",
+"check": null,
+"header": false,
+"path": "src/work8/game_re2/float/barrier/pass/new/002B0514.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002BF4BC",
+"check": null,
+"header": false,
+"path": "src/work8/sol2/variants/002BF4BC_1_nw.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002BF98C",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/002BF98C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002BFA1C",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/002BFA1C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002C425C",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/002C425C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002C8DA0",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/002C8DA0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002C9104",
+"check": null,
+"header": false,
+"path": "src/work8/sol2/session3/002C9104.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002CC4BC",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/002CC4BC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002CC5CC",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/002CC5CC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002D04E4",
+"check": null,
+"header": false,
+"path": "src/work8/game_re2/float/barrier/pass/dehacked/002D04E4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002D2A74",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/002D2A74.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002D40FC",
+"check": null,
+"header": false,
+"path": "src/work8/perm_server/002D40FC_match_dh.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002D41D4",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/002D41D4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002DEB3C",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/002DEB3C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002E021C",
+"check": null,
+"header": false,
+"path": "src/work8/sol2/variants/002E021C_12.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002E19EC",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/002E19EC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002E29F8",
+"check": null,
+"header": false,
+"path": "src/work8/doctor_srv/func_002E29F8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002E4DE8",
+"check": null,
+"header": false,
+"path": "src/work8/sol2/session5/002E4DE8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002F0830",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/002F0830.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002F2474",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/002F2474.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002F32D8",
+"check": null,
+"header": false,
+"path": "src/work8/opus_tp2/func_002F32D8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002FA620",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/002FA620_nw.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002FBDAC",
+"check": null,
+"header": false,
+"path": "src/work8/game_re2/float/barrier/pass/dehacked/002FBDAC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002FE72C",
+"check": null,
+"header": false,
+"path": "src/work8/perm_server/002FE72C_match.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "003057E4",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/003057E4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00308110",
+"check": null,
+"header": false,
+"path": "src/work8/sol2/session3/00308110.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "003097BC",
+"check": null,
+"header": false,
+"path": "src/work8/sol2/variants/003097BC_0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00314B0C",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/00314B0C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0031A110",
+"check": null,
+"header": false,
+"path": "src/work8/game_re2/float/barrier/pass/new/0031A110.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0031A804",
+"check": null,
+"header": false,
+"path": "src/work8/sol2/session3/0031A804.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0031B348",
+"check": null,
+"header": false,
+"path": "src/work8/game_re2/float/barrier/pass/dehacked/0031B348.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0031D75C",
+"check": null,
+"header": false,
+"path": "src/work8/sol2/variants/0031D75C_0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "003214AC",
+"check": null,
+"header": false,
+"path": "src/work8/audit_reloc/fix/src/003214AC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "003214F4",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/003214F4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00325664",
+"check": null,
+"header": false,
+"path": "src/work8/sol2/session3/00325664.cpp",
+"status": "honest",
+"tricks": []
+}
+]
+},
+"albw::Counter": {
+"kind": "struct",
+"name": "Counter",
+"sites": [
+{
+"addr": "00137F54",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work7/gpt15/variants/00137F54/v0_nw.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001DD530",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work4/agent4/func_001DD530.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001DDAF0",
+"check": "MATCH",
+"header": false,
+"path": "src/work4/agent5/func_001DDAF0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0029383C",
+"check": "MATCH",
+"header": false,
+"path": "src/work7/gpt17/func_0029383C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002C6598",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work7/gpt17/func_002C6598.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00380600",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work7/gpt18/func_00380600_nw.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "003A4820",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/opus_tp4/func_003A4820.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "003BDE4C",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/opus8/003BDE4C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "003C0870",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/opus8/003C0870.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "003C13E8",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/opus8/003C13E8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "003C3E9C",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/opus8/003C3E9C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "003DAE68",
+"check": "MATCH",
+"header": false,
+"path": "src/work7/ds4/f_3DAE68.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0043283C",
+"check": null,
+"header": false,
+"path": "src/work8/opus_tiny/f43283C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0052E5E4",
+"check": null,
+"header": false,
+"path": "src/work8/opus_tp3b/func_0052E5E4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0052EB40",
+"check": null,
+"header": false,
+"path": "src/work8/opus_tp2/func_0052EB40.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005675BC",
+"check": null,
+"header": false,
+"path": "src/work8/opus5/005675BC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0056C768",
+"check": null,
+"header": false,
+"path": "src/work8/H8/func_0056C768.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002AA5F0",
+"check": null,
+"header": false,
+"path": "src/work8/fam_rtti/func_002AA5F0.c",
+"status": "hack",
+"tricks": []
+}
+]
+},
+"albw::CreateFn": {
+"kind": "typedef",
+"name": "CreateFn",
+"sites": [
+{
+"addr": "00593240",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/fam_sti/func_00593240.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005934D4",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/fam_sti/func_005934D4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059352C",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/fam_sti/func_0059352C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005936A0",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/fam_sti/func_005936A0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00599018",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/fam_sti/func_00599018.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005991C0",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/fam_sti/func_005991C0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005993FC",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/fam_sti/func_005993FC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059A0CC",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/fam_sti/func_0059A0CC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059A548",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/fam_sti/func_0059A548.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059A5F8",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/fam_sti/func_0059A5F8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059AC40",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/fam_sti/func_0059AC40.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059B17C",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/fam_sti/func_0059B17C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059B1D4",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/fam_sti/func_0059B1D4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059B2A8",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/fam_sti/func_0059B2A8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059B37C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059B37C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059B44C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059B44C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059B66C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059B66C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059BF70",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059BF70.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059D488",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059D488.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059DB94",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059DB94.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059E4FC",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059E4FC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F088",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059F088.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F154",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059F154.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F220",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059F220.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F24C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059F24C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F5D4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059F5D4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F6A4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059F6A4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F878",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059F878.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F9E0",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059F9E0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059FA90",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059FA90.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A1084",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A1084.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A10B0",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A10B0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A1160",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A1160.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A118C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A118C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A123C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A123C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A1448",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A1448.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A1924",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A1924.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A1E30",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A1E30.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A21D8",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A21D8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A30FC",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A30FC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A31C8",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A31C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A35D4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A35D4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A36A4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A36A4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A3754",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A3754.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A3804",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A3804.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A38B4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A38B4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A3C20",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A3C20.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A3EE8",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A3EE8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A59B4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A59B4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A5B48",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A5B48.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A5B7C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A5B7C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A5C50",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A5C50.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A6160",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A6160.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A6260",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A6260.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A6338",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A6338.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A6408",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A6408.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A64D4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A64D4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A6B28",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A6B28.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A6BF8",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A6BF8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A77E4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A77E4.cpp",
+"status": "honest",
+"tricks": []
+}
+]
+},
+"albw::Delegate": {
+"kind": "struct",
+"name": "Delegate",
+"sites": [
+{
+"addr": "00168E00",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/game_re2/families/src/rm/00168E00_from_00286FF8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00197F1C",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/fam_rtti2/func_00197F1C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0019BAF0",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/translator/runs/harvest150/descent/0019BAF0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001BFDB0",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/rules/synth/t8_eval/iface_on/001BFDB0/best.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001C70E4",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/game_re2/families/src/rm/001C70E4_from_0019BAF0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00244C40",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/translator/runs/harvest150/descent/00244C40.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00257EA0",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/rules/synth/t8_eval/iface_on/00257EA0/best.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00286FF8",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/rules/synth/t8_eval/iface_on/00286FF8/best.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0029D9FC",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/newtrans/batch/work/27788_45855/0029D9FC.2844d7713c3e.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0037AE48",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/game_re2/families/src/rm/0037AE48_from_0029D9FC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "003B0510",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/translator/runs/harvest150/descent/003B0510.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00456C90",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/newtrans/batch/work/27788_18587/00456C90.119001764649.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00516258",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/lead/matched_1020/00516258.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0067F8D4",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/sol2/session4/0067F8D4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00682734",
+"check": "MATCH",
+"header": false,
+"path": "src/work7/gpt30/func_00682734.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00682790",
+"check": "MATCH",
+"header": false,
+"path": "src/work7/gpt22/func_00682790.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "006827EC",
+"check": "MATCH",
+"header": false,
+"path": "src/work7/gpt22/func_006827EC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00682848",
+"check": "MATCH",
+"header": false,
+"path": "src/work7/gpt22/func_00682848.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "006828A4",
+"check": null,
+"header": false,
+"path": "src/work7/gpt22/func_006828A4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00682900",
+"check": null,
+"header": false,
+"path": "src/work7/gpt22/func_00682900.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0068295C",
+"check": null,
+"header": false,
+"path": "src/work7/gpt22/func_0068295C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "006829B8",
+"check": null,
+"header": false,
+"path": "src/work7/gpt22/func_006829B8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00682A14",
+"check": null,
+"header": false,
+"path": "src/work7/gpt22/func_00682A14.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00682A70",
+"check": null,
+"header": false,
+"path": "src/work7/gpt22/func_00682A70.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00682ACC",
+"check": null,
+"header": false,
+"path": "src/work7/gpt22/func_00682ACC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00682B28",
+"check": null,
+"header": false,
+"path": "src/work7/gpt22/func_00682B28.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00682B84",
+"check": null,
+"header": false,
+"path": "src/work7/gpt22/func_00682B84.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00682BE0",
+"check": null,
+"header": false,
+"path": "src/work7/gpt22/func_00682BE0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00682C3C",
+"check": null,
+"header": false,
+"path": "src/work7/gpt22/func_00682C3C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00682C98",
+"check": null,
+"header": false,
+"path": "src/work7/gpt22/func_00682C98.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00682CF4",
+"check": null,
+"header": false,
+"path": "src/work7/gpt22/func_00682CF4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00682D50",
+"check": null,
+"header": false,
+"path": "src/work7/gpt22/func_00682D50.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00682DAC",
+"check": null,
+"header": false,
+"path": "src/work7/gpt22/func_00682DAC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00682E08",
+"check": null,
+"header": false,
+"path": "src/work7/gpt22/func_00682E08.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00682E64",
+"check": null,
+"header": false,
+"path": "src/work7/gpt22/func_00682E64.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00682EC0",
+"check": null,
+"header": false,
+"path": "src/work7/gpt22/func_00682EC0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00682F1C",
+"check": null,
+"header": false,
+"path": "src/work7/gpt22/func_00682F1C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00682F78",
+"check": null,
+"header": false,
+"path": "src/work7/gpt22/func_00682F78.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00682FD4",
+"check": null,
+"header": false,
+"path": "src/work7/gpt22/func_00682FD4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00683030",
+"check": null,
+"header": false,
+"path": "src/work7/gpt22/func_00683030.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0068308C",
+"check": null,
+"header": false,
+"path": "src/work7/gpt22/func_0068308C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "006830E8",
+"check": null,
+"header": false,
+"path": "src/work7/gpt22/func_006830E8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00683144",
+"check": null,
+"header": false,
+"path": "src/work7/gpt22/func_00683144.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "006831A0",
+"check": null,
+"header": false,
+"path": "src/work7/gpt22/func_006831A0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "006831FC",
+"check": null,
+"header": false,
+"path": "src/work7/gpt22/func_006831FC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00683258",
+"check": null,
+"header": false,
+"path": "src/work7/gpt22/func_00683258.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "006832B4",
+"check": null,
+"header": false,
+"path": "src/work7/gpt22/func_006832B4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00683310",
+"check": null,
+"header": false,
+"path": "src/work7/gpt22/func_00683310.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0068336C",
+"check": null,
+"header": false,
+"path": "src/work7/gpt22/func_0068336C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "006833C8",
+"check": null,
+"header": false,
+"path": "src/work7/gpt22/func_006833C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00683424",
+"check": null,
+"header": false,
+"path": "src/work7/gpt22/func_00683424.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00683480",
+"check": null,
+"header": false,
+"path": "src/work7/gpt22/func_00683480.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "006834DC",
+"check": null,
+"header": false,
+"path": "src/work7/gpt22/func_006834DC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00683538",
+"check": null,
+"header": false,
+"path": "src/work7/gpt22/func_00683538.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00683594",
+"check": null,
+"header": false,
+"path": "src/work7/gpt22/func_00683594.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "006835F0",
+"check": null,
+"header": false,
+"path": "src/work7/gpt22/func_006835F0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0068364C",
+"check": null,
+"header": false,
+"path": "src/work7/gpt22/func_0068364C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "006836A8",
+"check": null,
+"header": false,
+"path": "src/work7/gpt22/func_006836A8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00683704",
+"check": null,
+"header": false,
+"path": "src/work7/gpt22/func_00683704.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00683760",
+"check": null,
+"header": false,
+"path": "src/work7/gpt22/func_00683760.cpp",
+"status": "honest",
+"tricks": []
+}
+]
+},
+"albw::Factory": {
+"kind": "struct",
+"name": "Factory",
+"sites": [
+{
+"addr": "00593240",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/fam_sti/func_00593240.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005934D4",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/fam_sti/func_005934D4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059352C",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/fam_sti/func_0059352C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005936A0",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/fam_sti/func_005936A0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00599018",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/fam_sti/func_00599018.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005991C0",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/fam_sti/func_005991C0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005993FC",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/fam_sti/func_005993FC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059A0CC",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/fam_sti/func_0059A0CC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059A548",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/fam_sti/func_0059A548.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059A5F8",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/fam_sti/func_0059A5F8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059AC40",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/fam_sti/func_0059AC40.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059B17C",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/fam_sti/func_0059B17C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059B1D4",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/fam_sti/func_0059B1D4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059B2A8",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/fam_sti/func_0059B2A8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059B37C",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/fam_sti/func_0059B37C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059B44C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059B44C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059B66C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059B66C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059BF70",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059BF70.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059D488",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059D488.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059DB94",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059DB94.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059E4FC",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059E4FC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F088",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059F088.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F154",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059F154.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F220",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059F220.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F24C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059F24C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F5D4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059F5D4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F6A4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059F6A4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F878",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059F878.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F9E0",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059F9E0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059FA90",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059FA90.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A1084",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A1084.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A10B0",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A10B0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A1160",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A1160.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A118C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A118C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A123C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A123C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A1448",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A1448.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A1924",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A1924.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A1E30",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A1E30.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A21D8",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A21D8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A30FC",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A30FC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A31C8",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A31C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A35D4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A35D4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A36A4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A36A4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A3754",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A3754.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A3804",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A3804.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A38B4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A38B4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A3C20",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A3C20.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A3EE8",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A3EE8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A59B4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A59B4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A5B48",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A5B48.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A5B7C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A5B7C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A5C50",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A5C50.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A6160",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A6160.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A6260",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A6260.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A6338",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A6338.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A6408",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A6408.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A64D4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A64D4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A6B28",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A6B28.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A6BF8",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A6BF8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A77E4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A77E4.cpp",
+"status": "honest",
+"tricks": []
+}
+]
+},
+"albw::Flag16": {
+"kind": "struct",
+"name": "Flag16",
+"sites": [
+{
+"addr": "0025D328",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/auto/var/v_0025D328_from_0025C464.cpp",
+"status": "hack",
+"tricks": [
+"__schedule_barrier"
+]
+},
+{
+"addr": "0025D380",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/auto/var/v_0025D380_from_0025C464.cpp",
+"status": "hack",
+"tricks": [
+"__schedule_barrier"
+]
+},
+{
+"addr": "0025D3D8",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/auto/var/v_0025D3D8_from_0025C464.cpp",
+"status": "hack",
+"tricks": [
+"__schedule_barrier"
+]
+},
+{
+"addr": "0025D430",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/auto/var/v_0025D430_from_0025C464.cpp",
+"status": "hack",
+"tricks": [
+"__schedule_barrier"
+]
+},
+{
+"addr": "003248BC",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/auto/func_003248BC.cpp",
+"status": "hack",
+"tricks": [
+"weak",
+"perm_t"
+]
+},
+{
+"addr": "001533B8",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/game_re2/families/src/dehack/001533B8_from_0026562C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001660D0",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/game_re2/float/barrier/pass/dehacked/001660D0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00172428",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/sol2/session4/00172428.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001B6D20",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work7/gpt16/func_001B6D20.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00230674",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/opus_tp3b/func_00230674.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00254ED8",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work7/gpt16/func_00254ED8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0025B324",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/sol2/session3/0025B324.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0025D5C8",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/sol1/0025D5C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0026562C",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/sol1/0026562C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00267914",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/game_re2/float/hacks/pass/dehacked/00267914.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00267968",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/game_re2/float/barrier/pass/new/00267968.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002879C8",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/sol2/variants/002879C8_1.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00288224",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/game_re2/float/barrier/pass/dehacked/00288224.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002884A4",
+"check": null,
+"header": false,
+"path": "src/work8/sol2/session5/002884A4_nw.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0028B008",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/0028B008.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002903E8",
+"check": null,
+"header": false,
+"path": "src/work8/sol2/session6/002903E8_dh.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00291520",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/00291520.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00291950",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/00291950_dh.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0029E18C",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/0029E18C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0029F88C",
+"check": null,
+"header": false,
+"path": "src/work8/sol2/variants/0029F88C_0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002A52D8",
+"check": null,
+"header": false,
+"path": "src/work8/sol2/variants/002A52D8_1.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002AD6C0",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/002AD6C0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002AD8A0",
+"check": null,
+"header": false,
+"path": "src/work8/sol2/session4/002AD8A0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002AE9F8",
+"check": null,
+"header": false,
+"path": "src/work8/sol2/session3/002AE9F8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002B0514",
+"check": null,
+"header": false,
+"path": "src/work8/game_re2/float/barrier/pass/new/002B0514.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002B1448",
+"check": null,
+"header": false,
+"path": "src/work8/nm1/x_d.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002BF2F0",
+"check": null,
+"header": false,
+"path": "src/work7/gpt25/best/func_002BF2F0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002BF3B0",
+"check": null,
+"header": false,
+"path": "src/work7/gpt25/best/func_002BF3B0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002BF4BC",
+"check": null,
+"header": false,
+"path": "src/work8/sol2/variants/002BF4BC_1_nw.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002BF98C",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/002BF98C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002BFA1C",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/002BFA1C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002BFA98",
+"check": null,
+"header": false,
+"path": "src/work7/gpt25/best/func_002BFA98.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002C425C",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/002C425C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002C8DA0",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/002C8DA0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002C9104",
+"check": null,
+"header": false,
+"path": "src/work8/sol2/session3/002C9104.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002CC4BC",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/002CC4BC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002CC5CC",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/002CC5CC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002D04E4",
+"check": null,
+"header": false,
+"path": "src/work8/game_re2/float/barrier/pass/dehacked/002D04E4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002D2A74",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/002D2A74.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002D40FC",
+"check": null,
+"header": false,
+"path": "src/work8/perm_server/002D40FC_match_dh.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002D41D4",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/002D41D4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002DEB3C",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/002DEB3C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002E021C",
+"check": null,
+"header": false,
+"path": "src/work8/sol2/variants/002E021C_12.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002E19EC",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/002E19EC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002E29F8",
+"check": null,
+"header": false,
+"path": "src/work8/doctor_srv/func_002E29F8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002E4DE8",
+"check": null,
+"header": false,
+"path": "src/work8/sol2/session5/002E4DE8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002F0830",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/002F0830.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002F2474",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/002F2474.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002F32D8",
+"check": null,
+"header": false,
+"path": "src/work8/opus_tp2/func_002F32D8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002FA620",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/002FA620_nw.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002FBDAC",
+"check": null,
+"header": false,
+"path": "src/work8/game_re2/float/barrier/pass/dehacked/002FBDAC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002FE72C",
+"check": null,
+"header": false,
+"path": "src/work8/perm_server/002FE72C_match.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "003057E4",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/003057E4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00308110",
+"check": null,
+"header": false,
+"path": "src/work8/sol2/session3/00308110.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "003097BC",
+"check": null,
+"header": false,
+"path": "src/work8/sol2/variants/003097BC_0.cpp",
+"status": "honest",
+"tricks": []
+}
+]
+},
+"albw::Flag32": {
+"kind": "struct",
+"name": "Flag32",
+"sites": [
+{
+"addr": "0025D328",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/auto/var/v_0025D328_from_0025C464.cpp",
+"status": "hack",
+"tricks": [
+"__schedule_barrier"
+]
+},
+{
+"addr": "0025D380",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/auto/var/v_0025D380_from_0025C464.cpp",
+"status": "hack",
+"tricks": [
+"__schedule_barrier"
+]
+},
+{
+"addr": "0025D3D8",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/auto/var/v_0025D3D8_from_0025C464.cpp",
+"status": "hack",
+"tricks": [
+"__schedule_barrier"
+]
+},
+{
+"addr": "0025D430",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/auto/var/v_0025D430_from_0025C464.cpp",
+"status": "hack",
+"tricks": [
+"__schedule_barrier"
+]
+},
+{
+"addr": "003248BC",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/auto/func_003248BC.cpp",
+"status": "hack",
+"tricks": [
+"weak",
+"perm_t"
+]
+},
+{
+"addr": "0010173C",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/sol2/variants/0010173C_15.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00105374",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/game_re2/reach/pass/00105374.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00122E64",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/sol1/00122E64.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0012B4E4",
+"check": "MATCH",
+"header": false,
+"path": "src/work7/gpt15/variants/0012B4E4/v0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0013BD80",
+"check": "MATCH",
+"header": false,
+"path": "src/work7/gpt15/variants/0013BD80/v8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0014F4EC",
+"check": "MATCH",
+"header": false,
+"path": "src/work7/gpt15/variants/0014F4EC/v0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001533B8",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/game_re2/families/src/dehack/001533B8_from_0026562C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001660D0",
+"check": null,
+"header": false,
+"path": "src/work8/game_re2/float/barrier/pass/dehacked/001660D0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00230674",
+"check": null,
+"header": false,
+"path": "src/work8/opus_tp3b/func_00230674.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0025B324",
+"check": null,
+"header": false,
+"path": "src/work8/sol2/session3/0025B324.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0025D5C8",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/0025D5C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00261C9C",
+"check": null,
+"header": false,
+"path": "src/work7/gpt25/best/func_00261C9C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00262E88",
+"check": null,
+"header": false,
+"path": "src/work7/gpt25/best/func_00262E88.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002635FC",
+"check": null,
+"header": false,
+"path": "src/work7/gpt25/best/func_002635FC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0026562C",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/0026562C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00267914",
+"check": null,
+"header": false,
+"path": "src/work8/game_re2/float/hacks/pass/dehacked/00267914.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00267968",
+"check": null,
+"header": false,
+"path": "src/work8/game_re2/float/barrier/pass/new/00267968.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0026D3AC",
+"check": null,
+"header": false,
+"path": "src/work7/gpt25/best/func_0026D3AC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002879C8",
+"check": null,
+"header": false,
+"path": "src/work8/sol2/variants/002879C8_1.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00288224",
+"check": null,
+"header": false,
+"path": "src/work8/game_re2/float/barrier/pass/dehacked/00288224.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002884A4",
+"check": null,
+"header": false,
+"path": "src/work8/sol2/session5/002884A4_nw.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0028B008",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/0028B008.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0028B110",
+"check": null,
+"header": false,
+"path": "src/work7/gpt25/best/func_0028B110_nw.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0028C740",
+"check": null,
+"header": false,
+"path": "src/work7/gpt25/best/func_0028C740.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002903E8",
+"check": null,
+"header": false,
+"path": "src/work8/sol2/session6/002903E8_dh.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00291520",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/00291520.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00291950",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/00291950_dh.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002944CC",
+"check": null,
+"header": false,
+"path": "src/work7/ds3/func_002944CC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00295A8C",
+"check": null,
+"header": false,
+"path": "src/work7/gpt25/best/func_00295A8C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0029E18C",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/0029E18C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0029F88C",
+"check": null,
+"header": false,
+"path": "src/work8/sol2/variants/0029F88C_0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002A0FA4",
+"check": null,
+"header": false,
+"path": "src/work7/gpt25/best/func_002A0FA4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002A52D8",
+"check": null,
+"header": false,
+"path": "src/work8/sol2/variants/002A52D8_1.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002AD6C0",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/002AD6C0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002AD8A0",
+"check": null,
+"header": false,
+"path": "src/work8/sol2/session4/002AD8A0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002AE9F8",
+"check": null,
+"header": false,
+"path": "src/work8/sol2/session3/002AE9F8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002B0514",
+"check": null,
+"header": false,
+"path": "src/work8/game_re2/float/barrier/pass/new/002B0514.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002BBA98",
+"check": null,
+"header": false,
+"path": "src/work7/ds3/func_002BBA98.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002BC9C8",
+"check": null,
+"header": false,
+"path": "src/work7/gpt25/best/func_002BC9C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002BF4BC",
+"check": null,
+"header": false,
+"path": "src/work8/sol2/variants/002BF4BC_1_nw.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002BF98C",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/002BF98C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002BFA1C",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/002BFA1C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002C425C",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/002C425C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002C4DD8",
+"check": null,
+"header": false,
+"path": "src/work7/gpt25/best/func_002C4DD8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002C8DA0",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/002C8DA0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002C9104",
+"check": null,
+"header": false,
+"path": "src/work8/sol2/session3/002C9104.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002CC4BC",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/002CC4BC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002CC5CC",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/002CC5CC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002D04E4",
+"check": null,
+"header": false,
+"path": "src/work8/game_re2/float/barrier/pass/dehacked/002D04E4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002D2A74",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/002D2A74.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002D40FC",
+"check": null,
+"header": false,
+"path": "src/work8/perm_server/002D40FC_match_dh.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002D41D4",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/002D41D4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002D439C",
+"check": null,
+"header": false,
+"path": "src/work7/gpt25/best/func_002D439C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002D4A7C",
+"check": null,
+"header": false,
+"path": "src/work7/gpt25/best/func_002D4A7C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002DEB3C",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/002DEB3C.cpp",
+"status": "honest",
+"tricks": []
+}
+]
+},
+"albw::Id64": {
+"kind": "struct",
+"name": "Id64",
+"sites": [
+{
+"addr": "005D0E74",
+"check": "MATCH",
+"header": true,
+"path": "src/work8/auto/func_005D0E74.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005F3414",
+"check": "MATCH",
+"header": true,
+"path": "src/work8/auto/func_005F3414.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005CE944",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/auto/func_005CE944.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005931E8",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work7/ds7/probe_sti_b.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00593214",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work7/ds7/hid/_bulk_005931e8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00593240",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/fam_sti/func_00593240.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005934D4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005934D4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00593500",
+"check": null,
+"header": false,
+"path": "src/work7/ds7/probe_sti_a.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059352C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059352C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005936A0",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005936A0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00598E34",
+"check": null,
+"header": false,
+"path": "src/work7/gpt21/func_00598E34.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00599018",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_00599018.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005991C0",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005991C0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005993FC",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005993FC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059A0CC",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059A0CC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059A24C",
+"check": null,
+"header": false,
+"path": "src/work7/ds7/hid/_bulk_00593500.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059A33C",
+"check": null,
+"header": false,
+"path": "src/work7/ds7/hid/_bulk_00593500.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059A3E8",
+"check": null,
+"header": false,
+"path": "src/work7/ds7/hid/_bulk_00593500.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059A4F0",
+"check": null,
+"header": false,
+"path": "src/work7/ds7/hid/_bulk_005931e8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059A51C",
+"check": null,
+"header": false,
+"path": "src/work7/ds7/hid/_bulk_00593500.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059A548",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059A548.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059A5F8",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059A5F8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059AC40",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059AC40.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059B17C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059B17C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059B1A8",
+"check": null,
+"header": false,
+"path": "src/work7/ds7/hid/_bulk_005931e8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059B1D4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059B1D4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059B2A8",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059B2A8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059B37C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059B37C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059B44C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059B44C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059B66C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059B66C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059BF70",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059BF70.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059D488",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059D488.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059DB94",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059DB94.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059E4FC",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059E4FC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F088",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059F088.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F154",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059F154.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F220",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059F220.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F24C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059F24C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F5D4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059F5D4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F6A4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059F6A4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F738",
+"check": null,
+"header": false,
+"path": "src/work7/ds7/hid/_bulk_00593500.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F78C",
+"check": null,
+"header": false,
+"path": "src/work7/ds7/hid/_bulk_00593500.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F878",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059F878.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F8DC",
+"check": null,
+"header": false,
+"path": "src/work7/ds7/hid/_bulk_00593500.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F908",
+"check": null,
+"header": false,
+"path": "src/work7/ds7/hid/_bulk_005931e8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F9B4",
+"check": null,
+"header": false,
+"path": "src/work7/ds7/hid/_bulk_00593500.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F9E0",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059F9E0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059FA90",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059FA90.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059FABC",
+"check": null,
+"header": false,
+"path": "src/work7/ds7/hid/_bulk_00593500.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059FAE8",
+"check": null,
+"header": false,
+"path": "src/work7/ds7/hid/_bulk_00593500.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A1084",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A1084.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A10B0",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A10B0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A1160",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A1160.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A118C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A118C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A123C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A123C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A1448",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A1448.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A14A0",
+"check": null,
+"header": false,
+"path": "src/work7/ds7/hid/_bulk_005931e8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A1924",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A1924.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A1E30",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A1E30.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A21D8",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A21D8.cpp",
+"status": "honest",
+"tricks": []
+}
+]
+},
+"albw::ListNode": {
+"kind": "struct",
+"name": "ListNode",
+"sites": [
+{
+"addr": "00107AE0",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/opus_tiny/f107AE0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0010B368",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/opus_tiny/f10B368.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0010BDD8",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/opus_tiny/t108.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0010CE7C",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/lead/matched_1020/0010CE7C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0011224C",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work7/gpt23/func_0011224C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0019A38C",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/sol2/session4/0019A38C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001E252C",
+"check": null,
+"header": false,
+"path": "src/work4/agent1/func_001E252C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002974A0",
+"check": null,
+"header": false,
+"path": "src/work8/audit_reloc/fix/src/002974A0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0030D120",
+"check": null,
+"header": false,
+"path": "src/work8/opus2/0030D120_dh.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "003222C4",
+"check": null,
+"header": false,
+"path": "src/work8/opus8/003222C4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0049F5A8",
+"check": null,
+"header": false,
+"path": "src/work7/ds6/func_0049F5A8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "006874D4",
+"check": null,
+"header": false,
+"path": "src/work8/opus_tiny/f6874D4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "006874EC",
+"check": null,
+"header": false,
+"path": "src/work8/opus_tiny/f6874EC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00689C64",
+"check": null,
+"header": false,
+"path": "src/work8/opus_tiny/f689C64.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00689C78",
+"check": null,
+"header": false,
+"path": "src/work8/opus_tiny/f689C78.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00124694",
+"check": null,
+"header": false,
+"path": "src/work8/perm_server/00124694_match.cpp",
+"status": "hack",
+"tricks": []
+}
+]
+},
+"albw::Pair": {
+"kind": "struct",
+"name": "Pair",
+"sites": [
+{
+"addr": "005D0E74",
+"check": "MATCH",
+"header": true,
+"path": "src/work8/auto/func_005D0E74.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005F3414",
+"check": "MATCH",
+"header": true,
+"path": "src/work8/auto/func_005F3414.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005CE944",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/auto/func_005CE944.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0010BE44",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work7/ds7/hid/vmember.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0010BE70",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work7/ds7/hid/_bulk_0010be44.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0010D0C0",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work7/ds7/hid/_bulk_0010be44.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0010DA24",
+"check": null,
+"header": false,
+"path": "src/work7/gpt15/func_0010DA24.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0014EB3C",
+"check": null,
+"header": false,
+"path": "src/work7/gpt15/variants/0014EB3C/v0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001C800C",
+"check": null,
+"header": false,
+"path": "src/work8/opus_tp2/func_001C800C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0022CC08",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/0022CC08_nw.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002A5B90",
+"check": null,
+"header": false,
+"path": "src/work7/ds3/func_002A5B90.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002E92E0",
+"check": null,
+"header": false,
+"path": "src/work7/ds3/func_002E92E0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002EA76C",
+"check": null,
+"header": false,
+"path": "src/work7/ds3/func_002EA76C_nw.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002EEFAC",
+"check": null,
+"header": false,
+"path": "src/work7/ds3/func_002EEFAC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0034C0AC",
+"check": null,
+"header": false,
+"path": "src/work7/gpt18/func_0034C0AC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00363850",
+"check": null,
+"header": false,
+"path": "src/work8/nm2/v_m1.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00373364",
+"check": null,
+"header": false,
+"path": "src/work7/gpt18/func_00373364_nw.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00377354",
+"check": null,
+"header": false,
+"path": "src/work7/gpt18/func_00377354.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "003852EC",
+"check": null,
+"header": false,
+"path": "src/work8/ds_srv/ds1/func_003852EC.c",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "003D0ACC",
+"check": null,
+"header": false,
+"path": "src/work8/sol2/003D0ACC_dh.c",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "003D3800",
+"check": null,
+"header": false,
+"path": "src/work8/opus4/003D3800.c",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00407CEC",
+"check": null,
+"header": false,
+"path": "src/work7/gpt19/func_00407CEC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0040C844",
+"check": null,
+"header": false,
+"path": "src/work8/nm1/r_0040C83C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0040E800",
+"check": null,
+"header": false,
+"path": "src/work8/nm2/c0040E800/vA.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00428B84",
+"check": null,
+"header": false,
+"path": "src/work8/sol2/variants/00428B84_2.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0044F498",
+"check": null,
+"header": false,
+"path": "src/work7/gpt19/func_0044F498.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0048E128",
+"check": null,
+"header": false,
+"path": "src/work7/gpt19/func_0048E128.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "004A693C",
+"check": null,
+"header": false,
+"path": "src/work8/opus4/004A693C.c",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0056A10C",
+"check": null,
+"header": false,
+"path": "src/work7/gpt21/func_0056A10C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00573720",
+"check": null,
+"header": false,
+"path": "src/work7/gpt21/func_00573720.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00580A38",
+"check": null,
+"header": false,
+"path": "src/work8/H9/func_00580A38.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005817C0",
+"check": null,
+"header": false,
+"path": "src/work7/gpt21/func_005817C0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005931E8",
+"check": null,
+"header": false,
+"path": "src/work7/ds7/probe_sti_b.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00593214",
+"check": null,
+"header": false,
+"path": "src/work7/ds7/hid/_bulk_005931e8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00593240",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_00593240.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005934D4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005934D4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00593500",
+"check": null,
+"header": false,
+"path": "src/work7/ds7/probe_sti_a.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059352C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059352C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005936A0",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005936A0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00598E34",
+"check": null,
+"header": false,
+"path": "src/work7/gpt21/func_00598E34.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00599018",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_00599018.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005991C0",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005991C0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005993FC",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005993FC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059A0CC",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059A0CC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059A24C",
+"check": null,
+"header": false,
+"path": "src/work7/ds7/hid/_bulk_00593500.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059A33C",
+"check": null,
+"header": false,
+"path": "src/work7/ds7/hid/_bulk_00593500.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059A3E8",
+"check": null,
+"header": false,
+"path": "src/work7/ds7/hid/_bulk_00593500.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059A4F0",
+"check": null,
+"header": false,
+"path": "src/work7/ds7/hid/_bulk_005931e8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059A51C",
+"check": null,
+"header": false,
+"path": "src/work7/ds7/hid/_bulk_00593500.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059A548",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059A548.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059A5F8",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059A5F8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059AC40",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059AC40.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059B17C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059B17C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059B1A8",
+"check": null,
+"header": false,
+"path": "src/work7/ds7/hid/_bulk_005931e8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059B1D4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059B1D4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059B2A8",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059B2A8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059B37C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059B37C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059B44C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059B44C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059B66C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059B66C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059BF70",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059BF70.cpp",
+"status": "honest",
+"tricks": []
+}
+]
+},
+"albw::PtrCnt": {
+"kind": "struct",
+"name": "PtrCnt",
+"sites": [
+{
+"addr": "00465FE0",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/lead/matched_1020/00465FE0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00593240",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/fam_sti/func_00593240.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005934D4",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/fam_sti/func_005934D4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059352C",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/fam_sti/func_0059352C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005936A0",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/fam_sti/func_005936A0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00599018",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/fam_sti/func_00599018.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005991C0",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005991C0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005993FC",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005993FC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059A0CC",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059A0CC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059A548",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059A548.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059A5F8",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059A5F8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059AC40",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059AC40.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059B17C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059B17C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059B1D4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059B1D4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059B2A8",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059B2A8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059B37C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059B37C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059B44C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059B44C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059B66C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059B66C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059BF70",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059BF70.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059D488",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059D488.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059DB94",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059DB94.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059E4FC",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059E4FC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F088",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059F088.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F154",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059F154.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F220",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059F220.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F24C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059F24C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F5D4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059F5D4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F6A4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059F6A4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F878",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059F878.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F9E0",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059F9E0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059FA90",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059FA90.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A1084",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A1084.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A10B0",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A10B0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A1160",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A1160.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A118C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A118C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A123C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A123C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A1448",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A1448.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A1924",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A1924.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A1E30",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A1E30.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A21D8",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A21D8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A30FC",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A30FC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A31C8",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A31C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A35D4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A35D4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A36A4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A36A4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A3754",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A3754.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A3804",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A3804.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A38B4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A38B4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A3C20",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A3C20.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A3EE8",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A3EE8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A59B4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A59B4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A5B48",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A5B48.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A5B7C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A5B7C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A5C50",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A5C50.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A6160",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A6160.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A6260",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A6260.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A6338",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A6338.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A6408",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A6408.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A64D4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A64D4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A6B28",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A6B28.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A6BF8",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A6BF8.cpp",
+"status": "honest",
+"tricks": []
+}
+]
+},
+"albw::PtrList": {
+"kind": "struct",
+"name": "PtrList",
+"sites": [
+{
+"addr": "00465FE0",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/lead/matched_1020/00465FE0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00593240",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/fam_sti/func_00593240.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005934D4",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/fam_sti/func_005934D4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059352C",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/fam_sti/func_0059352C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005936A0",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/fam_sti/func_005936A0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00599018",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/fam_sti/func_00599018.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005991C0",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005991C0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005993FC",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005993FC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059A0CC",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059A0CC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059A548",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059A548.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059A5F8",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059A5F8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059AC40",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059AC40.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059B17C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059B17C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059B1D4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059B1D4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059B2A8",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059B2A8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059B37C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059B37C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059B44C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059B44C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059B66C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059B66C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059BF70",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059BF70.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059D488",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059D488.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059DB94",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059DB94.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059E4FC",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059E4FC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F088",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059F088.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F154",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059F154.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F220",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059F220.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F24C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059F24C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F5D4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059F5D4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F6A4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059F6A4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F878",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059F878.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F9E0",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059F9E0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059FA90",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059FA90.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A1084",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A1084.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A10B0",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A10B0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A1160",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A1160.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A118C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A118C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A123C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A123C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A1448",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A1448.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A1924",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A1924.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A1E30",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A1E30.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A21D8",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A21D8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A30FC",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A30FC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A31C8",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A31C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A35D4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A35D4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A36A4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A36A4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A3754",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A3754.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A3804",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A3804.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A38B4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A38B4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A3C20",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A3C20.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A3EE8",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A3EE8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A59B4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A59B4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A5B48",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A5B48.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A5B7C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A5B7C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A5C50",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A5C50.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A6160",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A6160.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A6260",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A6260.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A6338",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A6338.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A6408",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A6408.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A64D4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A64D4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A6B28",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A6B28.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A6BF8",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A6BF8.cpp",
+"status": "honest",
+"tricks": []
+}
+]
+},
+"albw::PtrListBase": {
+"kind": "struct",
+"name": "PtrListBase",
+"sites": [
+{
+"addr": "00465FE0",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/lead/matched_1020/00465FE0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00593240",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/fam_sti/func_00593240.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005934D4",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/fam_sti/func_005934D4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059352C",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/fam_sti/func_0059352C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005936A0",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/fam_sti/func_005936A0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00599018",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/fam_sti/func_00599018.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005991C0",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/fam_sti/func_005991C0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005993FC",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005993FC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059A0CC",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059A0CC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059A548",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059A548.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059A5F8",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059A5F8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059AC40",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059AC40.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059B17C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059B17C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059B1D4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059B1D4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059B2A8",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059B2A8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059B37C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059B37C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059B44C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059B44C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059B66C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059B66C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059BF70",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059BF70.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059D488",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059D488.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059DB94",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059DB94.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059E4FC",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059E4FC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F088",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059F088.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F154",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059F154.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F220",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059F220.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F24C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059F24C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F5D4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059F5D4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F6A4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059F6A4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F878",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059F878.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059F9E0",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059F9E0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0059FA90",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_0059FA90.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A1084",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A1084.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A10B0",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A10B0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A1160",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A1160.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A118C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A118C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A123C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A123C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A1448",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A1448.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A1924",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A1924.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A1E30",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A1E30.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A21D8",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A21D8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A30FC",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A30FC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A31C8",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A31C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A35D4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A35D4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A36A4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A36A4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A3754",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A3754.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A3804",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A3804.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A38B4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A38B4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A3C20",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A3C20.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A3EE8",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A3EE8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A59B4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A59B4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A5B48",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A5B48.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A5B7C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A5B7C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A5C50",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A5C50.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A6160",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A6160.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A6260",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A6260.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A6338",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A6338.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A6408",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A6408.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A64D4",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A64D4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A6B28",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A6B28.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005A6BF8",
+"check": null,
+"header": false,
+"path": "src/work8/fam_sti/func_005A6BF8.cpp",
+"status": "honest",
+"tricks": []
+}
+]
+},
+"albw::StateMgr": {
+"kind": "struct",
+"name": "StateMgr",
+"sites": [
+{
+"addr": "0013646C",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/auto/func_0013646C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0024C54C",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/auto/func_0024C54C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0035E2E4",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/auto/func_0035E2E4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0010BB50",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0010BC94",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0010CF7C",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00137E14",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/opus_tp3b/func_00137E14.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0013DFC0",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/audit_reloc/fix/src/0013DFC0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00143E80",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/game_re2/families/src/s16/00143E80_from_0016EC48_s16ec48.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0015A29C",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work5/agent16/func_00213DF8_nw.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0015F8C8",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work5/agent16/func_00213DF8_nw.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0016EC48",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/game_re2/families/solve/16EC48/v7.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00172B74",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/opus_tp3b/func_00172B74.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00174EB0",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/game_re2/families/src/s16/00174EB0_from_0016EC48_s16ec48.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00176760",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/game_re2/families/src/s16/00176760_from_0016EC48_s16ec48.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001816E8",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/opus6/001816E8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00186108",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/fam_rtti/func_00186108.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00186870",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/fam_rtti/func_00186870.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00197F1C",
+"check": null,
+"header": false,
+"path": "src/work8/fam_rtti2/func_00197F1C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001989F8",
+"check": null,
+"header": false,
+"path": "src/work8/game_re2/families/src/s16/001989F8_from_0016EC48_s16ec48.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0019C608",
+"check": null,
+"header": false,
+"path": "src/work8/game_re2/families/src/s16/0019C608_from_0016EC48_s16ec48.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001AAD14",
+"check": null,
+"header": false,
+"path": "src/work8/opus_tp3b/func_001AAD14_nw.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001BE3C8",
+"check": null,
+"header": false,
+"path": "src/work8/game_re2/families/src/s16/001BE3C8_from_0016EC48_s16ec48.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001BED10",
+"check": null,
+"header": false,
+"path": "src/work8/game_re2/families/src/s16/001BED10_from_0016EC48_s16ec48.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001C21A4",
+"check": null,
+"header": false,
+"path": "src/work8/game_re2/families/src/s16/001C21A4_from_0016EC48_s16ec48.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001C3348",
+"check": null,
+"header": false,
+"path": "src/work8/game_re2/families/src/s16/001C3348_from_0016EC48_s16ec48.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001C800C",
+"check": null,
+"header": false,
+"path": "src/work8/opus_tp2/func_001C800C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001CA0D8",
+"check": null,
+"header": false,
+"path": "src/work8/fam_rtti/func_001CA0D8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001CA758",
+"check": null,
+"header": false,
+"path": "src/work8/fam_rtti/func_001CA758.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001CAE60",
+"check": null,
+"header": false,
+"path": "src/work8/fam_rtti/func_001CAE60.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001CC97C",
+"check": null,
+"header": false,
+"path": "src/work8/opus4/001CC97C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001E28B8",
+"check": null,
+"header": false,
+"path": "src/work8/game_re2/families/src/s16/001E28B8_from_0016EC48_s16ec48.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001E6E60",
+"check": null,
+"header": false,
+"path": "src/work4/agent5/b6/func_001E6E60_nw.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001E6F84",
+"check": null,
+"header": false,
+"path": "src/work8/game_re2/families/src/s16/001E6F84_from_0016EC48_s16ec48.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001E7AA0",
+"check": null,
+"header": false,
+"path": "src/work4/agent3/func_001E7AA0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00200978",
+"check": null,
+"header": false,
+"path": "src/work5/agent8/func_00200978_nw.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00200A3C",
+"check": null,
+"header": false,
+"path": "src/work8/lead/matched_1020/00200A3C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00202C20",
+"check": null,
+"header": false,
+"path": "src/work8/opus1/00202C20_nw.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00206DB8",
+"check": null,
+"header": false,
+"path": "src/work5/agent11/func_00206DB8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00212B5C",
+"check": null,
+"header": false,
+"path": "src/work8/sol2/00212B5C_nw.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00213DF8",
+"check": null,
+"header": false,
+"path": "src/work5/agent16/func_00213DF8_nw.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002158D8",
+"check": null,
+"header": false,
+"path": "src/work6/gpt11/func_002158D8_nw.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00215AC8",
+"check": null,
+"header": false,
+"path": "src/work6/gpt11/func_00215AC8_nw.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00215F70",
+"check": null,
+"header": false,
+"path": "src/work6/gpt11/func_00215F70_nw.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0021A59C",
+"check": null,
+"header": false,
+"path": "src/work8/lead/ledger_1019/dehack/0021A59C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0021ABB0",
+"check": null,
+"header": false,
+"path": "src/work8/lead/ledger_1019/dehack/0021ABB0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0021ACB8",
+"check": null,
+"header": false,
+"path": "src/work8/lead/ledger_1019/dehack/0021ACB8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0021BC40",
+"check": null,
+"header": false,
+"path": "src/work8/lead/ledger_1019/dehack/0021BC40.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002254CC",
+"check": null,
+"header": false,
+"path": "src/work8/opus5/002254CC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00244434",
+"check": null,
+"header": false,
+"path": "src/work8/fam_rtti/func_00244434.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00245CB8",
+"check": null,
+"header": false,
+"path": "src/work8/fam_rtti/func_00245CB8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0024F49C",
+"check": null,
+"header": false,
+"path": "src/work8/game_re2/families/src/s16/0024F49C_from_0016EC48_s16ec48.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0025195C",
+"check": null,
+"header": false,
+"path": "src/work8/game_re2/families/src/s16/0025195C_from_0016EC48_s16ec48.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0026E08C",
+"check": null,
+"header": false,
+"path": "src/work8/opus_tp3b/func_0026E08C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002835D0",
+"check": null,
+"header": false,
+"path": "src/work8/fam_rtti/func_002835D0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00285A24",
+"check": null,
+"header": false,
+"path": "src/work8/fam_rtti/func_00285A24.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002863A4",
+"check": null,
+"header": false,
+"path": "src/work8/opus3/002863A4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00299458",
+"check": null,
+"header": false,
+"path": "src/work8/game_re2/families/src/s16/00299458_from_0016EC48_s16ec48.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0029AB48",
+"check": null,
+"header": false,
+"path": "src/work8/game_re2/families/src/s16/0029AB48_from_0016EC48_s16ec48.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0029B1EC",
+"check": null,
+"header": false,
+"path": "src/work8/game_re2/families/src/s16/0029B1EC_from_0016EC48_s16ec48.cpp",
+"status": "honest",
+"tricks": []
+}
+]
+},
+"albw::Word": {
+"kind": "struct",
+"name": "Word",
+"sites": [
+{
+"addr": "0019EBF0",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/opus_tiny/f19EBF0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001A0A5C",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/opus_tiny/f1A0A5C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001DEA54",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work4/agent7/func_001DEA54.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001E4A5C",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work4/agent8/func_001E4A5C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0021A2DC",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/opus_tiny/f21A2DC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0021C124",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/opus_tiny/f21C124.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002E1BB4",
+"check": null,
+"header": false,
+"path": "src/work7/gpt17/func_002E1BB4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "003907DC",
+"check": null,
+"header": false,
+"path": "src/work7/gpt18/func_003907DC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "003FDD6C",
+"check": null,
+"header": false,
+"path": "src/work8/opus_tiny/f3FDD6C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00419344",
+"check": null,
+"header": false,
+"path": "src/work8/sol2/00419344.c",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "004A1D4C",
+"check": null,
+"header": false,
+"path": "src/work8/opus_tiny/f4A1D4C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "004C6584",
+"check": null,
+"header": false,
+"path": "src/work7/gpt20/func_004C6584.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0050151C",
+"check": null,
+"header": false,
+"path": "src/work8/opus_tiny/f50151C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00501C38",
+"check": null,
+"header": false,
+"path": "src/work8/opus_tiny/f501C38.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00517888",
+"check": null,
+"header": false,
+"path": "src/work8/opus_tiny/f501C38.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0051D37C",
+"check": null,
+"header": false,
+"path": "src/work7/gpt20/v51D3_0.cpp",
+"status": "honest",
+"tricks": []
+}
+]
+},
+"albw::randRange": {
+"kind": "inline-func",
+"name": "randRange",
+"sites": [
+{
+"addr": "00396834",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/auto/func_00396834.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "003BD538",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/auto/func_003BD538.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "004139B0",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/auto/func_004139B0.cpp",
+"status": "hack",
+"tricks": [
+"asm"
+]
+},
+{
+"addr": "006552C0",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/auto/func_006552C0.cpp",
+"status": "hack",
+"tricks": [
+"weak"
+]
+},
+{
+"addr": "00656274",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/auto/func_00656274.cpp",
+"status": "hack",
+"tricks": [
+"weak"
+]
+},
+{
+"addr": "00104338",
+"check": "MATCH",
+"header": false,
+"path": "src/work7/gpt23/func_00104338.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00124194",
+"check": "MATCH",
+"header": false,
+"path": "src/work7/ds1/func_00124194.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00125980",
+"check": "MATCH",
+"header": false,
+"path": "src/work7/ds1/func_00125980.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00158AF0",
+"check": null,
+"header": false,
+"path": "src/work8/newtrans/pilot_g6c/starts/c02/descent/00158AF0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0017AB94",
+"check": null,
+"header": false,
+"path": "src/work8/lead/matched_1020/0017AB94.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001958EC",
+"check": null,
+"header": false,
+"path": "src/work8/lead/matched_1020/001958EC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001963F4",
+"check": null,
+"header": false,
+"path": "src/work8/lead/matched_1020/001963F4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001A367C",
+"check": null,
+"header": false,
+"path": "src/work7/ds2/v1A367C_u64_nw.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001A36F0",
+"check": null,
+"header": false,
+"path": "src/work7/ds2/v1A36F0_u64_nw.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001A9098",
+"check": null,
+"header": false,
+"path": "src/work8/newtrans/pilot_g6c/starts/c03/descent/001A9098.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00200A3C",
+"check": null,
+"header": false,
+"path": "src/work8/lead/matched_1020/00200A3C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00202C20",
+"check": null,
+"header": false,
+"path": "src/work8/opus1/00202C20_nw.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00205E38",
+"check": null,
+"header": false,
+"path": "src/work8/newtrans/pilot_g6c/starts/c04/descent/00205E38.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00212B5C",
+"check": null,
+"header": false,
+"path": "src/work8/sol2/00212B5C_nw.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002158D8",
+"check": null,
+"header": false,
+"path": "src/work6/gpt11/func_002158D8_nw.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00215AC8",
+"check": null,
+"header": false,
+"path": "src/work6/gpt11/func_00215AC8_nw.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00215F70",
+"check": null,
+"header": false,
+"path": "src/work6/gpt11/func_00215F70_nw.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00219668",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work6/gpt13/func_00219668.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0021A59C",
+"check": null,
+"header": false,
+"path": "src/work8/lead/ledger_1019/dehack/0021A59C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0021ABB0",
+"check": null,
+"header": false,
+"path": "src/work8/lead/ledger_1019/dehack/0021ABB0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0021ACB8",
+"check": null,
+"header": false,
+"path": "src/work8/lead/ledger_1019/dehack/0021ACB8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0021BC40",
+"check": null,
+"header": false,
+"path": "src/work8/lead/ledger_1019/dehack/0021BC40.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00222ED8",
+"check": null,
+"header": false,
+"path": "src/work8/newtrans/pilot_g6c/starts/c04/descent/00222ED8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002A4C00",
+"check": null,
+"header": false,
+"path": "src/work8/newtrans/pilot_g6c/starts/c05/descent/002A4C00.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002B75EC",
+"check": null,
+"header": false,
+"path": "src/work8/newtrans/pilot_g6c/starts/c06/descent/002B75EC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00329F74",
+"check": null,
+"header": false,
+"path": "src/work7/ds4/f_329F74.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0036D71C",
+"check": null,
+"header": false,
+"path": "src/work7/ds4/f_36D71C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0039611C",
+"check": null,
+"header": false,
+"path": "src/work8/lead/matched_1020/0039611C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00396534",
+"check": null,
+"header": false,
+"path": "src/work8/lead/matched_1020/00396534.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "003B0D50",
+"check": null,
+"header": false,
+"path": "src/work8/lead/matched_1020/003B0D50.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "003B23E0",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/H4/func_003B23E0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "003B6ECC",
+"check": null,
+"header": false,
+"path": "src/work7/gpt18/func_003B6ECC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "003B74EC",
+"check": null,
+"header": false,
+"path": "src/work8/lead/matched_1020/003B74EC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "003B7680",
+"check": null,
+"header": false,
+"path": "src/work8/lead/matched_1020/003B7680.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "003B8B4C",
+"check": null,
+"header": false,
+"path": "src/work7/ds4/f_3B8B4C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "003BDDBC",
+"check": null,
+"header": false,
+"path": "src/work7/gpt18/func_003BDDBC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "003BDE4C",
+"check": null,
+"header": false,
+"path": "src/work8/opus8/003BDE4C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "003BDFBC",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/003BDFBC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "003BDFF4",
+"check": null,
+"header": false,
+"path": "src/work8/newtrans/batch/work/27788_14596/003BDFF4.6cb96d4048db.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "003BF8C4",
+"check": null,
+"header": false,
+"path": "src/work7/gpt18/func_003BF8C4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "003C0870",
+"check": null,
+"header": false,
+"path": "src/work8/opus8/003C0870.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "003C0AC4",
+"check": null,
+"header": false,
+"path": "src/work8/lead/matched_1020/003C0AC4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "003C1358",
+"check": null,
+"header": false,
+"path": "src/work7/gpt18/func_003C1358.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "003C13E8",
+"check": null,
+"header": false,
+"path": "src/work8/opus8/003C13E8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "003C3E0C",
+"check": null,
+"header": false,
+"path": "src/work7/gpt18/func_003C3E0C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "003C3E9C",
+"check": null,
+"header": false,
+"path": "src/work8/opus8/003C3E9C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "003C418C",
+"check": null,
+"header": false,
+"path": "src/work8/opus4/003C418C.c",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "003C4E68",
+"check": null,
+"header": false,
+"path": "src/work7/gpt18/func_003C4E68.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "003CD764",
+"check": null,
+"header": false,
+"path": "src/work8/doctor_srv/func_003CD764.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00429204",
+"check": null,
+"header": false,
+"path": "src/work7/gpt27/func_00429204.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00429F84",
+"check": null,
+"header": false,
+"path": "src/work7/gpt19/func_00429F84.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0048C3DC",
+"check": null,
+"header": false,
+"path": "src/work7/ds5/f_0048C3DC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "004960AC",
+"check": null,
+"header": false,
+"path": "src/work8/lead/matched_1020/004960AC.c",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "004FFF80",
+"check": null,
+"header": false,
+"path": "src/work8/lead/matched_1020/004FFF80.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0058A474",
+"check": null,
+"header": false,
+"path": "src/work7/gpt29/func_0058A474.cpp",
+"status": "honest",
+"tricks": []
+}
+],
+"verdict": "PASS",
+"verified": 3
+},
+"operator new": {
+"kind": "operator",
+"name": "operator new",
+"sites": [
+{
+"addr": "006063CC",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/auto/var/v_006063CC_from_006043E4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0010BAB4",
+"check": "MATCH",
+"header": false,
+"path": "src/work7/gpt23/func_0010BAB4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0010BB50",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0010BC94",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0010CF7C",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/opus_fam/a1/006563C8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0010F8E8",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work7/gpt23/func_0010F8E8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0014D244",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work7/ds1/func_0014D244.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0014E868",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work7/ds1/func_0014E868.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0015212C",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/opus5/0015212C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0015C6A8",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/game_re2/reach/pass/0015C6A8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0016739C",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work7/gpt16/func_0016739C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001DEA54",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work4/agent7/func_001DEA54.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001E3EB0",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work5/finisher/func_001E3EB0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001E4414",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work4/agent8/func_001E4414.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0030D120",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/opus2/0030D120_dh.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "003931EC",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/opus_fam/a6/m0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "003947D0",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/H3/func_003947D0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "003FDD6C",
+"check": "MATCH",
+"header": false,
+"path": "src/work8/opus_tiny/f3FDD6C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "004937B0",
+"check": null,
+"header": false,
+"path": "src/work8/game_re2/float/barrier/pass/dehacked/004937B0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00495760",
+"check": null,
+"header": false,
+"path": "src/work8/lead/matched_1020/00495760.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "004964D4",
+"check": null,
+"header": false,
+"path": "src/work7/gpt20/func_004964D4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0049AE90",
+"check": null,
+"header": false,
+"path": "src/work7/gpt20/func_0049AE90.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0049CE98",
+"check": null,
+"header": false,
+"path": "src/work7/gpt20/func_0049CE98.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "004A6C98",
+"check": null,
+"header": false,
+"path": "src/work7/gpt20/func_004A6C98.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "004AB4D0",
+"check": null,
+"header": false,
+"path": "src/work8/opus_tp3b/func_004AB4D0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "004B92E4",
+"check": null,
+"header": false,
+"path": "src/work8/opus6/004B92E4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "004B9930",
+"check": null,
+"header": false,
+"path": "src/work7/gpt20/func_004B9930.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "004BCB60",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/004BCB60.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "004CE738",
+"check": null,
+"header": false,
+"path": "src/work7/gpt20/func_004CE738.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "004D0268",
+"check": null,
+"header": false,
+"path": "src/work8/perm_local/imported/func_004D0268.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "004E422C",
+"check": null,
+"header": false,
+"path": "src/work8/game_re2/float/barrier/pass/dehacked/004E422C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "004E4CA0",
+"check": null,
+"header": false,
+"path": "src/work8/opus3/004E4CA0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "004E97BC",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/004E97BC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "004FA0B8",
+"check": null,
+"header": false,
+"path": "src/work8/game_re2/float/barrier/pass/new/004FA0B8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "004FBFBC",
+"check": null,
+"header": false,
+"path": "src/work8/sol2/variants/004FBFBC_0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "004FC07C",
+"check": null,
+"header": false,
+"path": "src/work8/sol2/variants/004FC07C_0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00502768",
+"check": null,
+"header": false,
+"path": "src/work8/game_re2/float/barrier/pass/dehacked/00502768.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "005136F4",
+"check": null,
+"header": false,
+"path": "src/work8/sol1/005136F4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00533644",
+"check": null,
+"header": false,
+"path": "src/work8/game_re2/float/barrier/pass/new/00533644.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0055C470",
+"check": null,
+"header": false,
+"path": "src/work8/game_re2/float/barrier/pass/dehacked/0055C470.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0060279C",
+"check": null,
+"header": false,
+"path": "src/work7/ds7/gen_vtfac_all.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "006027D8",
+"check": null,
+"header": false,
+"path": "src/work7/ds7/gen_vtfac_all.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00602840",
+"check": null,
+"header": false,
+"path": "src/work7/ds7/gen_factory_all.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0060286C",
+"check": null,
+"header": false,
+"path": "src/work7/ds7/gen_vtfac_all.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "006028A8",
+"check": null,
+"header": false,
+"path": "src/work7/ds7/gen_vtfac_all.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "006028E4",
+"check": null,
+"header": false,
+"path": "src/work7/gpt29/func_006028E4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00602960",
+"check": null,
+"header": false,
+"path": "src/work7/ds7/gen_factory_all.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0060298C",
+"check": null,
+"header": false,
+"path": "src/work7/ds7/gen_vtfac_all.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "006029C4",
+"check": null,
+"header": false,
+"path": "src/work7/ds7/gen_factory_all.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00602A74",
+"check": null,
+"header": false,
+"path": "src/work7/ds7/gen_factory_all.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00602AF8",
+"check": null,
+"header": false,
+"path": "src/work8/audit_reloc/fix/src/00602AF8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00602B20",
+"check": null,
+"header": false,
+"path": "src/work7/ds7/gen_vtfac_all.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00602B58",
+"check": null,
+"header": false,
+"path": "src/work7/ds7/gen_vtfac_all.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00602B90",
+"check": null,
+"header": false,
+"path": "src/work7/ds7/gen_fb_602B90.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00602C00",
+"check": null,
+"header": false,
+"path": "src/work7/ds7/gen_factory_all.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00602C2C",
+"check": null,
+"header": false,
+"path": "src/work8/lead/matched_1020/00602C2C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00602CA4",
+"check": null,
+"header": false,
+"path": "src/work7/ds7/gen_fac3_all.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00602D08",
+"check": null,
+"header": false,
+"path": "src/work8/lead/matched_1020/00602D08.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00602DA4",
+"check": null,
+"header": false,
+"path": "src/work7/ds7/gen_fac3_all.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00602E34",
+"check": null,
+"header": false,
+"path": "src/work7/ds7/gen_vtfac_all.cpp",
+"status": "honest",
+"tricks": []
+}
+],
+"verdict": "PASS",
+"verified": 3
+},
+"sead::SafeString": {
+"kind": "typedef",
+"name": "SafeString",
+"sites": [
+{
+"addr": "002C9C04",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/auto/var/v_002C9C04_from_00240F7C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00135800",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/sol1/00135800.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0015381C",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work7/ds2/f_0015381C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001563F8",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/opus1/001563F8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00163870",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work7/ds2/f_00163870.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00163E88",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work7/ds2/f_00163E88.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0017381C",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work7/ds2/v17381C_b.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00173F4C",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work7/ds2/f_00173F4C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00183738",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work7/ds2/f_00183738.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00189580",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/sol2/variants/00189580_1_dh.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0018D9FC",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work7/ds2/f_0018D9FC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0018E66C",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work7/ds2/f_0018E66C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001986E0",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work7/ds2/f_001986E0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0019B7D4",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work7/ds2/f_0019B7D4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001A4354",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work7/ds2/f_001A4354.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001A8024",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/opus8/001A8024.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001A985C",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/sol1/001A985C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001B06C4",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/sol2/variants/001B06C4_0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001B2A74",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/lead/matched_1020/001B2A74.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001BF634",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/opus_tp2/func_001BF634.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001BF70C",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work7/ds2/v1BF70C_a.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001BFC14",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/fam_rtti2/func_001BFC14.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001C3054",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work7/ds2/v1C3054_a.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001D0238",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work5/agent1/func_001D0238.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001D1228",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work5/agent1/func_001D1228.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001D12BC",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work5/agent1/func_001D12BC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001D1B20",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work8/sol1/001D1B20.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001D2614",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work5/agent2/func_001D2614.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001D2A74",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work5/finisher2/func_001D2A74.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001D64D4",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work5/agent4/func_001D64D4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001D681C",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work5/agent4/func_001D681C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001D7238",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work7/opus/OP25/func_001D7238.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001DB220",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work5/agent6/func_001DB220.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001DE958",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work4/agent6/func_001DE958.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001DF624",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work4/agent8/func_001DF624.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001DF8F8",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work4/agent8/func_001DF8F8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001E02B4",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work4/agent1/func_001E02B4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001FEFBC",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work5/agent7/func_001FEFBC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00200A3C",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work8/lead/matched_1020/00200A3C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00202C20",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work8/opus1/00202C20_nw.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00212B5C",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work8/sol2/00212B5C_nw.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002158D8",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work6/gpt11/func_002158D8_nw.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00215AC8",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work6/gpt11/func_00215AC8_nw.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00215F70",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work6/gpt11/func_00215F70_nw.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00217A0C",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work8/opus1/00217A0C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002188A0",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work6/gpt13/func_002188A0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00219968",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work8/opus2/00219968_nw.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0021A4F0",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work6/gpt14/func_0021A4F0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0021A59C",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work8/lead/ledger_1019/dehack/0021A59C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0021ABB0",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work8/lead/ledger_1019/dehack/0021ABB0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0021ACB8",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work8/lead/ledger_1019/dehack/0021ACB8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0021BC40",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work8/lead/ledger_1019/dehack/0021BC40.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002270E4",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work7/ds2/f_002270E4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0023E0E8",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work8/opus7/0023E0E8.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00240F7C",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work7/ds2/f_00240F7C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00254E18",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work7/ds2/f_00254E18.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002585A0",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work8/sol2/session3/002585A0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00259354",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work7/gpt24/func_00259354.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00259800",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work7/ds2/f_00259800.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00259C6C",
+"check": "NO MATCH (reloc)",
+"header": false,
+"path": "src/work7/ds3/func_00259C6C.cpp",
+"status": "honest",
+"tricks": []
+}
+],
+"verdict": "FAIL",
+"verified": 0
+},
+"sead::SafeStringBase": {
+"kind": "struct",
+"name": "SafeStringBase",
+"sites": [
+{
+"addr": "00135800",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/sol1/00135800.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001A985C",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/sol1/001A985C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001D1B20",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/sol1/001D1B20.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "001FEFBC",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work5/agent7/func_001FEFBC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0025B324",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/sol2/session3/0025B324.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002C8DA0",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/sol1/002C8DA0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002C9104",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/sol2/session3/002C9104.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002CC4BC",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/sol1/002CC4BC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "002CC5CC",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/sol1/002CC5CC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0031A804",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/sol2/session3/0031A804.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "003214AC",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/audit_reloc/fix/src/003214AC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "003214F4",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/sol1/003214F4.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0035B19C",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/sol1/0035B19C.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0035CCFC",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/H2/func_0035CCFC.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "00360AD0",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/sol2/session3/00360AD0_dh.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "0038B0D0",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/sol1/0038B0D0.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "003AE590",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/sol1/003AE590.cpp",
+"status": "honest",
+"tricks": []
+},
+{
+"addr": "004C17C0",
+"check": "NO MATCH",
+"header": false,
+"path": "src/work8/sol1/004C17C0.cpp",
+"status": "honest",
+"tricks": []
+}
+],
+"verdict": "FAIL",
+"verified": 0
+}
+},
+"updated": "2026-11-15T10:54:12+00:00",
+"verifier": "identity-v1"
+}

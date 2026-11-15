@@ -111,7 +111,10 @@ def assemble_image(entries):
         ce, _pool = fn.code_end(s, e)
         code_len = ce - s
         hexaddr = "%08X" % addr
-        named = [f for f in funcs if hexaddr in f["name"].upper()]
+        # mangled names embed the address without leading zeros (f58DC54),
+        # so match both the padded and unpadded hex forms
+        named = [f for f in funcs if hexaddr in f["name"].upper()
+                 or hexaddr.lstrip("0") in f["name"].upper()]
         # The target function's size is e-s; prefer a candidate whose section
         # size is closest to that (multi-function objects carry extra syms
         # like __sti__ static initializers that must not win).

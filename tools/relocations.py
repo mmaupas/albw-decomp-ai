@@ -25,7 +25,7 @@ def resolve_symbol(symbol, section_bases, aliases=None):
     if section != 0:
         return None
     if aliases and symbol["name"] in aliases:
-        return aliases[symbol["name"]]
+        return aliases[symbol["name"]], False
     match = ADDRESS_LABEL.fullmatch(symbol["name"])
     if match:
         address = int(match.group(1), 16)

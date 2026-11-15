@@ -463,6 +463,8 @@ def load_aliases():
 def cmd_check(src, addr, sym=None, cc=DEFAULT_CC, flags=DEFAULT_FLAGS, prebuilt=False, aliases=None):
     if isinstance(aliases, str):
         aliases = json.loads(open(aliases).read()) if aliases.strip().startswith("{") else load_aliases()
+    elif aliases is None:
+        aliases = load_aliases()
     if addr not in STARTS:
         raise ValueError("check requires an exact function start: %08X" % addr)
     if md is None:

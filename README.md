@@ -12,14 +12,14 @@ not included either.
 <!-- generated:status -->
 | | Functions | Share of 25,986 | .text bytes | Share of 5,841,180 B |
 |---|---:|---:|---:|---:|
-| Matched, source included | 16,937 | 65.2% | 1,440,324 | 24.7% |
-| of which honest (no hack) | 16,154 | 62.2% | 1,315,188 | 22.5% |
+| Matched, source included | 16,726 | 64.4% | 1,420,212 | 24.3% |
+| of which honest (no hack) | 15,943 | 61.4% | 1,295,076 | 22.2% |
 | of which hack | 783 | 3.0% | 125,136 | 2.1% |
 | Earlier match, source not included | 114 | 0.4% | 15,396 | 0.3% |
-| Not matched yet | 8,921 | 34.3% | 4,380,712 | 75.0% |
+| Not matched yet | 9,132 | 35.1% | 4,400,824 | 75.3% |
 | Excluded library | 14 | 0.1% | 4,748 | 0.1% |
 
-Remaining for an honest decompilation (excluding libraries): **9,818** functions.
+Remaining for an honest decompilation (excluding libraries): **10,029** functions.
 
 Sizes use consecutive starts in `funcs.json` within `.text` (`0x100000`–`0x69211C`), not the whole binary.
 3 interior-address entries are not counted as separate functions.
@@ -30,8 +30,10 @@ Hack reasons (a function can have several): weak 527, __schedule_barrier 156, as
 **Correction to the first publication.** 419 entries of the first publication (2026-10-15) were removed after a
 relocation audit. The old checker masked relocated words and could print `RESULT: MATCH` for the wrong call or global.
 The checker now validates supported relocation identities and rejects unknown symbols, unsupported relocations,
-and unproved linker rewrites. Existing entries have **not** all been reverified with this stricter checker;
-the table reflects recorded metadata, not a new verification campaign.
+and unproved linker rewrites. Every published `honest` entry is reverified end-to-end by the image gate:
+`python tools/rebuild_check.py` recompiles all of them and reports `RESULT: EXACT MATCH` (SHA-1 equal to the
+target image). 211 pre-hardening entries that failed that gate were de-registered to unmatched (wrong-callee
+labels / pool-layout drift); they can be re-matched properly later.
 
 Counts are generated offline from `functions.json` and `funcs.json`:
 `python3 tools/audit.py readme --write`. CI rejects stale generated summaries.
@@ -149,8 +151,8 @@ decides.
 ### ملخص بالعربي
 - **وش هذا المشروع:** مشروع تفكيك مطابق للعبة Zelda: A Link Between Worlds على 3DS، بهدف إنتاج نفس بايتات الدوال باستخدام مترجم armcc 4.1.
 <!-- generated:arabic-status -->
-- **وين وصلنا:** 16,937 دالة لها مصدر (65.2%)، منها 16,154 نظيفة (62.2%) و783 بحيل.
-- **وش باقي:** 8,921 دالة غير مطابقة؛ الباقي لتفكيك نظيف، باستثناء المكتبات، 9,818 دالة.
+- **وين وصلنا:** 16,726 دالة لها مصدر (64.4%)، منها 15,943 نظيفة (61.4%) و783 بحيل.
+- **وش باقي:** 9,132 دالة غير مطابقة؛ الباقي لتفكيك نظيف، باستثناء المكتبات، 10,029 دالة.
 <!-- /generated:arabic-status -->
 - الأرقام من الفهرس؛ لم تُعَد مراجعة كل المصادر بالمُدقّق الجديد الأكثر صرامة.
 - **وش ما يشمل:** ما فيه أي ملفات من اللعبة (ملف الكود أو ملفات البيانات) ولا المترجم. كل واحد يجيب نسخته بنفسه.

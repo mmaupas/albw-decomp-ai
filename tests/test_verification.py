@@ -79,6 +79,11 @@ class RelocationTests(unittest.TestCase):
                          (0x700000, False))
         self.assertIsNone(resolve_symbol(symbol("local", 0x10, 4), {3: 0x100000}))
 
+    def test_alias_returns_address_tuple(self):
+        self.assertEqual(resolve_symbol(symbol("_Z13func_00102000v", 0, 0), {},
+                                        {"_Z13func_00102000v": 0x102000}),
+                         (0x102000, False))
+
 
 class BinaryTests(unittest.TestCase):
     def test_wrong_binary_is_rejected(self):

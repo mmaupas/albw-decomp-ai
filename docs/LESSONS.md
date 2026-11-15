@@ -1482,3 +1482,31 @@ are the evidence. Report: `shared/shape_verification.json`
 | `sead::SafeString` | FAIL (0/60 sites byte-exact); 36/60 checked fail only on unproved mangled-name relocations | - |
 | `sead::SafeStringBase` | FAIL (0/18 sites byte-exact) | - |
 <!-- /shape-verification -->
+
+## Punch list cleared: image gate now EXACT MATCH (0 mismatched words)
+
+The 216-function / 516-word rebuild_check failure list was triaged per function
+(prebuilt `fn.py check` on the cached objects, then fresh compiles to confirm):
+
+- 207 reloc + 1 mixed: pre-hardening sources (mostly src/work7/ds7 batches) whose
+  only fn.py diffs were unproved mangled-callee relocations — the callee labels
+  in those sources are wrong vs the dump, and global aliasing of shared mangled
+  names is UNSAFE (it broke 1619 good functions when tried: names like vtable /
+  operator-new symbols are shared across files with different true targets).
+  Verdict: unfixable by relocation fix within review budget -> de-registered to
+  unmatched (208 entries), objs purged.
+- 8 image_only: fn.py MATCH on fresh compile — the cached gate objects were
+  STALE (sources fixed after the objs were built; e.g. fam58D_bit.cpp masks).
+  Verdict: fixed by deleting the stale objs and letting the gate recompile.
+- Gate bug found and fixed: multi-function objects were placed by symbol-name
+  match on the 8-digit hex key, but mangled names embed the address without
+  leading zeros (f58DC54 vs 0058DC54) -> wrong function placed. Fixed in
+  rebuild_check.py; 3 remaining pool-layout/register-order stragglers
+  de-registered (211 total).
+- relocations.py bug fixed: the aliases branch returned a bare int where callers
+  unpack (addr, thumb); fn.py now loads shared/aliases.json by default.
+
+Result: `python tools/rebuild_check.py` -> RESULT: EXACT MATCH, rebuilt SHA-1 ==
+target e6ab7d66...; README caveat about unverified entries removed. Honest count
+drops 16154 -> 15943; the de-registered functions are unmatched again and can be
+re-matched properly (correct callee labels) later.

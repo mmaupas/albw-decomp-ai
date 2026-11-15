@@ -25,6 +25,23 @@ class RelocationTests(unittest.TestCase):
             self.assertFalse(word_matches(0xEBFFFFFE, target,
                                          (28, symbol()), 0x101000, {}))
 
+    def test_nopped_tail_call_to_fall_through(self):
+        # linker rewrote a tail "b" to the next function (fall-through
+        # instruction) into NOP: only that exact case passes
+        self.assertTrue(validate_relocation(0xEAFFFFFE, 0xE1A00000, 29,
+                                            0x102000, (0x102004, False)))
+        self.assertTrue(validate_relocation(0xEAFFFFFE, 0xE1A00000, 1,
+                                            0x102000, (0x102004, False)))
+        # any other NOP target, or a call, or a non-fall-through target: fail
+        self.assertFalse(validate_relocation(0xEAFFFFFE, 0xE1A00000, 29,
+                                             0x102000, (0x103000, False)))
+        self.assertFalse(validate_relocation(0xEAFFFFFE, 0xE1A00000, 29,
+                                             0x102000, (0x102008, False)))
+        self.assertFalse(validate_relocation(0xEBFFFFFE, 0xE1A00000, 28,
+                                             0x102000, (0x102004, False)))
+        self.assertFalse(validate_relocation(0xEAFFFFFE, 0xEAFFFFFE, 29,
+                                             0x102000, (0x102004, False)))
+
     def test_backward_branch_and_nonzero_addend(self):
         self.assertTrue(validate_relocation(0xEAFFFFFE, 0xEAFFFBFE, 29,
                                            0x102000, (0x101000, False)))

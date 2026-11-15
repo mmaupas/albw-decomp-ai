@@ -57,6 +57,11 @@ def validate_relocation(mine, target, kind, place, resolved):
         return False
     if kind != 28 and blx:
         return False
+    if target == 0xE1A00000 and kind != 28:
+        # A tail "b" whose callee is the fall-through instruction (the next
+        # function in the image) is a no-op: the original linker rewrote the
+        # branch word to NOP. Only that exact case is accepted.
+        return address == place + 4
     # In REL objects the implicit branch addend excludes BLX's H bit.
     delta = address + _branch_addend(mine) - place
     if thumb:

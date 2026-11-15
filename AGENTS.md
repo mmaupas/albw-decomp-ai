@@ -14,6 +14,9 @@ The workflow lives in the tools, not in this file — every tool prints a
   `python tools/worklist.py next` hands out one candidate and one command.
 - **Deferred / near-miss functions** (`worklist.py report` entries) and
   **de-hack** work: use the `decomp-manual` skill.
+- **After every admitted shape batch**: a shape passing `shape_verify.py`
+  changes twin/synth predictions — re-harvest its families with
+  `python tools/reharvest.py next` (twins unlock twins at header level).
 
 # Non-negotiable rules
 

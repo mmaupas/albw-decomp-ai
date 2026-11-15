@@ -33,6 +33,8 @@ knowledge moves out of the agent's head and into tools + recipe data.
 | `tools/shapemine.py` | done — n-gram motif clusters over all 25,986 starts; `next` prints the top unreported header-shape candidate |
 | `tools/refine.py` (phase 4) | done — closed-loop refiner, acceptance 5/5 reproduced from skeleton-only restart |
 | `tools/worklist.py` (phase 5) | done — next/register/report/status; first auto-registered match 003E60D4 |
+| `tools/shape_verify.py` | done — >=3-site byte-exact admission protocol for header shapes |
+| `tools/reharvest.py` (phase 5b) | done — after each admitted shape batch, re-run refine+register over the shape's unindexed family (shapemine motif overlap) |
 | `AGENTS.md` + skills | done — AGENTS.md is facts+invariants; the loop is `.agents/skills/decomp-loop`, expert work `.agents/skills/decomp-manual` |
 
 ## Phases
@@ -153,6 +155,21 @@ NEXT      python tools/refine.py 0x0049F6DC --budget 60
 - state in `logs/autodecomp/state.json`; crash-safe (`--jobs 1`,
   Popen+start_new_session+killpg, per-step timeouts — the OOM rules are
   encoded here, not remembered).
+
+### Phase 5b — Re-harvest after every shape batch (tools/reharvest.py)
+
+Each shape admitted to `shared/include/albw_shapes.h` (passing
+`shape_verify.py`) changes what dna twins / synth predict: a twin whose
+source uses the header shape now compiles correctly where it was the "wrong
+construct". Twins unlock twins — the Nov 2-4 batches were this effect at
+instruction level; this repeats it at header level.
+
+`python tools/reharvest.py next` picks the next PASS shape and prints
+`run <shape> --limit M --budget B`. `run` resolves the shape's unindexed
+family (shapemine n-gram motifs shared by >= 2 verified sites, ranked by
+overlap), refines each target from its dna twin, and registers matches via
+`worklist.py register` (nothing registers without fn.py check MATCH).
+`targets <shape>` lists the family without spending oracle budget.
 
 ### Phase 6 — AGENTS.md rewrite
 

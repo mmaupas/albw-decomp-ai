@@ -67955,7 +67955,11 @@
 "status": "honest"
 },
 "00490AB8": {
-"status": "excluded_library"
+"cc": "4.1/b1049",
+"flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
+"hack_reasons": [],
+"path": "src/work8/auto/func_00490AB8.c",
+"status": "honest"
 },
 "00490B58": {
 "cc": "4.1/b1049",

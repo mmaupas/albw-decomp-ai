@@ -6,7 +6,7 @@ typedef unsigned int u32;
 extern unsigned func_00111A64(unsigned);
 static inline unsigned bind_0039611C_2_2(unsigned p0, unsigned limit) { return (unsigned)(((unsigned long long)func_00111A64(p0) * limit) >> 32); }
 
-extern unsigned func_0055DC98(unsigned, unsigned, unsigned);
+extern "C" bool func_0055DE60(void*, int);
 extern unsigned func_0058A7D4(unsigned);
 extern unsigned func_00396AC0(unsigned, unsigned);
 unsigned func_0039611C(unsigned a0)
@@ -16,11 +16,11 @@ unsigned func_0039611C(unsigned a0)
   unsigned t34, t38, t40;
   t1 = *(unsigned *)((char *)a0);
   t5 = (t1 + 0x800) + 0x3C8;
-  t7 = func_0055DC98(t5, *(unsigned char *)((char *)(t1 + 0x1400) + 0x88), t5);
+  t7 = func_0055DE60((void*)t5, (int)*(unsigned char *)((char *)(t1 + 0x1400) + 0x88));
   if (t7 == 0) {
     t8 = *(unsigned *)((char *)a0);
     t12 = (t8 + 0x800) + 0x3C8;
-    t14 = func_0055DC98(t12, *(unsigned char *)((char *)(t8 + 0x1400) + 0x89), t12);
+    t14 = func_0055DE60((void*)t12, (int)*(unsigned char *)((char *)(t8 + 0x1400) + 0x89));
     r0 = t14;
     if (t14 == 0) goto L10;
   }
@@ -29,11 +29,11 @@ unsigned func_0039611C(unsigned a0)
   t19 = t17;
   t20 = *(unsigned *)((char *)a0);
   t24 = (t20 + 0x800) + 0x3C8;
-  t26 = func_0055DC98(t24, *(unsigned char *)((char *)(t20 + 0x1400) + 0x88), t24);
+  t26 = func_0055DE60((void*)t24, (int)*(unsigned char *)((char *)(t20 + 0x1400) + 0x88));
   if (t26 != 0) {
     t27 = *(unsigned *)((char *)a0);
     t31 = (t27 + 0x800) + 0x3C8;
-    t33 = func_0055DC98(t31, *(unsigned char *)((char *)(t27 + 0x1400) + 0x89), t31);
+    t33 = func_0055DE60((void*)t31, (int)*(unsigned char *)((char *)(t27 + 0x1400) + 0x89));
     if (t33 != 0) {
       if ((int)t19 >= 0x32) goto L7;
       goto L8;
@@ -41,7 +41,7 @@ unsigned func_0039611C(unsigned a0)
   }
   t34 = *(unsigned *)((char *)a0);
   t38 = (t34 + 0x800) + 0x3C8;
-  t40 = func_0055DC98(t38, *(unsigned char *)((char *)(t34 + 0x1400) + 0x88), t38);
+  t40 = func_0055DE60((void*)t38, (int)*(unsigned char *)((char *)(t34 + 0x1400) + 0x88));
   if (t40 == 0) goto L8;
   L7:;
   func_00396AC0(a0, *(unsigned char *)((char *)(*(unsigned *)((char *)a0) + 0x1400) + 0x88));

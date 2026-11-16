@@ -82576,6 +82576,13 @@
 "path": "src/work5/templater/gen/func_00546488.cpp",
 "status": "honest"
 },
+"0054668C": {
+"cc": "4.1/b1049",
+"flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
+"hack_reasons": [],
+"path": "src/work8/auto/func_0054668C.cpp",
+"status": "honest"
+},
 "005466E8": {
 "cc": "4.1/b1049",
 "flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",

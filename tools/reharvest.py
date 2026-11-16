@@ -231,9 +231,15 @@ def cmd_run_motif(args):
     registered = 0
     for key in targets:
         t0 = time.time()
-        subprocess.run([sys.executable, "tools/refine.py", "0x" + key,
-                        "--budget", str(args.budget), "--start", "auto", "--json"],
-                       capture_output=True, text=True, cwd=ROOT, timeout=1200)
+        try:
+            subprocess.run([sys.executable, "tools/refine.py", "0x" + key,
+                            "--budget", str(args.budget), "--start", "auto", "--json"],
+                           capture_output=True, text=True, cwd=ROOT, timeout=1200)
+        except subprocess.TimeoutExpired:
+            print("%s TIMEOUT (refine >1200s, skipped)" % key, flush=True)
+            state["attempted"][key] = {"shape": args.shape, "status": "TIMEOUT"}
+            save_state(state)
+            continue
         sp = os.path.join(ROOT, "logs", "refine", key, "state.json")
         rstate = read_json(sp) if os.path.exists(sp) else {}
         best = rstate.get("best") or {}

@@ -228,6 +228,12 @@ def _register(addr, src, flags, as_json):
     ext = os.path.splitext(src)[1]
     if ext not in (".c", ".cpp", ".cc"):
         raise ValueError("unsupported source extension: " + ext)
+    # lifted scaffolds (tools/lift.py) are semantic, never byte-exact: they
+    # can never be registered as matched/honest/hack
+    lifted_root = os.path.realpath(os.path.join(ROOT, "src_lifted"))
+    for candidate in (src,):
+        if os.path.realpath(candidate).startswith(lifted_root + os.sep):
+            raise ValueError("lifted source under src_lifted/ is never registrable as matched: " + src)
     dest = os.path.join(AUTO_DIR, "func_%s%s" % (key, ext))
     with open(src, encoding="utf-8") as stream:
         text = rebase_includes(stream.read(), AUTO_DIR)

@@ -58,12 +58,15 @@ textual constructs, not every semantic trick; passing it is not proof of honesty
 |---|---|
 | `functions.json` | The index: `address -> {path, cc, flags, status, hack_reasons}` |
 | `src/` | The sources. Paths keep the layout of the original workspace (many agents and tools wrote to many folders), and local `#include`s are relative to each file |
+| `src_lifted/` | Lifted semantic scaffolds (`func_<ADDR>.c`, LIFTED banner) — never registrable as matched |
 | `shared/include/` | Project headers (written for this project) |
 | `shared/symbols.jsonl` | Names inferred for some functions |
 | `shared/extra_starts.txt`, `shared/not_starts.txt` | Corrections to the function table |
 | `funcs.json` | The function table: start addresses, call targets, pointers. Addresses only, no code |
 | `tools/fn.py` | Disassembly, cross-references, and the byte-exact checker |
 | `tools/audit.py` | Offline invariant audit of `functions.json` + status-table stats |
+| `tools/lift.py` | ARM32 semantic lifter for unmatched functions (`src_lifted/`, status `lifted`) |
+| `tools/hybrid_build.py` | Hybrid image builder (`build/hybrid.bin`: matched + lifted + original bytes) |
 
 ## Requirements
 
@@ -75,6 +78,12 @@ textual constructs, not every semantic trick; passing it is not proof of honesty
 3. **ARM Compiler (armcc) 4.1, build 1049.** Place it at `tools/armcc/4.1/b1049/bin/armcc.exe`. Every published
    function uses this build unless its index entry specifies otherwise. You need your own licensed copy.
    On Linux/macOS, the Windows executable also requires Wine (available as `wine` on `PATH`).
+
+The lifting/hybrid/oracle tools (`tools/lift.py`, `tools/hybrid_build.py`, `worklist.py verify`) use the same
+inputs: `lift`/`batch` and the full hybrid build need `code.bin` (+ armcc under Wine), and `verify` additionally
+needs the Zakuro replay corpus in `logs/coverage/` and a 3dsrecomp build (see `docs/RECOMP_IDEAS.md`). Without
+them every one of these commands degrades to an offline plan or a printed list of the exact commands to run
+later on the phone — nothing is faked or skipped silently.
 
 Default flags:
 ```
@@ -103,6 +112,35 @@ python3 tools/audit.py readme
 ```
 Refiner checkpoints retain immutable checked variants and a wave cursor. Winner copies keep their `.c`/`.cpp`/`.cc`
 extension. Legacy checkpoints predate strict relocation checking and require an explicit `--fresh` restart.
+
+## Lifted scaffolds and hybrid builds
+
+`tools/lift.py` translates unmatched functions into **semantic C scaffolds** under `src_lifted/`
+(Hookshot-style ARM32 lifting with capstone). Lifted code is never byte-exact and is never registered
+as `matched`/`honest`/`hack`: `functions.json` records it with status `lifted`, the status table above
+counts it in its own "Lifted (semantic, not byte-exact)" row (excluded from all matched/honest
+arithmetic), `worklist.py register` refuses `src_lifted/` sources, and `fn.py check` on a lifted file
+is informational only. Its purpose is oracle coverage, hybrid builds, and a starting scaffold for later
+matching work.
+
+```
+python3 tools/lift.py targets --json                 # offline list of liftable addresses (unmatched / source_lost / no-twin)
+python3 tools/lift.py lift 0x005AB1D0                # lift one function (needs code.bin) -> src_lifted/func_005AB1D0.c
+python3 tools/lift.py batch --limit 200 --budget 20  # budgeted, resumable queue (state: logs/lift/)
+python3 tools/lift.py status / report --json
+python3 tools/hybrid_build.py check                  # offline composition plan of the hybrid image (no armcc needed)
+python3 tools/hybrid_build.py --out build/hybrid.bin # full build: matched recompiled + lifted stubs + original bytes
+python3 tools/worklist.py verify 0x005AB1D0 --count 500  # behavioral oracle (3dsrecomp/Zakuro replay corpus)
+```
+
+The hybrid image assembles three layers at the original addresses — byte-exact matched sources
+recompiled with armcc, lifted stubs, and the original `code.bin` bytes for everything else — into
+`build/hybrid.bin`. It is a **testing artifact for the behavioral oracle, not a release artifact**;
+`tools/rebuild_check.py` remains the only byte-exact gate and its semantics are unchanged. All compiler
+jobs stay serialized under the repository lock (`--jobs 1`). `worklist.py verify` records an
+oracle-verified candidate as `semantic_match` with a `wall_class` (byte diffs remain, behavior equal on
+the replay corpus); it never counts toward honest bytes. The parked walls 005AB1D0, 0059F7B8, 005A8AA0,
+005CBE9C are the first eligible `verify` candidates. See `docs/AUTOMATION_PLAN.md` phase 7.
 
 ## How it was made
 

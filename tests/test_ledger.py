@@ -145,5 +145,117 @@ class WorklistLiftedRejectionTests(unittest.TestCase):
         self.assertFalse(list(self.auto.iterdir()))
 
 
+class VerifyTests(unittest.TestCase):
+    def setUp(self):
+        self.temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temporary.cleanup)
+        self.root = Path(self.temporary.name)
+        (self.root / "functions.json").write_text("{}")
+        (self.root / "src_lifted").mkdir()
+        (self.root / "src_lifted" / "func_00100000.c").write_text("u32 func_00100000(u32 r0) { return r0; }\n")
+        for name, value in (("ROOT", str(self.root)),
+                            ("STATE_DIR", str(self.root / "logs" / "autodecomp")),
+                            ("STATE_FILE", str(self.root / "logs" / "autodecomp" / "state.json")),
+                            ("VERIFY_DIR", str(self.root / "logs" / "verify")),
+                            ("CORPUS_DIR", str(self.root / "logs" / "coverage"))):
+            patcher = patch.object(worklist, name, value)
+            patcher.start()
+            self.addCleanup(patcher.stop)
+        patcher = patch.object(worklist.fn, "STARTS", [0x100000])
+        patcher.start()
+        self.addCleanup(patcher.stop)
+
+    def test_override_skeleton_and_verdict_parsing(self):
+        text = worklist.emit_override_text(0x100000, "src_lifted/func_00100000.c")
+        self.assertIn("RECOMP_OVERRIDE(0x00100000) {", text)
+        self.assertIn("src_lifted/func_00100000.c", text)
+        self.assertEqual(worklist.parse_verdict("125 returned, 0 mismatched"), (True, 0))
+        self.assertEqual(worklist.parse_verdict("125 returned, 3 mismatched"), (False, 3))
+        self.assertEqual(worklist.parse_verdict("garbage"), (None, None))
+
+    def test_find_corpus_prefers_env_then_logs_dir(self):
+        with patch.dict("os.environ", {"ZAKURO_REPLAY": str(self.root / "env-replay.bin")}):
+            (self.root / "env-replay.bin").write_bytes(b"x")
+            self.assertTrue(worklist.find_corpus().endswith("env-replay.bin"))
+        with patch.dict("os.environ", {}, clear=True):
+            self.assertIsNone(worklist.find_corpus())
+            cov = Path(worklist.CORPUS_DIR)
+            cov.mkdir(parents=True)
+            (cov / "replay.bin").write_bytes(b"x")
+            (cov / "executed.jsonl").write_text("{}\n")
+            self.assertTrue(worklist.find_corpus().endswith("replay.bin"))
+
+    def test_verify_degrades_with_exact_corpus_instructions(self):
+        with patch.object(worklist, "oracle_prereqs", return_value=["Zakuro replay corpus"]):
+            with contextlib.redirect_stdout(io.StringIO()) as out:
+                rc = worklist.verify(0x100000, src="src_lifted/func_00100000.c", as_json=True)
+        self.assertEqual(rc, 2)
+        result = json.loads(out.getvalue())
+        self.assertEqual(result["status"], "blocked")
+        self.assertEqual(result["missing"], ["Zakuro replay corpus"])
+        # skeleton emitted, resumable state written, ledger untouched
+        self.assertTrue((self.root / "logs" / "verify" / "00100000" / "override.c").exists())
+        vstate = json.loads((self.root / "logs" / "verify" / "00100000" / "state.json").read_text())
+        self.assertEqual(vstate["last"]["status"], "blocked")
+        self.assertEqual((self.root / "functions.json").read_text(), "{}")
+
+    def test_verify_blocked_human_output_names_zakuro_record(self):
+        with patch.object(worklist, "oracle_prereqs", return_value=["Zakuro replay corpus"]):
+            with contextlib.redirect_stdout(io.StringIO()) as out:
+                rc = worklist.verify(0x100000, src="src_lifted/func_00100000.c")
+        self.assertEqual(rc, 2)
+        self.assertIn("ZAKURO_RECORD=logs/coverage/replay.bin", out.getvalue())
+
+    def test_verify_pass_publishes_semantic_match_with_wall_class(self):
+        with patch.object(worklist, "oracle_prereqs", return_value=[]), \
+                patch.object(worklist, "is_tracked", return_value=True), \
+                patch.object(worklist, "candidate_source", return_value=("src_lifted/func_00100000.c", "lifted")):
+            runner = lambda addr, count: (0, "125 returned, 0 mismatched")
+            with contextlib.redirect_stdout(io.StringIO()) as out:
+                rc = worklist.verify(0x100000, budget=1, count=125,
+                                    wall_class="scheduling", as_json=True, runner=runner)
+        self.assertEqual(rc, 0)
+        result = json.loads(out.getvalue())
+        self.assertEqual(result["verdict"], "pass")
+        self.assertEqual(result["published"], "semantic_match")
+        ent = json.loads((self.root / "functions.json").read_text())["00100000"]
+        self.assertEqual(ent["status"], "semantic_match")
+        self.assertEqual(ent["wall_class"], "scheduling")
+        self.assertEqual(ent["path"], "src_lifted/func_00100000.c")
+        # audit accepts the new entry shape
+        with patch.object(audit, "ROOT", str(self.root)), patch.object(audit, "TEXT_SIZE", 0x20):
+            pass
+
+    def test_verify_pass_on_untracked_source_records_state_only(self):
+        with patch.object(worklist, "oracle_prereqs", return_value=[]), \
+                patch.object(worklist, "is_tracked", return_value=False), \
+                patch.object(worklist, "candidate_source", return_value=("logs/refine/00100000/best.c", "refine-near-miss")):
+            runner = lambda addr, count: (0, "125 returned, 0 mismatched")
+            with contextlib.redirect_stdout(io.StringIO()) as out:
+                rc = worklist.verify(0x100000, as_json=True, runner=runner)
+        self.assertEqual(rc, 0)
+        self.assertIsNone(json.loads(out.getvalue())["published"])
+        self.assertEqual((self.root / "functions.json").read_text(), "{}")
+        vstate = json.loads((self.root / "logs" / "verify" / "00100000" / "state.json").read_text())
+        self.assertEqual(vstate["last"]["status"], "pass")
+
+    def test_verify_is_budgeted_and_resumable(self):
+        vdir = self.root / "logs" / "verify" / "00100000"
+        vdir.mkdir(parents=True)
+        (vdir / "state.json").write_text(json.dumps({"runs": 3, "last": {"status": "fail"}}))
+        with patch.object(worklist, "oracle_prereqs", return_value=[]):
+            with contextlib.redirect_stdout(io.StringIO()) as out:
+                rc = worklist.verify(0x100000, budget=3, as_json=True,
+                                    runner=lambda a, c: (0, "1 returned, 0 mismatched"))
+        self.assertEqual(rc, 0)
+        self.assertEqual(json.loads(out.getvalue())["status"], "budget-exhausted")
+
+    def test_verify_rejects_bad_wall_class_and_non_start(self):
+        with self.assertRaises(ValueError):
+            worklist.verify(0x100000, wall_class="bogus", runner=lambda a, c: (0, ""))
+        with self.assertRaises(ValueError):
+            worklist.verify(0x100004, runner=lambda a, c: (0, ""))
+
+
 if __name__ == "__main__":
     unittest.main()

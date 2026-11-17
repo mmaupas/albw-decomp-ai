@@ -193,6 +193,13 @@ def img_load(img, addr):
     return _STACK.get(addr & 0xFFFFFFF, 0)
 
 
+# The offline CI workflow runs stdlib-only (no capstone); every test that
+# actually disassembles is skipped there and runs under `uv run` (uv sync).
+needs_capstone = unittest.skipIf(lift.Cs is None,
+                                 "capstone not installed (uv sync); stdlib-only runs skip this")
+
+
+@needs_capstone
 class LiftCoreTests(unittest.TestCase):
     def setUp(self):
         self.img, self.starts = build_fixture()
@@ -307,6 +314,7 @@ class LiftCliTests(unittest.TestCase):
             p.start()
             self.addCleanup(p.stop)
 
+    @needs_capstone
     def test_lift_writes_file_ledger_and_state(self):
         import contextlib, io
         with contextlib.redirect_stdout(io.StringIO()) as out:
@@ -336,6 +344,7 @@ class LiftCliTests(unittest.TestCase):
         rc = lift.cmd_lift(self.starts[1])  # no code.bin, no --image
         self.assertEqual(rc, 2)
 
+    @needs_capstone
     def test_batch_is_budgeted_and_resumable(self):
         import contextlib, io
         with contextlib.redirect_stderr(io.StringIO()):

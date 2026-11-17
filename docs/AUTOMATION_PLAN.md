@@ -35,6 +35,9 @@ knowledge moves out of the agent's head and into tools + recipe data.
 | `tools/worklist.py` (phase 5) | done — next/register/report/status; first auto-registered match 003E60D4 |
 | `tools/shape_verify.py` | done — >=3-site byte-exact admission protocol for header shapes |
 | `tools/reharvest.py` (phase 5b) | done — after each admitted shape batch, re-run refine+register over the shape's unindexed family (shapemine motif overlap) |
+| `tools/lift.py` (phase 7) | done — ARM32 semantic lifter -> `src_lifted/`, status `lifted`, never matched |
+| `tools/hybrid_build.py` (phase 7) | done — hybrid image (matched+lifted+original) -> `build/hybrid.bin`, `--check` offline |
+| `worklist.py verify` (phase 7) | done — RECOMP_OVERRIDE + behavioral_oracle + Zakuro corpus, status `semantic_match` + `wall_class` |
 | `AGENTS.md` + skills | done — AGENTS.md is facts+invariants; the loop is `.agents/skills/decomp-loop`, expert work `.agents/skills/decomp-manual` |
 
 ## Phases
@@ -189,6 +192,69 @@ Restructure so the expert workflow becomes a reference appendix and the
   and what to read from its output.
 - Explicit note: AGENTS.md edits require user sign-off (this phase).
 
+### Phase 7 — Semantic lifting, hybrid builds, oracle verification (lift.py, hybrid_build.py, worklist.py verify)
+
+Goal: give the unmatched tail a **semantic C scaffold** and a **runnable hybrid
+image**, so the behavioral oracle can run at full coverage long before full
+matching. Lifted code is NEVER byte-exact and NEVER counted as matched/honest —
+that invariant is enforced by `audit.py`, not by convention.
+
+- **`tools/lift.py`** — `lift <addr>` / `batch [--limit N --budget B]` (resumable,
+  state `logs/lift/`) / `targets [--filter ...]` (offline: unmatched, source_lost,
+  no-twin) / `status` / `report [--json]`. Capstone ARM-mode disassembly from the
+  start to the next start; pool words split like `fn.py code_end`; tokens reuse
+  the shapemine vocabulary (cond stripped, r/#/POOL/CALL). Per-function CFG,
+  emitted as register-machine C: r0-r3 parameters, r4-r12/sp/lr zero-initialized
+  locals, NZCV flag locals, frame as a local byte array, `bl` to a start ->
+  `extern u32 func_XXXXXXXX(...)`, non-start `bl` (e.g. `__aeabi_idiv`-family
+  helpers) -> opaque extern + warning, tail `b` -> plain call, jump tables ->
+  switch, `bx lr`/`pop {pc}` -> `return r0;`. Anything unexpressible ->
+  `/* LIFT-UNSUPPORTED */` stub (frame preserved, fixed return) with the reason
+  in the batch state: a correct gap is acceptable, a wrong lift is not. Output
+  files carry the LIFTED banner and live at `src_lifted/func_<ADDR>.c`; lifting
+  records `status: "lifted"` in functions.json and nothing else.
+- **Ledger** — `audit.py` accepts `lifted` (src_lifted/ path + cc, exists and
+  git-tracked) and `semantic_match` (path + required `wall_class` from
+  `scheduling|regalloc|pool_layout|unknown`); matched entries pointing at
+  `src_lifted/` are rejected; both statuses are excluded from all
+  matched/honest/hack arithmetic; the README table has an always-present
+  "Lifted (semantic, not byte-exact)" row. `worklist.py register` refuses
+  `src_lifted/` sources outright; `fn.py check` on a lifted file is
+  informational only and cannot flip a status.
+- **`tools/hybrid_build.py`** — assembles three layers at original addresses
+  into `build/hybrid.bin` (never `code.bin`): matched sources recompiled by
+  importing `rebuild_check.assemble_image` (not forked), lifted stubs compiled
+  with their recorded cc/flags under the repo compiler lock (`--jobs 1`, one
+  armcc call per function, objects cached in `logs/hybrid/obj/` — separate from
+  the gate's cache so a lifted stub can never masquerade as a matched object),
+  original `code.bin` bytes (SHA-1-verified, read-only) for the rest. `--check`
+  is a fully offline composition plan (matched/lifted/original bytes +
+  per-region coverage). The output is a **testing artifact for the oracle, not a
+  release artifact**; the image gate is unchanged.
+- **`worklist.py verify <addr>`** (roadmap C2+C3) — resolves a candidate
+  (lifted stub, refine near-miss, or `--src`), emits a `RECOMP_OVERRIDE`
+  skeleton under `logs/verify/<ADDR>/`, runs `behavioral_oracle.py`
+  (3dsrecomp verify) against the Zakuro replay corpus in `logs/coverage/`
+  (`ZAKURO_RECORD`/`ZAKURO_REPLAY`). Serialized, budgeted (`--budget`, default
+  1 oracle run), resumable. A pass on a git-tracked candidate records
+  `semantic_match` + `wall_class` in functions.json — byte diffs remain,
+  behavior equal on the corpus; it stops near-miss budget burn without fake
+  wins and never counts toward honest bytes. Without corpus/harness/ROM it
+  prints the exact setup commands and exits non-zero. **First eligible
+  candidates: the parked walls 005AB1D0, 0059F7B8, 005A8AA0, 005CBE9C.**
+- **Decisions recorded:** (1) the register-machine C model was chosen because
+  it is semantically faithful and compiles under armcc 4.1 `--c99` without GNU
+  extensions; (2) hybrid builds keep a separate object cache (see above);
+  (3) `verify` publishes `semantic_match` only for git-tracked candidate paths,
+  preserving the audit's tracked-path invariant — untracked near-miss verdicts
+  stay in `logs/verify/`; (4) the worklist lock is not reentrant, so
+  `record_semantic_match(locked=True)` is used under `verify`; (5) the README
+  was regenerated with `audit.py readme --write`, which also picked up master
+  registrations that had not refreshed the table.
+- **Non-goals:** no byte-exactness for lifted code, no auto-registration path,
+  no change to matching criteria or honest/hack definitions, no host-layer port
+  (F2 stays parked), no new dependencies.
+
 ## Ordering, effort, risk
 
 | Phase | Effort | Risk |
@@ -199,6 +265,7 @@ Restructure so the expert workflow becomes a reference appendix and the
 | 4 refine | 1-2 sessions | medium — acceptance test gates it |
 | 5 queue | 1 session | low — glue over finished pieces |
 | 6 AGENTS.md | minutes | sign-off needed |
+| 7 lift/hybrid/verify | 2-3 sessions | medium — full mode needs code.bin + armcc + the Zakuro corpus on the phone; the offline parts (targets / hybrid --check / tests) are gated here |
 
 Phases 1–2 unlock value immediately (dna twins alone close functions);
 3–5 are what actually removes the expert from the loop; 6 is cheap but must

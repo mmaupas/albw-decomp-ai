@@ -65,6 +65,64 @@ identical to code.bin), so Zakuro loads it directly. covtool itself is
 scratch (~/zakuro-work/covtool), not committed; the wrapper
 `tools/coverage_run.py` is.
 
+### 2b. Scripted gameplay coverage (ZAKURO_RECORD / ZAKURO_REPLAY corpus)
+
+Beyond the title screen, coverage has to come from *scripted* runs, not
+idle boots. Zakuro's `zakuro-core` already has the machinery: the frontend
+records inputs with `ZAKURO_RECORD=file` and plays them back with
+`ZAKURO_REPLAY=file` (plain text: a `clock <millis since 1900>` line, then
+one line per input change: `frame buttons-hex circle_x circle_y touch_x
+touch_y`), and the clock makes runs bit-reproducible. `tools/coverage_scenarios.py`
+generates those replay files from named scenarios into
+`tools/coverage-scenarios/*.replay` (+ `index.json`); the loop is:
+
+    python tools/coverage_scenarios.py build          # regenerate replays
+    python tools/coverage_run.py scenario mash-1800   # run + rank
+    # -> logs/coverage/corpus/mash-1800.jsonl + .log
+    # -> logs/coverage/rank/mash-1800.txt             (rank after this addition)
+    # optional: --save-at 1800 to snapshot a state into logs/coverage/states/,
+    #           --load <state> to chain the next scenario from it
+
+`coverage_run.py scenario` runs covtool with `ZAKURO_REPLAY` and re-runs
+`coverage_rank.py rank --coverage logs/coverage` after every corpus
+addition, so `logs/coverage/rank/<scenario>.txt` is the hot-path-ordered
+backlog as of that scenario. `coverage_rank.py --coverage` now accepts
+files, repeatable flags, or a directory (a directory merges
+`executed.jsonl` + `corpus/*.jsonl`, summing hits).
+
+covtool (2026-11-18, scratch at `~/zakuro-work/zakuro-src`, NOT committed)
+is `zakuro-core/examples/covtool.rs` plus a ~30-line patch to
+`zakuro-core/src/lib.rs`: a `System.coverage: Option<Coverage>` field
+counted in `note()` — a flat u64 array over the exheader's code span (one
+indexed increment per instruction) plus a map for PCs outside it — with
+`enable_coverage(base, span)` / `coverage()` accessors. It drives inputs
+from `ZAKURO_REPLAY` / `ZAKURO_INPUT` / `ZAKURO_MASH_BUTTONS`, supports
+`ZAKURO_SAVE_AT` / `ZAKURO_LOAD` state chaining, `ZAKURO_DUMP_AT` screen
+dumps, and writes one `{"addr": "XXXXXXXX", "hits": N}` line per executed
+PC (same format as the 2026-11-07 log).
+
+**ROM input on this machine (2026-11-18):** no decrypted USA .3ds is
+present — only `code.bin` (USA ExeFS .code) and the wrong-region EU cart
+in `logs/rom/`. `tools/synth_rom.py` builds a synthetic decrypted USA
+.3ds (`~/zakuro-work/albw-usa-synth.3ds`): the EU cart copied, with ExeFS
+`.code` <- code.bin (sha1-verified), program_id/partition_id/jump_id <-
+0004000000C30E00, product_code <- CTR-P-BZLE. Segment layout is identical
+(repo fn.py: text 0x00100000+0x593000, rodata 0x00693000, data 0x006FF000;
+EU ExeFS .code is exactly 0x628000 = code.bin's size), so the mapping is
+correct. **But the USA code deadlocks in boot on the EU RomFS** (main
+thread spins on a null Manager singleton's lock at 0x28 after the 12th
+RomFS read; the EU code on the same container reaches the title screen,
+243,846 PCs / 600 frames), and with RomFS disabled it dies on its first
+file open (0xC8804478). The USA code reads region-specific RomFS content
+early and the EU RomFS's layout/content diverges — so real USA gameplay
+coverage needs the decrypted USA .3ds itself (`--rom` / $ALBW_ROM /
+~/Download). The 2026-11-07 title-screen log (`logs/coverage/executed.jsonl`,
+5,368 functions) remains the USA baseline until then. The scripted-loop
+harness was validated end-to-end on the EU cart (which boots): mash
+replays get past the title screen and grow the covered-PC set per
+scenario; those validation runs live in `logs/coverage-eu/`, kept out of
+the USA corpus because EU code addresses don't map to the USA funcs.json.
+
 Alternative sources if Zakuro ever stops fitting: fork Azahar/Citra and
 increment a counter keyed on PC in the ARM11 core, or use a Luma3DS-style
 hook on real hardware.

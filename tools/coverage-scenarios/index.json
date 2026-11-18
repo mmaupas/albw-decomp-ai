@@ -1,0 +1,32 @@
+{
+ "mash-1800": {
+  "replay": "mash-1800.replay",
+  "frames": 1800,
+  "changes": 90,
+  "notes": "ZAKURO_MASH_BUTTONS pattern baked in: cycles A,B,START,SELECT,X,Y,UP,DOWN with a touch tap every 40 frames; blitzes through title / file select / new-game screens"
+ },
+ "menu-1200": {
+  "replay": "menu-1200.replay",
+  "frames": 1200,
+  "changes": 60,
+  "notes": "mash to reach gameplay, then open the pause menu (START) and page through it"
+ },
+ "press-start-1200": {
+  "replay": "press-start-1200.replay",
+  "frames": 1200,
+  "changes": 30,
+  "notes": "periodic START+A to advance menus and dismiss dialogs"
+ },
+ "title-600": {
+  "replay": "title-600.replay",
+  "frames": 600,
+  "changes": 0,
+  "notes": "no input; boots to the title screen and idles (the 2026-11-07 baseline run)"
+ },
+ "walk-combat-1800": {
+  "replay": "walk-combat-1800.replay",
+  "frames": 1800,
+  "changes": 100,
+  "notes": "mash thru the title/file screens for 1200 frames, then roam in a square pattern while mashing A/B (walking + combat); validated on the EU cart"
+ }
+}

@@ -1,8 +1,13 @@
 """Coverage-weighted ranking of the near-miss backlog (3dsrecomp/Zakuro idea).
 
   python tools/coverage_rank.py rank [--coverage logs/coverage/executed.jsonl]
-                                     [--top N] [--json]
+                                     [--coverage logs/coverage] [--top N] [--json]
   python tools/coverage_rank.py explain <addr>
+
+--coverage is repeatable and accepts files or directories; a directory
+(e.g. logs/coverage) merges executed.jsonl plus every corpus/*.jsonl in it,
+summing hits — that is the scripted-gameplay corpus from
+`coverage_run.py scenario <name>` (see docs/RECOMP_IDEAS.md section 2b).
 
 Idea (logs/decomp-tools-review.md, part 5A "coverage feedback loop"): a
 matching decomp should work on what the game actually executes, not only on
@@ -32,6 +37,7 @@ execute in this Termux environment):
   - Luma3DS-style real-hardware hook: log PCs from a syscall wrapper.
 """
 import argparse
+import glob
 import json
 import math
 import os
@@ -60,29 +66,43 @@ def load_report():
     return rows
 
 
-def load_coverage(path):
-    """Aggregate hits per function start from a JSONL coverage log."""
+def coverage_files(paths):
+    """Expand the --coverage args into a list of JSONL files: each arg may be
+    a single file or a directory (all *.jsonl in it, sorted; logs/coverage
+    holds executed.jsonl plus corpus/*.jsonl subdir)."""
+    files = []
+    for p in paths:
+        if p and os.path.isdir(p):
+            files.extend(sorted(glob.glob(os.path.join(p, "*.jsonl"))))
+            files.extend(sorted(glob.glob(os.path.join(p, "*", "*.jsonl"))))
+        elif p and os.path.exists(p):
+            files.append(p)
+    return files
+
+
+def load_coverage(paths):
+    """Aggregate hits per function start from JSONL coverage logs (merged, hits summed)."""
     hits = {}
-    if not path or not os.path.exists(path):
-        return hits
-    with open(path, encoding="utf-8") as stream:
-        for line in stream:
-            line = line.strip()
-            if not line:
-                continue
-            d = json.loads(line)
-            addr = d.get("addr", d.get("pc"))
-            if addr is None:
-                continue
-            if isinstance(addr, str):
-                # tolerate "005CBE9C", "005CBE9C+0x10", "0x005CBE9C"
-                addr = addr.split("+")[0].removeprefix("0x").removeprefix("0X")
-                addr = int(addr, 16)
-            else:
-                addr = int(addr)
-            count = int(d.get("hits", d.get("count", 1)))
-            start = fn.func_range(addr)[0]
-            hits[start] = hits.get(start, 0) + count
+    files = coverage_files(paths)
+    for path in files:
+        with open(path, encoding="utf-8") as stream:
+            for line in stream:
+                line = line.strip()
+                if not line:
+                    continue
+                d = json.loads(line)
+                addr = d.get("addr", d.get("pc"))
+                if addr is None:
+                    continue
+                if isinstance(addr, str):
+                    # tolerate "005CBE9C", "005CBE9C+0x10", "0x005CBE9C"
+                    addr = addr.split("+")[0].removeprefix("0x").removeprefix("0X")
+                    addr = int(addr, 16)
+                else:
+                    addr = int(addr)
+                count = int(d.get("hits", d.get("count", 1)))
+                start = fn.func_range(addr)[0]
+                hits[start] = hits.get(start, 0) + count
     return hits
 
 
@@ -101,12 +121,13 @@ def rank(rows, hits):
 
 def cmd_rank(args):
     rows = load_report()
-    hits = load_coverage(args.coverage)
+    hits = load_coverage(args.coverage or [DEFAULT_COVERAGE])
     ranked = rank(rows, hits)
     if args.json:
         print(json.dumps(ranked[:args.top] if args.top else ranked, indent=1))
         return 0
-    print("coverage file: %s (%d functions covered)" % (args.coverage, len(hits)))
+    print("coverage files: %s (%d functions covered)"
+          % (", ".join(coverage_files(args.coverage or [DEFAULT_COVERAGE])) or "none", len(hits)))
     print("rank  addr      frac   hits      score   kind")
     for i, r in enumerate(ranked[:args.top]):
         print("%4d  %s  %.2f  %-9d %.4f  %s" % (i + 1, r["addr"], r["frac"], r["hits"], r["score"], r["kind"]))
@@ -118,7 +139,7 @@ def cmd_explain(args):
     start = fn.func_range(addr)[0]
     rows = load_report()
     row = next((r for r in rows if int(r["addr"], 16) == addr), None)
-    hits = load_coverage(args.coverage)
+    hits = load_coverage(args.coverage or [DEFAULT_COVERAGE])
     h = hits.get(start, 0)
     if row is None:
         print("%08X is not in the near-miss backlog" % addr)
@@ -135,13 +156,15 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     sub = ap.add_subparsers(dest="cmd", required=True)
     p = sub.add_parser("rank")
-    p.add_argument("--coverage", default=DEFAULT_COVERAGE)
+    p.add_argument("--coverage", action="append", default=None,
+                   help="JSONL file or directory (repeatable); default logs/coverage/executed.jsonl. "
+                        "A directory merges executed.jsonl + corpus/*.jsonl (the scenario corpus).")
     p.add_argument("--top", type=int, default=25)
     p.add_argument("--json", action="store_true")
     p.set_defaults(func=cmd_rank)
     p = sub.add_parser("explain")
     p.add_argument("addr")
-    p.add_argument("--coverage", default=DEFAULT_COVERAGE)
+    p.add_argument("--coverage", action="append", default=None)
     p.set_defaults(func=cmd_explain)
     args = ap.parse_args()
     sys.exit(args.func(args))

@@ -18,6 +18,11 @@ index). Nothing registers without fn.py check printing RESULT: MATCH —
 refuses src_lifted/ sources outright (lifted code is semantic, never
 byte-exact).
 
+`report` --json rows carry the legacy fields (addr/kind/frac/checks/origin/
+hypothesis) plus the aligned ecosystem fields score/max_score/diff/flags_tried/
+permuter added side by side (field map: docs/AUTOMATION_PLAN.md phase 10);
+`status` --json adds the permuter tried-cache hit-rate summary.
+
 `verify` (roadmap C2+C3) runs the behavioral oracle for one candidate
 (near-miss or lifted stub): it emits a RECOMP_OVERRIDE skeleton under
 logs/verify/<ADDR>/, runs behavioral_oracle.py (3dsrecomp verify against
@@ -47,7 +52,7 @@ import fn
 import dna
 import contextlib
 import synth
-from permuter import check_one
+from permuter import cache_stats, check_one, load_tried, state_for_addr
 from sweep import DEFAULT_FLAGS
 from audit import WALL_CLASSES, trick_reasons
 from common import file_lock, read_json, write_json
@@ -112,6 +117,31 @@ def candidates():
 def refine_state(addr):
     p = os.path.join(ROOT, "logs", "refine", "%08X" % addr, "state.json")
     return read_json(p) if os.path.exists(p) else None
+
+
+def refine_flags_tried(addr):
+    """Distinct flag strings checked for this target (refine history.jsonl)."""
+    path = os.path.join(ROOT, "logs", "refine", "%08X" % addr, "history.jsonl")
+    out = []
+    if os.path.exists(path):
+        with open(path, encoding="utf-8") as stream:
+            for line in stream:
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    rec = json.loads(line)
+                except ValueError:
+                    continue
+                flags = rec.get("flags")
+                if flags and flags not in out:
+                    out.append(flags)
+    return out
+
+
+def permuter_state(key):
+    """Permuter tried-cache outcome for one address (None when never permuted)."""
+    return state_for_addr(key, ROOT)
 
 
 def ops_twin_map():
@@ -328,6 +358,8 @@ def report(as_json=False):
             continue
         if b.get("match"):
             rows.append(dict(addr=key, kind="MATCH-unregistered", frac=1.0,
+                             diff=dict(op=b.get("n_op", 0), reg=b.get("n_reg", 0),
+                                       perm=bool(b.get("perm"))),
                              hypothesis="run: python tools/worklist.py register 0x%s" % key))
             continue
         frac = b["words"] / b["total"] if b["total"] else 0.0
@@ -344,7 +376,17 @@ def report(as_json=False):
         rows.append(dict(addr=key, kind="OP=%d REG=%d%s" % (b["n_op"], b["n_reg"],
                                                            " PERM" if b["perm"] else ""),
                          frac=frac, checks=rstate["used"], origin=rstate["origin"],
+                         diff=dict(op=b["n_op"], reg=b["n_reg"], perm=bool(b["perm"])),
                          hypothesis=hyp))
+    # aligned (ecosystem) fields, added alongside the existing ones: score is the
+    # same word-match fraction as frac, diff exposes the OP/REG class numerically,
+    # flags_tried lists the flag sets actually checked, permuter surfaces the
+    # permuter's tried-cache outcome for the address (None when never permuted)
+    for row in rows:
+        row["score"] = row["frac"]
+        row["max_score"] = 1.0
+        row["flags_tried"] = refine_flags_tried(int(row["addr"], 16))
+        row["permuter"] = permuter_state(row["addr"])
     rows.sort(key=lambda r: -r["frac"])
     if as_json:
         print(json.dumps(rows))
@@ -362,7 +404,8 @@ def status_summary(as_json=False):
     waiting = sum(1 for k in state["attempted"]
                   if ((refine_state(int(k, 16)) or {}).get("best") or {}).get("match"))
     s = {"candidates": n_cand, "attempted": len(state["attempted"]),
-         "registered": len(state["registered"]), "match_waiting": waiting}
+         "registered": len(state["registered"]), "match_waiting": waiting,
+         "permuter": cache_stats(load_tried(ROOT))}
     if as_json:
         print(json.dumps(s))
     else:

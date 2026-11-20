@@ -278,6 +278,36 @@ none touches the ledger, `src/`, or the image gate.)
 - Semantics unchanged otherwise: the cache only prevents wasted work, it never
   invents candidates. Tests: `tests/test_permuter_tried.py`.
 
+#### H8 — state vocabulary alignment (additive fields only)
+
+Survey of the current `--json` shapes and their in-repo consumers (grep-verified;
+audit/CI read `functions.json`, not these outputs):
+
+| Shape | Current fields | In-repo consumers |
+|---|---|---|
+| `worklist.py report --json` | rows: `addr`, `kind`, `frac`, `checks`, `origin`, `hypothesis` | `tools/coverage_rank.py` (`addr`, `frac`, `kind`, `hypothesis`, `checks`, `origin`), `.agents/skills/decomp-loop` + `decomp-manual` (human text) |
+| `worklist.py status --json` | `candidates`, `attempted`, `registered`, `match_waiting` | agents/README (human text) |
+| `refine.py <addr> --json` | `addr`, `status`, `used`, `origin`, `best{n_op,n_reg,perm,words,total,sim,match,flags,err}`; DEFER adds `reason` | `worklist.py` (`refine_state`), `tools/reharvest.py` (`best.n_op`/`n_reg`), tests |
+| `permuter.py <addr> <spec> --json` (new with H7) | `addr`, `run_id`, `variants`, `flag_sets`, `checks`, `skipped`, `flags_tried`, `results[...]`, `best`, `permuter` | new; the human text output is unchanged |
+| refine state `logs/refine/<addr>/state.json` + `history.jsonl` | `best` record; per-check rows `iter,wave,flags,match,n_op,n_reg,perm,words,total,sim,err` | refine resume, `worklist.py report` |
+
+Aligned fields are ADDED in the same objects — nothing renamed or dropped:
+
+| Old field (unchanged) | Aligned field (added) | Mapping |
+|---|---|---|
+| report row `frac` | `score` + `max_score: 1.0` | identical value: the word-match fraction `words/total` in [0,1] |
+| report row `kind` (`"OP=2 REG=1 PERM"`) | `diff` = `{op, reg, perm}` | the same OP/REG/PERM diff class, numeric |
+| refine `best.words`/`best.total`; permuter result `words`/`total` | `score` + `max_score: 1.0` (in `best` and per result) | identical information: `score = words/total`, the quantity `fn.py check` prints as `(pct%)`; the alignment-based `sim` keeps its own name |
+| per-check `flags` records; permuter `flag_sets` | `flags_tried` (list of distinct flag strings checked) | refine: collected from `history.jsonl`; permuter: this run's flag sets |
+| — | `permuter` (report rows, refine `--json`, `status --json`, permuter `--json`) | permuter tried-cache outcome for the address: `{entries, rejected, skips, best{outcome,score,sim,flags,run}}` or `null` when never permuted; cache hit-rate: `{entries, rejected, match, lookups, hits, hit_rate, skips, cache}` |
+
+`score` deliberately maps to the word-match fraction, not to the OP-class
+counter: `n_op`/`n_reg`/`perm` (now also numeric as `diff`) remain the
+instruction-diff metric, while `score`/`max_score` is the standardized match
+metric carrying the same information as `frac`/`words`/`total`. Existing
+consumers migrate at leisure; `tests/test_vocabulary.py` asserts every old
+field still appears with unchanged semantics.
+
 ## Ordering, effort, risk
 
 | Phase | Effort | Risk |

@@ -113,6 +113,16 @@ python3 tools/audit.py readme
 Refiner checkpoints retain immutable checked variants and a wave cursor. Winner copies keep their `.c`/`.cpp`/`.cc`
 extension. Legacy checkpoints predate strict relocation checking and require an explicit `--fresh` restart.
 
+The refiner also has an opt-in **repair proposal pass** (roadmap H3), inspired by
+[RetroReversing/decomp-repair](https://github.com/RetroReversing/decomp-repair) (AGPL-3.0-only; ideas ported, none of
+its source committed — see `docs/AUTOMATION_PLAN.md` phase 9). `python3 tools/refine.py 0xADDR --proposals repair
+--repair-budget 12` checks single-change variants of the current near-miss (literal nudges from the diff words,
+branch-arm swaps, bool casts, register hints, local lifetimes, operand order, explicit casts, volatile placement)
+after the dna-twin waves and before the synth fallback; `python3 tools/refine.py propose [--json]` lists the same
+variants offline over the logged near-misses. The pass proposes, never judges: only `fn.py check` decides a variant
+and only `worklist.py register` records a `RESULT: MATCH`. Without `--proposals` the refiner's behavior is
+unchanged.
+
 ## Lifted scaffolds and hybrid builds
 
 `tools/lift.py` translates unmatched functions into **semantic C scaffolds** under `src_lifted/`

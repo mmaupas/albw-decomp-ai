@@ -308,6 +308,29 @@ metric carrying the same information as `frac`/`words`/`total`. Existing
 consumers migrate at leisure; `tests/test_vocabulary.py` asserts every old
 field still appears with unchanged semantics.
 
+#### H2 — objdiff-cli integration (`tools/objdiff.py`, `tools/setup_objdiff.py`)
+
+- `tools/setup_objdiff.py` is the only manual, one-time download: it fetches the
+  **pinned** objdiff-cli v3.8.3 release asset for the host (or `--target`,
+  e.g. `linux-aarch64` on the phone) into the gitignored `tools/bin/`, and
+  verifies the asset's pinned SHA-256 (recorded per target in the script)
+  before the binary is put in place; a sidecar `objdiff-cli.json` records
+  version/target/hash and `--check` re-verifies an installed binary. No binary
+  is ever committed or fetched at build time.
+- `tools/objdiff.py` (stdlib only) wraps it: `diff <base-obj> <target-obj>
+  [--symbol NAME] [--json]` drives objdiff-cli's one-shot mode
+  (`diff -2 base -1 target -o - --format json`) and re-emits the tool's own
+  JSON, falling back to a structured passthrough `{tool, command, returncode,
+  stdout, stderr}` if the output resists parsing; `units <obj> [--json]`
+  lists an object's units/sections with sizes and match percentages (self-diff).
+  Without the binary or the objects it prints the exact setup/phone command
+  and exits 2 (the `lift.py` convention). ARM objects from armcc are supported
+  by objdiff-cli's own arch detection.
+- Where it helps (documented in README, no `triage.py` change this session):
+  multi-function objects, pool-data diffs, gate-failure triage, hybrid layer
+  verification. Tests mock the subprocess (`tests/test_objdiff.py`); the real
+  binary + real ARM objects are phone-side.
+
 ## Ordering, effort, risk
 
 | Phase | Effort | Risk |

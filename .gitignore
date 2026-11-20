@@ -2,6 +2,9 @@
 code.bin
 *.bin
 tools/armcc/
+# pinned third-party tool binaries (tools/setup_objdiff.py downloads these
+# manually, SHA-256 verified; never committed, never fetched at build time)
+tools/bin/
 # build and check outputs
 *.o
 check_log.jsonl

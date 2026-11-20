@@ -38,6 +38,7 @@ knowledge moves out of the agent's head and into tools + recipe data.
 | `tools/lift.py` (phase 7) | done — ARM32 semantic lifter -> `src_lifted/`, status `lifted`, never matched |
 | `tools/hybrid_build.py` (phase 7) | done — hybrid image (matched+lifted+original) -> `build/hybrid.bin`, `--check` offline |
 | `worklist.py verify` (phase 7) | done — RECOMP_OVERRIDE + behavioral_oracle + Zakuro corpus, status `semantic_match` + `wall_class` |
+| `tools/sdkmap.py` (phase 8) | done — SDK fingerprinting pipeline: committed nnsdk metadata inventory, offline `plan`, phone-gated `fingerprint`/`try-compile` |
 | `AGENTS.md` + skills | done — AGENTS.md is facts+invariants; the loop is `.agents/skills/decomp-loop`, expert work `.agents/skills/decomp-manual` |
 
 ## Phases
@@ -255,6 +256,92 @@ that invariant is enforced by `audit.py`, not by convention.
   no change to matching criteria or honest/hack definitions, no host-layer port
   (F2 stays parked), no new dependencies.
 
+### Phase 8 — SDK fingerprinting (tools/sdkmap.py, roadmap H1)
+
+Goal: match the part of the unmatched tail (and some `excluded_library`
+entries) that is ordinary Nitro/nn SDK code, by compiling the SDK's own
+reconstructed source with the original compiler instead of reverse
+engineering it. `tools/sdkmap.py` fingerprints the unmatched tail against the
+nnsdk inventory so that a candidate costs one compile, judged by
+`fn.py check` like anything else.
+
+- **`inventory --nnsdk-dir PATH [--out shared/nnsdk_inventory.json]`** — parses
+  the nnsdk clone with a stdlib C++ scope/signature scanner (namespaces,
+  class/struct/enum scopes, free functions, class members, static members,
+  constructors/destructors/operators, templates, `__asm` functions whose exact
+  mangled name is harvested from `__attribute__((section("i._ZN...")))`).
+  Other mangled names are best-effort full-expansion Itanium patterns (unknown
+  types encode as `?`; nn typedefs map to their builtin codes). The emitted
+  **metadata inventory** — the only committed artifact — carries names,
+  mangled-name patterns, namespaces, source paths inside nnsdk, kind, and a
+  per-file content sha256 + structure hash. Output is deterministic
+  (sort_keys) and resumable through a per-file cache in
+  `logs/sdkmap/inventory_cache.json` (only content-changed files re-parse).
+- **`plan [--filter ...] [--limit N] [--json]`** — fully offline (committed
+  inventory + funcs.json + functions.json + shared/symbols.jsonl). Ranks SDK
+  candidates from the `excluded_library` / `unmatched` / `source_lost` pools by:
+  symbol-name hits against the inventory (namespace prefixes of depth >= 2 and
+  class/function whole words), size-class agreement with the excluded_library
+  pool's empirical size distribution, library-region clustering (±0x4000 around
+  excluded_library addresses), neighborhood of matched SDK-named functions,
+  and real call edges from `logs/sdkmap/fingerprints.json` once fingerprinted
+  (funcs.json has no caller->callee edges, so until then its bl target set and
+  address clustering are the offline proxy). Each row: address, reasons,
+  suggested nnsdk source paths, expected difficulty. State:
+  `logs/sdkmap/plan.json`.
+- **`fingerprint [--addr A ...] [--budget B] [--json]`** — needs code.bin
+  (SHA-1-verified, read-only) + capstone. Emits each candidate's normalized
+  token stream (shapemine vocabulary: cond stripped, r/#/POOL/CALL) plus the
+  CFG shape (block count, pool size, call list) into
+  `logs/sdkmap/fingerprints.json` for phone-side comparison against compiled
+  nnsdk sources. Without code.bin it prints the phone command and exits 2.
+- **`try-compile <addr> --nnsdk-dir PATH [--source ...] [--sym ...] [--run] [--json]`**
+  — phone-only orchestrator. Builds a self-contained unit under
+  `logs/sdkmap/build/<ADDR>/` (mapped nnsdk sources copied, the `Include/` tree
+  copied beside them, `<nn/...>` includes rewritten to quoted ones so fn.py
+  check's fixed `-I` resolves them), compiles with the entry's cc/flags
+  (defaults otherwise) through the repository compiler lock via
+  `permuter.check_one` -> `fn.py check`. The default is a dry run printing the
+  CHECK/REGISTER commands; `--run` on `RESULT: MATCH` uses the standard
+  `worklist register` flow and records `"note": "sdk:nnsdk <path>@<rev>"` on
+  the entry (the source_lost note-field convention; `audit.py` needed no new
+  invariant — a test locks this in). Without code.bin/armcc/the clone it exits
+  2 with the exact phone commands. It never auto-registers from a sandbox, and
+  existing index entries (e.g. `excluded_library`) are replaced manually by
+  the operator before registering.
+- **`status` / `report [--json]`** — offline views over the resumable state
+  (`logs/sdkmap/`).
+
+**License/attribution.** `3dsdecomp/nnsdk` (https://github.com/3dsdecomp/nnsdk),
+pinned at revision `d50a4b89d13c929d2438abf92e5a48f039efffbf` (default branch
+`main`), ships **no LICENSE file** at that revision (GitHub API reports
+`license: null`). The clone therefore lives only in an untracked working
+directory (outside the repo or under the gitignored `logs/`), and the only
+committed artifact is the generated metadata inventory
+`shared/nnsdk_inventory.json`, which records the URL, revision, and license
+status. No game-derived raw data is committed either (no binary slices, no
+disassembly listings as data files).
+
+**Decisions recorded:** (1) inventory-not-vendoring — names/mangled
+patterns/paths/hashes only, because nnsdk carries no redistribution license at
+the pinned revision and AGENTS.md rule 3 already forbids committing SDK
+material; (2) the inventory parser is a heuristic stdlib scanner, not a
+compiler — mangled patterns are best-effort full expansions (no substitution
+compression), and exact names come from `__asm` section markers where present;
+(3) `plan` is offline by construction, so the call-graph signal uses
+`fingerprints.json` once available and address clustering before that;
+(4) the `sdk:nnsdk` note reuses the free-text `note` field, so `audit.py`
+changed zero invariants (locked in by `tests/test_sdkmap.py`); (5)
+registration stays on the phone through the existing `fn.py check` +
+`worklist register` flow — `try-compile --run` only orchestrates it, never
+runs from a sandbox; (6) the image gate is untouched: `rebuild_check.py`
+remains the only byte-exact gate and every SDK match must pass it.
+
+**Non-goals:** no automatic matching or registration from the sandbox, no
+smuggling SDK source into the repo, no decomp.me or external publishing of
+game-derived data, no host-layer work, no changes to the shape tools,
+`refine.py`, or the lifter, no new dependencies.
+
 ## Ordering, effort, risk
 
 | Phase | Effort | Risk |
@@ -266,6 +353,7 @@ that invariant is enforced by `audit.py`, not by convention.
 | 5 queue | 1 session | low — glue over finished pieces |
 | 6 AGENTS.md | minutes | sign-off needed |
 | 7 lift/hybrid/verify | 2-3 sessions | medium — full mode needs code.bin + armcc + the Zakuro corpus on the phone; the offline parts (targets / hybrid --check / tests) are gated here |
+| 8 sdkmap | 1-2 sessions | low offline (inventory/plan/tests), medium on the phone — fingerprint + try-compile need code.bin + armcc + the nnsdk clone |
 
 Phases 1–2 unlock value immediately (dna twins alone close functions);
 3–5 are what actually removes the expert from the loop; 6 is cheap but must

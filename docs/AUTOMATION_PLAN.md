@@ -38,6 +38,7 @@ knowledge moves out of the agent's head and into tools + recipe data.
 | `tools/lift.py` (phase 7) | done — ARM32 semantic lifter -> `src_lifted/`, status `lifted`, never matched |
 | `tools/hybrid_build.py` (phase 7) | done — hybrid image (matched+lifted+original) -> `build/hybrid.bin`, `--check` offline |
 | `worklist.py verify` (phase 7) | done — RECOMP_OVERRIDE + behavioral_oracle + Zakuro corpus, status `semantic_match` + `wall_class` |
+| `tools/proposals_repair.py` + `refine --proposals repair` (phase 9) | done — opt-in repair proposal pass, offline-tested (see phase 9) |
 | `AGENTS.md` + skills | done — AGENTS.md is facts+invariants; the loop is `.agents/skills/decomp-loop`, expert work `.agents/skills/decomp-manual` |
 
 ## Phases
@@ -255,6 +256,90 @@ that invariant is enforced by `audit.py`, not by convention.
   no change to matching criteria or honest/hack definitions, no host-layer port
   (F2 stays parked), no new dependencies.
 
+### Phase 9 — Repair proposal pass (tools/proposals_repair.py + refine.py, roadmap H3)
+
+Goal: a better proposal source for the reharvest near-miss queue (OP 1–3 words
+from a match). `tools/proposals_repair.py` is a pure, offline, stdlib-only module:
+given a candidate source text (+ optional diff metadata from the refine state)
+and the target's known flags, `propose(source, name, diff, flags, budget)`
+returns an ordered list of variants, each `{name, family, reason, hash, source}`,
+each altering ONE thing armcc 4.1 is sensitive to. **Proposes, never judges:**
+nothing in the pass compiles, checks, or registers; only `fn.py check` (armcc,
+on the phone) judges a variant, and only `worklist register` records a
+`RESULT: MATCH`. This stays inside the non-goal "tools propose, the oracle
+decides" — no variant is ever auto-applied to a registered source.
+
+- **Pass families, ranked by the repo's parked wall classes** (variant #1 is
+  the most probable fix):
+  1. `literal_value` — literal value nudges driven by the diff's differing
+     words when available (wall: `neg-fam-sti-third-pool-word` and any pool-word
+     OP delta; literals in pointer-arithmetic position are never nudged);
+  2. `branch_arm` — `if (c) T else E` → `if (!(c)) E else T`, plus the flipped-
+     comparison form `a == b` → `a != b` (walls: `neg-if-converted-guard-chain`,
+     sweep's PERM branch-cond-flip class). Guards with assignments/`++`/`--`
+     are skipped — the swap must stay provably side-effect-equivalent;
+  3. `bool_cast` — explicit `(s32)(guard)` on if-conditions
+     (wall: `neg-bool-materialized-guard`);
+  4. `arg_register` — `register` storage-class hints on params/locals,
+     signedness-invariant param type nudges (only when every use is a `==0`/`!=0`
+     test), and param reorder for adjacent same-type params whose only uses are
+     the two operands of one commutative op (an alpha-rename: semantics kept)
+     (walls: `neg-stack-arg-frame-copy`, arg-carrying REG deltas; at `-O2` the
+     `zero-loop-r2` recipe makes register/lifetime carrying outrank branch
+     layout, so the family order promotes `arg_register`/`lifetime` then);
+  5. `lifetime` — hoist a nested declaration to function scope (init kept at
+     the original site), split a top-level local into a fresh *used* phase local
+     after its 2nd assignment (the "dummy-adjacent" lifetime, but never a dummy:
+     the fresh local must have a later use), narrow a declaration into its
+     single use block. Loops/gotos/labels/`&x`/shadowing skip the rewrite;
+  6. `operand_order` — commute `A op B` only for commutative ops with pure
+     (identifier/literal) operands (REG-class allocation-only deltas);
+  7. `cast_insert` — explicit `(uN)` cast on a store RHS matching the store
+     width (truncation / bool-materialization);
+  8. `literal_type` — `(u32)` cast / `u` suffix on integer literals (pool-word
+     typing);
+  9. `volatile_move` — relocate an existing `volatile` from a pointer
+     declaration to its simple deref sites (never introduces one).
+- **Semantic safety:** a pass that cannot prove the rewrite semantics-preserving
+  emits nothing ("when in doubt, do not emit"); every variant is a full source
+  string and carries a human-readable `reason` naming the sensitivity it targets.
+- **Determinism and budget:** the enumeration is deterministic given the
+  source; `--repair-budget N` (default 12, `DEFAULT_REPAIR_BUDGET`) caps
+  variants per target per wave.
+- **refine.py wiring (opt-in, additive):** `refine 0xADDR --proposals repair`
+  adds the pass; ranking is after the dna-twin baseline/waves and before the
+  synth fallback, and the pass re-proposes from any new winning body. State
+  under `logs/refine/<addr8>/` gains new keys only: `repair` (proposed /
+  skipped / families / seconds / budget), `proposals` (per checked variant:
+  name, family, reason, hash, wave, match — so a phone MATCH traces back to the
+  exact pass) and `rejected_hashes`. Rejected hashes are read back (never
+  written by the pass) from refine state plus the permuter's tried-candidates
+  cache `logs/permuter/<addr8>/tried.txt` when present, so a rejected variant
+  is not re-proposed. Default `refine` behavior (no flag) is bit-for-bit
+  unchanged, including the state shape. `refine.py propose [0xADDR ...]
+  [--src PATH] [--repair-budget N] [--diff FILE.json] [--json]` is the offline
+  batch surface: per target it prints variants proposed (with family and
+  reason), skipped (cache/duplicate), and time spent — it never compiles.
+  With no addresses it sweeps the logged near-misses (`logs/refine/*/state.json`
+  with a best and no MATCH, closest OP first).
+- **Upstream reference and license:** pass design (single-change variant
+  families with reasons, propose-never-judge, per-family budgets, dedup by
+  source, rejected-candidate interop) is ported from
+  [RetroReversing/decomp-repair](https://github.com/RetroReversing/decomp-repair),
+  licensed **AGPL-3.0-only** (`LICENSE`; some of its readers began in
+  decomp.wtf, `LICENSE-decomp.wtf`). **No source from it is committed to this
+  repo** — only the ideas, adapted to armcc 4.1 sensitivities; its
+  MIPS/PS1/PS2/PSP/MSVC-specific passes (asm readers, GTE macros, CP0 leaves,
+  `permuter_gen`) are dropped. Its compiler-specific rewrites that assume GCC
+  or other compilers are not ported either.
+- **Acceptance (offline, CI):** 24 unit tests on synthetic near-miss sources
+  (no game content): determinism, family ordering, budget, reason strings,
+  semantic-safety guards (arm swap only side-effect-equivalent, commute only
+  pure commutative, split never a dummy, loop/assignment guards), `--json`
+  schemas, resumability, rejected-hash interop, and a default-behavior test
+  (no new state keys without the flag). The compile-and-judge loop is a phone
+  checklist (see the PR description), not part of CI.
+
 ## Ordering, effort, risk
 
 | Phase | Effort | Risk |
@@ -266,6 +351,7 @@ that invariant is enforced by `audit.py`, not by convention.
 | 5 queue | 1 session | low — glue over finished pieces |
 | 6 AGENTS.md | minutes | sign-off needed |
 | 7 lift/hybrid/verify | 2-3 sessions | medium — full mode needs code.bin + armcc + the Zakuro corpus on the phone; the offline parts (targets / hybrid --check / tests) are gated here |
+| 9 repair proposals | 1 session | low — pure offline generation; the judge stays `fn.py check` on the phone (phase 8 is the sdkmap session's) |
 
 Phases 1–2 unlock value immediately (dna twins alone close functions);
 3–5 are what actually removes the expert from the loop; 6 is cheap but must

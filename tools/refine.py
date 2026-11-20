@@ -2,6 +2,9 @@
 
   python tools/refine.py 0xADDR [--budget 60]
                             [--start auto|synth|twin] [--src PATH] [--fresh] [--json]
+                            [--proposals repair] [--repair-budget 12]
+  python tools/refine.py propose [0xADDR ...] [--src PATH] [--repair-budget N]
+                                 [--diff FILE.json] [--json]   offline proposals only
   python tools/refine.py acceptance [N] [--budget 40]   phase-4 gate
 
 Wraps the fn.py oracle with diff-class-driven mutation (no hand-written
@@ -13,6 +16,15 @@ Loop until MATCH or budget (fn.py checks, ~5-9 s each) exhausted:
                       then FLAGS grid (-O3/-Otime variants)
   REG/PERM best    -> ORDER wave (statement permutations, sweep's lazy sampler)
   wave set exhausted without improvement -> DEFER
+
+Opt-in repair proposals (--proposals repair, roadmap H3): single-change
+variants from tools/proposals_repair.py (literal nudges from the diff words,
+branch arm swaps, bool casts, register hints, local lifetimes, operand order,
+casts, volatile placement) are checked AFTER the dna-twin baseline/waves and
+BEFORE the synth fallback, capped per target by --repair-budget. The pass
+proposes, never judges: only fn.py check decides, only worklist register
+registers. `propose` runs the same pass offline over logged near-misses and
+prints per-target proposed/skipped/time (--json); it never compiles.
 
 State (resumable): logs/refine/<addr8>/{start.*, best.c, state.json,
 history.jsonl, waves/}. Every checked variant is appended to history;
@@ -32,6 +44,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import fn
 import dna
 import synth
+import proposals_repair
 from permuter import check_one
 from sweep import body_permutations, classify
 from common import atomic_write, file_lock, read_json, write_json
@@ -43,6 +56,9 @@ PREAMBLE = "typedef unsigned int u32;\ntypedef unsigned char u8;\ntypedef unsign
 # skeleton store line: *(u32*)((char*)self + 0xOFF) = RHS;
 STORE_LINE = re.compile(r"^(\s*\*\((?:u8|u16|u32)\*\)\(\(char\*\)self \+ (0x[0-9a-f]+)\) = )([^;]+);$")
 OPT_VARIANTS = ("-O3 -Otime", "-O3", "-O2 -Otime", "-O2")
+# opt-in proposal sources (roadmap H3); ranked after dna-twin, before synth
+PROPOSAL_SOURCES = ("repair",)
+DEFAULT_REPAIR_BUDGET = 12
 
 
 def flag_variants(base):
@@ -62,6 +78,63 @@ def flag_variants(base):
 
 def state_dir(addr):
     return os.path.join(ROOT, "logs", "refine", "%08X" % addr)
+
+
+def parse_proposals(value):
+    """Normalize --proposals into a set of known proposal sources."""
+    toks = [t for t in re.split(r"[,\s]+", value or "") if t]
+    bad = [t for t in toks if t not in PROPOSAL_SOURCES]
+    if bad:
+        raise ValueError("unknown proposal source(s): %s (valid: %s)"
+                         % (", ".join(bad), ", ".join(PROPOSAL_SOURCES)))
+    return set(toks)
+
+
+def repair_diff(state):
+    """Diff metadata for the repair pass, from the current best record."""
+    best = state.get("best") or {}
+    d = {k: best.get(k) for k in ("n_op", "n_reg", "perm", "words", "total")}
+    d["diff_words"] = state.get("repair_diff_words") or []
+    return d
+
+
+def gen_repair_checks(text, addr, state, budget):
+    """Repair-pass candidates from the current best text (opt-in, roadmap H3).
+
+    Returns [(source, flags, meta)] and accumulates per-target stats in
+    state["repair"] (proposed / skipped / families / seconds). Variants whose
+    content hash is already recorded as rejected — refine state's
+    rejected_hashes or the permuter's tried-candidates cache — are not
+    re-proposed. Proposes only: nothing here judges or registers.
+    """
+    sd = state_dir(addr)
+    rejected = proposals_repair.load_rejected_hashes(ROOT, addr, sd)
+    rep = proposals_repair.run_pass(text, name=state.get("name"),
+                                    diff=repair_diff(state),
+                                    flags=state.get("flags_base"),
+                                    budget=budget, skip_hashes=rejected)
+    stats = state.get("repair")
+    if stats is None:
+        stats = {"proposed": 0, "skipped": 0, "families": {}, "seconds": 0.0,
+                 "budget": budget}
+        state["repair"] = stats
+    stats["proposed"] += len(rep["variants"])
+    stats["skipped"] += rep["skipped"]
+    stats["seconds"] += rep["seconds"]
+    stats["budget"] = budget
+    for fam, n in rep["families"].items():
+        stats["families"][fam] = stats["families"].get(fam, 0) + n
+    flags = (state.get("best") or {}).get("flags") or state.get("flags_base")
+    return [(v["source"], flags, v) for v in rep["variants"]]
+
+
+def record_repair_check(state, meta, wave, match):
+    """Persist one checked repair variant's provenance (traceable MATCH)."""
+    state.setdefault("proposals", []).append(dict(
+        name=meta["name"], family=meta["family"], reason=meta["reason"],
+        hash=meta["hash"], wave=wave, match=match))
+    if not match:
+        state.setdefault("rejected_hashes", []).append(meta["hash"])
 
 
 # --------------------------------------------------------------- start sources
@@ -295,14 +368,17 @@ def better(a, b):
 
 
 def run(addr, budget=60, start="auto", src=None, fresh=False,
-        as_json=False, quiet=False):
+        as_json=False, quiet=False, proposals="", repair_budget=DEFAULT_REPAIR_BUDGET):
     if budget < 1:
         raise ValueError("budget must be positive")
     with file_lock(os.path.join(state_dir(addr), "run.lock")):
-        return _run(addr, budget, start, src, fresh, as_json, quiet or as_json)
+        return _run(addr, budget, start, src, fresh, as_json, quiet or as_json,
+                    proposals, repair_budget)
 
 
-def _run(addr, budget, start, src, fresh, as_json, quiet):
+def _run(addr, budget, start, src, fresh, as_json, quiet, proposals="",
+         repair_budget=DEFAULT_REPAIR_BUDGET):
+    proposals = parse_proposals(proposals)
     sd = state_dir(addr)
     os.makedirs(os.path.join(sd, "waves"), exist_ok=True)
     hist_path = os.path.join(sd, "history.jsonl")
@@ -391,6 +467,33 @@ def _run(addr, budget, start, src, fresh, as_json, quiet):
         if not quiet:
             _print_rec("baseline", rec)
 
+    # ---- opt-in repair wave (roadmap H3): ranked after the dna-twin baseline,
+    # before the synth fallback. Proposes only; check() is the sole judge.
+    tried = set(state["tried"])
+    if proposals and state["best"] and not state["best"]["match"] \
+            and "repair" not in tried and state["used"] < budget:
+        with open(state["best"]["path"], encoding="utf-8") as stream:
+            text = stream.read()
+        for text_v, flags, meta in gen_repair_checks(text, addr, state, repair_budget):
+            if state["used"] >= budget:
+                break
+            rec = check(text_v, flags, "repair")
+            if not quiet:
+                _print_rec("repair", rec)
+            record_repair_check(state, meta, "repair", rec["match"])
+            if better(rec, state["best"]):
+                keep_best(rec, text_v)
+            _save(state_path, state)
+            if rec["match"]:
+                break
+        tried.add("repair")
+        state["tried"] = sorted(tried)
+        _save(state_path, state)
+        if state["best"]["match"]:
+            state["status"] = "MATCH"
+            _save(state_path, state)
+            return _finish(addr, state, "MATCH", as_json, quiet)
+
     # Fallback is a resumable phase, not a side effect of running the baseline.
     if state.get("fallback") == "pending":
         best = state["best"]
@@ -424,8 +527,6 @@ def _run(addr, budget, start, src, fresh, as_json, quiet):
         _save(state_path, state)
         return _finish(addr, state, "MATCH", as_json, quiet)
 
-    tried = set(state["tried"])
-
     # Persist the complete bounded wave and cursor, not a budget-truncated prefix.
     while state["used"] < budget and not state["best"]["match"]:
         pending = state.get("pending")
@@ -452,6 +553,10 @@ def _run(addr, budget, start, src, fresh, as_json, quiet):
                 wave = "flags"
                 checks = [(text, f) for f in flag_variants(state["flags_base"])
                           if f != best["flags"]]
+            if wave is None and "repair" not in tried and proposals \
+                    and not state["best"]["match"]:
+                wave = "repair"
+                checks = gen_repair_checks(text, addr, state, repair_budget)
             if wave is None:
                 break
             pending = {"wave": wave, "checks": checks, "cursor": 0, "improved": False}
@@ -459,11 +564,14 @@ def _run(addr, budget, start, src, fresh, as_json, quiet):
             _save(state_path, state)
         wave, checks = pending["wave"], pending["checks"]
         while pending["cursor"] < len(checks) and state["used"] < budget:
-            text_v, flags = checks[pending["cursor"]]
+            item = checks[pending["cursor"]]
+            text_v, flags = item[0], item[1]
             rec = check(text_v, flags, wave)
             if not quiet:
                 _print_rec(wave, rec)
             pending["cursor"] += 1
+            if wave == "repair" and len(item) > 2:
+                record_repair_check(state, item[2], wave, rec["match"])
             if better(rec, state["best"]):
                 pending["improved"] = True
                 keep_best(rec, text_v)
@@ -474,6 +582,8 @@ def _run(addr, budget, start, src, fresh, as_json, quiet):
             tried.add(wave)
             if pending["improved"]:
                 tried.discard("order")  # a new winning body can reorder differently
+                if "repair" in tried:
+                    tried.discard("repair")  # re-propose from the new winning body
             state["pending"] = None
             state["iter"] += 1
             state["tried"] = sorted(tried)
@@ -510,16 +620,27 @@ def _finish(addr, state, status, as_json, quiet):
             print("NEXT  manual review")
         return result
     if as_json:
-        print(json.dumps({"addr": "%08X" % addr, "status": status,
-                          "used": state["used"], "origin": state["origin"],
-                          "best": {k: b.get(k) for k in
-                                   ("n_op", "n_reg", "perm", "words", "total",
-                                    "sim", "match", "flags", "err")}}))
-        return {"addr": addr, "status": status, "used": state["used"], "best": b}
+        out = {"addr": "%08X" % addr, "status": status,
+               "used": state["used"], "origin": state["origin"],
+               "best": {k: b.get(k) for k in
+                        ("n_op", "n_reg", "perm", "words", "total",
+                         "sim", "match", "flags", "err")}}
+        if state.get("repair"):
+            out["repair"] = dict(state["repair"],
+                                 proposals=state.get("proposals", []))
+        print(json.dumps(out))
+        return {"addr": addr, "status": status, "used": state["used"], "best": b,
+                **({"repair": out["repair"]} if "repair" in out else {})}
     if not quiet:
         print("STATUS %s  %d checks used, best OP=%d REG=%d %s %d/%d sim=%.1f" % (
             status, state["used"], b["n_op"], b["n_reg"], "PERM " if b["perm"] else "",
             b["words"], b["total"], b["sim"]))
+        if state.get("repair"):
+            r = state["repair"]
+            print("REPAIR   %d proposed (%s), %d skipped, %.3fs" % (
+                r["proposed"],
+                ", ".join("%s=%d" % kv for kv in sorted(r["families"].items())) or "-",
+                r["skipped"], r["seconds"]))
     if not quiet:
         if status == "MATCH":
             print("NEXT  python3 tools/fn.py check %s 0x%08X "
@@ -529,6 +650,95 @@ def _finish(addr, state, status, as_json, quiet):
             print("NEXT  manual review (near-miss in logs/refine/%08X/history.jsonl)" % addr)
     return {"addr": addr, "status": status, "used": state["used"], "best": b,
             "origin": state["origin"]}
+
+
+# ------------------------------------------------------- repair proposals (H3)
+
+def near_miss_addrs():
+    """Logged refine near-misses (a best without MATCH), closest OP first."""
+    out = []
+    base = os.path.join(ROOT, "logs", "refine")
+    if not os.path.isdir(base):
+        return out
+    for name in sorted(os.listdir(base)):
+        sp = os.path.join(base, name, "state.json")
+        if not os.path.exists(sp):
+            continue
+        try:
+            st = read_json(sp)
+        except ValueError:
+            continue
+        best = st.get("best")
+        if best and not best.get("match") and best.get("path") \
+                and os.path.exists(best["path"]):
+            try:
+                out.append((best.get("n_op", 999), int(name, 16)))
+            except ValueError:
+                continue
+    out.sort()
+    return [addr for _, addr in out]
+
+
+def propose_batch(addrs, src=None, repair_budget=DEFAULT_REPAIR_BUDGET,
+                  diff_file=None, as_json=False):
+    """Offline repair-proposal batch over near-misses: proposes, never judges.
+
+    Per target: the logged best source (or --src), the repair pass's ordered
+    variants with reasons, skipped (cache/duplicate) counts, and time spent.
+    Nothing is compiled here; `fn.py check` on the phone judges each variant,
+    and only `worklist register` registers a MATCH.
+    """
+    extra_diff = read_json(diff_file) if diff_file else None
+    if not addrs:
+        addrs = near_miss_addrs()
+    targets = []
+    for addr in addrs:
+        key = "%08X" % addr
+        sd = state_dir(addr)
+        sp = os.path.join(sd, "state.json")
+        st = read_json(sp) if os.path.exists(sp) else {}
+        if src:
+            with open(src, errors="replace") as stream:
+                text = stream.read()
+            name, flags, origin = st.get("name"), st.get("flags_base"), "src:%s" % src
+        else:
+            best = st.get("best")
+            if not best or not best.get("path") or not os.path.exists(best["path"]):
+                targets.append({"addr": key, "error": "no logged near-miss "
+                                "(run refine.py first, or pass --src)"})
+                continue
+            with open(best["path"], encoding="utf-8") as stream:
+                text = stream.read()
+            name, flags, origin = st.get("name"), st.get("flags_base"), st.get("origin")
+        diff = {k: (st.get("best") or {}).get(k)
+                for k in ("n_op", "n_reg", "perm", "words", "total")}
+        if extra_diff:
+            diff.update(extra_diff)
+        rejected = proposals_repair.load_rejected_hashes(ROOT, addr, sd)
+        rep = proposals_repair.run_pass(text, name=name, diff=diff, flags=flags,
+                                        budget=repair_budget, skip_hashes=rejected)
+        targets.append({"addr": key, "origin": origin, "budget": repair_budget,
+                        "proposed": [{k: v[k] for k in
+                                      ("index", "name", "family", "reason", "hash")}
+                                     for v in rep["variants"]],
+                        "skipped": rep["skipped"], "families": rep["families"],
+                        "seconds": round(rep["seconds"], 4)})
+    if as_json:
+        print(json.dumps({"targets": targets}, indent=1))
+    else:
+        for t in targets:
+            if "error" in t:
+                print("%s  %s" % (t["addr"], t["error"]))
+                continue
+            print("%s  %d proposed, %d skipped (%.3fs)  families: %s" % (
+                t["addr"], len(t["proposed"]), t["skipped"], t["seconds"],
+                ", ".join("%s=%d" % kv for kv in sorted(t["families"].items())) or "-"))
+            for p in t["proposed"]:
+                print("    %-9s %-13s %s" % (p["name"], p["family"], p["reason"][:100]))
+        print("NEXT  on the phone: python tools/refine.py 0xADDR --proposals repair "
+              "--repair-budget %d  # compile+judge; register any MATCH via "
+              "worklist.py register" % repair_budget)
+    return targets
 
 
 # ----------------------------------------------------------------- acceptance
@@ -588,16 +798,39 @@ def main():
     ap.add_argument("--src")
     ap.add_argument("--fresh", action="store_true")
     ap.add_argument("--json", action="store_true")
+    ap.add_argument("--proposals", default="",
+                    help="comma-separated extra proposal sources (repair); default off")
+    ap.add_argument("--repair-budget", type=int, default=DEFAULT_REPAIR_BUDGET,
+                    help="max repair variants per target (default %d)"
+                         % DEFAULT_REPAIR_BUDGET)
     a = ap.parse_args()
     if not a.addr:
         print(__doc__)
         return
     run(int(a.addr, 16), budget=a.budget, start=a.start, src=a.src,
-        fresh=a.fresh, as_json=a.json)
+        fresh=a.fresh, as_json=a.json, proposals=a.proposals,
+        repair_budget=a.repair_budget)
 
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1 and sys.argv[1] == "acceptance":
+    if len(sys.argv) > 1 and sys.argv[1] == "propose":
+        args = sys.argv[2:]
+        value_opts = ("--src", "--repair-budget", "--diff")
+        addrs, skip = [], False
+        for a in args:
+            if skip:
+                skip = False
+            elif a in value_opts:
+                skip = True
+            elif not a.startswith("--"):
+                addrs.append(int(a, 16))
+
+        def opt(flag, default=None):
+            return args[args.index(flag) + 1] if flag in args else default
+        propose_batch(addrs, src=opt("--src"),
+                      repair_budget=int(opt("--repair-budget", DEFAULT_REPAIR_BUDGET)),
+                      diff_file=opt("--diff"), as_json="--json" in args)
+    elif len(sys.argv) > 1 and sys.argv[1] == "acceptance":
         n = int(sys.argv[2]) if len(sys.argv) > 2 else 10
         b = int(sys.argv[sys.argv.index("--budget") + 1]) if "--budget" in sys.argv else 40
         acceptance(n, budget=b)

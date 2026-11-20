@@ -63,6 +63,17 @@ The workflow lives in the tools, not in this file — every tool prints a
    testing artifact for the oracle, never a release artifact, and never
    reads or writes `code.bin` except through the gate's SHA-1-verified,
    read-only path.
+6. **No vendored SDK source (nnsdk working copy).** The `3dsdecomp/nnsdk`
+   clone used by `tools/sdkmap.py` (phase 8, roadmap H1) lives ONLY in an
+   untracked working directory — outside the repo or under the gitignored
+   `logs/` — and is never committed (that project ships no LICENSE file at the
+   pinned revision `d50a4b8`). The only committed nnsdk artifact is the
+   generated metadata inventory `shared/nnsdk_inventory.json`. `tools/sdkmap.py`
+   never writes game-derived raw data (no binary slices, no disassembly
+   listings); its resumable state lives under `logs/sdkmap/`. SDK matches
+   register through the normal `fn.py check` + `worklist.py register` flow,
+   with a `sdk:nnsdk <path>@<rev>` note on the entry; `try-compile --run` only
+   orchestrates that flow on the phone and never auto-registers.
 
 # Environment
 
@@ -101,6 +112,10 @@ The workflow lives in the tools, not in this file — every tool prints a
   `functions.json` (hex-string keys) against `funcs.json` (int addresses)
   requires explicit conversion; don't assume the formats match.
 - `shared/symbols.jsonl` — inferred function names.
+- `shared/nnsdk_inventory.json` — generated metadata inventory of
+  `3dsdecomp/nnsdk` @ `d50a4b89d13c929d2438abf92e5a48f039efffbf`
+  (names, mangled-name patterns, namespaces, source paths, per-file hashes;
+  no SDK source is vendored — see rule 6).
 - `shared/recipes.json` + `tools/recipes.py` — machine-checkable recipe
   corpus (positive: target shape -> winning construct; negative: hard
   skips, checked before any compile budget is spent). `docs/LESSONS.md`
@@ -117,8 +132,10 @@ The workflow lives in the tools, not in this file — every tool prints a
   needs neither code.bin nor armcc — run it before committing index
   changes), `lift.py` (semantic ARM32 lifter -> `src_lifted/`,
   status `lifted`), `hybrid_build.py` (hybrid image builder,
-  `build/hybrid.bin` testing artifact). Each tool's docstring is its
-  documentation.
+  `build/hybrid.bin` testing artifact), `sdkmap.py` (SDK fingerprinting
+  pipeline, phase 8: nnsdk metadata inventory, offline `plan`, phone-only
+  `fingerprint`/`try-compile`; state `logs/sdkmap/`). Each tool's docstring
+  is its documentation.
 - `src_lifted/` — lifted semantic scaffolds (`func_<ADDR>.c`, LIFTED
   banner). Committable like any `src/` file, but never registrable as
   matched (see rule 5).

@@ -67,6 +67,8 @@ textual constructs, not every semantic trick; passing it is not proof of honesty
 | `tools/audit.py` | Offline invariant audit of `functions.json` + status-table stats |
 | `tools/lift.py` | ARM32 semantic lifter for unmatched functions (`src_lifted/`, status `lifted`) |
 | `tools/hybrid_build.py` | Hybrid image builder (`build/hybrid.bin`: matched + lifted + original bytes) |
+| `tools/sdkmap.py` | SDK fingerprinting pipeline (nnsdk inventory, offline `plan`, phone-gated `fingerprint`/`try-compile`) |
+| `shared/nnsdk_inventory.json` | Generated metadata inventory of `3dsdecomp/nnsdk` @ `d50a4b8` (names, mangled patterns, paths, hashes — no SDK source) |
 
 ## Requirements
 
@@ -141,6 +143,28 @@ jobs stay serialized under the repository lock (`--jobs 1`). `worklist.py verify
 oracle-verified candidate as `semantic_match` with a `wall_class` (byte diffs remain, behavior equal on
 the replay corpus); it never counts toward honest bytes. The parked walls 005AB1D0, 0059F7B8, 005A8AA0,
 005CBE9C are the first eligible `verify` candidates. See `docs/AUTOMATION_PLAN.md` phase 7.
+
+## SDK fingerprinting (sdkmap)
+
+`tools/sdkmap.py` (roadmap H1) fingerprints the unmatched tail against the public nnsdk reconstruction
+([3dsdecomp/nnsdk](https://github.com/3dsdecomp/nnsdk), pinned at `d50a4b89d13c929d2438abf92e5a48f039efffbf`;
+that revision ships no LICENSE file), so SDK functions embedded in the game can be matched by compiling
+the SDK's own source with armcc instead of reverse engineering them. The nnsdk clone stays in an
+**untracked** directory (outside the repo or under the gitignored `logs/`); the only committed artifact is
+the generated metadata inventory `shared/nnsdk_inventory.json` — names, mangled-name patterns, namespaces,
+source paths, per-file hashes. No SDK source and no game-derived raw data is committed.
+
+```
+python3 tools/sdkmap.py plan --limit 50 --json     # offline ranked SDK candidates (state: logs/sdkmap/plan.json)
+python3 tools/sdkmap.py status / report --json    # offline views over logs/sdkmap/
+# phone only (needs code.bin + armcc under Wine + the nnsdk clone):
+uv run python tools/sdkmap.py fingerprint --budget 20
+uv run python tools/sdkmap.py try-compile 0x<ADDR> --nnsdk-dir <nnsdk-clone> --run
+```
+
+Without `code.bin`/armcc, `fingerprint` and `try-compile` exit 2 and print the exact phone commands.
+A successful SDK match registers through the standard `worklist.py register` flow with a
+`sdk:nnsdk <path>@<rev>` note on the entry. See `docs/AUTOMATION_PLAN.md` phase 8.
 
 ## How it was made
 

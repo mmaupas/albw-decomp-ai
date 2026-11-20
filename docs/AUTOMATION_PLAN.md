@@ -255,6 +255,82 @@ that invariant is enforced by `audit.py`, not by convention.
   no change to matching criteria or honest/hack definitions, no host-layer port
   (F2 stays parked), no new dependencies.
 
+### Phase 10 — Track H tooling bundle (H7 permuter tried-memory, H8 state vocabulary, H2 objdiff-cli)
+
+(Phase 8 is the sdkmap session, phase 9 the repair-proposals session; this
+phase owns the three small additive Track H items. All are offline-testable;
+none touches the ledger, `src/`, or the image gate.)
+
+#### H7 — permuter tried-memory (`tools/permuter.py`)
+
+- `logs/permuter/tried.json` (gitignored via `logs/`): `entries` keyed by
+  SHA-256 over the normalized candidate source + target address + `cc` +
+  `flags`; each value is the outcome summary (`rejected`/`match`, `words`,
+  `total`, `score`, `sim`, `err`), a UTC timestamp and the run id. Top-level
+  `stats` counts `lookups`/`hits` for the hit rate.
+- `normalize_source` (tested helper) strips comments and squashes whitespace
+  churn (string/char literals kept verbatim) so cosmetic edits do not defeat
+  the cache; `candidate_key` is the stable hash over that + addr + cc + flags.
+- A run consults the cache before compiling: known-`rejected` entries are
+  skipped (skip count logged, candidate still ranked by its recorded score),
+  matches are never skipped, `--fresh` bypasses the cache for a clean run,
+  `permuter.py status [--json]` reports entries/lookups/hits/hit-rate/skips.
+- Semantics unchanged otherwise: the cache only prevents wasted work, it never
+  invents candidates. Tests: `tests/test_permuter_tried.py`.
+
+#### H8 — state vocabulary alignment (additive fields only)
+
+Survey of the current `--json` shapes and their in-repo consumers (grep-verified;
+audit/CI read `functions.json`, not these outputs):
+
+| Shape | Current fields | In-repo consumers |
+|---|---|---|
+| `worklist.py report --json` | rows: `addr`, `kind`, `frac`, `checks`, `origin`, `hypothesis` | `tools/coverage_rank.py` (`addr`, `frac`, `kind`, `hypothesis`, `checks`, `origin`), `.agents/skills/decomp-loop` + `decomp-manual` (human text) |
+| `worklist.py status --json` | `candidates`, `attempted`, `registered`, `match_waiting` | agents/README (human text) |
+| `refine.py <addr> --json` | `addr`, `status`, `used`, `origin`, `best{n_op,n_reg,perm,words,total,sim,match,flags,err}`; DEFER adds `reason` | `worklist.py` (`refine_state`), `tools/reharvest.py` (`best.n_op`/`n_reg`), tests |
+| `permuter.py <addr> <spec> --json` (new with H7) | `addr`, `run_id`, `variants`, `flag_sets`, `checks`, `skipped`, `flags_tried`, `results[...]`, `best`, `permuter` | new; the human text output is unchanged |
+| refine state `logs/refine/<addr>/state.json` + `history.jsonl` | `best` record; per-check rows `iter,wave,flags,match,n_op,n_reg,perm,words,total,sim,err` | refine resume, `worklist.py report` |
+
+Aligned fields are ADDED in the same objects — nothing renamed or dropped:
+
+| Old field (unchanged) | Aligned field (added) | Mapping |
+|---|---|---|
+| report row `frac` | `score` + `max_score: 1.0` | identical value: the word-match fraction `words/total` in [0,1] |
+| report row `kind` (`"OP=2 REG=1 PERM"`) | `diff` = `{op, reg, perm}` | the same OP/REG/PERM diff class, numeric |
+| refine `best.words`/`best.total`; permuter result `words`/`total` | `score` + `max_score: 1.0` (in `best` and per result) | identical information: `score = words/total`, the quantity `fn.py check` prints as `(pct%)`; the alignment-based `sim` keeps its own name |
+| per-check `flags` records; permuter `flag_sets` | `flags_tried` (list of distinct flag strings checked) | refine: collected from `history.jsonl`; permuter: this run's flag sets |
+| — | `permuter` (report rows, refine `--json`, `status --json`, permuter `--json`) | permuter tried-cache outcome for the address: `{entries, rejected, skips, best{outcome,score,sim,flags,run}}` or `null` when never permuted; cache hit-rate: `{entries, rejected, match, lookups, hits, hit_rate, skips, cache}` |
+
+`score` deliberately maps to the word-match fraction, not to the OP-class
+counter: `n_op`/`n_reg`/`perm` (now also numeric as `diff`) remain the
+instruction-diff metric, while `score`/`max_score` is the standardized match
+metric carrying the same information as `frac`/`words`/`total`. Existing
+consumers migrate at leisure; `tests/test_vocabulary.py` asserts every old
+field still appears with unchanged semantics.
+
+#### H2 — objdiff-cli integration (`tools/objdiff.py`, `tools/setup_objdiff.py`)
+
+- `tools/setup_objdiff.py` is the only manual, one-time download: it fetches the
+  **pinned** objdiff-cli v3.8.3 release asset for the host (or `--target`,
+  e.g. `linux-aarch64` on the phone) into the gitignored `tools/bin/`, and
+  verifies the asset's pinned SHA-256 (recorded per target in the script)
+  before the binary is put in place; a sidecar `objdiff-cli.json` records
+  version/target/hash and `--check` re-verifies an installed binary. No binary
+  is ever committed or fetched at build time.
+- `tools/objdiff.py` (stdlib only) wraps it: `diff <base-obj> <target-obj>
+  [--symbol NAME] [--json]` drives objdiff-cli's one-shot mode
+  (`diff -2 base -1 target -o - --format json`) and re-emits the tool's own
+  JSON, falling back to a structured passthrough `{tool, command, returncode,
+  stdout, stderr}` if the output resists parsing; `units <obj> [--json]`
+  lists an object's units/sections with sizes and match percentages (self-diff).
+  Without the binary or the objects it prints the exact setup/phone command
+  and exits 2 (the `lift.py` convention). ARM objects from armcc are supported
+  by objdiff-cli's own arch detection.
+- Where it helps (documented in README, no `triage.py` change this session):
+  multi-function objects, pool-data diffs, gate-failure triage, hybrid layer
+  verification. Tests mock the subprocess (`tests/test_objdiff.py`); the real
+  binary + real ARM objects are phone-side.
+
 ## Ordering, effort, risk
 
 | Phase | Effort | Risk |
@@ -266,6 +342,7 @@ that invariant is enforced by `audit.py`, not by convention.
 | 5 queue | 1 session | low — glue over finished pieces |
 | 6 AGENTS.md | minutes | sign-off needed |
 | 7 lift/hybrid/verify | 2-3 sessions | medium — full mode needs code.bin + armcc + the Zakuro corpus on the phone; the offline parts (targets / hybrid --check / tests) are gated here |
+| 10 track H bundle | 1 session | low — additive fields/tools only; offline tests gate it |
 
 Phases 1–2 unlock value immediately (dna twins alone close functions);
 3–5 are what actually removes the expert from the loop; 6 is cheap but must

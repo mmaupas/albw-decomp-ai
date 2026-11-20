@@ -32,7 +32,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import fn
 import dna
 import synth
-from permuter import check_one
+from permuter import check_one, state_for_addr
 from sweep import body_permutations, classify
 from common import atomic_write, file_lock, read_json, write_json
 from relocations import VERIFIER_VERSION
@@ -62,6 +62,27 @@ def flag_variants(base):
 
 def state_dir(addr):
     return os.path.join(ROOT, "logs", "refine", "%08X" % addr)
+
+
+def flags_tried(addr):
+    """Distinct flag strings checked for this target (history.jsonl), aligned
+    ecosystem field added alongside the per-check `flags` records."""
+    path = os.path.join(state_dir(addr), "history.jsonl")
+    out = []
+    if os.path.exists(path):
+        with open(path, encoding="utf-8") as stream:
+            for line in stream:
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    rec = json.loads(line)
+                except ValueError:
+                    continue
+                flags = rec.get("flags")
+                if flags and flags not in out:
+                    out.append(flags)
+    return out
 
 
 # --------------------------------------------------------------- start sources
@@ -369,10 +390,11 @@ def _run(addr, budget, start, src, fresh, as_json, quiet):
             rec.update(match=r["match"], words=r["words"], total=r["total"],
                        sim=r["sim"], err="")
         rec.update(iter=state["iter"], wave=wave, flags=flags, path=path)
+        rec["score"] = round(rec["words"] / max(rec["total"], 1), 6)
         with open(hist_path, "a") as fh:
             fh.write(json.dumps({k: rec.get(k) for k in
                                  ("iter", "wave", "flags", "match", "n_op", "n_reg",
-                                  "perm", "words", "total", "sim", "err")}) + "\n")
+                                  "perm", "words", "total", "sim", "score", "err")}) + "\n")
         return rec
 
     def keep_best(rec, text):
@@ -502,7 +524,10 @@ def _finish(addr, state, status, as_json, quiet):
     b = state.get("best")
     if b is None:
         result = {"addr": "%08X" % addr, "status": status, "used": state["used"],
-                  "best": None, "reason": state.get("reason", "no starting source")}
+                  "best": None, "reason": state.get("reason", "no starting source"),
+                  "score": None, "max_score": 1.0,
+                  "flags_tried": flags_tried(addr),
+                  "permuter": state_for_addr("%08X" % addr, ROOT)}
         if as_json:
             print(json.dumps(result))
         elif not quiet:
@@ -510,11 +535,22 @@ def _finish(addr, state, status, as_json, quiet):
             print("NEXT  manual review")
         return result
     if as_json:
+        # legacy best records predate the aligned fields: derive score from
+        # words/total when the record has none (identical information)
+        score = b.get("score")
+        if score is None:
+            score = round(b["words"] / max(b["total"], 1), 6) if b.get("total") else 0.0
+        best_out = {k: b.get(k) for k in
+                    ("n_op", "n_reg", "perm", "words", "total",
+                     "sim", "match", "flags", "err")}
+        best_out["score"] = score
+        best_out["max_score"] = 1.0
         print(json.dumps({"addr": "%08X" % addr, "status": status,
                           "used": state["used"], "origin": state["origin"],
-                          "best": {k: b.get(k) for k in
-                                   ("n_op", "n_reg", "perm", "words", "total",
-                                    "sim", "match", "flags", "err")}}))
+                          "score": score, "max_score": 1.0,
+                          "flags_tried": flags_tried(addr),
+                          "permuter": state_for_addr("%08X" % addr, ROOT),
+                          "best": best_out}))
         return {"addr": addr, "status": status, "used": state["used"], "best": b}
     if not quiet:
         print("STATUS %s  %d checks used, best OP=%d REG=%d %s %d/%d sim=%.1f" % (

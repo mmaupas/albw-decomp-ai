@@ -167,10 +167,13 @@ class SweepTests(unittest.TestCase):
             for tool in (permuter, sweep):
                 with self.subTest(tool=tool.__name__), patch.object(tool, "ROOT", str(root)), patch.object(
                         tool.tempfile, "mkdtemp", side_effect=workspace), patch.object(
-                        sys, "argv", [tool.__name__, "00100000", str(spec)]), patch.object(
+                        sys, "argv", [tool.__name__, "00100000", str(spec)]) as argv, patch.object(
                         tool, "check_one", side_effect=lambda *args, **kwargs: dict(
                             match=False, err="fake oracle", words=0, total=1, sim=0, out="")) as check, contextlib.redirect_stdout(io.StringIO()):
                     tool.main()
+                    # permuter records the rejected fixture in its tried-cache, so a
+                    # re-run of the identical spec must bypass it to re-check
+                    argv.append("--fresh")
                     tool.main()
                     self.assertEqual(check.call_count, 2)
                     self.assertEqual(check.call_args.args[3], "--recorded-fpic")

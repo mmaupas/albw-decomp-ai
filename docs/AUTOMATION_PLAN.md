@@ -255,6 +255,29 @@ that invariant is enforced by `audit.py`, not by convention.
   no change to matching criteria or honest/hack definitions, no host-layer port
   (F2 stays parked), no new dependencies.
 
+### Phase 10 — Track H tooling bundle (H7 permuter tried-memory, H8 state vocabulary, H2 objdiff-cli)
+
+(Phase 8 is the sdkmap session, phase 9 the repair-proposals session; this
+phase owns the three small additive Track H items. All are offline-testable;
+none touches the ledger, `src/`, or the image gate.)
+
+#### H7 — permuter tried-memory (`tools/permuter.py`)
+
+- `logs/permuter/tried.json` (gitignored via `logs/`): `entries` keyed by
+  SHA-256 over the normalized candidate source + target address + `cc` +
+  `flags`; each value is the outcome summary (`rejected`/`match`, `words`,
+  `total`, `score`, `sim`, `err`), a UTC timestamp and the run id. Top-level
+  `stats` counts `lookups`/`hits` for the hit rate.
+- `normalize_source` (tested helper) strips comments and squashes whitespace
+  churn (string/char literals kept verbatim) so cosmetic edits do not defeat
+  the cache; `candidate_key` is the stable hash over that + addr + cc + flags.
+- A run consults the cache before compiling: known-`rejected` entries are
+  skipped (skip count logged, candidate still ranked by its recorded score),
+  matches are never skipped, `--fresh` bypasses the cache for a clean run,
+  `permuter.py status [--json]` reports entries/lookups/hits/hit-rate/skips.
+- Semantics unchanged otherwise: the cache only prevents wasted work, it never
+  invents candidates. Tests: `tests/test_permuter_tried.py`.
+
 ## Ordering, effort, risk
 
 | Phase | Effort | Risk |
@@ -266,6 +289,7 @@ that invariant is enforced by `audit.py`, not by convention.
 | 5 queue | 1 session | low — glue over finished pieces |
 | 6 AGENTS.md | minutes | sign-off needed |
 | 7 lift/hybrid/verify | 2-3 sessions | medium — full mode needs code.bin + armcc + the Zakuro corpus on the phone; the offline parts (targets / hybrid --check / tests) are gated here |
+| 10 track H bundle | 1 session | low — additive fields/tools only; offline tests gate it |
 
 Phases 1–2 unlock value immediately (dna twins alone close functions);
 3–5 are what actually removes the expert from the loop; 6 is cheap but must

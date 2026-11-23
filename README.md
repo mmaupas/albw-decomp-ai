@@ -67,6 +67,7 @@ textual constructs, not every semantic trick; passing it is not proof of honesty
 | `tools/audit.py` | Offline invariant audit of `functions.json` + status-table stats |
 | `tools/lift.py` | ARM32 semantic lifter for unmatched functions (`src_lifted/`, status `lifted`) |
 | `tools/hybrid_build.py` | Hybrid image builder (`build/hybrid.bin`: matched + lifted + original bytes) |
+| `tools/objdiff.py`, `tools/setup_objdiff.py` | objdiff-cli wrapper (object-level diffs) + its one-time pinned-binary setup |
 
 ## Requirements
 
@@ -141,6 +142,39 @@ jobs stay serialized under the repository lock (`--jobs 1`). `worklist.py verify
 oracle-verified candidate as `semantic_match` with a `wall_class` (byte diffs remain, behavior equal on
 the replay corpus); it never counts toward honest bytes. The parked walls 005AB1D0, 0059F7B8, 005A8AA0,
 005CBE9C are the first eligible `verify` candidates. See `docs/AUTOMATION_PLAN.md` phase 7.
+
+## Object-level diffing (objdiff-cli)
+
+`tools/objdiff.py` is a thin, stdlib-only wrapper around
+[objdiff-cli](https://github.com/encounter/objdiff) (object-level, data-aware
+diffing with ARM support), so multi-function objects and literal-pool data stop
+being triaged by eye. Where it helps: **multi-function objects** (per-unit
+`match_percent` instead of one whole-file verdict), **pool data** (section
+`data_diff` blocks), **gate-failure triage** (`rebuild_check.py` mismatches at
+object granularity), and **hybrid layer verification** (matched vs lifted
+objects side by side). `triage.py` behavior is unchanged.
+
+The binary is never committed and never downloaded at build time. One manual
+setup downloads the **pinned** release (objdiff-cli v3.8.3) into the gitignored
+`tools/bin/`, verifying the asset's SHA-256 before use:
+
+```
+python3 tools/setup_objdiff.py                          # this host (auto-detected)
+python3 tools/setup_objdiff.py --target linux-aarch64   # the phone (Termux)
+python3 tools/setup_objdiff.py --check                  # verify an installed binary
+```
+
+```
+python3 tools/objdiff.py units <object> --json                 # unit/section list of one object
+python3 tools/objdiff.py diff <base-obj> <target-obj> --json   # machine-readable object diff
+python3 tools/objdiff.py diff base.o target.o --symbol func_005AB1D0   # one unit
+```
+
+`--json` re-emits objdiff-cli's own JSON (with a structured passthrough if the
+output ever resists parsing). Without the binary or the object files, every
+command prints the exact setup command above and exits 2 — the same
+degradation convention as `tools/lift.py`. The real ARM objects come from the
+phone-side armcc runs; the committed tests mock the subprocess.
 
 ## How it was made
 

@@ -747,11 +747,13 @@ def load_symbols():
 
 
 def record_lifted(key, rel_path, cc=DEFAULT_CC, flags=DEFAULT_FLAGS):
-    """Record status "lifted" in functions.json. Never touches other entries."""
+    """Record status "lifted" in functions.json. Never touches other entries.
+    A no_source (source_lost) entry may be converted to lifted — that is the
+    lifter's purpose; matched/hack/semantic_match/excluded entries never are."""
     with file_lock(LOCK):
         data = load_functions()
         ent = data.get(key)
-        if ent and ent.get("status") != "lifted":
+        if ent and ent.get("status") not in ("lifted", "no_source"):
             raise ValueError("refusing to overwrite existing %s entry %s" % (ent.get("status"), key))
         data[key] = {"cc": cc, "flags": flags, "path": rel_path, "status": "lifted"}
         write_json(FUNCTIONS, data, canonical=True)

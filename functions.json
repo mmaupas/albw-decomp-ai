@@ -1,4 +1,10 @@
 {
+"00100000": {
+"cc": "4.1/b1049",
+"flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
+"path": "src_lifted/func_00100000.c",
+"status": "lifted"
+},
 "00100024": {
 "cc": "4.1/b1049",
 "flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Ospace --split_sections",
@@ -12,6 +18,12 @@
 "hack_reasons": [],
 "path": "src/work8/auto/func_00100B84.cpp",
 "status": "honest"
+},
+"00100B88": {
+"cc": "4.1/b1049",
+"flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
+"path": "src_lifted/func_00100B88.c",
+"status": "lifted"
 },
 "00100B90": {
 "cc": "4.1/b1049",
@@ -235,6 +247,18 @@
 "hack_reasons": [],
 "path": "src/work7/ds1/t_d2.cpp",
 "status": "honest"
+},
+"00101DC4": {
+"cc": "4.1/b1049",
+"flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
+"path": "src_lifted/func_00101DC4.c",
+"status": "lifted"
+},
+"00101DE8": {
+"cc": "4.1/b1049",
+"flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
+"path": "src_lifted/func_00101DE8.c",
+"status": "lifted"
 },
 "00101E00": {
 "cc": "4.1/b1049",
@@ -574,6 +598,24 @@
 "hack_reasons": [],
 "path": "src/work7/ds1/func_00103C10.cpp",
 "status": "honest"
+},
+"00103C68": {
+"cc": "4.1/b1049",
+"flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
+"path": "src_lifted/func_00103C68.c",
+"status": "lifted"
+},
+"00103C80": {
+"cc": "4.1/b1049",
+"flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
+"path": "src_lifted/func_00103C80.c",
+"status": "lifted"
+},
+"00103CA4": {
+"cc": "4.1/b1049",
+"flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
+"path": "src_lifted/func_00103CA4.c",
+"status": "lifted"
 },
 "00103D1C": {
 "cc": "4.1/b1049",
@@ -964,12 +1006,36 @@
 "path": "src/work8/opus_tiny/f106314.cpp",
 "status": "hack"
 },
+"00106358": {
+"cc": "4.1/b1049",
+"flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
+"path": "src_lifted/func_00106358.c",
+"status": "lifted"
+},
+"00106370": {
+"cc": "4.1/b1049",
+"flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
+"path": "src_lifted/func_00106370.c",
+"status": "lifted"
+},
 "00106388": {
 "cc": "4.1/b1049",
 "flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
 "hack_reasons": [],
 "path": "src/work7/gpt15/func_00106388.cpp",
 "status": "honest"
+},
+"00106394": {
+"cc": "4.1/b1049",
+"flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
+"path": "src_lifted/func_00106394.c",
+"status": "lifted"
+},
+"0010639C": {
+"cc": "4.1/b1049",
+"flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
+"path": "src_lifted/func_0010639C.c",
+"status": "lifted"
 },
 "001064D0": {
 "cc": "4.1/b1049",
@@ -1007,6 +1073,12 @@
 "hack_reasons": [],
 "path": "src/work5/templater/gen/func_001080CC.cpp",
 "status": "honest"
+},
+"0010818C": {
+"cc": "4.1/b1049",
+"flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
+"path": "src_lifted/func_0010818C.c",
+"status": "lifted"
 },
 "001081A4": {
 "cc": "4.1/b1049",
@@ -1384,6 +1456,12 @@
 "path": "src/work7/gpt15/variants/0010994C/v0.cpp",
 "status": "honest"
 },
+"0010998C": {
+"cc": "4.1/b1049",
+"flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
+"path": "src_lifted/func_0010998C.c",
+"status": "lifted"
+},
 "00109D6C": {
 "cc": "4.1/b1049",
 "flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
@@ -1636,6 +1714,12 @@
 "path": "src/work8/lead/matched_1020/0010B380.c",
 "status": "honest"
 },
+"0010B3C0": {
+"cc": "4.1/b1049",
+"flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
+"path": "src_lifted/func_0010B3C0.c",
+"status": "lifted"
+},
 "0010B3EC": {
 "cc": "4.1/b1049",
 "flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
@@ -1797,12 +1881,24 @@
 "path": "src/work7/ds7/hid/_bulk_0010be44.cpp",
 "status": "honest"
 },
+"0010BE9C": {
+"cc": "4.1/b1049",
+"flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
+"path": "src_lifted/func_0010BE9C.c",
+"status": "lifted"
+},
 "0010BEB4": {
 "cc": "4.1/b1049",
 "flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
 "hack_reasons": [],
 "path": "src/work7/gpt15/func_0010BEB4.cpp",
 "status": "honest"
+},
+"0010BFD4": {
+"cc": "4.1/b1049",
+"flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
+"path": "src_lifted/func_0010BFD4.c",
+"status": "lifted"
 },
 "0010C0B8": {
 "cc": "4.1/b1049",
@@ -1992,6 +2088,12 @@
 "path": "src/work7/ds7/hid/_bulk_0010be44.cpp",
 "status": "honest"
 },
+"0010D0EC": {
+"cc": "4.1/b1049",
+"flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
+"path": "src_lifted/func_0010D0EC.c",
+"status": "lifted"
+},
 "0010D0F4": {
 "cc": "4.1/b1049",
 "flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
@@ -2148,6 +2250,12 @@
 "path": "src/work7/gpt15/func_0010E3B0.cpp",
 "status": "honest"
 },
+"0010EAE8": {
+"cc": "4.1/b1049",
+"flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
+"path": "src_lifted/func_0010EAE8.c",
+"status": "lifted"
+},
 "0010EDBC": {
 "cc": "4.1/b1049",
 "flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
@@ -2192,12 +2300,24 @@
 "path": "src/work8/auto/func_0010F1F8.c",
 "status": "honest"
 },
+"0010F228": {
+"cc": "4.1/b1049",
+"flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
+"path": "src_lifted/func_0010F228.c",
+"status": "lifted"
+},
 "0010F88C": {
 "cc": "4.1/b1049",
 "flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
 "hack_reasons": [],
 "path": "src/work7/gpt23/func_0010F88C.cpp",
 "status": "honest"
+},
+"0010F8B8": {
+"cc": "4.1/b1049",
+"flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
+"path": "src_lifted/func_0010F8B8.c",
+"status": "lifted"
 },
 "0010F8E8": {
 "cc": "4.1/b1049",
@@ -11552,9 +11672,10 @@
 "status": "honest"
 },
 "0012AB58": {
-"label": "source_lost",
-"note": "source lost in first-publication purge; dna twin + synth re-derivation attempted, best diff OP=19 REG=0 (logs/refine/0012AB58/)",
-"status": "no_source"
+"cc": "4.1/b1049",
+"flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
+"path": "src_lifted/func_0012AB58.c",
+"status": "lifted"
 },
 "0012B42C": {
 "cc": "4.1/b1049",
@@ -24129,6 +24250,12 @@
 "hack_reasons": [],
 "path": "src/work7/ds7/hid/f3cmp70_c.cpp",
 "status": "honest"
+},
+"001EA96C": {
+"cc": "4.1/b1049",
+"flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
+"path": "src_lifted/func_001EA96C.c",
+"status": "lifted"
 },
 "001FE4C0": {
 "cc": "4.1/b1049",
@@ -94815,6 +94942,12 @@
 "hack_reasons": [],
 "path": "src/work8/fam_sti/func_005936A0.cpp",
 "status": "honest"
+},
+"005937D8": {
+"cc": "4.1/b1049",
+"flags": "--cpu=MPCore --fpmode=fast --apcs=/interwork -O3 -Otime --split_sections",
+"path": "src_lifted/func_005937D8.c",
+"status": "lifted"
 },
 "00598E08": {
 "cc": "4.1/b1049",

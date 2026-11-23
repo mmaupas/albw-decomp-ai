@@ -1,0 +1,5096 @@
+{
+ "counts": {
+  "files": 29,
+  "functions": 76
+ },
+ "files": [
+  {
+   "content_sha256": "d9a5e1349236b09bcfd44ebbcb70271debfe5c24be987f9a4bb5d124eb699812",
+   "functions": [
+    {
+     "asm": false,
+     "class": "Handle",
+     "inline": false,
+     "kind": "constructor",
+     "line": 9,
+     "mangled_pattern": "_ZN2nn6HandleC1Ev",
+     "name": "Handle",
+     "namespaces": [
+      "nn"
+     ],
+     "params": [],
+     "params_text": "",
+     "qualified": "nn::Handle::Handle",
+     "return": "",
+     "source": "Include/nn/Handle.h",
+     "template": false
+    }
+   ],
+   "path": "Include/nn/Handle.h",
+   "structure_hash": "63f89bf0ae69b7ed9d0558a5c8c1336ee7b411c42a08bb9692670e9b5d1927fe",
+   "types": [
+    {
+     "kind": "class",
+     "name": "EventBase",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "ipc"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystemBase",
+     "namespaces": [
+      "nn",
+      "fs",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Handle",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HandleObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HidBase",
+     "namespaces": [
+      "nn",
+      "hid",
+      "CTR"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "InterruptEvent",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "KConfigMemory",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Result",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Service",
+     "namespaces": [
+      "nn",
+      "srv",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "UserFileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "CTR",
+      "MPCore",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "VEC3",
+     "namespaces": [
+      "nn",
+      "math"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "WaitObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    }
+   ]
+  },
+  {
+   "content_sha256": "33652e7d397a9572376c18e0d521079229da91bd4fb1afb2eebf8bd0a5c7d11b",
+   "functions": [
+    {
+     "asm": false,
+     "class": "Result",
+     "inline": false,
+     "kind": "constructor",
+     "line": 167,
+     "mangled_pattern": "_ZN2nn6ResultC1Ev",
+     "name": "Result",
+     "namespaces": [
+      "nn"
+     ],
+     "params": [],
+     "params_text": "",
+     "qualified": "nn::Result::Result",
+     "return": "",
+     "source": "Include/nn/Result.h",
+     "template": false
+    },
+    {
+     "asm": false,
+     "class": "Result",
+     "inline": false,
+     "kind": "constructor",
+     "line": 169,
+     "mangled_pattern": "_ZN2nn6ResultC1EN2nn5LevelEN2nn7SummaryEN2nn10ModuleTypeEi",
+     "name": "Result",
+     "namespaces": [
+      "nn"
+     ],
+     "params": [
+      "Level",
+      "Summary",
+      "ModuleType",
+      "int"
+     ],
+     "params_text": "Level level, Summary summary, ModuleType module, int desc",
+     "qualified": "nn::Result::Result",
+     "return": "",
+     "source": "Include/nn/Result.h",
+     "template": false
+    },
+    {
+     "asm": false,
+     "class": "Result",
+     "inline": false,
+     "kind": "member",
+     "line": 174,
+     "mangled_pattern": "_ZN2nn6Result9SucceededEv",
+     "name": "Succeeded",
+     "namespaces": [
+      "nn"
+     ],
+     "params": [],
+     "params_text": "",
+     "qualified": "nn::Result::Succeeded",
+     "return": "bool",
+     "source": "Include/nn/Result.h",
+     "template": false
+    },
+    {
+     "asm": false,
+     "class": "Result",
+     "inline": false,
+     "kind": "member",
+     "line": 175,
+     "mangled_pattern": "_ZN2nn6Result6FailedEv",
+     "name": "Failed",
+     "namespaces": [
+      "nn"
+     ],
+     "params": [],
+     "params_text": "",
+     "qualified": "nn::Result::Failed",
+     "return": "bool",
+     "source": "Include/nn/Result.h",
+     "template": false
+    },
+    {
+     "asm": false,
+     "class": "Result",
+     "inline": false,
+     "kind": "member",
+     "line": 176,
+     "mangled_pattern": "_ZN2nn6Result8GetLevelEv",
+     "name": "GetLevel",
+     "namespaces": [
+      "nn"
+     ],
+     "params": [],
+     "params_text": "",
+     "qualified": "nn::Result::GetLevel",
+     "return": "Level",
+     "source": "Include/nn/Result.h",
+     "template": false
+    },
+    {
+     "asm": false,
+     "class": "Result",
+     "inline": false,
+     "kind": "member",
+     "line": 177,
+     "mangled_pattern": "_ZN2nn6Result10GetSummaryEv",
+     "name": "GetSummary",
+     "namespaces": [
+      "nn"
+     ],
+     "params": [],
+     "params_text": "",
+     "qualified": "nn::Result::GetSummary",
+     "return": "Summary",
+     "source": "Include/nn/Result.h",
+     "template": false
+    },
+    {
+     "asm": false,
+     "class": "Result",
+     "inline": false,
+     "kind": "member",
+     "line": 178,
+     "mangled_pattern": "_ZN2nn6Result13GetModuleTypeEv",
+     "name": "GetModuleType",
+     "namespaces": [
+      "nn"
+     ],
+     "params": [],
+     "params_text": "",
+     "qualified": "nn::Result::GetModuleType",
+     "return": "ModuleType",
+     "source": "Include/nn/Result.h",
+     "template": false
+    },
+    {
+     "asm": false,
+     "class": "Result",
+     "inline": false,
+     "kind": "member",
+     "line": 179,
+     "mangled_pattern": "_ZN2nn6Result14GetDescriptionEv",
+     "name": "GetDescription",
+     "namespaces": [
+      "nn"
+     ],
+     "params": [],
+     "params_text": "",
+     "qualified": "nn::Result::GetDescription",
+     "return": "int",
+     "source": "Include/nn/Result.h",
+     "template": false
+    },
+    {
+     "asm": false,
+     "class": "Result",
+     "inline": false,
+     "kind": "member",
+     "line": 180,
+     "mangled_pattern": "_ZN2nn6Result7IsValidEv",
+     "name": "IsValid",
+     "namespaces": [
+      "nn"
+     ],
+     "params": [],
+     "params_text": "",
+     "qualified": "nn::Result::IsValid",
+     "return": "bool",
+     "source": "Include/nn/Result.h",
+     "template": false
+    },
+    {
+     "asm": false,
+     "class": "Result",
+     "inline": true,
+     "kind": "member_operator",
+     "line": 182,
+     "mangled_pattern": "_ZN2nn6ResultbEv",
+     "name": "operator bool",
+     "namespaces": [
+      "nn"
+     ],
+     "params": [],
+     "params_text": "",
+     "qualified": "nn::Result::operator bool",
+     "return": "inline",
+     "source": "Include/nn/Result.h",
+     "template": false
+    }
+   ],
+   "path": "Include/nn/Result.h",
+   "structure_hash": "40b70ab636fcfbc985dab79ff2a343814f167969f6644411aa6dfc2614117063",
+   "types": [
+    {
+     "kind": "class",
+     "name": "EventBase",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "ipc"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystemBase",
+     "namespaces": [
+      "nn",
+      "fs",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Handle",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HandleObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HidBase",
+     "namespaces": [
+      "nn",
+      "hid",
+      "CTR"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "InterruptEvent",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "KConfigMemory",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Result",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Service",
+     "namespaces": [
+      "nn",
+      "srv",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "UserFileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "CTR",
+      "MPCore",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "VEC3",
+     "namespaces": [
+      "nn",
+      "math"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "WaitObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    }
+   ]
+  },
+  {
+   "content_sha256": "668206ba7a6f4fed71d1ca3bbe46501f744b00f0d8d0f3ac8fd68f1f44514cab",
+   "functions": [],
+   "path": "Include/nn/Types.h",
+   "structure_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+   "types": [
+    {
+     "kind": "class",
+     "name": "EventBase",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "ipc"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystemBase",
+     "namespaces": [
+      "nn",
+      "fs",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Handle",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HandleObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HidBase",
+     "namespaces": [
+      "nn",
+      "hid",
+      "CTR"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "InterruptEvent",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "KConfigMemory",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Result",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Service",
+     "namespaces": [
+      "nn",
+      "srv",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "UserFileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "CTR",
+      "MPCore",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "VEC3",
+     "namespaces": [
+      "nn",
+      "math"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "WaitObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    }
+   ]
+  },
+  {
+   "content_sha256": "b286c9086b25d8c5e4422e3fa91d5b5351cd4c6c7460da7a8bccb2755e9d48c9",
+   "functions": [
+    {
+     "asm": false,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 7,
+     "mangled_pattern": "_ZN2nn3cfg3CTR10InitializeEv",
+     "name": "Initialize",
+     "namespaces": [
+      "nn",
+      "cfg",
+      "CTR"
+     ],
+     "params": [],
+     "params_text": "",
+     "qualified": "nn::cfg::CTR::Initialize",
+     "return": "void",
+     "source": "Include/nn/cfg/CTR/cfg_Api.h",
+     "template": false
+    }
+   ],
+   "path": "Include/nn/cfg/CTR/cfg_Api.h",
+   "structure_hash": "4d5c83a8e5b173efb8f92ca3c014220411ff86b4b015b7eba8f5214dc89f33c6",
+   "types": [
+    {
+     "kind": "class",
+     "name": "EventBase",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "ipc"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystemBase",
+     "namespaces": [
+      "nn",
+      "fs",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Handle",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HandleObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HidBase",
+     "namespaces": [
+      "nn",
+      "hid",
+      "CTR"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "InterruptEvent",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "KConfigMemory",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Result",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Service",
+     "namespaces": [
+      "nn",
+      "srv",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "UserFileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "CTR",
+      "MPCore",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "VEC3",
+     "namespaces": [
+      "nn",
+      "math"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "WaitObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    }
+   ]
+  },
+  {
+   "content_sha256": "601ebd6abbde3b6a9ac560dc53442bc5f6e8015f1e6e3b7647b0909c03237717",
+   "functions": [
+    {
+     "asm": false,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 8,
+     "mangled_pattern": "_ZN2nn3dbg5BreakEN2nn3dbg11BreakReasonE",
+     "name": "Break",
+     "namespaces": [
+      "nn",
+      "dbg"
+     ],
+     "params": [
+      "BreakReason"
+     ],
+     "params_text": "BreakReason reason",
+     "qualified": "nn::dbg::Break",
+     "return": "void",
+     "source": "Include/nn/dbg/dbg_Api.h",
+     "template": false
+    }
+   ],
+   "path": "Include/nn/dbg/dbg_Api.h",
+   "structure_hash": "ed45324995c9b5e8b6e0283cc63483282c694fdf6c2fc9934eb807ae60dbd84b",
+   "types": [
+    {
+     "kind": "class",
+     "name": "EventBase",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "ipc"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystemBase",
+     "namespaces": [
+      "nn",
+      "fs",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Handle",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HandleObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HidBase",
+     "namespaces": [
+      "nn",
+      "hid",
+      "CTR"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "InterruptEvent",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "KConfigMemory",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Result",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Service",
+     "namespaces": [
+      "nn",
+      "srv",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "UserFileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "CTR",
+      "MPCore",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "VEC3",
+     "namespaces": [
+      "nn",
+      "math"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "WaitObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    }
+   ]
+  },
+  {
+   "content_sha256": "50b232df43da6a670bb76676fdd323d053ee915fbb040d1cbc9d2f6c1a659dd1",
+   "functions": [],
+   "path": "Include/nn/dbg/dbg_Types.h",
+   "structure_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+   "types": [
+    {
+     "kind": "class",
+     "name": "EventBase",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "ipc"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystemBase",
+     "namespaces": [
+      "nn",
+      "fs",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Handle",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HandleObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HidBase",
+     "namespaces": [
+      "nn",
+      "hid",
+      "CTR"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "InterruptEvent",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "KConfigMemory",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Result",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Service",
+     "namespaces": [
+      "nn",
+      "srv",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "UserFileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "CTR",
+      "MPCore",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "VEC3",
+     "namespaces": [
+      "nn",
+      "math"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "WaitObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    }
+   ]
+  },
+  {
+   "content_sha256": "9053167fabd40e2fc0d244a86c8a6a5bf9654cd0001873b341823d86664e1b9d",
+   "functions": [
+    {
+     "asm": false,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 8,
+     "mangled_pattern": "_ZN2nn3err3CTR13ThrowFatalErrEN2nn6ResultE",
+     "name": "ThrowFatalErr",
+     "namespaces": [
+      "nn",
+      "err",
+      "CTR"
+     ],
+     "params": [
+      "Result"
+     ],
+     "params_text": "Result",
+     "qualified": "nn::err::CTR::ThrowFatalErr",
+     "return": "void",
+     "source": "Include/nn/err/CTR/err_Api.h",
+     "template": false
+    }
+   ],
+   "path": "Include/nn/err/CTR/err_Api.h",
+   "structure_hash": "ecd0730eea1c3f023cc721b8d6f19904a6f43cc810ccfe0fa318fd5b74e4068d",
+   "types": [
+    {
+     "kind": "class",
+     "name": "EventBase",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "ipc"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystemBase",
+     "namespaces": [
+      "nn",
+      "fs",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Handle",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HandleObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HidBase",
+     "namespaces": [
+      "nn",
+      "hid",
+      "CTR"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "InterruptEvent",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "KConfigMemory",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Result",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Service",
+     "namespaces": [
+      "nn",
+      "srv",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "UserFileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "CTR",
+      "MPCore",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "VEC3",
+     "namespaces": [
+      "nn",
+      "math"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "WaitObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    }
+   ]
+  },
+  {
+   "content_sha256": "fea16988d71c4a49dffcb6256680da0ccf263b11b4f677e1db7fb0254b8b156f",
+   "functions": [
+    {
+     "asm": false,
+     "class": "UserFileSystem",
+     "inline": false,
+     "kind": "static_member",
+     "line": 12,
+     "mangled_pattern": "_ZN2nn2fs3CTR6MPCore6detail14UserFileSystem10InitializeEN2nn6HandleE",
+     "name": "Initialize",
+     "namespaces": [
+      "nn",
+      "fs",
+      "CTR",
+      "MPCore",
+      "detail"
+     ],
+     "params": [
+      "Handle"
+     ],
+     "params_text": "Handle handle",
+     "qualified": "nn::fs::CTR::MPCore::detail::UserFileSystem::Initialize",
+     "return": "static void",
+     "source": "Include/nn/fs/CTR/MPCore/detail/fs_UserFileSystem.h",
+     "template": false
+    },
+    {
+     "asm": false,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 18,
+     "mangled_pattern": "_ZN2nn2fs28ForceDisableLatencyEmulationEv",
+     "name": "ForceDisableLatencyEmulation",
+     "namespaces": [
+      "nn",
+      "fs"
+     ],
+     "params": [],
+     "params_text": "",
+     "qualified": "nn::fs::ForceDisableLatencyEmulation",
+     "return": "void",
+     "source": "Include/nn/fs/CTR/MPCore/detail/fs_UserFileSystem.h",
+     "template": false
+    }
+   ],
+   "path": "Include/nn/fs/CTR/MPCore/detail/fs_UserFileSystem.h",
+   "structure_hash": "1763f498f4fbcc625712d0bc4e11fb1067317bd73d964c9dd102453db9fbac26",
+   "types": [
+    {
+     "kind": "class",
+     "name": "EventBase",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "ipc"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystemBase",
+     "namespaces": [
+      "nn",
+      "fs",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Handle",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HandleObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HidBase",
+     "namespaces": [
+      "nn",
+      "hid",
+      "CTR"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "InterruptEvent",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "KConfigMemory",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Result",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Service",
+     "namespaces": [
+      "nn",
+      "srv",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "UserFileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "CTR",
+      "MPCore",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "VEC3",
+     "namespaces": [
+      "nn",
+      "math"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "WaitObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    }
+   ]
+  },
+  {
+   "content_sha256": "9646ca9042396f04ac8ef58e91f6527162a0704a566116c964cb334f6b09618a",
+   "functions": [
+    {
+     "asm": false,
+     "class": "FileSystemBase",
+     "inline": false,
+     "kind": "constructor",
+     "line": 11,
+     "mangled_pattern": "_ZN2nn2fs6detail14FileSystemBaseC1Ev",
+     "name": "FileSystemBase",
+     "namespaces": [
+      "nn",
+      "fs",
+      "detail"
+     ],
+     "params": [],
+     "params_text": "",
+     "qualified": "nn::fs::detail::FileSystemBase::FileSystemBase",
+     "return": "",
+     "source": "Include/nn/fs/detail/fs_FileSystemBase.h",
+     "template": false
+    },
+    {
+     "asm": false,
+     "class": "FileSystemBase",
+     "inline": false,
+     "kind": "constructor",
+     "line": 12,
+     "mangled_pattern": "_ZN2nn2fs6detail14FileSystemBaseC1EPi",
+     "name": "FileSystemBase",
+     "namespaces": [
+      "nn",
+      "fs",
+      "detail"
+     ],
+     "params": [
+      "int*"
+     ],
+     "params_text": "int* a",
+     "qualified": "nn::fs::detail::FileSystemBase::FileSystemBase",
+     "return": "",
+     "source": "Include/nn/fs/detail/fs_FileSystemBase.h",
+     "template": false
+    },
+    {
+     "asm": false,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 18,
+     "mangled_pattern": "_ZN2nn2fs6detail28RegisterGlobalFileSystemBaseERN2nn2fs6detail14FileSystemBaseE",
+     "name": "RegisterGlobalFileSystemBase",
+     "namespaces": [
+      "nn",
+      "fs",
+      "detail"
+     ],
+     "params": [
+      "FileSystemBase&"
+     ],
+     "params_text": "FileSystemBase&",
+     "qualified": "nn::fs::detail::RegisterGlobalFileSystemBase",
+     "return": "void",
+     "source": "Include/nn/fs/detail/fs_FileSystemBase.h",
+     "template": false
+    }
+   ],
+   "path": "Include/nn/fs/detail/fs_FileSystemBase.h",
+   "structure_hash": "d6ef4a60f17b4cef516980630646eabf37690a4bd2b106040b434871264f9197",
+   "types": [
+    {
+     "kind": "class",
+     "name": "EventBase",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "ipc"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystemBase",
+     "namespaces": [
+      "nn",
+      "fs",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Handle",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HandleObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HidBase",
+     "namespaces": [
+      "nn",
+      "hid",
+      "CTR"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "InterruptEvent",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "KConfigMemory",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Result",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Service",
+     "namespaces": [
+      "nn",
+      "srv",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "UserFileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "CTR",
+      "MPCore",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "VEC3",
+     "namespaces": [
+      "nn",
+      "math"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "WaitObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    }
+   ]
+  },
+  {
+   "content_sha256": "794192763dccc66236461be5b45794bd2ca1c23d8805343500b53dffa780b82f",
+   "functions": [
+    {
+     "asm": false,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 12,
+     "mangled_pattern": "_ZN2nn2fs10InitializeEv",
+     "name": "Initialize",
+     "namespaces": [
+      "nn",
+      "fs"
+     ],
+     "params": [],
+     "params_text": "",
+     "qualified": "nn::fs::Initialize",
+     "return": "void",
+     "source": "Include/nn/fs/fs_Api.h",
+     "template": false
+    }
+   ],
+   "path": "Include/nn/fs/fs_Api.h",
+   "structure_hash": "3fd98fe46f0107fd954af6d4d9511abe2c656bdea05d226f9266207518120481",
+   "types": [
+    {
+     "kind": "class",
+     "name": "EventBase",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "ipc"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystemBase",
+     "namespaces": [
+      "nn",
+      "fs",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Handle",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HandleObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HidBase",
+     "namespaces": [
+      "nn",
+      "hid",
+      "CTR"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "InterruptEvent",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "KConfigMemory",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Result",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Service",
+     "namespaces": [
+      "nn",
+      "srv",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "UserFileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "CTR",
+      "MPCore",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "VEC3",
+     "namespaces": [
+      "nn",
+      "math"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "WaitObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    }
+   ]
+  },
+  {
+   "content_sha256": "2a3e8436351d2d2479ce18b8001cf46115529088bd7004f61bb68d01a0a22e46",
+   "functions": [
+    {
+     "asm": false,
+     "class": "FileSystem",
+     "inline": false,
+     "kind": "member",
+     "line": 8,
+     "mangled_pattern": "_ZN2nn2fs3ipc10FileSystem10InitializeEv",
+     "name": "Initialize",
+     "namespaces": [
+      "nn",
+      "fs",
+      "ipc"
+     ],
+     "params": [],
+     "params_text": "",
+     "qualified": "nn::fs::ipc::FileSystem::Initialize",
+     "return": "void",
+     "source": "Include/nn/fs/ipc/fs_FileSystem.h",
+     "template": false
+    }
+   ],
+   "path": "Include/nn/fs/ipc/fs_FileSystem.h",
+   "structure_hash": "a1c614d90a35e23030facb597f03930f4e6a21f391c2153cd3ca6cfcc49a4da3",
+   "types": [
+    {
+     "kind": "class",
+     "name": "EventBase",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "ipc"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystemBase",
+     "namespaces": [
+      "nn",
+      "fs",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Handle",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HandleObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HidBase",
+     "namespaces": [
+      "nn",
+      "hid",
+      "CTR"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "InterruptEvent",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "KConfigMemory",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Result",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Service",
+     "namespaces": [
+      "nn",
+      "srv",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "UserFileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "CTR",
+      "MPCore",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "VEC3",
+     "namespaces": [
+      "nn",
+      "math"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "WaitObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    }
+   ]
+  },
+  {
+   "content_sha256": "6e2d5c9943a8155da6d279c0d17ee6d36b35c82924f0cad1ff7350cd29f8f64a",
+   "functions": [],
+   "path": "Include/nn/hid/CTR/hid_HidBase.h",
+   "structure_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+   "types": [
+    {
+     "kind": "class",
+     "name": "EventBase",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "ipc"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystemBase",
+     "namespaces": [
+      "nn",
+      "fs",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Handle",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HandleObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HidBase",
+     "namespaces": [
+      "nn",
+      "hid",
+      "CTR"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "InterruptEvent",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "KConfigMemory",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Result",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Service",
+     "namespaces": [
+      "nn",
+      "srv",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "UserFileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "CTR",
+      "MPCore",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "VEC3",
+     "namespaces": [
+      "nn",
+      "math"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "WaitObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    }
+   ]
+  },
+  {
+   "content_sha256": "185019064a70091e0ced70a106b261e9cc57b8bb593801d776516dca8968feb9",
+   "functions": [
+    {
+     "asm": false,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 14,
+     "mangled_pattern": "_ZN2nn4math5ARMv610VEC3AddAsmEPN2nn4math4VEC3EPKN2nn4math4VEC3EPKN2nn4math4VEC3E",
+     "name": "VEC3AddAsm",
+     "namespaces": [
+      "nn",
+      "math",
+      "ARMv6"
+     ],
+     "params": [
+      "VEC3*",
+      "const VEC3*",
+      "const VEC3*"
+     ],
+     "params_text": "VEC3* out, const VEC3* v1, const VEC3* v2",
+     "qualified": "nn::math::ARMv6::VEC3AddAsm",
+     "return": "void",
+     "source": "Include/nn/math/math_VEC3.h",
+     "template": false
+    },
+    {
+     "asm": false,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 15,
+     "mangled_pattern": "_ZN2nn4math5ARMv610VEC3SubAsmEPN2nn4math4VEC3EPKN2nn4math4VEC3EPKN2nn4math4VEC3E",
+     "name": "VEC3SubAsm",
+     "namespaces": [
+      "nn",
+      "math",
+      "ARMv6"
+     ],
+     "params": [
+      "VEC3*",
+      "const VEC3*",
+      "const VEC3*"
+     ],
+     "params_text": "VEC3* out, const VEC3* v1, const VEC3* v2",
+     "qualified": "nn::math::ARMv6::VEC3SubAsm",
+     "return": "void",
+     "source": "Include/nn/math/math_VEC3.h",
+     "template": false
+    },
+    {
+     "asm": false,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 16,
+     "mangled_pattern": "_ZN2nn4math5ARMv610VEC3MulAsmEPN2nn4math4VEC3EPKN2nn4math4VEC3EPKN2nn4math4VEC3E",
+     "name": "VEC3MulAsm",
+     "namespaces": [
+      "nn",
+      "math",
+      "ARMv6"
+     ],
+     "params": [
+      "VEC3*",
+      "const VEC3*",
+      "const VEC3*"
+     ],
+     "params_text": "VEC3* out, const VEC3* v1, const VEC3* v2",
+     "qualified": "nn::math::ARMv6::VEC3MulAsm",
+     "return": "void",
+     "source": "Include/nn/math/math_VEC3.h",
+     "template": false
+    },
+    {
+     "asm": false,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 17,
+     "mangled_pattern": "_ZN2nn4math5ARMv610VEC3DivAsmEPN2nn4math4VEC3EPKN2nn4math4VEC3EPKN2nn4math4VEC3E",
+     "name": "VEC3DivAsm",
+     "namespaces": [
+      "nn",
+      "math",
+      "ARMv6"
+     ],
+     "params": [
+      "VEC3*",
+      "const VEC3*",
+      "const VEC3*"
+     ],
+     "params_text": "VEC3* out, const VEC3* v1, const VEC3* v2",
+     "qualified": "nn::math::ARMv6::VEC3DivAsm",
+     "return": "void",
+     "source": "Include/nn/math/math_VEC3.h",
+     "template": false
+    },
+    {
+     "asm": false,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 19,
+     "mangled_pattern": "_ZN2nn4math5ARMv610VEC3AddAsmEPN2nn4math4VEC3EPKN2nn4math4VEC3Ef",
+     "name": "VEC3AddAsm",
+     "namespaces": [
+      "nn",
+      "math",
+      "ARMv6"
+     ],
+     "params": [
+      "VEC3*",
+      "const VEC3*",
+      "float"
+     ],
+     "params_text": "VEC3* out, const VEC3* v1, float f",
+     "qualified": "nn::math::ARMv6::VEC3AddAsm",
+     "return": "void",
+     "source": "Include/nn/math/math_VEC3.h",
+     "template": false
+    },
+    {
+     "asm": false,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 20,
+     "mangled_pattern": "_ZN2nn4math5ARMv610VEC3SubAsmEPN2nn4math4VEC3EPKN2nn4math4VEC3Ef",
+     "name": "VEC3SubAsm",
+     "namespaces": [
+      "nn",
+      "math",
+      "ARMv6"
+     ],
+     "params": [
+      "VEC3*",
+      "const VEC3*",
+      "float"
+     ],
+     "params_text": "VEC3* out, const VEC3* v1, float f",
+     "qualified": "nn::math::ARMv6::VEC3SubAsm",
+     "return": "void",
+     "source": "Include/nn/math/math_VEC3.h",
+     "template": false
+    },
+    {
+     "asm": false,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 21,
+     "mangled_pattern": "_ZN2nn4math5ARMv610VEC3MulAsmEPN2nn4math4VEC3EPKN2nn4math4VEC3Ef",
+     "name": "VEC3MulAsm",
+     "namespaces": [
+      "nn",
+      "math",
+      "ARMv6"
+     ],
+     "params": [
+      "VEC3*",
+      "const VEC3*",
+      "float"
+     ],
+     "params_text": "VEC3* out, const VEC3* v1, float f",
+     "qualified": "nn::math::ARMv6::VEC3MulAsm",
+     "return": "void",
+     "source": "Include/nn/math/math_VEC3.h",
+     "template": false
+    },
+    {
+     "asm": false,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 22,
+     "mangled_pattern": "_ZN2nn4math5ARMv610VEC3DivAsmEPN2nn4math4VEC3EPKN2nn4math4VEC3Ef",
+     "name": "VEC3DivAsm",
+     "namespaces": [
+      "nn",
+      "math",
+      "ARMv6"
+     ],
+     "params": [
+      "VEC3*",
+      "const VEC3*",
+      "float"
+     ],
+     "params_text": "VEC3* out, const VEC3* v1, float f",
+     "qualified": "nn::math::ARMv6::VEC3DivAsm",
+     "return": "void",
+     "source": "Include/nn/math/math_VEC3.h",
+     "template": false
+    }
+   ],
+   "path": "Include/nn/math/math_VEC3.h",
+   "structure_hash": "9a234863b6a6d9df3a411646d17b781451a53aad624eb06df5dcab99f1f425ad",
+   "types": [
+    {
+     "kind": "class",
+     "name": "EventBase",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "ipc"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystemBase",
+     "namespaces": [
+      "nn",
+      "fs",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Handle",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HandleObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HidBase",
+     "namespaces": [
+      "nn",
+      "hid",
+      "CTR"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "InterruptEvent",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "KConfigMemory",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Result",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Service",
+     "namespaces": [
+      "nn",
+      "srv",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "UserFileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "CTR",
+      "MPCore",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "VEC3",
+     "namespaces": [
+      "nn",
+      "math"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "WaitObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    }
+   ]
+  },
+  {
+   "content_sha256": "cb18560d0552f01f8b17577260b5484457a376002d99c4d44c53839498136b04",
+   "functions": [
+    {
+     "asm": false,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 8,
+     "mangled_pattern": "_ZN2nn3ndm10InitializeEv",
+     "name": "Initialize",
+     "namespaces": [
+      "nn",
+      "ndm"
+     ],
+     "params": [],
+     "params_text": "",
+     "qualified": "nn::ndm::Initialize",
+     "return": "Result",
+     "source": "Include/nn/ndm/ndm_Api.h",
+     "template": false
+    },
+    {
+     "asm": false,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 9,
+     "mangled_pattern": "_ZN2nn3ndm16SuspendSchedulerEb",
+     "name": "SuspendScheduler",
+     "namespaces": [
+      "nn",
+      "ndm"
+     ],
+     "params": [
+      "bool"
+     ],
+     "params_text": "bool",
+     "qualified": "nn::ndm::SuspendScheduler",
+     "return": "Result",
+     "source": "Include/nn/ndm/ndm_Api.h",
+     "template": false
+    }
+   ],
+   "path": "Include/nn/ndm/ndm_Api.h",
+   "structure_hash": "0cae9c5afef25f4ab67c3f7aaecb5f89e9c58aae2e7514f18185b3642afc651c",
+   "types": [
+    {
+     "kind": "class",
+     "name": "EventBase",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "ipc"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystemBase",
+     "namespaces": [
+      "nn",
+      "fs",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Handle",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HandleObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HidBase",
+     "namespaces": [
+      "nn",
+      "hid",
+      "CTR"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "InterruptEvent",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "KConfigMemory",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Result",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Service",
+     "namespaces": [
+      "nn",
+      "srv",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "UserFileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "CTR",
+      "MPCore",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "VEC3",
+     "namespaces": [
+      "nn",
+      "math"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "WaitObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    }
+   ]
+  },
+  {
+   "content_sha256": "8e769c524749b68c6c1e187856c4e7165aad25b91b1b15397c7cc080290588c5",
+   "functions": [],
+   "path": "Include/nn/os/os_EventBase.h",
+   "structure_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+   "types": [
+    {
+     "kind": "class",
+     "name": "EventBase",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "ipc"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystemBase",
+     "namespaces": [
+      "nn",
+      "fs",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Handle",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HandleObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HidBase",
+     "namespaces": [
+      "nn",
+      "hid",
+      "CTR"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "InterruptEvent",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "KConfigMemory",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Result",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Service",
+     "namespaces": [
+      "nn",
+      "srv",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "UserFileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "CTR",
+      "MPCore",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "VEC3",
+     "namespaces": [
+      "nn",
+      "math"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "WaitObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    }
+   ]
+  },
+  {
+   "content_sha256": "41d8cf21938475aefdf19ab86dcc053f290b83acbb47f1900a8862bc287f2d94",
+   "functions": [],
+   "path": "Include/nn/os/os_HandleObject.h",
+   "structure_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+   "types": [
+    {
+     "kind": "class",
+     "name": "EventBase",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "ipc"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystemBase",
+     "namespaces": [
+      "nn",
+      "fs",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Handle",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HandleObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HidBase",
+     "namespaces": [
+      "nn",
+      "hid",
+      "CTR"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "InterruptEvent",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "KConfigMemory",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Result",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Service",
+     "namespaces": [
+      "nn",
+      "srv",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "UserFileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "CTR",
+      "MPCore",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "VEC3",
+     "namespaces": [
+      "nn",
+      "math"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "WaitObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    }
+   ]
+  },
+  {
+   "content_sha256": "f799613f25221aa2c1f3adab6205d587bd33ef9a30ab3e96fb71987a4e1aa146",
+   "functions": [],
+   "path": "Include/nn/os/os_InterruptEvent.h",
+   "structure_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+   "types": [
+    {
+     "kind": "class",
+     "name": "EventBase",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "ipc"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystemBase",
+     "namespaces": [
+      "nn",
+      "fs",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Handle",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HandleObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HidBase",
+     "namespaces": [
+      "nn",
+      "hid",
+      "CTR"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "InterruptEvent",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "KConfigMemory",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Result",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Service",
+     "namespaces": [
+      "nn",
+      "srv",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "UserFileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "CTR",
+      "MPCore",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "VEC3",
+     "namespaces": [
+      "nn",
+      "math"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "WaitObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    }
+   ]
+  },
+  {
+   "content_sha256": "3b5ed645666708c672daadb3c2217d5a762a7c660529f464bd84a0e78887b979",
+   "functions": [
+    {
+     "asm": false,
+     "class": null,
+     "inline": true,
+     "kind": "free_function",
+     "line": 39,
+     "mangled_pattern": "_ZN2nn2os16GetKConfigMemoryEv",
+     "name": "GetKConfigMemory",
+     "namespaces": [
+      "nn",
+      "os"
+     ],
+     "params": [],
+     "params_text": "",
+     "qualified": "nn::os::GetKConfigMemory",
+     "return": "inline const KConfigMemory *",
+     "source": "Include/nn/os/os_KConfigMemory.h",
+     "template": false
+    },
+    {
+     "asm": false,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 44,
+     "mangled_pattern": "_ZN2nn2os16GetAppMemorySizeEv",
+     "name": "GetAppMemorySize",
+     "namespaces": [
+      "nn",
+      "os"
+     ],
+     "params": [],
+     "params_text": "",
+     "qualified": "nn::os::GetAppMemorySize",
+     "return": "u32",
+     "source": "Include/nn/os/os_KConfigMemory.h",
+     "template": false
+    }
+   ],
+   "path": "Include/nn/os/os_KConfigMemory.h",
+   "structure_hash": "a6571b129efc643af065a65c9296496be5ef3c3246c007718a18cb5f49af1a49",
+   "types": [
+    {
+     "kind": "class",
+     "name": "EventBase",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "ipc"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystemBase",
+     "namespaces": [
+      "nn",
+      "fs",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Handle",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HandleObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HidBase",
+     "namespaces": [
+      "nn",
+      "hid",
+      "CTR"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "InterruptEvent",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "KConfigMemory",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Result",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Service",
+     "namespaces": [
+      "nn",
+      "srv",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "UserFileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "CTR",
+      "MPCore",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "VEC3",
+     "namespaces": [
+      "nn",
+      "math"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "WaitObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    }
+   ]
+  },
+  {
+   "content_sha256": "50e86dc6b99cccc67b98a00a000eb3d99f24a3804ecd60f575d7b787af24deeb",
+   "functions": [],
+   "path": "Include/nn/os/os_Types.h",
+   "structure_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+   "types": [
+    {
+     "kind": "class",
+     "name": "EventBase",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "ipc"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystemBase",
+     "namespaces": [
+      "nn",
+      "fs",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Handle",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HandleObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HidBase",
+     "namespaces": [
+      "nn",
+      "hid",
+      "CTR"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "InterruptEvent",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "KConfigMemory",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Result",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Service",
+     "namespaces": [
+      "nn",
+      "srv",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "UserFileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "CTR",
+      "MPCore",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "VEC3",
+     "namespaces": [
+      "nn",
+      "math"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "WaitObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    }
+   ]
+  },
+  {
+   "content_sha256": "d2ded62eed77a08471a615e9cdd3ba7799ef2963157d6c235703a8fe011ffad5",
+   "functions": [],
+   "path": "Include/nn/os/os_WaitObject.h",
+   "structure_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+   "types": [
+    {
+     "kind": "class",
+     "name": "EventBase",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "ipc"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystemBase",
+     "namespaces": [
+      "nn",
+      "fs",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Handle",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HandleObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HidBase",
+     "namespaces": [
+      "nn",
+      "hid",
+      "CTR"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "InterruptEvent",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "KConfigMemory",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Result",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Service",
+     "namespaces": [
+      "nn",
+      "srv",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "UserFileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "CTR",
+      "MPCore",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "VEC3",
+     "namespaces": [
+      "nn",
+      "math"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "WaitObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    }
+   ]
+  },
+  {
+   "content_sha256": "258f75dbde17612e529485eb9093f9eb32923097a01616850dea164127b2ab92",
+   "functions": [
+    {
+     "asm": false,
+     "class": "Service",
+     "inline": false,
+     "kind": "static_member",
+     "line": 12,
+     "mangled_pattern": "_ZN2nn3srv6detail7Service16GetServiceHandleEPN2nn6HandleEPKcij",
+     "name": "GetServiceHandle",
+     "namespaces": [
+      "nn",
+      "srv",
+      "detail"
+     ],
+     "params": [
+      "Handle*",
+      "const char*",
+      "s32",
+      "u32"
+     ],
+     "params_text": "Handle* out, const char* service, s32, u32",
+     "qualified": "nn::srv::detail::Service::GetServiceHandle",
+     "return": "static Result",
+     "source": "Include/nn/srv/detail/srv_Service.h",
+     "template": false
+    }
+   ],
+   "path": "Include/nn/srv/detail/srv_Service.h",
+   "structure_hash": "f7e5284f378fa80bd2a013279b6852bf4d0547c7237587a2eb07c7c0d67e9fdd",
+   "types": [
+    {
+     "kind": "class",
+     "name": "EventBase",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "ipc"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystemBase",
+     "namespaces": [
+      "nn",
+      "fs",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Handle",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HandleObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HidBase",
+     "namespaces": [
+      "nn",
+      "hid",
+      "CTR"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "InterruptEvent",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "KConfigMemory",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Result",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Service",
+     "namespaces": [
+      "nn",
+      "srv",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "UserFileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "CTR",
+      "MPCore",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "VEC3",
+     "namespaces": [
+      "nn",
+      "math"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "WaitObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    }
+   ]
+  },
+  {
+   "content_sha256": "c9bb0627af327a50beca588fcf8788ca4ce01b9c417532dd1ef9f34d73003dbd",
+   "functions": [
+    {
+     "asm": false,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 9,
+     "mangled_pattern": "_ZN2nn3srv10InitializeEv",
+     "name": "Initialize",
+     "namespaces": [
+      "nn",
+      "srv"
+     ],
+     "params": [],
+     "params_text": "",
+     "qualified": "nn::srv::Initialize",
+     "return": "Result",
+     "source": "Include/nn/srv/srv_Api.h",
+     "template": false
+    },
+    {
+     "asm": false,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 10,
+     "mangled_pattern": "_ZN2nn3srv16GetServiceHandleEPN2nn6HandleEPKcij",
+     "name": "GetServiceHandle",
+     "namespaces": [
+      "nn",
+      "srv"
+     ],
+     "params": [
+      "Handle*",
+      "const char*",
+      "s32",
+      "u32"
+     ],
+     "params_text": "Handle* out, const char* service, s32, u32",
+     "qualified": "nn::srv::GetServiceHandle",
+     "return": "Result",
+     "source": "Include/nn/srv/srv_Api.h",
+     "template": false
+    }
+   ],
+   "path": "Include/nn/srv/srv_Api.h",
+   "structure_hash": "c24eafadb57ce121bf6ab2d42d3091e813e75854d24ec2b00f511c3c75eb563b",
+   "types": [
+    {
+     "kind": "class",
+     "name": "EventBase",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "ipc"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystemBase",
+     "namespaces": [
+      "nn",
+      "fs",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Handle",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HandleObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HidBase",
+     "namespaces": [
+      "nn",
+      "hid",
+      "CTR"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "InterruptEvent",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "KConfigMemory",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Result",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Service",
+     "namespaces": [
+      "nn",
+      "srv",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "UserFileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "CTR",
+      "MPCore",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "VEC3",
+     "namespaces": [
+      "nn",
+      "math"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "WaitObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    }
+   ]
+  },
+  {
+   "content_sha256": "f080095226b511144bc51a9aa6fa41a632f42ae1a832ea416d9ab31fad9d1549",
+   "functions": [
+    {
+     "asm": true,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 10,
+     "mangled_pattern": "_ZN2nn3svc13ControlMemoryEPjjjjjj",
+     "name": "ControlMemory",
+     "namespaces": [
+      "nn",
+      "svc"
+     ],
+     "params": [
+      "u32*",
+      "u32",
+      "u32",
+      "u32",
+      "u32",
+      "u32"
+     ],
+     "params_text": "u32* addr, u32 addr0, u32 addr1, u32 size, u32 op, u32 perms",
+     "qualified": "nn::svc::ControlMemory",
+     "return": "__asm nn :: Result",
+     "source": "Include/nn/svc/svc_Api.h",
+     "template": false
+    },
+    {
+     "asm": true,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 11,
+     "mangled_pattern": "_ZN2nn3svc11ExitProcessEv",
+     "name": "ExitProcess",
+     "namespaces": [
+      "nn",
+      "svc"
+     ],
+     "params": [],
+     "params_text": "",
+     "qualified": "nn::svc::ExitProcess",
+     "return": "__asm void",
+     "source": "Include/nn/svc/svc_Api.h",
+     "template": false
+    },
+    {
+     "asm": true,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 12,
+     "mangled_pattern": "_ZN2nn3svc11SleepThreadEy",
+     "name": "SleepThread",
+     "namespaces": [
+      "nn",
+      "svc"
+     ],
+     "params": [
+      "u64"
+     ],
+     "params_text": "u64 nanos",
+     "qualified": "nn::svc::SleepThread",
+     "return": "__asm void",
+     "source": "Include/nn/svc/svc_Api.h",
+     "template": false
+    },
+    {
+     "asm": true,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 13,
+     "mangled_pattern": "_ZN2nn3svc17GetThreadPriorityEPiN2nn6HandleE",
+     "name": "GetThreadPriority",
+     "namespaces": [
+      "nn",
+      "svc"
+     ],
+     "params": [
+      "s32*",
+      "nn::Handle"
+     ],
+     "params_text": "s32* prio, nn::Handle thread",
+     "qualified": "nn::svc::GetThreadPriority",
+     "return": "__asm nn :: Result",
+     "source": "Include/nn/svc/svc_Api.h",
+     "template": false
+    },
+    {
+     "asm": true,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 14,
+     "mangled_pattern": "_ZN2nn3svc11CreateMutexEPN2nn6HandleEb",
+     "name": "CreateMutex",
+     "namespaces": [
+      "nn",
+      "svc"
+     ],
+     "params": [
+      "nn::Handle*",
+      "bool"
+     ],
+     "params_text": "nn::Handle* mutex, bool initialLocked",
+     "qualified": "nn::svc::CreateMutex",
+     "return": "__asm nn :: Result",
+     "source": "Include/nn/svc/svc_Api.h",
+     "template": false
+    },
+    {
+     "asm": true,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 15,
+     "mangled_pattern": "_ZN2nn3svc11CreateEventEPN2nn6HandleEN2nn2os9ResetTypeE",
+     "name": "CreateEvent",
+     "namespaces": [
+      "nn",
+      "svc"
+     ],
+     "params": [
+      "nn::Handle*",
+      "nn::os::ResetType"
+     ],
+     "params_text": "nn::Handle* event, nn::os::ResetType type",
+     "qualified": "nn::svc::CreateEvent",
+     "return": "__asm nn :: Result",
+     "source": "Include/nn/svc/svc_Api.h",
+     "template": false
+    },
+    {
+     "asm": true,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 16,
+     "mangled_pattern": "_ZN2nn3svc17CreateMemoryBlockEPN2nn6HandleEjjjj",
+     "name": "CreateMemoryBlock",
+     "namespaces": [
+      "nn",
+      "svc"
+     ],
+     "params": [
+      "nn::Handle*",
+      "u32",
+      "u32",
+      "u32",
+      "u32"
+     ],
+     "params_text": "nn::Handle* memblock, u32 addr, u32 size, u32 myperms, u32 otherperms",
+     "qualified": "nn::svc::CreateMemoryBlock",
+     "return": "__asm nn :: Result",
+     "source": "Include/nn/svc/svc_Api.h",
+     "template": false
+    },
+    {
+     "asm": true,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 17,
+     "mangled_pattern": "_ZN2nn3svc20CreateAddressArbiterEPN2nn6HandleE",
+     "name": "CreateAddressArbiter",
+     "namespaces": [
+      "nn",
+      "svc"
+     ],
+     "params": [
+      "nn::Handle*"
+     ],
+     "params_text": "nn::Handle* arbiter",
+     "qualified": "nn::svc::CreateAddressArbiter",
+     "return": "__asm nn :: Result",
+     "source": "Include/nn/svc/svc_Api.h",
+     "template": false
+    },
+    {
+     "asm": true,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 18,
+     "mangled_pattern": "_ZN2nn3svc16ArbitrateAddressEN2nn6HandleEmN2nn2os15ArbitrationTypeEix",
+     "name": "ArbitrateAddress",
+     "namespaces": [
+      "nn",
+      "svc"
+     ],
+     "params": [
+      "nn::Handle",
+      "uintptr_t",
+      "nn::os::ArbitrationType",
+      "s32",
+      "s64"
+     ],
+     "params_text": "nn::Handle arbiter, uintptr_t addr, nn::os::ArbitrationType type, s32 value, s64 ns",
+     "qualified": "nn::svc::ArbitrateAddress",
+     "return": "__asm nn :: Result",
+     "source": "Include/nn/svc/svc_Api.h",
+     "template": false
+    },
+    {
+     "asm": true,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 19,
+     "mangled_pattern": "_ZN2nn3svc11CloseHandleEN2nn6HandleE",
+     "name": "CloseHandle",
+     "namespaces": [
+      "nn",
+      "svc"
+     ],
+     "params": [
+      "nn::Handle"
+     ],
+     "params_text": "nn::Handle handle",
+     "qualified": "nn::svc::CloseHandle",
+     "return": "__asm nn :: Result",
+     "source": "Include/nn/svc/svc_Api.h",
+     "template": false
+    },
+    {
+     "asm": true,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 20,
+     "mangled_pattern": "_ZN2nn3svc20WaitSynchronizationNEPiPKN2nn6HandleEibx",
+     "name": "WaitSynchronizationN",
+     "namespaces": [
+      "nn",
+      "svc"
+     ],
+     "params": [
+      "int*",
+      "const nn::Handle*",
+      "s32",
+      "bool",
+      "s64"
+     ],
+     "params_text": "int* out, const nn::Handle* handles, s32 handleCount, bool waitAll, s64 timeout_ns",
+     "qualified": "nn::svc::WaitSynchronizationN",
+     "return": "__asm nn :: Result",
+     "source": "Include/nn/svc/svc_Api.h",
+     "template": false
+    },
+    {
+     "asm": true,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 21,
+     "mangled_pattern": "_ZN2nn3svc15DuplicateHandleEPN2nn6HandleEN2nn6HandleE",
+     "name": "DuplicateHandle",
+     "namespaces": [
+      "nn",
+      "svc"
+     ],
+     "params": [
+      "nn::Handle*",
+      "nn::Handle"
+     ],
+     "params_text": "nn::Handle* out, nn::Handle original",
+     "qualified": "nn::svc::DuplicateHandle",
+     "return": "__asm nn :: Result",
+     "source": "Include/nn/svc/svc_Api.h",
+     "template": false
+    },
+    {
+     "asm": true,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 22,
+     "mangled_pattern": "_ZN2nn3svc13ConnectToPortEPN2nn6HandleEPKc",
+     "name": "ConnectToPort",
+     "namespaces": [
+      "nn",
+      "svc"
+     ],
+     "params": [
+      "nn::Handle*",
+      "const char*"
+     ],
+     "params_text": "nn::Handle* port, const char* portName",
+     "qualified": "nn::svc::ConnectToPort",
+     "return": "__asm nn :: Result",
+     "source": "Include/nn/svc/svc_Api.h",
+     "template": false
+    },
+    {
+     "asm": true,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 23,
+     "mangled_pattern": "_ZN2nn3svc12GetProcessIdEPjN2nn6HandleE",
+     "name": "GetProcessId",
+     "namespaces": [
+      "nn",
+      "svc"
+     ],
+     "params": [
+      "unsigned int*",
+      "nn::Handle"
+     ],
+     "params_text": "unsigned int* id, nn::Handle handle",
+     "qualified": "nn::svc::GetProcessId",
+     "return": "__asm nn :: Result",
+     "source": "Include/nn/svc/svc_Api.h",
+     "template": false
+    },
+    {
+     "asm": true,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 24,
+     "mangled_pattern": "_ZN2nn3svc11GetThreadIdEPjN2nn6HandleE",
+     "name": "GetThreadId",
+     "namespaces": [
+      "nn",
+      "svc"
+     ],
+     "params": [
+      "unsigned int*",
+      "nn::Handle"
+     ],
+     "params_text": "unsigned int* id, nn::Handle handle",
+     "qualified": "nn::svc::GetThreadId",
+     "return": "__asm nn :: Result",
+     "source": "Include/nn/svc/svc_Api.h",
+     "template": false
+    },
+    {
+     "asm": true,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 25,
+     "mangled_pattern": "_ZN2nn3svc16GetResourceLimitEPN2nn6HandleEN2nn6HandleE",
+     "name": "GetResourceLimit",
+     "namespaces": [
+      "nn",
+      "svc"
+     ],
+     "params": [
+      "Handle*",
+      "nn::Handle"
+     ],
+     "params_text": "Handle* resourceLimit, nn::Handle handle",
+     "qualified": "nn::svc::GetResourceLimit",
+     "return": "__asm nn :: Result",
+     "source": "Include/nn/svc/svc_Api.h",
+     "template": false
+    },
+    {
+     "asm": true,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 28,
+     "mangled_pattern": "_ZN2nn3svc5BreakEN2nn3dbg11BreakReasonE",
+     "name": "Break",
+     "namespaces": [
+      "nn",
+      "svc"
+     ],
+     "params": [
+      "nn::dbg::BreakReason"
+     ],
+     "params_text": "nn::dbg::BreakReason reason",
+     "qualified": "nn::svc::Break",
+     "return": "__asm nn :: Result",
+     "source": "Include/nn/svc/svc_Api.h",
+     "template": false
+    }
+   ],
+   "path": "Include/nn/svc/svc_Api.h",
+   "structure_hash": "0bdb1dae7e2c63d2049de5df2d2d7fea0c1036981b47bf9d17df131d3d81eade",
+   "types": [
+    {
+     "kind": "class",
+     "name": "EventBase",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "ipc"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystemBase",
+     "namespaces": [
+      "nn",
+      "fs",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Handle",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HandleObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HidBase",
+     "namespaces": [
+      "nn",
+      "hid",
+      "CTR"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "InterruptEvent",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "KConfigMemory",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Result",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Service",
+     "namespaces": [
+      "nn",
+      "srv",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "UserFileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "CTR",
+      "MPCore",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "VEC3",
+     "namespaces": [
+      "nn",
+      "math"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "WaitObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    }
+   ]
+  },
+  {
+   "content_sha256": "723e1d27c76c55effe4e005e103672a7bfb1fed7ed7c7baca5e8ec07bb9358f0",
+   "functions": [
+    {
+     "asm": false,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 7,
+     "mangled_pattern": "_ZN2nn3dbg5BreakEN2nn3dbg11BreakReasonE",
+     "name": "Break",
+     "namespaces": [
+      "nn",
+      "dbg"
+     ],
+     "params": [
+      "BreakReason"
+     ],
+     "params_text": "BreakReason reason",
+     "qualified": "nn::dbg::Break",
+     "return": "void",
+     "source": "Source/dbg/dbg_Api.cpp",
+     "template": false
+    }
+   ],
+   "path": "Source/dbg/dbg_Api.cpp",
+   "structure_hash": "310af5534e3f19b48c2b520c0eb9773c661f5ac150132d9c2be331ebdffef63f",
+   "types": [
+    {
+     "kind": "class",
+     "name": "EventBase",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "ipc"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystemBase",
+     "namespaces": [
+      "nn",
+      "fs",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Handle",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HandleObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HidBase",
+     "namespaces": [
+      "nn",
+      "hid",
+      "CTR"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "InterruptEvent",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "KConfigMemory",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Result",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Service",
+     "namespaces": [
+      "nn",
+      "srv",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "UserFileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "CTR",
+      "MPCore",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "VEC3",
+     "namespaces": [
+      "nn",
+      "math"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "WaitObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    }
+   ]
+  },
+  {
+   "content_sha256": "77ba03ce36398b8d159c46b5bf4b6ba8f8fa4b617f7852ddbd2b9db788f4b6ed",
+   "functions": [
+    {
+     "asm": false,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 18,
+     "mangled_pattern": "_ZN2nn2fs28ForceDisableLatencyEmulationEv",
+     "name": "ForceDisableLatencyEmulation",
+     "namespaces": [
+      "nn",
+      "fs"
+     ],
+     "params": [],
+     "params_text": "",
+     "qualified": "nn::fs::ForceDisableLatencyEmulation",
+     "return": "void",
+     "source": "Source/fs/CTR/MPCore/detail/fs_UserFileSystem.cpp",
+     "template": false
+    }
+   ],
+   "path": "Source/fs/CTR/MPCore/detail/fs_UserFileSystem.cpp",
+   "structure_hash": "55629134902e54e9bcb053dedda4562cac3e8db978c23d3149c14361f54de80a",
+   "types": [
+    {
+     "kind": "class",
+     "name": "EventBase",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "ipc"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystemBase",
+     "namespaces": [
+      "nn",
+      "fs",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Handle",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HandleObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HidBase",
+     "namespaces": [
+      "nn",
+      "hid",
+      "CTR"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "InterruptEvent",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "KConfigMemory",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Result",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Service",
+     "namespaces": [
+      "nn",
+      "srv",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "UserFileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "CTR",
+      "MPCore",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "VEC3",
+     "namespaces": [
+      "nn",
+      "math"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "WaitObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    }
+   ]
+  },
+  {
+   "content_sha256": "3864f1e059e8bc5aa7d9a02667fb034ced40234da1d741ca278aa346e35a05f1",
+   "functions": [],
+   "path": "Source/fs/fs_Api.cpp",
+   "structure_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+   "types": [
+    {
+     "kind": "class",
+     "name": "EventBase",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "ipc"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystemBase",
+     "namespaces": [
+      "nn",
+      "fs",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Handle",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HandleObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HidBase",
+     "namespaces": [
+      "nn",
+      "hid",
+      "CTR"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "InterruptEvent",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "KConfigMemory",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Result",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Service",
+     "namespaces": [
+      "nn",
+      "srv",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "UserFileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "CTR",
+      "MPCore",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "VEC3",
+     "namespaces": [
+      "nn",
+      "math"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "WaitObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    }
+   ]
+  },
+  {
+   "content_sha256": "19468e0b8ec77022093972860246410b90d62b4c3ebd1b2291dbcb411c4adfcb",
+   "functions": [
+    {
+     "asm": true,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 9,
+     "mangled_exact": "_ZN2nn4math5ARMv610VEC3SubAsmEPNS0_4VEC3EPKS2_S5_",
+     "mangled_pattern": "_ZN2nn4math5ARMv610VEC3SubAsmEPN2nn4math4VEC3EPKN2nn4math4VEC3EPKN2nn4math4VEC3E",
+     "name": "VEC3SubAsm",
+     "namespaces": [
+      "nn",
+      "math",
+      "ARMv6"
+     ],
+     "params": [
+      "VEC3*",
+      "const VEC3*",
+      "const VEC3*"
+     ],
+     "params_text": "VEC3* out, const VEC3* v1, const VEC3* v2",
+     "qualified": "nn::math::ARMv6::VEC3SubAsm",
+     "return": "__asm void",
+     "source": "Source/math/math_VEC3.cpp",
+     "template": false
+    },
+    {
+     "asm": true,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 20,
+     "mangled_exact": "_ZN2nn4math5ARMv610VEC3MulAsmEPNS0_4VEC3EPKS2_f",
+     "mangled_pattern": "_ZN2nn4math5ARMv610VEC3MulAsmEPN2nn4math4VEC3EPKN2nn4math4VEC3Ef",
+     "name": "VEC3MulAsm",
+     "namespaces": [
+      "nn",
+      "math",
+      "ARMv6"
+     ],
+     "params": [
+      "VEC3*",
+      "const VEC3*",
+      "float"
+     ],
+     "params_text": "VEC3* out, const VEC3* v1, float f",
+     "qualified": "nn::math::ARMv6::VEC3MulAsm",
+     "return": "__asm void",
+     "source": "Source/math/math_VEC3.cpp",
+     "template": false
+    }
+   ],
+   "path": "Source/math/math_VEC3.cpp",
+   "structure_hash": "bc628cf2a34a6a4b25cdc2b8b3c4bfbed993ea51ee2da909a6ebca44cf800579",
+   "types": [
+    {
+     "kind": "class",
+     "name": "EventBase",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "ipc"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystemBase",
+     "namespaces": [
+      "nn",
+      "fs",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Handle",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HandleObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HidBase",
+     "namespaces": [
+      "nn",
+      "hid",
+      "CTR"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "InterruptEvent",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "KConfigMemory",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Result",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Service",
+     "namespaces": [
+      "nn",
+      "srv",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "UserFileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "CTR",
+      "MPCore",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "VEC3",
+     "namespaces": [
+      "nn",
+      "math"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "WaitObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    }
+   ]
+  },
+  {
+   "content_sha256": "f0b6f9d1fd82580875cc90c13f8ef949c9330a42a7b11363cd3763c736c84833",
+   "functions": [
+    {
+     "asm": false,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 13,
+     "mangled_pattern": "_ZN2nn3srv16GetServiceHandleEPN2nn6HandleEPKcij",
+     "name": "GetServiceHandle",
+     "namespaces": [
+      "nn",
+      "srv"
+     ],
+     "params": [
+      "Handle*",
+      "const char*",
+      "s32",
+      "u32"
+     ],
+     "params_text": "Handle* out, const char* service, s32 r2, u32 r3",
+     "qualified": "nn::srv::GetServiceHandle",
+     "return": "NON_MATCHING Result",
+     "source": "Source/srv/srv_Api.cpp",
+     "template": false
+    }
+   ],
+   "path": "Source/srv/srv_Api.cpp",
+   "structure_hash": "6eb72e48fcf3d11be11fc20da1f1f722a453c26edb81733bccd8855a12d04ef7",
+   "types": [
+    {
+     "kind": "class",
+     "name": "EventBase",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "ipc"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystemBase",
+     "namespaces": [
+      "nn",
+      "fs",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Handle",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HandleObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HidBase",
+     "namespaces": [
+      "nn",
+      "hid",
+      "CTR"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "InterruptEvent",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "KConfigMemory",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Result",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Service",
+     "namespaces": [
+      "nn",
+      "srv",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "UserFileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "CTR",
+      "MPCore",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "VEC3",
+     "namespaces": [
+      "nn",
+      "math"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "WaitObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    }
+   ]
+  },
+  {
+   "content_sha256": "141db0950754af9280642e1abaf9b273e4bad428c6968f73a8bd882936ef806a",
+   "functions": [
+    {
+     "asm": true,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 8,
+     "mangled_exact": "_ZN2nn3svc13ControlMemoryEPjjjjjj",
+     "mangled_pattern": "_ZN2nn3svc13ControlMemoryEPjjjjjj",
+     "name": "ControlMemory",
+     "namespaces": [
+      "nn",
+      "svc"
+     ],
+     "params": [
+      "u32*",
+      "u32",
+      "u32",
+      "u32",
+      "u32",
+      "u32"
+     ],
+     "params_text": "u32* addr, u32 addr0, u32 addr1, u32 size, u32 op, u32 perms",
+     "qualified": "nn::svc::ControlMemory",
+     "return": "__asm nn :: Result",
+     "source": "Source/svc/svc_Api.cpp",
+     "template": false
+    },
+    {
+     "asm": true,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 21,
+     "mangled_exact": "_ZN2nn3svc11ExitProcessEv",
+     "mangled_pattern": "_ZN2nn3svc11ExitProcessEv",
+     "name": "ExitProcess",
+     "namespaces": [
+      "nn",
+      "svc"
+     ],
+     "params": [],
+     "params_text": "",
+     "qualified": "nn::svc::ExitProcess",
+     "return": "__asm void",
+     "source": "Source/svc/svc_Api.cpp",
+     "template": false
+    },
+    {
+     "asm": true,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 27,
+     "mangled_exact": "_ZN2nn3svc12CreateThreadEPNS_6HandleEPFvjEjjii",
+     "mangled_pattern": "_ZN2nn3svc12CreateThreadEPN2nn6HandleEN2nn3svc18void (* func)(u32)Ejjii",
+     "name": "CreateThread",
+     "namespaces": [
+      "nn",
+      "svc"
+     ],
+     "params": [
+      "nn::Handle*",
+      "void (* func)(u32)",
+      "u32",
+      "u32",
+      "s32",
+      "s32"
+     ],
+     "params_text": "nn::Handle* handle, void (*func)(u32), u32 arg, u32 stackTop, s32 prio, s32 processorId",
+     "qualified": "nn::svc::CreateThread",
+     "return": "__asm void",
+     "source": "Source/svc/svc_Api.cpp",
+     "template": false
+    },
+    {
+     "asm": true,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 40,
+     "mangled_exact": "_ZN2nn3svc11SleepThreadEy",
+     "mangled_pattern": "_ZN2nn3svc11SleepThreadEy",
+     "name": "SleepThread",
+     "namespaces": [
+      "nn",
+      "svc"
+     ],
+     "params": [
+      "u64"
+     ],
+     "params_text": "u64 nanos",
+     "qualified": "nn::svc::SleepThread",
+     "return": "__asm void",
+     "source": "Source/svc/svc_Api.cpp",
+     "template": false
+    },
+    {
+     "asm": true,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 46,
+     "mangled_exact": "_ZN2nn3svc17GetThreadPriorityEPiNS_6HandleE",
+     "mangled_pattern": "_ZN2nn3svc17GetThreadPriorityEPiN2nn6HandleE",
+     "name": "GetThreadPriority",
+     "namespaces": [
+      "nn",
+      "svc"
+     ],
+     "params": [
+      "s32*",
+      "nn::Handle"
+     ],
+     "params_text": "s32* prio, nn::Handle thread",
+     "qualified": "nn::svc::GetThreadPriority",
+     "return": "__asm nn :: Result",
+     "source": "Source/svc/svc_Api.cpp",
+     "template": false
+    },
+    {
+     "asm": true,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 56,
+     "mangled_exact": "_ZN2nn3svc11CreateMutexEPNS_6HandleEb",
+     "mangled_pattern": "_ZN2nn3svc11CreateMutexEPN2nn6HandleEb",
+     "name": "CreateMutex",
+     "namespaces": [
+      "nn",
+      "svc"
+     ],
+     "params": [
+      "nn::Handle*",
+      "bool"
+     ],
+     "params_text": "nn::Handle* mutex, bool initialLocked",
+     "qualified": "nn::svc::CreateMutex",
+     "return": "__asm nn :: Result",
+     "source": "Source/svc/svc_Api.cpp",
+     "template": false
+    },
+    {
+     "asm": true,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 66,
+     "mangled_exact": "_ZN2nn3svc11CreateEventEPNS_6HandleENS_2os9ResetTypeE",
+     "mangled_pattern": "_ZN2nn3svc11CreateEventEPN2nn6HandleEN2nn2os9ResetTypeE",
+     "name": "CreateEvent",
+     "namespaces": [
+      "nn",
+      "svc"
+     ],
+     "params": [
+      "nn::Handle*",
+      "nn::os::ResetType"
+     ],
+     "params_text": "nn::Handle* event, nn::os::ResetType type",
+     "qualified": "nn::svc::CreateEvent",
+     "return": "__asm nn :: Result",
+     "source": "Source/svc/svc_Api.cpp",
+     "template": false
+    },
+    {
+     "asm": true,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 76,
+     "mangled_exact": "_ZN2nn3svc17CreateMemoryBlockEPNS_6HandleEjjjj",
+     "mangled_pattern": "_ZN2nn3svc17CreateMemoryBlockEPN2nn6HandleEjjjj",
+     "name": "CreateMemoryBlock",
+     "namespaces": [
+      "nn",
+      "svc"
+     ],
+     "params": [
+      "nn::Handle*",
+      "u32",
+      "u32",
+      "u32",
+      "u32"
+     ],
+     "params_text": "nn::Handle* memblock, u32 addr, u32 size, u32 myperms, u32 otherperms",
+     "qualified": "nn::svc::CreateMemoryBlock",
+     "return": "__asm nn :: Result",
+     "source": "Source/svc/svc_Api.cpp",
+     "template": false
+    },
+    {
+     "asm": true,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 87,
+     "mangled_exact": "_ZN2nn3svc20CreateAddressArbiterEPNS_6HandleE",
+     "mangled_pattern": "_ZN2nn3svc20CreateAddressArbiterEPN2nn6HandleE",
+     "name": "CreateAddressArbiter",
+     "namespaces": [
+      "nn",
+      "svc"
+     ],
+     "params": [
+      "nn::Handle*"
+     ],
+     "params_text": "nn::Handle* arbiter",
+     "qualified": "nn::svc::CreateAddressArbiter",
+     "return": "__asm nn :: Result",
+     "source": "Source/svc/svc_Api.cpp",
+     "template": false
+    },
+    {
+     "asm": true,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 97,
+     "mangled_exact": "_ZN2nn3svc16ArbitrateAddressENS_6HandleEjNS_2os15ArbitrationTypeEix",
+     "mangled_pattern": "_ZN2nn3svc16ArbitrateAddressEN2nn6HandleEmN2nn2os15ArbitrationTypeEix",
+     "name": "ArbitrateAddress",
+     "namespaces": [
+      "nn",
+      "svc"
+     ],
+     "params": [
+      "nn::Handle",
+      "uintptr_t",
+      "nn::os::ArbitrationType",
+      "s32",
+      "s64"
+     ],
+     "params_text": "nn::Handle arbiter, uintptr_t addr, nn::os::ArbitrationType type, s32 value, s64 ns",
+     "qualified": "nn::svc::ArbitrateAddress",
+     "return": "__asm nn :: Result",
+     "source": "Source/svc/svc_Api.cpp",
+     "template": false
+    },
+    {
+     "asm": true,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 103,
+     "mangled_exact": "_ZN2nn3svc11CloseHandleENS_6HandleE",
+     "mangled_pattern": "_ZN2nn3svc11CloseHandleEN2nn6HandleE",
+     "name": "CloseHandle",
+     "namespaces": [
+      "nn",
+      "svc"
+     ],
+     "params": [
+      "nn::Handle"
+     ],
+     "params_text": "nn::Handle handle",
+     "qualified": "nn::svc::CloseHandle",
+     "return": "__asm nn :: Result",
+     "source": "Source/svc/svc_Api.cpp",
+     "template": false
+    },
+    {
+     "asm": true,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 109,
+     "mangled_exact": "_ZN2nn3svc20WaitSynchronizationNEPiPKNS_6HandleEibx",
+     "mangled_pattern": "_ZN2nn3svc20WaitSynchronizationNEPiPKN2nn6HandleEibx",
+     "name": "WaitSynchronizationN",
+     "namespaces": [
+      "nn",
+      "svc"
+     ],
+     "params": [
+      "int*",
+      "const nn::Handle*",
+      "s32",
+      "bool",
+      "s64"
+     ],
+     "params_text": "int* out, const nn::Handle* handles, s32 handleCount, bool waitAll, s64 timeout_ns",
+     "qualified": "nn::svc::WaitSynchronizationN",
+     "return": "__asm nn :: Result",
+     "source": "Source/svc/svc_Api.cpp",
+     "template": false
+    },
+    {
+     "asm": true,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 122,
+     "mangled_exact": "_ZN2nn3svc15DuplicateHandleEPNS_6HandleES1_",
+     "mangled_pattern": "_ZN2nn3svc15DuplicateHandleEPN2nn6HandleEN2nn6HandleE",
+     "name": "DuplicateHandle",
+     "namespaces": [
+      "nn",
+      "svc"
+     ],
+     "params": [
+      "nn::Handle*",
+      "nn::Handle"
+     ],
+     "params_text": "nn::Handle* out, nn::Handle original",
+     "qualified": "nn::svc::DuplicateHandle",
+     "return": "__asm nn :: Result",
+     "source": "Source/svc/svc_Api.cpp",
+     "template": false
+    },
+    {
+     "asm": true,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 132,
+     "mangled_exact": "_ZN2nn3svc13ConnectToPortEPNS_6HandleEPKc",
+     "mangled_pattern": "_ZN2nn3svc13ConnectToPortEPN2nn6HandleEPKc",
+     "name": "ConnectToPort",
+     "namespaces": [
+      "nn",
+      "svc"
+     ],
+     "params": [
+      "nn::Handle*",
+      "const char*"
+     ],
+     "params_text": "nn::Handle* port, const char* portName",
+     "qualified": "nn::svc::ConnectToPort",
+     "return": "__asm nn :: Result",
+     "source": "Source/svc/svc_Api.cpp",
+     "template": false
+    },
+    {
+     "asm": true,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 142,
+     "mangled_exact": "_ZN2nn3svc12GetProcessIdEPjNS_6HandleE",
+     "mangled_pattern": "_ZN2nn3svc12GetProcessIdEPjN2nn6HandleE",
+     "name": "GetProcessId",
+     "namespaces": [
+      "nn",
+      "svc"
+     ],
+     "params": [
+      "unsigned int*",
+      "nn::Handle"
+     ],
+     "params_text": "unsigned int *id, nn::Handle handle",
+     "qualified": "nn::svc::GetProcessId",
+     "return": "__asm nn :: Result",
+     "source": "Source/svc/svc_Api.cpp",
+     "template": false
+    },
+    {
+     "asm": true,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 152,
+     "mangled_exact": "_ZN2nn3svc11GetThreadIdEPjNS_6HandleE",
+     "mangled_pattern": "_ZN2nn3svc11GetThreadIdEPjN2nn6HandleE",
+     "name": "GetThreadId",
+     "namespaces": [
+      "nn",
+      "svc"
+     ],
+     "params": [
+      "unsigned int*",
+      "nn::Handle"
+     ],
+     "params_text": "unsigned int *id, nn::Handle handle",
+     "qualified": "nn::svc::GetThreadId",
+     "return": "__asm nn :: Result",
+     "source": "Source/svc/svc_Api.cpp",
+     "template": false
+    },
+    {
+     "asm": true,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 162,
+     "mangled_exact": "_ZN2nn3svc16GetResourceLimitEPNS_6HandleES1_",
+     "mangled_pattern": "_ZN2nn3svc16GetResourceLimitEPN2nn6HandleEN2nn6HandleE",
+     "name": "GetResourceLimit",
+     "namespaces": [
+      "nn",
+      "svc"
+     ],
+     "params": [
+      "Handle*",
+      "nn::Handle"
+     ],
+     "params_text": "Handle *resourceLimit, nn::Handle handle",
+     "qualified": "nn::svc::GetResourceLimit",
+     "return": "__asm nn :: Result",
+     "source": "Source/svc/svc_Api.cpp",
+     "template": false
+    },
+    {
+     "asm": true,
+     "class": null,
+     "inline": false,
+     "kind": "free_function",
+     "line": 173,
+     "mangled_exact": "_ZN2nn3svc5BreakENS_3dbg11BreakReasonE",
+     "mangled_pattern": "_ZN2nn3svc5BreakEN2nn3dbg11BreakReasonE",
+     "name": "Break",
+     "namespaces": [
+      "nn",
+      "svc"
+     ],
+     "params": [
+      "nn::dbg::BreakReason"
+     ],
+     "params_text": "nn::dbg::BreakReason reason",
+     "qualified": "nn::svc::Break",
+     "return": "__asm nn :: Result",
+     "source": "Source/svc/svc_Api.cpp",
+     "template": false
+    }
+   ],
+   "path": "Source/svc/svc_Api.cpp",
+   "structure_hash": "39b05f491c3d4bc0d554cbf5fe67a8ceb1f8ec80f1c9a0e9d9f49975525f7821",
+   "types": [
+    {
+     "kind": "class",
+     "name": "EventBase",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "ipc"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "FileSystemBase",
+     "namespaces": [
+      "nn",
+      "fs",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Handle",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HandleObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "HidBase",
+     "namespaces": [
+      "nn",
+      "hid",
+      "CTR"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "InterruptEvent",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "KConfigMemory",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Result",
+     "namespaces": [
+      "nn"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "Service",
+     "namespaces": [
+      "nn",
+      "srv",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "UserFileSystem",
+     "namespaces": [
+      "nn",
+      "fs",
+      "CTR",
+      "MPCore",
+      "detail"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "VEC3",
+     "namespaces": [
+      "nn",
+      "math"
+     ]
+    },
+    {
+     "kind": "class",
+     "name": "WaitObject",
+     "namespaces": [
+      "nn",
+      "os"
+     ]
+    }
+   ]
+  }
+ ],
+ "generator": "tools/sdkmap.py inventory",
+ "nnsdk": {
+  "attribution": "3dsdecomp/nnsdk, https://github.com/3dsdecomp/nnsdk, revision d50a4b89d13c929d2438abf92e5a48f039efffbf",
+  "license": "no LICENSE file at the pinned revision (GitHub API reports license: null); metadata-only inventory, no nnsdk source is vendored into this repo",
+  "revision": "d50a4b89d13c929d2438abf92e5a48f039efffbf",
+  "url": "https://github.com/3dsdecomp/nnsdk"
+ }
+}

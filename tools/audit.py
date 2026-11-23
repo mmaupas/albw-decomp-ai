@@ -5,12 +5,19 @@
 
 Checks (all offline, all read-only):
   keys            functions.json keys are 8-digit uppercase hex, zero-padded
-  schema          status is one of the six known values; honest/hack entries
+  schema          status is one of the known values; honest/hack entries
                   carry path+cc; hack carries non-empty hack_reasons;
-                  honest carries empty hack_reasons; every other status
-                  carries no path
+                  honest carries empty hack_reasons; lifted entries carry
+                  a src_lifted/ path + cc; semantic_match entries carry a
+                  path + a wall_class from the known vocabulary; every
+                  other status carries no path
   paths           every recorded path exists inside the repo and is tracked
                   by git
+  lifted          lifted/semantic_match entries are disjoint from
+                  matched/honest/hack: their paths live under src_lifted/
+                  (lifted) or are never src_lifted/ paths on matched
+                  entries, and they are excluded from all matched/honest
+                  arithmetic in stats()
   format          functions.json matches its canonical dump (indent=1,
                   sort_keys=True, every line lstripped) so future edits
                   produce minimal diffs
@@ -34,8 +41,13 @@ from common import TEXT_SIZE, TEXT_START, atomic_write, read_json
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-STATUSES = ("honest", "hack", "no_source", "excluded", "excluded_library", "interior_address")
+STATUSES = ("honest", "hack", "no_source", "excluded", "excluded_library", "interior_address",
+            "lifted", "semantic_match")
 MATCHED = ("honest", "hack")
+LIFTED_PREFIX = "src_lifted/"
+# wall_class vocabulary for semantic_match (roadmap C3: byte diffs remain,
+# behavior equal on the Zakuro replay corpus; never counts toward honest bytes)
+WALL_CLASSES = ("scheduling", "regalloc", "pool_layout", "unknown")
 REASONS = ("weak", "__schedule_barrier", "asm", "identical_arms", "perm_t",
            "dummy_local", "volatile_dummy", "nop_mask", "oob_local")
 
@@ -109,6 +121,21 @@ def check_all():
                 errors.append("schema: %s is %s but has no source path" % (addr, status))
             elif not ent.get("cc"):
                 errors.append("schema: %s has a path but no cc" % addr)
+            elif path.startswith(LIFTED_PREFIX):
+                errors.append("lifted: %s is %s but points at a lifted path %s" % (addr, status, path))
+        elif status == "lifted":
+            if not path:
+                errors.append("schema: %s is lifted but has no source path" % addr)
+            elif not path.startswith(LIFTED_PREFIX):
+                errors.append("lifted: %s path %s is not under %s" % (addr, path, LIFTED_PREFIX))
+            elif not ent.get("cc"):
+                errors.append("schema: %s is lifted but has no cc" % addr)
+        elif status == "semantic_match":
+            if not path:
+                errors.append("schema: %s is semantic_match but has no source path" % addr)
+            elif ent.get("wall_class") not in WALL_CLASSES:
+                errors.append("schema: %s is semantic_match but wall_class %r is not in %r"
+                              % (addr, ent.get("wall_class"), WALL_CLASSES))
         else:
             if path:
                 errors.append("schema: %s is %s but carries a path" % (addr, status))
@@ -168,6 +195,8 @@ def stats(data):
         "excluded_library": by_status["excluded_library"],
         "interior_address": sum(v.get("status") == "interior_address" for v in data.values()),
         "unmatched": by_status["unmatched"],
+        "lifted": by_status["lifted"],
+        "semantic_match": by_status["semantic_match"],
         "remaining_honest": total - by_status["honest"] - by_status["excluded"] - by_status["excluded_library"],
         "text_bytes": TEXT_SIZE,
         "bytes_by_status": dict(byte_counts),
@@ -183,7 +212,13 @@ def readme_blocks(out):
     for label, status in (("of which honest (no hack)", "honest"),
                           ("of which hack", "hack"),
                           ("Earlier match, source not included", "no_source"),
-                          ("Not matched yet", "unmatched"),
+                          ("Not matched yet", "unmatched")):
+        if out.get(status, 0):
+            rows.append((label, out[status], out["bytes_by_status"].get(status, 0)))
+    # lifted scaffolds are counted but never enter matched/honest arithmetic
+    rows.append(("Lifted (semantic, not byte-exact)", out.get("lifted", 0),
+                 out["bytes_by_status"].get("lifted", 0)))
+    for label, status in (("Semantic match (oracle-verified, bytes differ)", "semantic_match"),
                           ("Excluded library", "excluded_library"),
                           ("Other exclusions", "excluded")):
         if out.get(status, 0):
@@ -246,6 +281,8 @@ def main():
             print("  honest:                      %d  (%.1f%%)" % (out["honest"], out["honest_pct"]))
             print("  hack:                        %d  (%.1f%%)" % (out["hack"], out["hack_pct"]))
             print("Matched earlier, no source:    %d" % out["no_source"])
+            print("Lifted (semantic, not exact):  %d" % out["lifted"])
+            print("Semantic match (oracle-verified): %d" % out["semantic_match"])
             print("Non-redistributable 3rd-party:  %d" % out["excluded"])
             print("Prebuilt middleware/SDK:       %d" % out["excluded_library"])
             print("Interior addresses:            %d" % out["interior_address"])

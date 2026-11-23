@@ -12,14 +12,15 @@ not included either.
 <!-- generated:status -->
 | | Functions | Share of 25,986 | .text bytes | Share of 5,841,180 B |
 |---|---:|---:|---:|---:|
-| Matched, source included | 16,726 | 64.4% | 1,420,152 | 24.3% |
-| of which honest (no hack) | 15,943 | 61.4% | 1,295,016 | 22.2% |
+| Matched, source included | 16,873 | 64.9% | 1,428,564 | 24.5% |
+| of which honest (no hack) | 16,090 | 61.9% | 1,303,428 | 22.3% |
 | of which hack | 783 | 3.0% | 125,136 | 2.1% |
 | Earlier match, source not included | 114 | 0.4% | 15,396 | 0.3% |
-| Not matched yet | 9,132 | 35.1% | 4,400,884 | 75.3% |
-| Excluded library | 14 | 0.1% | 4,748 | 0.1% |
+| Not matched yet | 8,986 | 34.6% | 4,392,632 | 75.2% |
+| Lifted (semantic, not byte-exact) | 0 | 0.0% | 0 | 0.0% |
+| Excluded library | 13 | 0.1% | 4,588 | 0.1% |
 
-Remaining for an honest decompilation (excluding libraries): **10,029** functions.
+Remaining for an honest decompilation (excluding libraries): **9,883** functions.
 
 Sizes use consecutive starts in `funcs.json` within `.text` (`0x100000`–`0x69211C`), not the whole binary.
 3 interior-address entries are not counted as separate functions.
@@ -57,12 +58,15 @@ textual constructs, not every semantic trick; passing it is not proof of honesty
 |---|---|
 | `functions.json` | The index: `address -> {path, cc, flags, status, hack_reasons}` |
 | `src/` | The sources. Paths keep the layout of the original workspace (many agents and tools wrote to many folders), and local `#include`s are relative to each file |
+| `src_lifted/` | Lifted semantic scaffolds (`func_<ADDR>.c`, LIFTED banner) — never registrable as matched |
 | `shared/include/` | Project headers (written for this project) |
 | `shared/symbols.jsonl` | Names inferred for some functions |
 | `shared/extra_starts.txt`, `shared/not_starts.txt` | Corrections to the function table |
 | `funcs.json` | The function table: start addresses, call targets, pointers. Addresses only, no code |
 | `tools/fn.py` | Disassembly, cross-references, and the byte-exact checker |
 | `tools/audit.py` | Offline invariant audit of `functions.json` + status-table stats |
+| `tools/lift.py` | ARM32 semantic lifter for unmatched functions (`src_lifted/`, status `lifted`) |
+| `tools/hybrid_build.py` | Hybrid image builder (`build/hybrid.bin`: matched + lifted + original bytes) |
 
 ## Requirements
 
@@ -74,6 +78,12 @@ textual constructs, not every semantic trick; passing it is not proof of honesty
 3. **ARM Compiler (armcc) 4.1, build 1049.** Place it at `tools/armcc/4.1/b1049/bin/armcc.exe`. Every published
    function uses this build unless its index entry specifies otherwise. You need your own licensed copy.
    On Linux/macOS, the Windows executable also requires Wine (available as `wine` on `PATH`).
+
+The lifting/hybrid/oracle tools (`tools/lift.py`, `tools/hybrid_build.py`, `worklist.py verify`) use the same
+inputs: `lift`/`batch` and the full hybrid build need `code.bin` (+ armcc under Wine), and `verify` additionally
+needs the Zakuro replay corpus in `logs/coverage/` and a 3dsrecomp build (see `docs/RECOMP_IDEAS.md`). Without
+them every one of these commands degrades to an offline plan or a printed list of the exact commands to run
+later on the phone — nothing is faked or skipped silently.
 
 Default flags:
 ```
@@ -102,6 +112,35 @@ python3 tools/audit.py readme
 ```
 Refiner checkpoints retain immutable checked variants and a wave cursor. Winner copies keep their `.c`/`.cpp`/`.cc`
 extension. Legacy checkpoints predate strict relocation checking and require an explicit `--fresh` restart.
+
+## Lifted scaffolds and hybrid builds
+
+`tools/lift.py` translates unmatched functions into **semantic C scaffolds** under `src_lifted/`
+(Hookshot-style ARM32 lifting with capstone). Lifted code is never byte-exact and is never registered
+as `matched`/`honest`/`hack`: `functions.json` records it with status `lifted`, the status table above
+counts it in its own "Lifted (semantic, not byte-exact)" row (excluded from all matched/honest
+arithmetic), `worklist.py register` refuses `src_lifted/` sources, and `fn.py check` on a lifted file
+is informational only. Its purpose is oracle coverage, hybrid builds, and a starting scaffold for later
+matching work.
+
+```
+python3 tools/lift.py targets --json                 # offline list of liftable addresses (unmatched / source_lost / no-twin)
+python3 tools/lift.py lift 0x005AB1D0                # lift one function (needs code.bin) -> src_lifted/func_005AB1D0.c
+python3 tools/lift.py batch --limit 200 --budget 20  # budgeted, resumable queue (state: logs/lift/)
+python3 tools/lift.py status / report --json
+python3 tools/hybrid_build.py check                  # offline composition plan of the hybrid image (no armcc needed)
+python3 tools/hybrid_build.py --out build/hybrid.bin # full build: matched recompiled + lifted stubs + original bytes
+python3 tools/worklist.py verify 0x005AB1D0 --count 500  # behavioral oracle (3dsrecomp/Zakuro replay corpus)
+```
+
+The hybrid image assembles three layers at the original addresses — byte-exact matched sources
+recompiled with armcc, lifted stubs, and the original `code.bin` bytes for everything else — into
+`build/hybrid.bin`. It is a **testing artifact for the behavioral oracle, not a release artifact**;
+`tools/rebuild_check.py` remains the only byte-exact gate and its semantics are unchanged. All compiler
+jobs stay serialized under the repository lock (`--jobs 1`). `worklist.py verify` records an
+oracle-verified candidate as `semantic_match` with a `wall_class` (byte diffs remain, behavior equal on
+the replay corpus); it never counts toward honest bytes. The parked walls 005AB1D0, 0059F7B8, 005A8AA0,
+005CBE9C are the first eligible `verify` candidates. See `docs/AUTOMATION_PLAN.md` phase 7.
 
 ## How it was made
 
@@ -151,8 +190,8 @@ decides.
 ### ملخص بالعربي
 - **وش هذا المشروع:** مشروع تفكيك مطابق للعبة Zelda: A Link Between Worlds على 3DS، بهدف إنتاج نفس بايتات الدوال باستخدام مترجم armcc 4.1.
 <!-- generated:arabic-status -->
-- **وين وصلنا:** 16,726 دالة لها مصدر (64.4%)، منها 15,943 نظيفة (61.4%) و783 بحيل.
-- **وش باقي:** 9,132 دالة غير مطابقة؛ الباقي لتفكيك نظيف، باستثناء المكتبات، 10,029 دالة.
+- **وين وصلنا:** 16,873 دالة لها مصدر (64.9%)، منها 16,090 نظيفة (61.9%) و783 بحيل.
+- **وش باقي:** 8,986 دالة غير مطابقة؛ الباقي لتفكيك نظيف، باستثناء المكتبات، 9,883 دالة.
 <!-- /generated:arabic-status -->
 - الأرقام من الفهرس؛ لم تُعَد مراجعة كل المصادر بالمُدقّق الجديد الأكثر صرامة.
 - **وش ما يشمل:** ما فيه أي ملفات من اللعبة (ملف الكود أو ملفات البيانات) ولا المترجم. كل واحد يجيب نسخته بنفسه.

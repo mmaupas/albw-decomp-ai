@@ -576,7 +576,10 @@ class TryCompileTests(unittest.TestCase):
         # the build unit is self-contained under logs/sdkmap/build/
         unit = self.state / "build" / "00100010" / "unit.cpp"
         self.assertTrue(unit.exists())
-        self.assertIn('#include "Include__nn__math__math_VEC3.h"', unit.read_text())
+        text = unit.read_text()
+        self.assertTrue(text.startswith("#define NON_MATCHING\n"))
+        self.assertIn('#include "%s"' % os.path.abspath(
+            unit.parent / "Include__nn__math__math_VEC3.h"), text)
         self.assertTrue((self.state / "build" / "00100010" / "nn").is_dir())
 
     def test_dry_run_json_and_manual_source(self):
@@ -595,7 +598,10 @@ class TryCompileTests(unittest.TestCase):
         unit_dir, unit_path = sdkmap.build_unit(0x100010, str(self.nnsdk),
                                                 ["Source/x.cpp"])
         copied = (Path(unit_dir) / "Source__x.cpp").read_text()
-        self.assertIn('#include "nn/math/math_VEC3.h"', copied)
+        # includes resolve to absolute paths inside the unit, so the unit
+        # compiles under fn.py check's fixed -I regardless of nesting depth
+        self.assertIn('#include "%s"' % os.path.abspath(
+            os.path.join(unit_dir, "nn", "math", "math_VEC3.h")), copied)
         self.assertNotIn("<nn/", copied)
         self.assertTrue((Path(unit_dir) / "nn" / "math" / "math_VEC3.h").exists())
 

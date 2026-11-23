@@ -1017,31 +1017,67 @@ def suggestions_for(addr):
     return None
 
 
+def _unit_include_fixup(unit_dir):
+    """Rewrite every include that resolves inside the unit to its absolute path.
+
+    fn.py check compiles with a fixed -I shared/include and cwd=ROOT, so a
+    quoted include only resolves via the including file's own directory; nnsdk
+    headers nest nn/ includes, which would not resolve from unit_dir
+    subdirectories. Absolute includes compile fine under armcc (the twin-source
+    convention) and are rebased to ROOT-relative by worklist register's
+    rebase_includes, so the PATH AUDIT still passes at registration."""
+    by_base = {}
+    for base, _dirs, files in os.walk(unit_dir):
+        for name in files:
+            by_base.setdefault(name, os.path.join(base, name))
+    inc_re = re.compile(r'(^[ \t]*#include\s*[<"])([^>"]+)([>"])', re.MULTILINE)
+
+    def fix(m):
+        target = m.group(2)
+        if target.startswith("nn/"):
+            cand = os.path.join(unit_dir, target)
+        else:
+            cand = by_base.get(os.path.basename(target))
+        if cand and os.path.isfile(cand):
+            return m.group(1)[:-1] + '"' + os.path.abspath(cand) + '"'
+        return m.group(0)
+
+    for base, _dirs, files in os.walk(unit_dir):
+        for name in files:
+            path = os.path.join(base, name)
+            with open(path, encoding="utf-8", errors="replace") as fh:
+                text = fh.read()
+            new = inc_re.sub(fix, text)
+            if new != text:
+                with open(path, "w", encoding="utf-8", newline="\n") as fh:
+                    fh.write(new)
+
+
 def build_unit(addr, nnsdk_dir, sources):
     """Copy the mapped nnsdk source(s) + the Include tree into a
     self-contained build unit under logs/sdkmap/build/<ADDR>/ (never
-    committed). Angle includes of nn/ are rewritten to quoted includes so
-    fn.py check's fixed -I shared/include still resolves them relative to
-    the unit file."""
+    committed). Includes that resolve inside the unit are rewritten to
+    absolute paths so the unit compiles under fn.py check's fixed
+    -I shared/include no matter how deeply the nn/ headers nest."""
     unit_dir = os.path.join(BUILD_DIR, key_of(addr))
     if os.path.isdir(unit_dir):
         shutil.rmtree(unit_dir)
     os.makedirs(unit_dir)
-    parts = []
+    parts = ["#define NON_MATCHING"]  # SDK build macro; empty is what matching wants
     for rel in sources:
         with open(os.path.join(nnsdk_dir, rel), encoding="utf-8", errors="replace") as fh:
             text = fh.read()
-        text = re.sub(r'#include\s*<nn/([^>]*)>', r'#include "nn/\1"', text)
         dest = os.path.join(unit_dir, rel.replace("/", "__"))
         with open(dest, "w", encoding="utf-8", newline="\n") as fh:
             fh.write(text)
-        parts.append('#include "%s"' % os.path.basename(dest))
+        parts.append('#include "%s"' % os.path.abspath(dest))
     inc_src = os.path.join(nnsdk_dir, "Include")
     if os.path.isdir(inc_src):
         shutil.copytree(inc_src, unit_dir, dirs_exist_ok=True)
     unit_path = os.path.join(unit_dir, "unit.cpp")
     with open(unit_path, "w", encoding="utf-8", newline="\n") as fh:
         fh.write("\n".join(parts) + "\n")
+    _unit_include_fixup(unit_dir)
     return unit_dir, unit_path
 
 

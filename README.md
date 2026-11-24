@@ -15,9 +15,9 @@ not included either.
 | Matched, source included | 16,873 | 64.9% | 1,428,564 | 24.5% |
 | of which honest (no hack) | 16,090 | 61.9% | 1,303,428 | 22.3% |
 | of which hack | 783 | 3.0% | 125,136 | 2.1% |
-| Earlier match, source not included | 114 | 0.4% | 15,396 | 0.3% |
-| Not matched yet | 8,986 | 34.6% | 4,392,632 | 75.2% |
-| Lifted (semantic, not byte-exact) | 0 | 0.0% | 0 | 0.0% |
+| Earlier match, source not included | 113 | 0.4% | 15,300 | 0.3% |
+| Not matched yet | 8,964 | 34.5% | 4,289,320 | 73.4% |
+| Lifted (semantic, not byte-exact) | 23 | 0.1% | 103,408 | 1.8% |
 | Excluded library | 13 | 0.1% | 4,588 | 0.1% |
 
 Remaining for an honest decompilation (excluding libraries): **9,883** functions.
@@ -258,7 +258,7 @@ decides.
 - **وش هذا المشروع:** مشروع تفكيك مطابق للعبة Zelda: A Link Between Worlds على 3DS، بهدف إنتاج نفس بايتات الدوال باستخدام مترجم armcc 4.1.
 <!-- generated:arabic-status -->
 - **وين وصلنا:** 16,873 دالة لها مصدر (64.9%)، منها 16,090 نظيفة (61.9%) و783 بحيل.
-- **وش باقي:** 8,986 دالة غير مطابقة؛ الباقي لتفكيك نظيف، باستثناء المكتبات، 9,883 دالة.
+- **وش باقي:** 8,964 دالة غير مطابقة؛ الباقي لتفكيك نظيف، باستثناء المكتبات، 9,883 دالة.
 <!-- /generated:arabic-status -->
 - الأرقام من الفهرس؛ لم تُعَد مراجعة كل المصادر بالمُدقّق الجديد الأكثر صرامة.
 - **وش ما يشمل:** ما فيه أي ملفات من اللعبة (ملف الكود أو ملفات البيانات) ولا المترجم. كل واحد يجيب نسخته بنفسه.

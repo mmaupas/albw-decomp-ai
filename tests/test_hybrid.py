@@ -8,6 +8,7 @@ import unittest
 from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
+import audit
 import hybrid_build
 
 
@@ -147,7 +148,8 @@ class RepoCheckTests(unittest.TestCase):
         self.assertGreater(plan["total_functions"], 25000)
         layers = plan["layers"]
         self.assertGreater(layers["matched"]["functions"], 16000)
-        self.assertEqual(layers["lifted"]["functions"], 0)  # nothing lifted yet in this env
+        lifted_now = audit.stats(audit.load())["lifted"]
+        self.assertEqual(layers["lifted"]["functions"], lifted_now)
         self.assertEqual(layers["matched"]["bytes"] + layers["lifted"]["bytes"] + layers["original"]["bytes"],
                          plan["text_bytes"])
 

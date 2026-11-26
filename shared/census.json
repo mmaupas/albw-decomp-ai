@@ -19,7 +19,7 @@
 "functions": {
 "00100000": {
 "evidence": {
-"path": "src_lifted/func_00100000.c",
+"path": "src_lifted/game/func_00100000.c",
 "status": "lifted"
 },
 "pool": "lifted",
@@ -40,7 +40,7 @@
 },
 "00100B88": {
 "evidence": {
-"path": "src_lifted/func_00100B88.c",
+"path": "src_lifted/game/func_00100B88.c",
 "status": "lifted"
 },
 "pool": "lifted",
@@ -127,7 +127,7 @@
 },
 "00101DC4": {
 "evidence": {
-"path": "src_lifted/func_00101DC4.c",
+"path": "src_lifted/game/func_00101DC4.c",
 "status": "lifted"
 },
 "pool": "lifted",
@@ -136,7 +136,7 @@
 },
 "00101DE8": {
 "evidence": {
-"path": "src_lifted/func_00101DE8.c",
+"path": "src_lifted/game/func_00101DE8.c",
 "status": "lifted"
 },
 "pool": "lifted",
@@ -289,7 +289,7 @@
 },
 "00103C68": {
 "evidence": {
-"path": "src_lifted/func_00103C68.c",
+"path": "src_lifted/game/func_00103C68.c",
 "status": "lifted"
 },
 "pool": "lifted",
@@ -298,7 +298,7 @@
 },
 "00103C80": {
 "evidence": {
-"path": "src_lifted/func_00103C80.c",
+"path": "src_lifted/game/func_00103C80.c",
 "status": "lifted"
 },
 "pool": "lifted",
@@ -307,7 +307,7 @@
 },
 "00103CA4": {
 "evidence": {
-"path": "src_lifted/func_00103CA4.c",
+"path": "src_lifted/game/func_00103CA4.c",
 "status": "lifted"
 },
 "pool": "lifted",
@@ -448,7 +448,7 @@
 },
 "00106358": {
 "evidence": {
-"path": "src_lifted/func_00106358.c",
+"path": "src_lifted/game/func_00106358.c",
 "status": "lifted"
 },
 "pool": "lifted",
@@ -457,7 +457,7 @@
 },
 "00106370": {
 "evidence": {
-"path": "src_lifted/func_00106370.c",
+"path": "src_lifted/game/func_00106370.c",
 "status": "lifted"
 },
 "pool": "lifted",
@@ -466,7 +466,7 @@
 },
 "00106394": {
 "evidence": {
-"path": "src_lifted/func_00106394.c",
+"path": "src_lifted/game/func_00106394.c",
 "status": "lifted"
 },
 "pool": "lifted",
@@ -475,7 +475,7 @@
 },
 "0010639C": {
 "evidence": {
-"path": "src_lifted/func_0010639C.c",
+"path": "src_lifted/game/func_0010639C.c",
 "status": "lifted"
 },
 "pool": "lifted",
@@ -556,7 +556,7 @@
 },
 "0010818C": {
 "evidence": {
-"path": "src_lifted/func_0010818C.c",
+"path": "src_lifted/game/func_0010818C.c",
 "status": "lifted"
 },
 "pool": "lifted",
@@ -691,7 +691,7 @@
 },
 "0010998C": {
 "evidence": {
-"path": "src_lifted/func_0010998C.c",
+"path": "src_lifted/game/func_0010998C.c",
 "status": "lifted"
 },
 "pool": "lifted",
@@ -832,7 +832,7 @@
 },
 "0010B3C0": {
 "evidence": {
-"path": "src_lifted/func_0010B3C0.c",
+"path": "src_lifted/game/func_0010B3C0.c",
 "status": "lifted"
 },
 "pool": "lifted",
@@ -877,7 +877,7 @@
 },
 "0010BE9C": {
 "evidence": {
-"path": "src_lifted/func_0010BE9C.c",
+"path": "src_lifted/game/func_0010BE9C.c",
 "status": "lifted"
 },
 "pool": "lifted",
@@ -902,7 +902,7 @@
 },
 "0010BFD4": {
 "evidence": {
-"path": "src_lifted/func_0010BFD4.c",
+"path": "src_lifted/game/func_0010BFD4.c",
 "status": "lifted"
 },
 "pool": "lifted",
@@ -1013,7 +1013,7 @@
 },
 "0010D0EC": {
 "evidence": {
-"path": "src_lifted/func_0010D0EC.c",
+"path": "src_lifted/game/func_0010D0EC.c",
 "status": "lifted"
 },
 "pool": "lifted",
@@ -1160,7 +1160,7 @@
 },
 "0010EAE8": {
 "evidence": {
-"path": "src_lifted/func_0010EAE8.c",
+"path": "src_lifted/game/func_0010EAE8.c",
 "status": "lifted"
 },
 "pool": "lifted",
@@ -1217,7 +1217,7 @@
 },
 "0010F228": {
 "evidence": {
-"path": "src_lifted/func_0010F228.c",
+"path": "src_lifted/game/func_0010F228.c",
 "status": "lifted"
 },
 "pool": "lifted",
@@ -1250,7 +1250,7 @@
 },
 "0010F8B8": {
 "evidence": {
-"path": "src_lifted/func_0010F8B8.c",
+"path": "src_lifted/game/func_0010F8B8.c",
 "status": "lifted"
 },
 "pool": "lifted",
@@ -2575,7 +2575,7 @@
 },
 "0012AB58": {
 "evidence": {
-"path": "src_lifted/func_0012AB58.c",
+"path": "src_lifted/game/func_0012AB58.c",
 "status": "lifted"
 },
 "pool": "lifted",
@@ -10266,7 +10266,7 @@
 },
 "001EA96C": {
 "evidence": {
-"path": "src_lifted/func_001EA96C.c",
+"path": "src_lifted/game/func_001EA96C.c",
 "status": "lifted"
 },
 "pool": "lifted",
@@ -50821,7 +50821,7 @@
 },
 "005937D8": {
 "evidence": {
-"path": "src_lifted/func_005937D8.c",
+"path": "src_lifted/game/func_005937D8.c",
 "status": "lifted"
 },
 "pool": "lifted",
@@ -55586,9 +55586,9 @@
 },
 "inputs": {
 "funcs.json": "ca4456c77358872d6ce72f919701a941306183438bb3a9ac3375f2dd55749315",
-"functions.json": "d4049f92cb5df8d45c9468f6b398e766794bd77228fd1c03b90fc78169d6624f",
+"functions.json": "294b98d38e91fe9c398cee2e4fea2a6f7400ae4456005304d9e600dab0870599",
 "shared/recipes.json": "c2698f4aaae639d3e7383477d06155be7fa35b5dad1f84011b92c4236049d125",
-"shared/shape_verification.json": "d83e1e60cf7994d829a4258dec61eb9f3c8b4a710a51a8f2a9ec32d2b86f1bbf",
+"shared/shape_verification.json": "fc499b0f8e10fe36f91cefef8066d5396db5c25a58ac87c2aae15a60fc816a73",
 "shared/symbols.jsonl": "99b16e9aaf359abcc326deb0220771a2fe8a7a4d1149b4aa7a7b9ba2500fa096"
 },
 "instruction_metadata": null,

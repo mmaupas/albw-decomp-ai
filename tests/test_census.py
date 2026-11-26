@@ -318,6 +318,20 @@ class CapstonePassTests(unittest.TestCase):
         self.assertIsNone(out[0x100010]["recipe"])
         self.assertTrue(out[0x100010]["has_ldm_stm"])
 
+    def test_view_handles_bare_pc_ldr(self):
+        # capstone 5 renders ldr r0, [pc, #0] as "ldr r0, [pc]" (offset
+        # omitted): the pool address must still be a+8, not crash.
+        import fn
+        import synth
+        image = bytearray(0x20)
+        words = [0xE59F0000, 0xE1A00000, 0xDEADBEEF, 0xE1A00000, 0xE1A00000]
+        for i, w in enumerate(words):
+            image[i * 4:i * 4 + 4] = w.to_bytes(4, "little")
+        with patch.object(fn, "STARTS", [0x100000]), \
+                patch.object(fn, "TEXT_END", 0x100014), patch.object(fn, "CODE", bytes(image)):
+            _s, _e, ins = synth.view(0x100000)
+        self.assertEqual(ins[0], ("ldr", "POOL DEADBEEF"))
+
 
 if __name__ == "__main__":
     unittest.main()

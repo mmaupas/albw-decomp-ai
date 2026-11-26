@@ -36,7 +36,8 @@ def view(addr):
         m = i.mnemonic.split(".")[0]
         if m in ("ldr", "vldr") and "pc" in i.op_str:
             mm = re.search(r"\[pc, #(-?0x[0-9a-f]+|-?\d+)\]", i.op_str)
-            la = a + 8 + int(mm.group(1), 0)
+            # capstone omits a zero offset: "ldr r0, [pc]" == "[pc, #0]"
+            la = a + 8 + (int(mm.group(1), 0) if mm else 0)
             ins.append((m, "POOL %08X" % fn.rd32(la & ~3)))
             continue
         if m in ("bl", "blx") and i.op_str.startswith("#"):
